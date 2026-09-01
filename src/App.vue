@@ -12,15 +12,15 @@ onHide(() => {
 </script>
 <style>
 page {
-  --color-text-primary: #1f2329;
-  --color-text-secondary: #646a73;
-  --color-text-tertiary: #8f959e;
-  --color-brand: #16a085;
-  --color-brand-pressed: #0c7464;
-  --color-brand-soft: #eaf8f4;
-  --color-page: #f7f8fa;
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-tertiary: #94a3b8;
+  --color-brand: #0ea5a4;
+  --color-brand-pressed: #0f766e;
+  --color-brand-soft: #ccfbf1;
+  --color-page: #f8fafc;
   --color-surface: #ffffff;
-  --color-line: #ebeef2;
+  --color-line: #e2e8f0;
   --radius-card: 24rpx;
   --radius-control: 20rpx;
   --font-display: 40rpx;

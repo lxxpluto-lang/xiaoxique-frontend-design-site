@@ -185,7 +185,6 @@ export interface KnowledgeItem {
   tags: string[]
   audience: 'all' | UserMode
   recommendedFor: UserMode[]
-  poster: string
   duration: string
   body: string[]
   video?: string
@@ -268,7 +267,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['运动安全', '居家锻炼'],
     audience: 'all',
     recommendedFor: ['cardiac', 'public'],
-    poster: '/static/knowledge/posters/guide-home-safety.jpg',
     duration: '4分钟阅读',
     body: [
       '运动前先确认精神、睡眠和身体感受，并准备合适的鞋服、饮水和无障碍活动空间。',
@@ -285,7 +283,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['心脏康复', '日常防护'],
     audience: 'all',
     recommendedFor: ['cardiac'],
-    poster: '/static/knowledge/posters/guide-cardiac.jpg',
     duration: '5分钟阅读',
     body: [
       '患者模式中的计划信息仅用于本课题原型演示，真实运动安排应以医生或康复师给出的处方为准。',
@@ -302,7 +299,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['健康减重', '运动习惯'],
     audience: 'all',
     recommendedFor: ['public'],
-    poster: '/static/knowledge/posters/guide-weight.jpg',
     duration: '4分钟阅读',
     body: [
       '先选择一种愿意开始的3分钟轻运动，建立固定时间和固定场景，比一次完成很大的运动量更容易坚持。',
@@ -319,7 +315,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['运动前', '安全提示'],
     audience: 'all',
     recommendedFor: ['cardiac', 'public'],
-    poster: '/static/knowledge/posters/tip-before-check.jpg',
     duration: '2分钟阅读',
     body: ['先停下来感受今天的身体状态，再决定是否开始。', '患者用户应如实完成运动前检查，出现异常症状时不要进入训练。'],
     reviewStatus: 'prototype-pending-review',
@@ -332,7 +327,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['Borg', '运动记录'],
     audience: 'all',
     recommendedFor: ['cardiac'],
-    poster: '/static/knowledge/posters/tip-borg.jpg',
     duration: '2分钟阅读',
     body: ['按照真实感受记录轻松、适中或明显费力，不必追求某个分数。', '如果感受与平时明显不同，应先暂停并观察，必要时联系专业人员。'],
     reviewStatus: 'prototype-pending-review',
@@ -345,7 +339,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['异常症状', '立即停止'],
     audience: 'all',
     recommendedFor: ['cardiac'],
-    poster: '/static/knowledge/posters/tip-stop.jpg',
     duration: '1分钟阅读',
     body: ['立即停止运动并坐下或平躺休息，避免继续用力。', '症状明显、持续或加重时及时寻求医疗帮助；紧急情况请呼叫120。'],
     reviewStatus: 'prototype-pending-review',
@@ -358,7 +351,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['运动后', '恢复'],
     audience: 'all',
     recommendedFor: ['public', 'cardiac'],
-    poster: '/static/knowledge/posters/tip-recovery.jpg',
     duration: '2分钟阅读',
     body: ['结束后先进行缓和活动，不要突然坐下或立即进行高强度工作。', '补充适量水分并记录运动后的身体感受，明显不适时及时处理。'],
     reviewStatus: 'prototype-pending-review',
@@ -371,7 +363,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['热身', '小喜短视频'],
     audience: 'all',
     recommendedFor: ['public', 'cardiac'],
-    poster: '/static/knowledge/posters/video-warm-up.jpg',
     duration: '00:12',
     body: ['本视频为可播放的原型演示素材，正式科普内容与动作需经医学专家审核。'],
     video: '/static/knowledge/videos/warm-up-demo.mp4',
@@ -385,7 +376,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['心脏康复', '运动前检查'],
     audience: 'all',
     recommendedFor: ['cardiac'],
-    poster: '/static/knowledge/posters/video-cardiac-check.jpg',
     duration: '00:12',
     body: ['本视频为可播放的原型演示素材，不构成诊断、治疗或处方调整建议。'],
     video: '/static/knowledge/videos/cardiac-check-demo.mp4',
@@ -399,7 +389,6 @@ export const knowledgeItems: KnowledgeItem[] = [
     tags: ['运动习惯', '健康减重'],
     audience: 'all',
     recommendedFor: ['public'],
-    poster: '/static/knowledge/posters/video-habit.jpg',
     duration: '00:12',
     body: ['本视频为可播放的原型演示素材，正式内容待医学与健康教育专家审核。'],
     video: '/static/knowledge/videos/habit-demo.mp4',

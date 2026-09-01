@@ -77,19 +77,19 @@ const inviteCode = ref('XQ-7DAY')
 </script>
 
 <style scoped lang="scss">
-.knowledge-companion { margin: 0; padding: 0 24rpx 8rpx; background: linear-gradient(180deg, #e7faf5 0, #f5f7f6 390rpx); }
-.companion-hero { display: flex; min-height: 220rpx; padding: 30rpx 18rpx 26rpx; align-items: center; justify-content: space-between; }
+.knowledge-companion { margin: 0; padding: 10rpx 24rpx 8rpx; background: #f8fafc; }
+.companion-hero { display: flex; min-height: 164rpx; padding: 24rpx; align-items: center; justify-content: space-between; border-radius: 24rpx; color: #fff; background: linear-gradient(135deg,#0ea5a4,#0f766e); box-shadow: 0 8rpx 24rpx rgba(15,118,110,.1); }
 .companion-hero text { display: block; }
-.companion-hero > view:first-child > text:first-child { color: #657a74; font-size: 22rpx; }
-.companion-hero > view:first-child > text:nth-child(2) { margin-top: 4rpx; color: #172b28; font-size: 30rpx; font-weight: 650; }
-.companion-hero > view:first-child > text:nth-child(2) text { display: inline; color: #0b8c72; font-size: 78rpx; font-weight: 760; line-height: 1; }
-.companion-hero > view:first-child > text:last-child { margin-top: 12rpx; color: #677772; font-size: 20rpx; }
-.companion-hero__badge { display: flex; width: 104rpx; height: 104rpx; align-items: center; justify-content: center; border: 10rpx solid rgba(255,255,255,.8); border-radius: 50%; color: #fff; background: #28b99b; box-shadow: 0 15rpx 30rpx rgba(26,152,126,.16); font-size: 38rpx; font-weight: 750; }
-.companion-entry-grid { display: grid; margin-top: -12rpx; padding: 14rpx 8rpx; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-radius: 26rpx; background: #fff; box-shadow: 0 10rpx 34rpx rgba(26,63,54,.07); }
+.companion-hero > view:first-child > text:first-child { color: rgba(255,255,255,.72); font-size: 20rpx; }
+.companion-hero > view:first-child > text:nth-child(2) { margin-top: 3rpx; color: #fff; font-size: 26rpx; font-weight: 650; }
+.companion-hero > view:first-child > text:nth-child(2) text { display: inline; color: #fff; font-size: 42rpx; font-weight: 760; line-height: 1; }
+.companion-hero > view:first-child > text:last-child { margin-top: 8rpx; color: rgba(255,255,255,.72); font-size: 18rpx; }
+.companion-hero__badge { display: flex; width: 72rpx; height: 72rpx; align-items: center; justify-content: center; border: 3rpx solid rgba(255,255,255,.5); border-radius: 50%; color: #fff; background: rgba(255,255,255,.12); font-size: 25rpx; font-weight: 750; }
+.companion-entry-grid { display: grid; margin-top: 12rpx; padding: 10rpx 8rpx; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1rpx solid #e2e8f0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
 .companion-entry-grid > button { display: flex; min-width: 0; min-height: 132rpx; padding: 12rpx 5rpx; align-items: center; flex-direction: column; border-left: 1rpx solid #edf1f0; background: #fff; text-align: center; }
 .companion-entry-grid > button:first-child { border-left: 0; }
-.companion-entry-grid > button.active { border-color: #16a085; box-shadow: inset 0 0 0 1rpx #16a085; }
-.companion-entry-icon { display: flex; align-items: center; justify-content: center; width: 58rpx; height: 58rpx; border-radius: 18rpx; color: #0c7464; background: #eaf8f4; font-size: 22rpx; font-weight: 700; }
+.companion-entry-grid > button.active { border-color: #0ea5a4; box-shadow: inset 0 0 0 1rpx #0ea5a4; }
+.companion-entry-icon { display: flex; align-items: center; justify-content: center; width: 58rpx; height: 58rpx; border-radius: 18rpx; color: #0f766e; background: #f0fdfa; font-size: 22rpx; font-weight: 700; }
 .companion-entry-icon--buddy { color: #6c6292; background: #f0ecfb; }
 .companion-entry-icon--checkin { color: #9b7310; background: #fff5d5; }
 .companion-entry-grid button > text:nth-child(2) { margin-top: 8rpx; color: #1f2329; font-size: 21rpx; font-weight: 700; }
