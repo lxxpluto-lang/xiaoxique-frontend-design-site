@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-19T08:10:00+08:00",
+  "hospital": {
+    "id": "BJFTRH-DEMO",
+    "name": "北京市丰台康复医院",
+    "shortName": "丰台康复医院"
+  },
+  "patient": {
+    "patientId": "P-DEMO-001",
+    "patientNo": "P-256572",
+    "hospitalPatientNo": "256572",
+    "name": "演示用户",
+    "maskedName": "演*用",
+    "age": 54,
+    "sex": "女",
+    "riskLevel": "中危",
+    "rehabStage": "冠心病2期",
+    "diagnosis": "冠心病 PCI 术后康复期",
+    "assignedDoctor": "演示医生"
+  },
+  "prescription": {
+    "id": "RX-DEMO-001",
+    "prescriptionNo": "RX-DEMO-0001",
+    "version": "V1",
+    "status": "completed",
+    "plannedSessions": 12,
+    "signedBy": "演示医生",
+    "signedAt": "2026-08-19T08:10:00+08:00",
+    "summary": "结合SPPB、基础生命体征和中危分层形成的演示运动处方，由演示医生确认后执行。",
+    "items": [
+      {
+        "category": "呼吸训练",
+        "project": "腹式呼吸",
+        "intensity": "舒适节律",
+        "duration": "10分钟",
+        "frequency": "本次训练",
+        "reason": "改善呼吸配合并帮助训练前放松。",
+        "appExerciseId": null
+      },
+      {
+        "category": "有氧运动",
+        "project": "功率车",
+        "intensity": "目标心率100–116 bpm；48–62W",
+        "duration": "30分钟",
+        "frequency": "本次训练",
+        "reason": "在监护下提高有氧耐力。",
+        "appExerciseId": null
+      },
+      {
+        "category": "抗阻训练",
+        "project": "哑铃力量",
+        "intensity": "每个动作2组，每组10次",
+        "duration": "15分钟",
+        "frequency": "本次训练",
+        "reason": "提高主要肌群力量并避免憋气。",
+        "appExerciseId": "resistance"
+      },
+      {
+        "category": "柔韧性训练",
+        "project": "全身柔韧训练",
+        "intensity": "舒适范围",
+        "duration": "10分钟",
+        "frequency": "本次训练",
+        "reason": "训练后放松并改善关节活动度。",
+        "appExerciseId": null
+      }
+    ]
+  },
+  "recentHospitalSession": {
+    "date": "2026-08-19",
+    "project": "综合运动康复",
+    "status": "待开始",
+    "before": "HR 70 / SpO₂ 98%",
+    "during": "HR 96 / SpO₂ 97%",
+    "after": "HR 76 / SpO₂ 98%",
+    "borg": 3
+  }
+}

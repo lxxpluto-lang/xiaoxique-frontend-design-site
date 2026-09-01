@@ -1,4 +1,4 @@
-import fixtureJson from '../../../shared-demo-data/fengtai-p-256572.json'
+import fixtureJson from '../data/fengtai-demo-patient.json'
 
 export type SharedExerciseId = 'baduanjin' | 'power-bike' | 'resistance' | 'stretch' | 'breathing' | 'music'
 
