@@ -11,15 +11,36 @@
   .prototype-shell {
     position: relative;
     width: 390px;
+    height: 844px;
+    min-height: 844px;
     margin: 0 auto;
     overflow: hidden;
+    zoom: min(1, calc(100vh / 844px));
     box-shadow: 0 0 42px rgba(24, 57, 49, .14);
   }
 
+  .prototype-shell .onboarding,
+  .prototype-shell .app-frame,
+  .prototype-shell .detail-frame {
+    height: 844px;
+    min-height: 844px;
+  }
+
+  .prototype-shell .page-scroll {
+    height: calc(844px - 216rpx - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  }
+
+  .prototype-shell .detail-scroll {
+    height: calc(844px - 96rpx - env(safe-area-inset-top));
+  }
+
   .prototype-shell .modal-mask {
+    top: 0;
     right: auto;
+    bottom: auto;
     left: 50%;
     width: 390px;
+    height: 844px;
     transform: translateX(-50%);
   }
 }
