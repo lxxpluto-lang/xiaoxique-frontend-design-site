@@ -37,6 +37,12 @@ export interface RewardItem {
   audience: 'cardiac' | 'mem' | 'all'
 }
 
+export interface RewardMilestone {
+  day: number
+  bonus: number
+  label: string
+}
+
 export interface KnowledgeItem {
   id: string
   type: KnowledgeItemType
@@ -328,10 +334,17 @@ export const assessmentItems = [
 ]
 
 export const rewardItems: RewardItem[] = [
-  { id: 'REWARD-001', name: '七日守护徽章', description: '完成连续 7 天锻炼后解锁', cost: 50, icon: '章', audience: 'all' },
-  { id: 'REWARD-002', name: '艾草健康包', description: '心脏康复活动演示礼品', cost: 120, icon: '艾', audience: 'cardiac' },
-  { id: 'REWARD-003', name: '健康谷物礼盒', description: '心脏康复活动演示礼品', cost: 160, icon: '谷', audience: 'cardiac' },
-  { id: 'REWARD-004', name: 'MEM 活动纪念章', description: '输入有效活动码后可见', cost: 80, icon: 'M', audience: 'mem' },
+  { id: 'REWARD-001', name: '七日守护徽章', description: '记录连续行动，不比较体重或身体数值', cost: 50, icon: '章', audience: 'all' },
+  { id: 'REWARD-002', name: '恢复训练微课', description: '兑换一节运动后恢复知识课程', cost: 80, icon: '课', audience: 'all' },
+  { id: 'REWARD-003', name: '报告解读权益', description: '兑换一次结构化运动报告解读演示', cost: 120, icon: '报', audience: 'cardiac' },
+  { id: 'REWARD-004', name: '设备同步指导', description: '兑换一次设备连接与数据来源说明', cost: 100, icon: '联', audience: 'all' },
+]
+
+export const rewardMilestones: RewardMilestone[] = [
+  { day: 7, bonus: 100, label: '建立第一周节奏' },
+  { day: 30, bonus: 100, label: '形成一个月习惯' },
+  { day: 60, bonus: 200, label: '稳定坚持两个月' },
+  { day: 100, bonus: 500, label: '完成百日里程碑' },
 ]
 
 export const calendarDays = Array.from({ length: 28 }, (_, index) => ({

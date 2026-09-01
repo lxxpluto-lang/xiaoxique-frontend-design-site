@@ -1044,3 +1044,74 @@ text, view, button, input { box-sizing: border-box; }
 .team-boundary { margin-top: 18rpx; padding: 20rpx 22rpx; border-radius: 20rpx; color: $muted; font-size: 22rpx; line-height: 1.55; background: #f4f7f8; }
 .team-boundary text { display: block; }
 .team-boundary text:first-child { margin-bottom: 6rpx; color: $ink; font-weight: 600; }
+
+/* 扇贝式迁移：每日单一行动、任务型助手、分层数据与非惩罚式激励。 */
+.plan-evidence { margin-top: 14rpx; padding: 12rpx 14rpx; border-radius: 15rpx; background: #f4f7f6; }
+.plan-evidence text { display: block; color: $muted; font-size: 20rpx; line-height: 1.45; }
+.plan-evidence text:first-child { margin-bottom: 3rpx; color: $brand-dark; font-weight: 700; }
+
+.data-tabs { display: grid; margin-bottom: 18rpx; padding: 6rpx; grid-template-columns: repeat(4, 1fr); gap: 6rpx; border: 1rpx solid $line; border-radius: 20rpx; background: #fff; }
+.data-tabs button { min-height: 62rpx; border-radius: 15rpx; color: $muted; font-size: 23rpx; text-align: center; }
+.data-tabs button.active { color: $brand-dark; font-weight: 700; background: $brand-soft; }
+.data-panel { min-height: 520rpx; }
+.data-panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16rpx; }
+.data-badge { flex-shrink: 0; padding: 8rpx 12rpx; border-radius: 999rpx; color: #8a6a28; font-size: 20rpx; font-weight: 600; background: #fff7df; }
+.today-data-grid { display: grid; margin-top: 14rpx; padding: 22rpx 10rpx; grid-template-columns: repeat(3, 1fr); border: 1rpx solid $line; border-radius: 24rpx; background: #fff; }
+.today-data-grid view { padding: 0 14rpx; border-left: 1rpx solid $line; text-align: center; }
+.today-data-grid view:first-child { border-left: 0; }
+.today-data-grid text { display: block; color: $muted; font-size: 21rpx; }
+.today-data-grid text:first-child { margin-bottom: 6rpx; color: $ink; font-size: 31rpx; font-weight: 700; }
+.data-explain { margin-top: 16rpx; padding: 20rpx 22rpx; border-radius: 20rpx; color: $muted; font-size: 23rpx; line-height: 1.55; background: $brand-soft; }
+.data-explain text { display: block; }
+.data-explain text:first-child { margin-bottom: 5rpx; color: $brand-dark; font-weight: 700; }
+.trend-chart { display: flex; height: 300rpx; margin-top: 22rpx; padding: 28rpx 18rpx 18rpx; align-items: flex-end; justify-content: space-between; gap: 14rpx; border: 1rpx solid $line; border-radius: 24rpx; background: linear-gradient(180deg, #f7fbfa, #fff); }
+.trend-column { display: flex; height: 100%; flex: 1; align-items: center; justify-content: flex-end; flex-direction: column; gap: 9rpx; }
+.trend-column > view { width: 68%; min-height: 12rpx; border-radius: 999rpx 999rpx 8rpx 8rpx; background: linear-gradient(180deg, #53b8a4, $brand); }
+.trend-column text { color: $muted; font-size: 19rpx; }
+.plan-summary { padding: 26rpx; border: 1rpx solid #b9e9dc; border-radius: 26rpx; background: linear-gradient(145deg, #eefbf7, #fff); }
+.plan-summary .section-title { display: block; margin-top: 8rpx; }
+.plan-summary .summary-copy { display: block; margin-top: 9rpx; }
+.plan-progress { height: 14rpx; margin-top: 22rpx; overflow: hidden; border-radius: 999rpx; background: #dceae6; }
+.plan-progress view { height: 100%; border-radius: inherit; background: $brand; }
+.plan-range { display: block; margin-top: 12rpx; color: $muted; font-size: 21rpx; line-height: 1.55; }
+.plan-week { display: grid; margin-top: 16rpx; padding: 20rpx 12rpx; grid-template-columns: repeat(7, 1fr); gap: 8rpx; border: 1rpx solid $line; border-radius: 24rpx; background: #fff; }
+.plan-week view { display: flex; min-height: 72rpx; align-items: center; justify-content: center; flex-direction: column; gap: 7rpx; border-radius: 16rpx; color: $muted; font-size: 20rpx; }
+.plan-week view.done { color: $brand-dark; background: $brand-soft; }
+.plan-week view.today { outline: 2rpx solid $brand; }
+
+.milestone-card, .points-rule-card { margin-top: 18rpx; padding: 24rpx; border: 1rpx solid $line; border-radius: 24rpx; background: #fff; }
+.milestone-bonus { flex-shrink: 0; padding: 10rpx 14rpx; border-radius: 999rpx; color: $brand-dark; font-size: 24rpx; font-weight: 700; background: $brand-soft; }
+.milestone-track { height: 14rpx; margin-top: 22rpx; overflow: hidden; border-radius: 999rpx; background: #e5ebe9; }
+.milestone-track view { height: 100%; border-radius: inherit; background: $brand; }
+.milestone-copy { display: block; margin-top: 10rpx; color: $muted; font-size: 21rpx; line-height: 1.5; }
+.milestone-list { display: grid; margin-top: 18rpx; grid-template-columns: repeat(4, 1fr); gap: 8rpx; }
+.milestone-list view { padding: 12rpx 5rpx; border-radius: 15rpx; color: $muted; background: #f5f7f7; text-align: center; }
+.milestone-list view.reached { color: $brand-dark; background: $brand-soft; }
+.milestone-list text { display: block; font-size: 19rpx; }
+.milestone-list text:last-child { margin-top: 4rpx; font-weight: 700; }
+.points-rule-card > .section-title { display: block; margin-bottom: 12rpx; }
+.points-rule-card > view { display: flex; align-items: center; justify-content: space-between; padding: 14rpx 0; border-top: 1rpx solid $line; color: $muted; font-size: 22rpx; }
+.points-rule-card > view text:last-child { color: $brand-dark; font-weight: 700; }
+.points-boundary { display: block; margin-top: 12rpx; padding: 15rpx 17rpx; border-radius: 16rpx; color: $muted; font-size: 20rpx; line-height: 1.5; background: #f4f7f8; }
+
+.goal-profile-card { margin-bottom: 18rpx; padding: 24rpx; border: 1rpx solid #b9e9dc; border-radius: 24rpx; background: #f3fbf8; }
+.goal-profile-current { display: block; margin-top: 8rpx; color: $brand-dark; font-size: 29rpx; font-weight: 700; line-height: 1.4; }
+.goal-options { display: grid; margin-top: 18rpx; grid-template-columns: 1fr 1fr; gap: 12rpx; }
+.goal-options button { min-height: 126rpx; padding: 18rpx; border: 1rpx solid $line; border-radius: 20rpx; background: #fff; text-align: left; }
+.goal-options button.active { border-color: $brand; box-shadow: inset 0 0 0 1rpx $brand; }
+.goal-options text { display: block; color: $muted; font-size: 20rpx; line-height: 1.4; }
+.goal-options text:first-child { margin-bottom: 6rpx; color: $ink; font-size: 23rpx; font-weight: 700; }
+.goal-lock { display: flex; align-items: center; justify-content: space-between; gap: 12rpx; margin-top: 18rpx; padding: 16rpx; border-radius: 17rpx; color: $muted; font-size: 21rpx; background: #fff; }
+.source-list { margin-top: 14rpx; }
+.source-list view { display: flex; align-items: center; justify-content: space-between; gap: 18rpx; padding: 15rpx 0; border-top: 1rpx solid $line; }
+.source-list text { color: $ink; font-size: 22rpx; }
+.source-list text:last-child { color: $muted; text-align: right; }
+.reward-boundary { margin-bottom: 18rpx; padding: 20rpx 22rpx; border-radius: 20rpx; color: $muted; font-size: 22rpx; line-height: 1.55; background: $brand-soft; }
+.reward-boundary text { display: block; }
+.reward-boundary text:first-child { margin-bottom: 5rpx; color: $brand-dark; font-weight: 700; }
+
+@media (max-width: 500px) {
+  .assistant-context { grid-template-columns: 1fr 1fr; row-gap: 18rpx; }
+  .assistant-context > view:nth-child(3) { grid-column: 1 / -1; border-left: 0; border-top: 1rpx solid $line; padding-top: 16rpx; }
+  .milestone-list { grid-template-columns: repeat(2, 1fr); }
+}
