@@ -827,6 +827,8 @@
               :elapsed="elapsed"
               :target-seconds="trainingTargetSeconds"
               @camera-status="cameraStatus = $event"
+              @course-time="syncCourseElapsed"
+              @course-ended="finishTraining(false)"
               @rep="recordRep"
               @beat="recordBeat"
             /><view class="exercise-controls"
@@ -1724,7 +1726,8 @@ const trainingTargetSeconds = computed(() => {
     activePrescriptionTask.value?.item.duration.match(/\d+/)?.[0];
   return prescribed
     ? Number(prescribed) * 60
-    : selectedGame.value.durationMinutes * 60;
+    : selectedGame.value.durationSeconds ||
+        selectedGame.value.durationMinutes * 60;
 });
 const formattedElapsed = computed(() => formatTimer(elapsed.value));
 const activityScore = computed(() =>
@@ -2301,12 +2304,29 @@ function startTimer() {
   stopTimer();
   trainingTimer = setInterval(() => {
     if (trainingStatus.value === "active") {
+      if (selectedGameId.value === "baduanjin") return;
       elapsed.value += 1;
       if (deviceConnected.value && elapsed.value % 3 === 0)
         updateLiveVitals();
       if (elapsed.value >= trainingTargetSeconds.value) finishTraining(false);
     }
   }, 1000);
+}
+function syncCourseElapsed(value: number) {
+  if (
+    selectedGameId.value !== "baduanjin" ||
+    trainingStatus.value !== "active" ||
+    !Number.isFinite(value)
+  )
+    return;
+  const next = Math.min(
+    trainingTargetSeconds.value,
+    Math.max(0, Math.floor(value)),
+  );
+  const previous = elapsed.value;
+  elapsed.value = next;
+  if (deviceConnected.value && next !== previous && next % 3 === 0)
+    updateLiveVitals();
 }
 function initializeLiveVitals() {
   liveHeartRate.value = Number.isFinite(preSnapshot.value.heartRate)

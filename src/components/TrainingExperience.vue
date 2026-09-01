@@ -3,18 +3,38 @@
     <view v-if="game.interaction === 'camera-score'" class="camera-training" :class="{ 'baduanjin-training': isBaduanjin }">
       <view v-if="isBaduanjin" class="segment-card">
         <view class="segment-heading">
-          <text>第 {{ currentSegment + 1 }} 式 · {{ segmentNames[currentSegment] }}</text>
-          <text>{{ currentSegment + 1 }}/8</text>
+          <text>{{ segmentTitle }}</text>
+          <text>{{ segmentCounter }}</text>
         </view>
         <view class="segment-dots">
-          <view v-for="(_, index) in segmentNames" :key="index" :class="{ done: index < currentSegment, active: index === currentSegment }" />
+          <view v-for="(_, index) in segmentNames" :key="index" :class="{ done: !isPreparing && index < currentSegment, active: !isPreparing && index === currentSegment }" />
         </view>
       </view>
 
       <view class="dual-camera-stage">
       <view class="training-pane">
         <text class="pane-heading">动作示范</text>
+        <video
+          v-if="isBaduanjin"
+          id="baduanjin-course-video"
+          class="baduanjin-course-video"
+          :src="activity.video"
+          :poster="activity.poster"
+          :autoplay="true"
+          :loop="false"
+          :muted="false"
+          :controls="true"
+          :enable-progress-gesture="true"
+          :show-center-play-btn="true"
+          :show-play-btn="true"
+          :show-fullscreen-btn="true"
+          playsinline
+          object-fit="contain"
+          @timeupdate="onCourseTimeUpdate"
+          @ended="emit('course-ended')"
+        />
         <MagpieMotion
+          v-else
           :label="activity.title + '示范动作'"
           :video-src="activity.video"
           :poster="activity.poster"
@@ -61,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, getCurrentInstance, onMounted, watch } from 'vue'
 import CameraPreview from '@/components/CameraPreview.vue'
 import MagpieMotion from '@/components/MagpieMotion.vue'
 import type { Activity } from '@/lib/rive-motion'
@@ -80,11 +100,44 @@ const props = defineProps<{
 }>()
 
 const segmentNames = ['双手托天理三焦', '左右开弓似射雕', '调理脾胃须单举', '五劳七伤往后瞧', '摇头摆尾去心火', '两手攀足固肾腰', '攒拳怒目增气力', '背后七颠百病消']
+const segmentStartSeconds = [30, 130, 220, 295, 355, 460, 555, 630]
 const isBaduanjin = computed(() => props.game.id === 'baduanjin')
-const currentSegment = computed(() => Math.min(7, Math.floor(props.elapsed / Math.max(1, props.targetSeconds) * 8)))
+const isPreparing = computed(() => props.elapsed < segmentStartSeconds[0])
+const currentSegment = computed(() => {
+  let active = 0
+  segmentStartSeconds.forEach((start, index) => {
+    if (props.elapsed >= start) active = index
+  })
+  return active
+})
+const segmentTitle = computed(() => isPreparing.value
+  ? '预备式 · 调整呼吸'
+  : `第 ${currentSegment.value + 1} 式 · ${segmentNames[currentSegment.value]}`)
+const segmentCounter = computed(() => isPreparing.value ? '准备' : `${currentSegment.value + 1}/8`)
+
+const componentInstance = getCurrentInstance()
+let courseVideoContext: ReturnType<typeof uni.createVideoContext> | undefined
+
+onMounted(() => {
+  if (isBaduanjin.value)
+    courseVideoContext = uni.createVideoContext('baduanjin-course-video', componentInstance?.proxy as any)
+})
+
+watch(() => props.paused, (paused) => {
+  if (!isBaduanjin.value || !courseVideoContext) return
+  if (paused) courseVideoContext.pause()
+  else courseVideoContext.play()
+})
+
+function onCourseTimeUpdate(event: any) {
+  const currentTime = Number(event?.detail?.currentTime ?? event?.target?.currentTime)
+  if (Number.isFinite(currentTime)) emit('course-time', currentTime)
+}
 
 const emit = defineEmits<{
   (event: 'camera-status', value: 'idle' | 'requesting' | 'ready' | 'denied'): void
+  (event: 'course-time', value: number): void
+  (event: 'course-ended'): void
   (event: 'rep'): void
   (event: 'beat'): void
 }>()
@@ -100,6 +153,7 @@ const emit = defineEmits<{
 .dual-camera-stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8rpx; }
 .training-pane { position: relative; height: 860rpx; overflow: hidden; border: 2rpx solid #cde5df; border-radius: 18rpx; background: #dce9e5; }.training-pane:nth-child(2) { height: 860rpx; }
 .pane-heading { position: absolute; z-index: 4; top: 0; left: 0; right: 0; padding: 12rpx 8rpx; color: #fff; background: rgba(16,75,64,.88); font-size: 19rpx; font-weight: 700; text-align: center; }
+.baduanjin-course-video { display: block; width: 100%; height: 100%; background: #000; }
 .score { color: #0f766e; font-size: 48rpx; font-weight: 700; }
 .prototype-label { display: block; color: #64748b; font-size: 22rpx; line-height: 1.5; text-align: center; }
 .game-stage { display: flex; min-height: 620rpx; padding: 32rpx; align-items: center; flex-direction: column; border: 0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }

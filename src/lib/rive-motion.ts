@@ -32,14 +32,14 @@ export interface Activity {
 export const activities: Activity[] = [
   {
     id: 'baduanjin',
-    title: '八段锦舒展',
+    title: '八段锦完整跟练',
     shortTitle: '八段锦',
     icon: '伸',
-    duration: '3 分钟',
-    durationSeconds: 180,
-    cue: '跟着翅膀缓缓抬起，呼吸不要憋住',
-    video: '/static/videos/magpie-baduanjin-continuous-v3.mp4',
-    poster: '/static/previews/continuous-v3/baduanjin-poster-v3.png',
+    duration: '12 分 08 秒',
+    durationSeconds: 728,
+    cue: '跟随示范和呼吸口令完成八式，过程中不要憋气',
+    video: '/static/videos/baduanjin-full-course-mobile.mp4',
+    poster: '/static/previews/baduanjin-full-course-poster.jpg',
     rive: {
       src: '/static/rive/magpie-baduanjin-v3.riv',
       artboard: 'Baduanjin',

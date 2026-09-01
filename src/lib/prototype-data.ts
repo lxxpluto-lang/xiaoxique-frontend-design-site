@@ -203,7 +203,8 @@ export interface ExerciseGame {
   title: string
   subtitle: string
   duration: string
-  durationMinutes: 3 | 5 | 10
+  durationMinutes: number
+  durationSeconds?: number
   iconPath: string
   activityId: 'baduanjin' | 'resistance' | 'singing'
   poster: string
@@ -440,12 +441,13 @@ export const exerciseGames: ExerciseGame[] = [
     id: 'baduanjin',
     categoryId: 'traditional',
     title: '八段锦',
-    subtitle: '舒展呼吸 · 摄像头跟练',
-    duration: '3 分钟',
-    durationMinutes: 3,
+    subtitle: '完整八式 · 呼吸口令 · 摄像头跟练',
+    duration: '12 分 08 秒',
+    durationMinutes: 12,
+    durationSeconds: 728,
     iconPath: '/static/icons/magpie-line/stretch.svg',
     activityId: 'baduanjin',
-    poster: '/static/previews/continuous-v3/baduanjin-poster-v3.png',
+    poster: '/static/previews/baduanjin-full-course-poster.jpg',
     feature: '动作评分',
     arSupported: true,
     interaction: 'camera-score',
