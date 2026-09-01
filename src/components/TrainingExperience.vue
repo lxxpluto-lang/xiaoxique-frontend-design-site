@@ -1,6 +1,6 @@
 <template>
   <view class="experience" :data-exercise="game.id">
-    <view v-if="game.id === 'baduanjin'" class="camera-training">
+    <view v-if="game.interaction === 'camera-score'" class="camera-training">
       <view class="training-pane">
         <MagpieMotion
           :label="activity.title + '示范动作'"
@@ -23,7 +23,7 @@
       <text class="prototype-label">摄像头骨架与评分均为原型模拟，不用于医疗判断</text>
     </view>
 
-    <view v-else-if="game.id === 'resistance'" class="game-stage resistance-stage">
+    <view v-else-if="game.interaction === 'rep-game'" class="game-stage resistance-stage">
       <image class="game-mascot" src="/static/rive-source/v4/master/magpie-neutral-master-v4.png" mode="aspectFit" />
       <text class="game-kicker">托举小喜鹊</text>
       <text class="game-title">跟随节奏，完成 12 次动作</text>
@@ -44,7 +44,7 @@
         :state-machine="activity.rive.stateMachine"
         :fit="activity.rive.fit"
       />
-      <view class="rhythm-copy"><text class="game-kicker">音乐律动</text><text class="game-title">听到节拍就点击</text></view>
+      <view class="rhythm-copy"><text class="game-kicker">{{ game.categoryId === 'aerobic' ? '稳定节律' : '呼吸与节拍' }}</text><text class="game-title">跟随提示轻轻点击</text></view>
       <view class="rhythm-stats"><view><text class="score">{{ rhythmHits }}</text><text>命中</text></view><view><text class="score">{{ rhythmCombo }}</text><text>连击</text></view><view><text class="score">{{ rhythmRound }}</text><text>/ 3 组</text></view></view>
       <button class="beat-button" :disabled="paused || rhythmHits >= 24" @tap="emit('beat')"><text>♪</text><text>{{ rhythmHits >= 24 ? '节拍完成' : '点击节拍' }}</text></button>
       <text class="prototype-label">3 组 × 8 拍，准确率由原型互动规则生成</text>

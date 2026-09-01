@@ -1,8 +1,14 @@
 export type UserMode = 'cardiac' | 'public'
-export type NavId = 'home' | 'knowledge' | 'assistant' | 'reports' | 'profile'
-export type ExerciseGameId = 'baduanjin' | 'resistance' | 'music'
+export type NavId = 'today' | 'discover' | 'assistant' | 'data' | 'profile'
+export type ExerciseCategoryId = 'traditional' | 'aerobic' | 'strength' | 'mobility' | 'recovery'
+export type ExerciseGameId = 'baduanjin' | 'taichi' | 'walking' | 'resistance' | 'stretch' | 'balance' | 'music' | 'breathing'
 export type KnowledgeCategory = 'recommended' | 'guide' | 'tip' | 'video'
 export type KnowledgeItemType = 'guide' | 'tip' | 'video'
+export type AssessmentMode = 'off' | 'optional' | 'required'
+export type DataSource = 'hospital-device' | 'apple-health' | 'health-connect' | 'manual' | 'demo-device'
+export type DataQuality = 'valid' | 'stale' | 'missing' | 'denied'
+export type AdviceLevel = 'stable' | 'attention' | 'stop' | 'insufficient'
+export type ReviewStatus = 'pending' | 'approved' | 'rejected' | 'maintained'
 export type DetailView =
   | 'none'
   | 'precheck'
@@ -14,8 +20,11 @@ export type DetailView =
   | 'devices'
   | 'knowledge-article'
   | 'knowledge-video'
-  | 'assessment'
   | 'reward-store'
+  | 'weekly-path'
+  | 'exercise-category'
+  | 'prototype-policy'
+  | 'doctor-reviews'
 
 export interface HealthMetric {
   id: string
@@ -34,6 +43,107 @@ export interface RewardItem {
   cost: number
   icon: string
   audience: 'cardiac' | 'mem' | 'all'
+}
+
+export interface ExerciseCategory {
+  id: ExerciseCategoryId
+  title: string
+  shortTitle: string
+  iconPath: string
+  description: string
+  recommendedGameId: ExerciseGameId
+}
+
+export interface AssessmentFields {
+  heartRate: boolean
+  oxygenSaturation: boolean
+  symptoms: boolean
+  borg: boolean
+  feeling: boolean
+  bloodPressure: boolean
+}
+
+export interface TrainingAssessmentPolicy {
+  id: string
+  version: number
+  status: 'draft' | 'published'
+  audience: 'cardiac'
+  preMode: AssessmentMode
+  postMode: AssessmentMode
+  fields: AssessmentFields
+  preValidMinutes: number
+  postWindowMinutes: number
+  sourcePriority: DataSource[]
+  updatedAt: string
+  publishedAt?: string
+}
+
+export interface VitalSnapshot {
+  phase: 'pre' | 'post'
+  heartRate?: number
+  oxygenSaturation?: number
+  borg?: number
+  feeling?: '轻松' | '适中' | '较累'
+  symptoms: string[]
+  source: DataSource
+  measuredAt: string
+  syncedAt: string
+  quality: DataQuality
+}
+
+export interface TrainingAssessment {
+  id: string
+  policyVersion: number
+  pre?: VitalSnapshot
+  post?: VitalSnapshot
+  completeness: 'complete' | 'partial' | 'missing'
+  comparison: string
+}
+
+export interface AIAdvice {
+  id: string
+  sessionId: string
+  level: AdviceLevel
+  title: string
+  summary: string
+  evidence: string[]
+  actions: string[]
+  sourceSummary: string
+  boundary: string
+  ruleVersion: string
+  createdAt: string
+}
+
+export interface DoctorReview {
+  id: string
+  sessionId: string
+  adviceId: string
+  status: ReviewStatus
+  proposedChange: string
+  createdAt: string
+  reviewedAt?: string
+}
+
+export interface MemEntitlement {
+  unlocked: boolean
+  inviteCode: string
+  unlockedAt?: string
+  challengeStartDate?: string
+  lastRewardCycleEnd?: string
+}
+
+export interface WalletState {
+  healthPoints: number
+  mCoins: number
+}
+
+export interface RedemptionRecord {
+  id: string
+  rewardId: string
+  rewardName: string
+  currency: 'health-points' | 'm-coins'
+  cost: number
+  createdAt: string
 }
 
 export interface RewardMilestone {
@@ -84,13 +194,16 @@ export interface KnowledgeItem {
 
 export interface ExerciseGame {
   id: ExerciseGameId
+  categoryId: ExerciseCategoryId
   title: string
   subtitle: string
   duration: string
+  durationMinutes: 3 | 5 | 10
   iconPath: string
   activityId: 'baduanjin' | 'resistance' | 'singing'
   poster: string
   feature: string
+  arSupported: boolean
   interaction: 'camera-score' | 'rep-game' | 'rhythm-game'
 }
 
@@ -115,6 +228,9 @@ export interface TrainingSession {
   results: ActivityResult[]
   createdAt: string
   pointsAwarded: number
+  policyVersion?: number
+  assessment?: TrainingAssessment
+  advice?: AIAdvice
 }
 
 export interface RewardLedger {
@@ -131,15 +247,15 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  { id: 'home', label: '首页', iconPath: '/static/icons/magpie-line/home.svg' },
-  { id: 'knowledge', label: '知识库', iconPath: '/static/icons/magpie-line/knowledge.svg' },
+  { id: 'today', label: '今日', iconPath: '/static/icons/magpie-line/home.svg' },
+  { id: 'discover', label: '发现', iconPath: '/static/icons/magpie-line/knowledge.svg' },
   {
     id: 'assistant',
     label: '小喜',
     iconPath: '/static/icons/magpie-line/assistant.svg',
     mascotPath: '/static/rive-source/v4/master/magpie-neutral-master-v4.png',
   },
-  { id: 'reports', label: '报告', iconPath: '/static/icons/magpie-line/report.svg' },
+  { id: 'data', label: '数据', iconPath: '/static/icons/magpie-line/report.svg' },
   { id: 'profile', label: '我的', iconPath: '/static/icons/magpie-line/profile.svg' },
 ]
 
@@ -291,39 +407,76 @@ export const knowledgeItems: KnowledgeItem[] = [
   },
 ]
 
+export const exerciseCategories: ExerciseCategory[] = [
+  { id: 'traditional', title: '传统养生', shortTitle: '养生', iconPath: '/static/icons/magpie-line/stretch.svg', description: '舒展身体，配合自然呼吸', recommendedGameId: 'baduanjin' },
+  { id: 'aerobic', title: '有氧耐力', shortTitle: '有氧', iconPath: '/static/icons/magpie-line/exercise.svg', description: '用稳定节律积累活动时间', recommendedGameId: 'walking' },
+  { id: 'strength', title: '力量抗阻', shortTitle: '力量', iconPath: '/static/icons/magpie-line/resistance.svg', description: '轻量重复，保持自然呼吸', recommendedGameId: 'resistance' },
+  { id: 'mobility', title: '柔韧平衡', shortTitle: '平衡', iconPath: '/static/icons/magpie-line/assessment.svg', description: '改善活动度与身体控制', recommendedGameId: 'stretch' },
+  { id: 'recovery', title: '呼吸放松', shortTitle: '放松', iconPath: '/static/icons/magpie-line/music.svg', description: '用呼吸和节拍慢慢恢复', recommendedGameId: 'breathing' },
+]
+
 export const exerciseGames: ExerciseGame[] = [
   {
     id: 'baduanjin',
+    categoryId: 'traditional',
     title: '八段锦',
     subtitle: '舒展呼吸 · 摄像头跟练',
     duration: '3 分钟',
+    durationMinutes: 3,
     iconPath: '/static/icons/magpie-line/stretch.svg',
     activityId: 'baduanjin',
     poster: '/static/previews/continuous-v3/baduanjin-poster-v3.png',
     feature: '动作评分',
+    arSupported: true,
     interaction: 'camera-score',
   },
   {
+    id: 'taichi', categoryId: 'traditional', title: '太极舒展', subtitle: '缓慢重心转移 · 跟练', duration: '5 分钟', durationMinutes: 5,
+    iconPath: '/static/icons/magpie-line/stretch.svg', activityId: 'baduanjin', poster: '/static/previews/continuous-v3/baduanjin-poster-v3.png', feature: '动作跟随', arSupported: true, interaction: 'camera-score',
+  },
+  {
+    id: 'walking', categoryId: 'aerobic', title: '步行节律', subtitle: '低冲击节奏 · 原地完成', duration: '10 分钟', durationMinutes: 10,
+    iconPath: '/static/icons/magpie-line/exercise.svg', activityId: 'singing', poster: '/static/previews/continuous-v3/singing-poster-v3.png', feature: '稳定节拍', arSupported: false, interaction: 'rhythm-game',
+  },
+  {
     id: 'resistance',
+    categoryId: 'strength',
     title: '抗阻训练',
     subtitle: '轻量力量 · 托举小喜鹊',
     duration: '3 分钟',
+    durationMinutes: 3,
     iconPath: '/static/icons/magpie-line/resistance.svg',
     activityId: 'resistance',
     poster: '/static/previews/continuous-v3/resistance-poster-v3.png',
     feature: '12 次动作',
+    arSupported: false,
     interaction: 'rep-game',
   },
   {
+    id: 'stretch', categoryId: 'mobility', title: '坐姿拉伸', subtitle: '肩颈与下肢 · 轻柔伸展', duration: '5 分钟', durationMinutes: 5,
+    iconPath: '/static/icons/magpie-line/stretch.svg', activityId: 'baduanjin', poster: '/static/previews/continuous-v3/baduanjin-poster-v3.png', feature: '活动度跟练', arSupported: false, interaction: 'camera-score',
+  },
+  {
+    id: 'balance', categoryId: 'mobility', title: '扶椅平衡', subtitle: '靠近支撑物 · 稳定练习', duration: '3 分钟', durationMinutes: 3,
+    iconPath: '/static/icons/magpie-line/assessment.svg', activityId: 'baduanjin', poster: '/static/previews/continuous-v3/baduanjin-poster-v3.png', feature: '平衡控制', arSupported: true, interaction: 'camera-score',
+  },
+  {
     id: 'music',
+    categoryId: 'recovery',
     title: '音乐律动',
     subtitle: '节奏放松 · 跟拍互动',
     duration: '3 分钟',
+    durationMinutes: 3,
     iconPath: '/static/icons/magpie-line/music.svg',
     activityId: 'singing',
     poster: '/static/previews/continuous-v3/singing-poster-v3.png',
     feature: '3 组节拍',
+    arSupported: false,
     interaction: 'rhythm-game',
+  },
+  {
+    id: 'breathing', categoryId: 'recovery', title: '呼吸放松', subtitle: '缓慢呼吸 · 运动后恢复', duration: '5 分钟', durationMinutes: 5,
+    iconPath: '/static/icons/magpie-line/music.svg', activityId: 'singing', poster: '/static/previews/continuous-v3/singing-poster-v3.png', feature: '呼吸节律', arSupported: false, interaction: 'rhythm-game',
   },
 ]
 
@@ -358,10 +511,11 @@ export const assessmentItems = [
 ]
 
 export const rewardItems: RewardItem[] = [
-  { id: 'REWARD-001', name: '七日守护徽章', description: '记录连续行动，不比较体重或身体数值', cost: 50, icon: '章', audience: 'all' },
-  { id: 'REWARD-002', name: '恢复训练微课', description: '兑换一节运动后恢复知识课程', cost: 80, icon: '课', audience: 'all' },
-  { id: 'REWARD-003', name: '报告解读权益', description: '兑换一次结构化运动报告解读演示', cost: 120, icon: '报', audience: 'cardiac' },
-  { id: 'REWARD-004', name: '设备同步指导', description: '兑换一次设备连接与数据来源说明', cost: 100, icon: '联', audience: 'all' },
+  { id: 'REWARD-001', name: '七日守护徽章', description: '记录连续健康行动', cost: 50, icon: '章', audience: 'all' },
+  { id: 'REWARD-002', name: '康复运动手册', description: '患者专属数字手册', cost: 80, icon: '册', audience: 'cardiac' },
+  { id: 'REWARD-003', name: '轻量弹力带', description: '患者礼品演示兑换', cost: 150, icon: '带', audience: 'cardiac' },
+  { id: 'REWARD-004', name: 'MEM运动笔记本', description: 'MEM学生礼品', cost: 20, icon: '本', audience: 'mem' },
+  { id: 'REWARD-005', name: 'MEM限定徽章', description: '连续学习运动纪念', cost: 10, icon: 'M', audience: 'mem' },
 ]
 
 export const rewardMilestones: RewardMilestone[] = [

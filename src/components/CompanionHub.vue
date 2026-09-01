@@ -1,7 +1,7 @@
 <template>
   <view class="knowledge-companion" data-testid="knowledge-companions">
     <view class="knowledge-companion__heading">
-      <view><text class="knowledge-companion__kicker">健康同行</text><text class="knowledge-companion__title">和熟悉的人一起坚持</text><text class="knowledge-companion__copy">参考扇贝的同桌与小组入口，放在知识库最上方；只分享打卡状态，不比较身体数据。</text></view>
+      <view><text class="knowledge-companion__kicker">一起坚持</text><text class="knowledge-companion__title">小队与搭子</text><text class="knowledge-companion__copy">只分享打卡状态，不比较身体数据。</text></view>
     </view>
 
     <view class="companion-entry-grid">
