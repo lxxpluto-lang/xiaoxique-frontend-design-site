@@ -1,12 +1,14 @@
 <template>
   <view class="knowledge-companion" data-testid="knowledge-companions">
-    <view class="knowledge-companion__heading">
-      <view><text class="knowledge-companion__kicker">一起坚持</text><text class="knowledge-companion__title">小队与搭子</text><text class="knowledge-companion__copy">只分享打卡状态，不比较身体数据。</text></view>
+    <view class="companion-hero">
+      <view><text>连续打卡</text><text><text>{{ streak }}</text> 天</text><text>{{ checkInDone ? '今天已完成，和伙伴一起保持节奏' : '完成今天的计划，再去看看伙伴' }}</text></view>
+      <view class="companion-hero__badge">{{ checkInDone ? '✓' : '待' }}</view>
     </view>
 
     <view class="companion-entry-grid">
-      <button :class="{ active: activeTab === 'team' }" data-testid="knowledge-team-entry" @tap="emit('update:activeTab', activeTab === 'team' ? 'none' : 'team')"><view class="companion-entry-icon">队</view><view><text>健康小队</text><text>{{ teamJoined ? teamState.name : '创建或加入亲友小队' }}</text></view><text>{{ teamJoined ? teamCheckedCount + '/' + teamMembers.length : '去组队' }} ›</text></button>
-      <button :class="{ active: activeTab === 'buddy' }" data-testid="knowledge-buddy-entry" @tap="emit('update:activeTab', activeTab === 'buddy' ? 'none' : 'buddy')"><view class="companion-entry-icon companion-entry-icon--buddy">伴</view><view><text>健康搭子</text><text>{{ buddyState.connected ? buddyState.buddyName + ' · 第' + buddyDay + '天' : '7天或30天温和陪伴' }}</text></view><text>{{ buddyState.connected ? '查看' : '去配对' }} ›</text></button>
+      <button :class="{ active: activeTab === 'team' }" data-testid="knowledge-team-entry" @tap="emit('update:activeTab', activeTab === 'team' ? 'none' : 'team')"><view class="companion-entry-icon">队</view><text>健康小队</text><text>{{ teamJoined ? teamCheckedCount + '/' + teamMembers.length + '已打卡' : '去组队' }}</text></button>
+      <button :class="{ active: activeTab === 'buddy' }" data-testid="knowledge-buddy-entry" @tap="emit('update:activeTab', activeTab === 'buddy' ? 'none' : 'buddy')"><view class="companion-entry-icon companion-entry-icon--buddy">伴</view><text>健康搭子</text><text>{{ buddyState.connected ? '第' + buddyDay + '天' : '去配对' }}</text></button>
+      <button data-testid="knowledge-checkin-entry" @tap="emit('openCheckin')"><view class="companion-entry-icon companion-entry-icon--checkin">签</view><text>打卡日历</text><text>{{ checkInDone ? '今天已完成' : '查看记录' }}</text></button>
     </view>
 
     <view v-if="activeTab === 'team'" class="social-panel knowledge-social-panel" data-testid="team-panel">
@@ -47,6 +49,7 @@ interface TeamMember {
 
 defineProps<{
   activeTab: 'none' | 'team' | 'buddy'
+  streak: number
   teamJoined: boolean
   teamState: TeamState
   teamMembers: TeamMember[]
@@ -60,6 +63,7 @@ defineProps<{
 
 const emit = defineEmits<{
   (event: 'update:activeTab', value: 'none' | 'team' | 'buddy'): void
+  (event: 'openCheckin'): void
   (event: 'createTeam'): void
   (event: 'joinTeam', value: string): void
   (event: 'joinDemoTeam'): void
@@ -73,21 +77,23 @@ const inviteCode = ref('XQ-7DAY')
 </script>
 
 <style scoped lang="scss">
-.knowledge-companion { margin: 24rpx 24rpx 4rpx; padding: 24rpx; border: 1rpx solid #cde8e1; border-radius: 28rpx; background: linear-gradient(145deg, #eefaf7, #fff 60%); }
-.knowledge-companion__kicker, .knowledge-companion__title, .knowledge-companion__copy { display: block; }
-.knowledge-companion__kicker { color: #0c7464; font-size: 21rpx; font-weight: 700; }
-.knowledge-companion__title { margin-top: 6rpx; color: #1f2329; font-size: 31rpx; font-weight: 700; }
-.knowledge-companion__copy { margin-top: 7rpx; color: #646a73; font-size: 21rpx; line-height: 1.5; }
-.companion-entry-grid { display: grid; margin-top: 20rpx; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10rpx; }
-.companion-entry-grid > button { display: grid; min-width: 0; padding: 17rpx; grid-template-columns: 58rpx minmax(0, 1fr); gap: 11rpx; border: 1rpx solid #e3e8e6; border-radius: 21rpx; background: #fff; text-align: left; }
+.knowledge-companion { margin: 0; padding: 0 24rpx 8rpx; background: linear-gradient(180deg, #e7faf5 0, #f5f7f6 390rpx); }
+.companion-hero { display: flex; min-height: 220rpx; padding: 30rpx 18rpx 26rpx; align-items: center; justify-content: space-between; }
+.companion-hero text { display: block; }
+.companion-hero > view:first-child > text:first-child { color: #657a74; font-size: 22rpx; }
+.companion-hero > view:first-child > text:nth-child(2) { margin-top: 4rpx; color: #172b28; font-size: 30rpx; font-weight: 650; }
+.companion-hero > view:first-child > text:nth-child(2) text { display: inline; color: #0b8c72; font-size: 78rpx; font-weight: 760; line-height: 1; }
+.companion-hero > view:first-child > text:last-child { margin-top: 12rpx; color: #677772; font-size: 20rpx; }
+.companion-hero__badge { display: flex; width: 104rpx; height: 104rpx; align-items: center; justify-content: center; border: 10rpx solid rgba(255,255,255,.8); border-radius: 50%; color: #fff; background: #28b99b; box-shadow: 0 15rpx 30rpx rgba(26,152,126,.16); font-size: 38rpx; font-weight: 750; }
+.companion-entry-grid { display: grid; margin-top: -12rpx; padding: 14rpx 8rpx; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-radius: 26rpx; background: #fff; box-shadow: 0 10rpx 34rpx rgba(26,63,54,.07); }
+.companion-entry-grid > button { display: flex; min-width: 0; min-height: 132rpx; padding: 12rpx 5rpx; align-items: center; flex-direction: column; border-left: 1rpx solid #edf1f0; background: #fff; text-align: center; }
+.companion-entry-grid > button:first-child { border-left: 0; }
 .companion-entry-grid > button.active { border-color: #16a085; box-shadow: inset 0 0 0 1rpx #16a085; }
-.companion-entry-icon { display: flex; align-items: center; justify-content: center; width: 58rpx; height: 58rpx; grid-row: span 2; border-radius: 18rpx; color: #0c7464; background: #eaf8f4; font-size: 22rpx; font-weight: 700; }
+.companion-entry-icon { display: flex; align-items: center; justify-content: center; width: 58rpx; height: 58rpx; border-radius: 18rpx; color: #0c7464; background: #eaf8f4; font-size: 22rpx; font-weight: 700; }
 .companion-entry-icon--buddy { color: #6c6292; background: #f0ecfb; }
-.companion-entry-grid button > view:nth-child(2) { min-width: 0; }
-.companion-entry-grid button > view:nth-child(2) text { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.companion-entry-grid button > view:nth-child(2) text:first-child { color: #1f2329; font-size: 23rpx; font-weight: 700; }
-.companion-entry-grid button > view:nth-child(2) text:last-child { margin-top: 4rpx; color: #646a73; font-size: 19rpx; }
-.companion-entry-grid button > text { grid-column: 2; color: #0c7464; font-size: 20rpx; font-weight: 600; }
+.companion-entry-icon--checkin { color: #9b7310; background: #fff5d5; }
+.companion-entry-grid button > text:nth-child(2) { margin-top: 8rpx; color: #1f2329; font-size: 21rpx; font-weight: 700; }
+.companion-entry-grid button > text:last-child { margin-top: 3rpx; overflow: hidden; color: #7a8783; font-size: 17rpx; text-overflow: ellipsis; white-space: nowrap; }
 .knowledge-social-panel { margin-top: 18rpx; }
 .team-hero { padding: 24rpx; border: 1rpx solid #b9e9dc; border-radius: 24rpx; background: linear-gradient(145deg, #e9f9f4, #fff); }
 .team-avatar-stack { display: flex; margin-bottom: 16rpx; padding-left: 12rpx; }
@@ -144,5 +150,4 @@ const inviteCode = ref('XQ-7DAY')
 .team-boundary { margin-top: 15rpx; padding: 17rpx 19rpx; border-radius: 18rpx; color: #646a73; font-size: 20rpx; line-height: 1.5; background: #f4f7f8; }
 .team-boundary text { display: block; }
 .team-boundary text:first-child { margin-bottom: 5rpx; color: #1f2329; font-weight: 700; }
-@media (max-width: 370px) { .companion-entry-grid { grid-template-columns: 1fr; } }
 </style>
