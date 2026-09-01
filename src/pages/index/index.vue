@@ -551,7 +551,7 @@
               ><view
                 ><text>MEM 7日挑战</text
                 ><text
-                  >连续 {{ memChallengeDays }}/7 天 · 每天满15分钟</text
+                  >连续 {{ memChallengeDays }}/7 天 · 整套八段锦＋评分</text
                 ></view
               ><button
                 :disabled="wallet.healthPoints < 100"
@@ -943,7 +943,9 @@
               ><view>{{
                 selectedSession.status === "stopped"
                   ? "停"
-                  : selectedSession.score
+                  : selectedSession.poseScored
+                    ? selectedSession.score
+                    : "完"
               }}</view
               ><text>{{
                 selectedSession.status === "stopped"
@@ -1201,6 +1203,9 @@
               @tap="convertPoints"
             >
               100健康积分 → 5M币</button
+            ><view v-if="mem.unlocked" class="mem-challenge-rule"
+              ><view><text>MEM八段锦7日奖励</text><text>连续 {{ memChallengeDays }}/7 天</text></view
+              ><text>每天完整完成八式并产生动作评分，连续7天奖励20M币；快速演示和提前结束不计入。</text></view
             ><text class="store-title">积分礼品</text
             ><view class="reward-grid"
               ><view v-for="reward in visibleRewards" :key="reward.id"
@@ -1843,7 +1848,10 @@ const postReady = computed(() => snapshotReady(postSnapshot.value, "post"));
 const pendingReviewCount = computed(
   () => doctorReviews.value.filter((item) => item.status === "pending").length,
 );
-const memChallengeDays = computed(() => calculateMemChallengeDays());
+const memChallengeDays = computed(() => {
+  const streakDays = calculateMemChallengeDays();
+  return streakDays === 0 ? 0 : ((streakDays - 1) % 7) + 1;
+});
 const visibleRewards = computed(() =>
   rewardItems.filter(
     (item) =>
@@ -2404,10 +2412,16 @@ function autoCheckInCoreExercise() {
 function resultItems() {
   if (selectedGame.value.interaction === "camera-score")
     return [
-      { label: "动作模拟评分", value: `${activityScore.value}分` },
       {
-        label: "AR互动",
-        value: selectedGame.value.arSupported ? "支持" : "未启用",
+        label: "动作评分",
+        value: cameraStatus.value === "ready" ? `${activityScore.value}分` : "未评分",
+      },
+      {
+        label: "整套八式",
+        value:
+          elapsed.value >= trainingTargetSeconds.value && !demoCompleted.value
+            ? "已完整完成"
+            : "未完整完成",
       },
     ];
   if (selectedGame.value.interaction === "rep-game")
@@ -2617,6 +2631,13 @@ function generateReport() {
   const createdAt = new Date().toISOString();
   const assessment = buildAssessment();
   const advice = buildAdvice(id, assessment);
+  const poseScored =
+    selectedGameId.value === "baduanjin" && cameraStatus.value === "ready";
+  const fullRoutineCompleted =
+    selectedGameId.value === "baduanjin" &&
+    trainingStatus.value === "completed" &&
+    !demoCompleted.value &&
+    elapsed.value >= trainingTargetSeconds.value;
   const session: TrainingSession = {
     id,
     exerciseId: selectedGameId.value,
@@ -2626,8 +2647,13 @@ function generateReport() {
     status: trainingStatus.value,
     durationSeconds: Math.min(trainingTargetSeconds.value, elapsed.value),
     demoCompleted: demoCompleted.value,
+    fullRoutineCompleted,
+    poseScored,
     stoppedReason: stoppedReason.value || undefined,
-    score: activityScore.value,
+    score:
+      selectedGame.value.interaction === "camera-score" && !poseScored
+        ? 0
+        : activityScore.value,
     results: resultItems(),
     createdAt,
     localDate: todayKey(),
@@ -2925,14 +2951,18 @@ function calculateMemChallengeDays() {
   let cursor = startOfLocalDay(new Date());
   while (true) {
     const key = localDateKey(cursor);
-    const seconds = sessions.value
-      .filter(
-        (item) =>
-          item.status === "completed" &&
-          localDateKey(new Date(item.createdAt)) === key,
-      )
-      .reduce((sum, item) => sum + item.durationSeconds, 0);
-    if (seconds < 900) break;
+    const qualified = sessions.value.some(
+      (item) =>
+        item.exerciseId === "baduanjin" &&
+        item.status === "completed" &&
+        item.fullRoutineCompleted === true &&
+        item.poseScored === true &&
+        item.demoCompleted === false &&
+        Number.isFinite(item.score) &&
+        item.score > 0 &&
+        item.localDate === key,
+    );
+    if (!qualified) break;
     count += 1;
     cursor = addLocalDays(cursor, -1);
   }
@@ -2948,12 +2978,13 @@ function evaluateMemChallenge() {
   ) {
     wallet.value.mCoins += 20;
     mem.value.lastRewardCycleEnd = todayKey();
+    uni.showToast({ title: "MEM连续7天 +20M币", icon: "none" });
   }
 }
 
 function persistState() {
   uni.setStorageSync(STORAGE_KEY, {
-    schemaVersion: 5,
+    schemaVersion: 6,
     ready: appReady.value,
     mode: mode.value,
     healthGoal: healthGoal.value,
@@ -3041,6 +3072,8 @@ onMounted(() => {
       ? saved.sessions.map((item: any) => ({
           ...item,
           localDate: item.localDate || localDateKey(new Date(item.createdAt)),
+          fullRoutineCompleted: item.fullRoutineCompleted === true,
+          poseScored: item.poseScored === true,
         }))
       : [];
     selfSelectedGameId.value = exerciseGames.some(

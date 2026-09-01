@@ -228,6 +228,8 @@ export interface TrainingSession {
   status: TrainingStatus
   durationSeconds: number
   demoCompleted: boolean
+  fullRoutineCompleted?: boolean
+  poseScored?: boolean
   stoppedReason?: string
   score: number
   results: ActivityResult[]
