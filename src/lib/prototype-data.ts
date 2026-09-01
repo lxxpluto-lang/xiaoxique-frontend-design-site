@@ -83,6 +83,9 @@ export interface VitalSnapshot {
   phase: 'pre' | 'post'
   heartRate?: number
   oxygenSaturation?: number
+  systolicBloodPressure?: number
+  diastolicBloodPressure?: number
+  discomfortScore?: number
   borg?: number
   feeling?: '轻松' | '适中' | '较累'
   symptoms: string[]

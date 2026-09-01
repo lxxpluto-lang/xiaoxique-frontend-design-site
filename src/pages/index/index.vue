@@ -825,89 +825,148 @@
             v-else-if="detailView === 'precheck'"
             class="detail-content"
             data-testid="precheck-screen"
-            ><StepIndicator :current="1" /><view class="policy-banner"
-              ><view
-                ><text>患者训练状态策略</text
-                ><text
-                  >训练前{{ modeLabel(publishedPolicy.preMode) }} · v{{
-                    publishedPolicy.version
-                  }}</text
-                ></view
-              ><button @tap="simulateVitalSync('pre')">重新同步</button></view
-            ><view
-              class="vital-source"
-              :class="'quality-' + preSnapshot.quality"
-              ><view
-                ><AppIcon
-                  src="/static/icons/magpie-line/device.svg"
-                  :size="34"
-                /><view
-                  ><text>{{ sourceLabel(preSnapshot.source) }}</text
-                  ><text
-                    >{{ qualityLabel(preSnapshot.quality) }} ·
-                    {{ formatTime(preSnapshot.measuredAt) }}</text
-                  ></view
-                ></view
-              ><text>{{
-                preSnapshot.quality === "valid" ? "已同步" : "需处理"
-              }}</text></view
-            ><view v-if="publishedPolicy.fields.symptoms" class="form-card"
-              ><text class="form-title">现在是否有不适？</text
-              ><checkbox-group class="symptom-list" @change="updatePreSymptoms"
-                ><label v-for="item in symptomOptions" :key="item.value"
-                  ><checkbox :value="item.value" color="#11866F" /><text>{{
-                    item.label
-                  }}</text></label
-                ></checkbox-group
-              ><text v-if="preSnapshot.symptoms.length" class="danger-note"
-                >不建议开始运动，请停止并按提示处理。</text
-              ></view
-            ><view class="vital-form"
-              ><label v-if="publishedPolicy.fields.heartRate"
-                ><text>心率</text
-                ><view
-                  ><input
-                    v-model.number="preSnapshot.heartRate"
-                    type="number"
-                  /><text>次/分</text></view
-                ></label
-              ><label v-if="publishedPolicy.fields.oxygenSaturation"
-                ><text>血氧</text
-                ><view
-                  ><input
-                    v-model.number="preSnapshot.oxygenSaturation"
-                    type="number"
-                  /><text>%</text></view
-                ></label
-              ></view
-            ><button
-              v-if="preSnapshot.quality !== 'valid'"
-              class="text-button"
-              @tap="useManualSnapshot('pre')"
-            >
-              标记为外部设备读数</button
-            ><view v-if="publishedPolicy.fields.borg" class="form-card"
-              ><text class="form-title">Borg用力感 {{ preSnapshot.borg }}</text
-              ><slider
-                :value="preSnapshot.borg"
+            ><StepIndicator :current="1" />
+            <view class="precheck-heading">
+              <text>训练前确认</text>
+              <text>完成以下信息后即可开始 · 约30秒</text>
+              <text
+                >医院安全规则 v{{ publishedPolicy.version }} ·
+                训练前{{ modeLabel(publishedPolicy.preMode) }}</text
+              >
+            </view>
+            <view class="precheck-section" data-testid="discomfort-score">
+              <view class="precheck-section__title">
+                <text>1</text>
+                <view>
+                  <text>当前不适程度</text>
+                  <text>0代表没有不适，10代表非常不适</text>
+                </view>
+                <text>{{ preSnapshot.discomfortScore ?? "待填写" }}</text>
+              </view>
+              <slider
+                :value="preSnapshot.discomfortScore ?? 0"
                 min="0"
                 max="10"
+                step="1"
                 activeColor="#11866F"
-                @change="setSnapshotBorg('pre', $event)" /></view
-            ><button
-              v-if="preSnapshot.symptoms.length"
-              class="danger-primary"
-              @tap="stopBeforeStart"
+                backgroundColor="#dce8e4"
+                @changing="setPreDiscomfortScore"
+                @change="setPreDiscomfortScore"
+              />
+              <view class="discomfort-scale">
+                <text>0 无不适</text>
+                <text>1–3 轻微</text>
+                <text>4–6 明显</text>
+                <text>7–10 严重</text>
+              </view>
+            </view>
+            <button
+              class="precheck-danger-entry"
+              data-testid="precheck-danger-entry"
+              @tap="reportPrecheckDiscomfort"
             >
-              停止本次并生成记录</button
-            ><button
-              v-else
+              <view>
+                <text>有胸痛、明显气促、头晕或心悸？</text>
+                <text>出现明显不适时，不要继续运动。</text>
+              </view>
+              <text>我有明显不适，暂不开始</text>
+            </button>
+            <view class="precheck-section" data-testid="precheck-vitals">
+              <view class="precheck-section__title">
+                <text>2</text>
+                <view>
+                  <text>血压和血氧</text>
+                  <text>选择设备读取，或使用家中设备后手动填写</text>
+                </view>
+              </view>
+              <view class="vital-entry-modes">
+                <button
+                  :class="{ active: preVitalInputMode === 'device' }"
+                  data-testid="read-pre-vitals"
+                  @tap="readPreVitalsFromDevice"
+                >
+                  设备自动读取
+                </button>
+                <button
+                  :class="{ active: preVitalInputMode === 'manual' }"
+                  data-testid="enter-pre-vitals-manually"
+                  @tap="chooseManualPreVitals"
+                >
+                  手动填写
+                </button>
+              </view>
+              <text v-if="preVitalInputMode === 'none'" class="precheck-empty"
+                >尚未测量，请选择一种方式。</text
+              >
+              <view v-else class="vital-form precheck-vital-form">
+                <label>
+                  <text>收缩压</text>
+                  <view>
+                    <input
+                      :value="preSnapshot.systolicBloodPressure ?? ''"
+                      type="number"
+                      placeholder="待填"
+                      :disabled="preVitalInputMode !== 'manual'"
+                      @input="
+                        setManualPreVital('systolicBloodPressure', $event)
+                      "
+                    />
+                    <text>mmHg</text>
+                  </view>
+                </label>
+                <label>
+                  <text>舒张压</text>
+                  <view>
+                    <input
+                      :value="preSnapshot.diastolicBloodPressure ?? ''"
+                      type="number"
+                      placeholder="待填"
+                      :disabled="preVitalInputMode !== 'manual'"
+                      @input="
+                        setManualPreVital('diastolicBloodPressure', $event)
+                      "
+                    />
+                    <text>mmHg</text>
+                  </view>
+                </label>
+                <label>
+                  <text>血氧</text>
+                  <view>
+                    <input
+                      :value="preSnapshot.oxygenSaturation ?? ''"
+                      type="number"
+                      placeholder="待填"
+                      :disabled="preVitalInputMode !== 'manual'"
+                      @input="setManualPreVital('oxygenSaturation', $event)"
+                    />
+                    <text>%</text>
+                  </view>
+                </label>
+              </view>
+              <text
+                v-if="preVitalInputMode !== 'none'"
+                class="precheck-source-note"
+                :class="{ ready: preSnapshot.quality === 'valid' }"
+                >数据来源：{{ sourceLabel(preSnapshot.source) }} ·
+                {{ qualityLabel(preSnapshot.quality) }} ·
+                {{ formatTime(preSnapshot.measuredAt) }}</text
+              >
+              <text
+                v-if="
+                  preVitalInputMode === 'manual' &&
+                  preSnapshot.quality !== 'valid'
+                "
+                class="precheck-empty"
+                >请完整填写收缩压、舒张压和血氧。</text
+              >
+            </view>
+            <button
               class="primary-button"
               :disabled="publishedPolicy.preMode === 'required' && !preReady"
               data-testid="begin-training"
               @tap="startTraining"
             >
-              开始{{ activeTrainingTitle }}</button
+              确认并开始运动</button
             ><button
               v-if="publishedPolicy.preMode === 'optional'"
               class="text-button"
@@ -1626,6 +1685,11 @@ type HealthGoal = "habit" | "weight" | "cardiac";
 type SocialTab = "none" | "team" | "buddy";
 type ScenarioId = "stable" | "attention" | "stop" | "insufficient";
 type TodayPageIndex = 0 | 1;
+type PreVitalInputMode = "none" | "device" | "manual";
+type PreVitalField =
+  | "systolicBloodPressure"
+  | "diastolicBloodPressure"
+  | "oxygenSaturation";
 
 interface GardenGrowthFeedback {
   sessionId: string;
@@ -1699,6 +1763,7 @@ const showAiBoundary = ref(false);
 const showStopReason = ref(false);
 const preSnapshot = ref<VitalSnapshot>(createVitalSnapshot("pre"));
 const postSnapshot = ref<VitalSnapshot>(createVitalSnapshot("post"));
+const preVitalInputMode = ref<PreVitalInputMode>("none");
 const policyDraft = ref<TrainingAssessmentPolicy>(createDefaultPolicy());
 const publishedPolicy = ref<TrainingAssessmentPolicy>(createDefaultPolicy());
 let trainingTimer: ReturnType<typeof setInterval> | undefined;
@@ -1718,12 +1783,12 @@ const policyFieldOptions: Array<{
   label: string;
   copy: string;
 }> = [
-  { id: "heartRate", label: "心率", copy: "设备自动采集" },
-  { id: "oxygenSaturation", label: "血氧", copy: "设备自动采集" },
-  { id: "symptoms", label: "异常症状", copy: "用户主动报告" },
-  { id: "borg", label: "Borg用力感", copy: "0–10主观感受" },
+  { id: "heartRate", label: "心率", copy: "训练后由设备自动采集" },
+  { id: "oxygenSaturation", label: "血氧", copy: "训练前设备读取或手动填写" },
+  { id: "symptoms", label: "异常症状", copy: "训练前快捷上报" },
+  { id: "borg", label: "Borg用力感", copy: "训练后0–10主观感受" },
   { id: "feeling", label: "运动后感受", copy: "轻松/适中/较累" },
-  { id: "bloodPressure", label: "血压", copy: "外接血压计或手动录入" },
+  { id: "bloodPressure", label: "血压", copy: "训练前设备读取或手动填写" },
 ];
 const symptomOptions = [
   { value: "chest-pain", label: "胸痛或胸部不适" },
@@ -2224,6 +2289,8 @@ function reviewStatusLabel(status: ReviewStatus) {
 }
 function snapshotSummary(snapshot?: VitalSnapshot) {
   if (!snapshot || snapshot.quality !== "valid") return "数据不足";
+  if (snapshot.phase === "pre")
+    return `不适 ${snapshot.discomfortScore ?? "--"}/10 · 血压 ${snapshot.systolicBloodPressure ?? "--"}/${snapshot.diastolicBloodPressure ?? "--"} mmHg · 血氧 ${snapshot.oxygenSaturation ?? "--"}%`;
   return `心率 ${snapshot.heartRate ?? "--"} · 血氧 ${snapshot.oxygenSaturation ?? "--"}% · Borg ${snapshot.borg ?? "--"}`;
 }
 
@@ -2242,7 +2309,7 @@ function createDefaultPolicy(): TrainingAssessmentPolicy {
       symptoms: true,
       borg: true,
       feeling: true,
-      bloodPressure: false,
+      bloodPressure: true,
     },
     preValidMinutes: 10,
     postWindowMinutes: 5,
@@ -2259,17 +2326,23 @@ function createDefaultPolicy(): TrainingAssessmentPolicy {
 }
 function createVitalSnapshot(
   phase: "pre" | "post",
-  quality: DataQuality = "valid",
+  quality: DataQuality = phase === "pre" ? "missing" : "valid",
 ): VitalSnapshot {
   const now = new Date().toISOString();
+  const hasReading = quality === "valid";
   return {
     phase,
-    heartRate: phase === "pre" ? 68 : 76,
-    oxygenSaturation: 98,
-    borg: phase === "pre" ? 1 : 3,
-    feeling: phase === "post" ? "适中" : undefined,
+    heartRate: hasReading ? (phase === "pre" ? 68 : 76) : undefined,
+    oxygenSaturation: hasReading ? 98 : undefined,
+    systolicBloodPressure:
+      phase === "pre" && hasReading ? 128 : undefined,
+    diastolicBloodPressure:
+      phase === "pre" && hasReading ? 78 : undefined,
+    discomfortScore: phase === "pre" && hasReading ? 0 : undefined,
+    borg: phase === "post" && hasReading ? 3 : undefined,
+    feeling: phase === "post" && hasReading ? "适中" : undefined,
     symptoms: [],
-    source: "demo-device",
+    source: hasReading ? "demo-device" : "manual",
     measuredAt: now,
     syncedAt: now,
     quality,
@@ -2559,6 +2632,7 @@ function resetTraining() {
   liveVitalUpdatedAt.value = "";
   preSnapshot.value = createVitalSnapshot("pre");
   postSnapshot.value = createVitalSnapshot("post");
+  preVitalInputMode.value = "none";
 }
 function selectExercise(id: ExerciseGameId) {
   detailReturnNav.value = activeNav.value;
@@ -2571,6 +2645,12 @@ function selectExercise(id: ExerciseGameId) {
 }
 function startTraining() {
   if (preSnapshot.value.symptoms.length) return;
+  if (
+    mode.value === "cardiac" &&
+    publishedPolicy.value.preMode === "required" &&
+    !preReady.value
+  )
+    return;
   detailView.value = "training";
   trainingStatus.value = "active";
   elapsed.value = 0;
@@ -2697,6 +2777,68 @@ function stopBeforeStart() {
   elapsed.value = 0;
   generateReport();
 }
+function setPreDiscomfortScore(event: any) {
+  preSnapshot.value.discomfortScore = Number(event.detail.value);
+}
+function reportPrecheckDiscomfort() {
+  preSnapshot.value.symptoms = ["胸痛、明显气促、头晕或心悸等明显不适"];
+  stopBeforeStart();
+}
+function readPreVitalsFromDevice() {
+  const now = new Date().toISOString();
+  const source =
+    deviceConnected.value && preSnapshot.value.source !== "manual"
+      ? preSnapshot.value.source
+      : "demo-device";
+  preVitalInputMode.value = "device";
+  preSnapshot.value = {
+    ...preSnapshot.value,
+    heartRate: 68,
+    oxygenSaturation: 98,
+    systolicBloodPressure: 128,
+    diastolicBloodPressure: 78,
+    source,
+    measuredAt: now,
+    syncedAt: now,
+    quality: "valid",
+  };
+  deviceConnected.value = true;
+  persistState();
+  uni.showToast({ title: "已读取设备数据", icon: "none" });
+}
+function chooseManualPreVitals() {
+  const now = new Date().toISOString();
+  preVitalInputMode.value = "manual";
+  preSnapshot.value = {
+    ...preSnapshot.value,
+    heartRate: undefined,
+    oxygenSaturation: undefined,
+    systolicBloodPressure: undefined,
+    diastolicBloodPressure: undefined,
+    source: "manual",
+    measuredAt: now,
+    syncedAt: now,
+    quality: "missing",
+  };
+}
+function setManualPreVital(field: PreVitalField, event: any) {
+  if (preVitalInputMode.value !== "manual") return;
+  const rawValue = String(event.detail.value ?? "").trim();
+  preSnapshot.value[field] = rawValue === "" ? undefined : Number(rawValue);
+  const now = new Date().toISOString();
+  preSnapshot.value.measuredAt = now;
+  preSnapshot.value.syncedAt = now;
+  const values = [
+    preSnapshot.value.systolicBloodPressure,
+    preSnapshot.value.diastolicBloodPressure,
+    preSnapshot.value.oxygenSaturation,
+  ];
+  preSnapshot.value.quality = values.every(
+    (value) => Number.isFinite(value) && Number(value) > 0,
+  )
+    ? "valid"
+    : "missing";
+}
 function updatePreSymptoms(event: { detail: { value: string[] } }) {
   preSnapshot.value.symptoms = event.detail.value;
 }
@@ -2708,22 +2850,41 @@ function setPostFeeling(feeling: string) {
   postSnapshot.value.feeling = feeling as VitalSnapshot["feeling"];
 }
 function simulateVitalSync(phase: "pre" | "post") {
-  const target = phase === "pre" ? preSnapshot : postSnapshot;
-  target.value = createVitalSnapshot(phase);
+  if (phase === "pre") {
+    readPreVitalsFromDevice();
+    return;
+  }
+  postSnapshot.value = createVitalSnapshot("post");
   deviceConnected.value = true;
   persistState();
   uni.showToast({ title: "已同步模拟设备数据", icon: "none" });
 }
 function useManualSnapshot(phase: "pre" | "post") {
-  const target = phase === "pre" ? preSnapshot : postSnapshot;
-  target.value.source = "manual";
-  target.value.measuredAt = new Date().toISOString();
-  target.value.syncedAt = target.value.measuredAt;
-  target.value.quality = "valid";
+  if (phase === "pre") {
+    chooseManualPreVitals();
+    return;
+  }
+  postSnapshot.value.source = "manual";
+  postSnapshot.value.measuredAt = new Date().toISOString();
+  postSnapshot.value.syncedAt = postSnapshot.value.measuredAt;
+  postSnapshot.value.quality = "valid";
   persistState();
   uni.showToast({ title: "已标记为外部设备读数", icon: "none" });
 }
 function snapshotReady(snapshot: VitalSnapshot, phase: "pre" | "post") {
+  if (phase === "pre")
+    return (
+      snapshot.quality === "valid" &&
+      Number.isFinite(snapshot.discomfortScore) &&
+      Number(snapshot.discomfortScore) >= 0 &&
+      Number(snapshot.discomfortScore) <= 10 &&
+      Number.isFinite(snapshot.systolicBloodPressure) &&
+      Number(snapshot.systolicBloodPressure) > 0 &&
+      Number.isFinite(snapshot.diastolicBloodPressure) &&
+      Number(snapshot.diastolicBloodPressure) > 0 &&
+      Number.isFinite(snapshot.oxygenSaturation) &&
+      Number(snapshot.oxygenSaturation) > 0
+    );
   if (
     snapshot.quality !== "valid" &&
     (publishedPolicy.value.fields.heartRate ||
@@ -2820,7 +2981,7 @@ function buildAssessment(): TrainingAssessment | undefined {
     (!post || snapshotReady(post, "post"));
   let comparison = "状态数据不完整，不生成确定性变化结论。";
   if (complete && pre && post)
-    comparison = `心率变化 ${Number(post.heartRate) - Number(pre.heartRate)} 次/分，血氧变化 ${Number(post.oxygenSaturation) - Number(pre.oxygenSaturation)} 个百分点。`;
+    comparison = `训练前不适程度 ${pre.discomfortScore ?? "--"}/10，血压 ${pre.systolicBloodPressure ?? "--"}/${pre.diastolicBloodPressure ?? "--"} mmHg；训练前后血氧变化 ${Number(post.oxygenSaturation) - Number(pre.oxygenSaturation)} 个百分点。`;
   else if (complete && pre)
     comparison = "仅记录训练前状态，不生成训练前后变化结论。";
   else if (complete && post)
@@ -2919,12 +3080,19 @@ function buildAdvice(
   }
   const pre = assessment.pre;
   const post = assessment.post;
+  const heartRateChangedSignificantly = Boolean(
+    pre &&
+      post &&
+      Number.isFinite(pre.heartRate) &&
+      Number.isFinite(post.heartRate) &&
+      Math.abs(Number(post.heartRate) - Number(pre.heartRate)) > 20,
+  );
   const attention = Boolean(
     pre &&
     post &&
     ((post.oxygenSaturation ?? 100) < 95 ||
       (pre.oxygenSaturation ?? 100) < 95 ||
-      Math.abs((post.heartRate ?? 0) - (pre.heartRate ?? 0)) > 20 ||
+      heartRateChangedSignificantly ||
       (post.borg ?? 0) >= 6 ||
       post.feeling === "较累"),
   );
@@ -3118,6 +3286,8 @@ function seedScenario(id: ScenarioId) {
     "pre",
     id === "insufficient" ? "stale" : "valid",
   );
+  preVitalInputMode.value =
+    id === "insufficient" ? "manual" : "device";
   postSnapshot.value = createVitalSnapshot(
     "post",
     id === "insufficient" ? "missing" : "valid",
