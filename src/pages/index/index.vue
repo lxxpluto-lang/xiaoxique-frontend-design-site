@@ -808,7 +808,11 @@
               ><text class="training-state">{{
                 trainingStatus === "paused" ? "已暂停" : "训练中"
               }}</text
-              ><view
+              ><view v-if="showLiveVitals" class="live-vitals-inline" data-testid="live-vitals"
+                ><text>♥ {{ liveHeartRate }} <text>bpm</text></text
+                ><text>SpO₂ {{ liveOxygen }}%</text
+                ><text>手环</text></view
+              ><view class="training-timer"
                 ><text>{{ formattedElapsed }}</text
                 ><text>/ {{ formatTimer(trainingTargetSeconds) }}</text></view
               ></view
@@ -1520,6 +1524,9 @@ const mem = ref<MemEntitlement>({ unlocked: false, inviteCode: "MEM-2026" });
 const memCode = ref("");
 const redemptions = ref<RedemptionRecord[]>([]);
 const deviceConnected = ref(false);
+const liveHeartRate = ref(76);
+const liveOxygen = ref(98);
+const liveVitalUpdatedAt = ref("");
 const doctorReviews = ref<DoctorReview[]>([]);
 const planAdjustment = ref("");
 const showAiBoundary = ref(false);
@@ -1726,6 +1733,17 @@ const activityScore = computed(() =>
     : selectedGame.value.interaction === "rep-game"
       ? Math.round((repCount.value / 12) * 100)
       : Math.round((rhythmHits.value / Math.max(1, rhythmTotal.value)) * 100),
+);
+const supportsLiveVitals = computed(() =>
+  ["baduanjin", "walking", "power-bike", "resistance", "balance"].includes(
+    selectedGameId.value,
+  ),
+);
+const showLiveVitals = computed(
+  () =>
+    deviceConnected.value &&
+    supportsLiveVitals.value &&
+    (trainingStatus.value === "active" || trainingStatus.value === "paused"),
 );
 const rhythmRound = computed(() =>
   Math.min(3, Math.max(1, Math.ceil(rhythmTotal.value / 8))),
@@ -2248,6 +2266,9 @@ function resetTraining() {
   cameraStatus.value = "idle";
   stoppedReason.value = "";
   pendingCheckInAward.value = 0;
+  liveHeartRate.value = 76;
+  liveOxygen.value = 98;
+  liveVitalUpdatedAt.value = "";
   preSnapshot.value = createVitalSnapshot("pre");
   postSnapshot.value = createVitalSnapshot("post");
 }
@@ -2265,6 +2286,7 @@ function startTraining() {
   detailView.value = "training";
   trainingStatus.value = "active";
   elapsed.value = 0;
+  if (deviceConnected.value) initializeLiveVitals();
   startTimer();
 }
 function skipPre() {
@@ -2280,9 +2302,36 @@ function startTimer() {
   trainingTimer = setInterval(() => {
     if (trainingStatus.value === "active") {
       elapsed.value += 1;
+      if (deviceConnected.value && elapsed.value % 3 === 0)
+        updateLiveVitals();
       if (elapsed.value >= trainingTargetSeconds.value) finishTraining(false);
     }
   }, 1000);
+}
+function initializeLiveVitals() {
+  liveHeartRate.value = Number.isFinite(preSnapshot.value.heartRate)
+    ? Number(preSnapshot.value.heartRate)
+    : 76;
+  liveOxygen.value = Number.isFinite(preSnapshot.value.oxygenSaturation)
+    ? Number(preSnapshot.value.oxygenSaturation)
+    : 98;
+  liveVitalUpdatedAt.value = new Date().toISOString();
+}
+function updateLiveVitals() {
+  const intensityLift =
+    selectedGame.value.categoryId === "aerobic"
+      ? 18
+      : selectedGame.value.categoryId === "strength"
+        ? 13
+        : 8;
+  const progressLift = Math.min(10, Math.floor(elapsed.value / 30));
+  const wave = Math.round(Math.sin(elapsed.value / 7) * 2);
+  liveHeartRate.value = Math.max(
+    60,
+    Math.min(126, 72 + intensityLift + progressLift + wave),
+  );
+  liveOxygen.value = elapsed.value % 21 < 3 ? 97 : 98;
+  liveVitalUpdatedAt.value = new Date().toISOString();
 }
 function stopTimer() {
   if (trainingTimer) clearInterval(trainingTimer);
