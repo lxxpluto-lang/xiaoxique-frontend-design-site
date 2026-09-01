@@ -279,7 +279,7 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { id: 'today', label: '今日', iconPath: '/static/icons/magpie-line/home.svg' },
   { id: 'data', label: '训练', iconPath: '/static/icons/magpie-line/report.svg' },
-  { id: 'assistant', label: '小喜', iconPath: '/static/rive-source/v4/master/magpie-neutral-master-v4.png', kind: 'mascot' },
+  { id: 'assistant', label: '小喜', iconPath: '/static/icons/magpie-line/assistant.svg' },
   { id: 'discover', label: '资讯', iconPath: '/static/icons/magpie-line/knowledge.svg' },
   { id: 'profile', label: '我的', iconPath: '/static/icons/magpie-line/profile.svg' },
 ]

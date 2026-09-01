@@ -264,23 +264,6 @@
               ><text>不影响医生今日计划</text
               ><button @tap="startSelfSelected">开始自选运动</button></view
             >
-            <button
-              class="weekly-entry"
-              data-testid="weekly-path-entry"
-              @tap="goDetail('weekly-path')"
-            >
-              <view
-                ><text>本周路径</text
-                ><text>已完成 {{ weeklyCompletedDays }}/7 天</text></view
-              ><view class="weekly-mini"
-                ><text
-                  v-for="day in weeklyPlanDays"
-                  :key="day.label"
-                  :class="{ done: day.done, today: day.today }"
-                  >{{ day.done ? "✓" : day.label }}</text
-                ></view
-              ><text>›</text>
-            </button>
             <view class="section-heading"
               ><view
                 ><text>更多运动</text
@@ -637,18 +620,11 @@
           ><button
             v-for="item in navItems"
             :key="item.id"
-            :class="{
-              active: activeNav === item.id,
-              assistant: item.kind === 'mascot',
-            }"
+            :class="{ active: activeNav === item.id }"
             @tap="switchNav(item.id)"
           >
             <view
-              ><image
-                v-if="item.kind === 'mascot'"
-                :src="item.iconPath"
-                mode="aspectFit" /><AppIcon
-                v-else
+              ><AppIcon
                 :src="item.iconPath"
                 :size="42"
                 :active="activeNav === item.id"
@@ -828,12 +804,10 @@
             v-else-if="detailView === 'training'"
             class="detail-content training-detail"
             data-testid="training-screen"
-            ><view class="training-strip"
-              ><view
-                ><text>{{
-                  trainingStatus === "paused" ? "已暂停" : "训练中"
-                }}</text
-                ><text>{{ activeTrainingTitle }}</text></view
+            ><view class="training-strip training-strip--compact"
+              ><text class="training-state">{{
+                trainingStatus === "paused" ? "已暂停" : "训练中"
+              }}</text
               ><view
                 ><text>{{ formattedElapsed }}</text
                 ><text>/ {{ formatTimer(trainingTargetSeconds) }}</text></view
@@ -841,7 +815,6 @@
             ><TrainingExperience
               :game="selectedGame"
               :activity="todayActivity"
-              :score="activityScore"
               :paused="trainingStatus === 'paused'"
               :rep-count="repCount"
               :rhythm-hits="rhythmHits"
@@ -849,7 +822,6 @@
               :rhythm-round="rhythmRound"
               :elapsed="elapsed"
               :target-seconds="trainingTargetSeconds"
-              :camera-status="cameraStatus"
               @camera-status="cameraStatus = $event"
               @rep="recordRep"
               @beat="recordBeat"

@@ -33,7 +33,7 @@
       <view class="joint joint-hip" />
     </view>
 
-    <view class="camera-status">
+    <view v-if="active || state === 'denied'" class="camera-status">
       <text class="status-dot" :class="`status-dot--${state}`" />
       <text>{{ statusText }}</text>
     </view>
