@@ -218,6 +218,34 @@
                 ></view
               >
             </view>
+            <button
+              class="today-steps-card"
+              data-testid="today-steps-card"
+              @tap="goDetail('devices')"
+            >
+              <view class="today-steps-card__head">
+                <view class="today-steps-card__icon">步</view>
+                <view>
+                  <text>今日步数</text>
+                  <text v-if="validTodayStepRecord"
+                    >{{ formatSteps(validTodayStepRecord.steps) }}
+                    <text>/ {{ formatSteps(validTodayStepRecord.goal) }} 步</text></text
+                  >
+                  <text v-else>今日步数未同步</text>
+                </view>
+                <text>{{ validTodayStepRecord ? "查看数据 ›" : "去同步 ›" }}</text>
+              </view>
+              <view class="steps-progress" aria-hidden="true">
+                <view :style="{ width: todayStepProgress + '%' }" />
+              </view>
+              <text class="today-steps-card__source">
+                {{
+                  validTodayStepRecord
+                    ? `${sourceLabel(validTodayStepRecord.source)} · ${formatStepSyncedTime(validTodayStepRecord.syncedAt)}更新`
+                    : "连接设备或手动补录；缺失值不会显示为 0"
+                }}
+              </text>
+            </button>
             <template v-if="mode === 'cardiac'">
               <view class="prescription-head"
                 ><view
@@ -610,6 +638,64 @@
                   ><text>{{ metric.source }}</text></view
                 ></view
               >
+              <view class="section-heading daily-activity-heading"
+                ><view
+                  ><text>每日活动</text
+                  ><text>步数独立于训练前后安全评估</text></view
+                ><button @tap="goDetail('devices')">录入与来源 ›</button></view
+              >
+              <button
+                class="daily-steps-card"
+                data-testid="daily-steps-card"
+                @tap="goDetail('devices')"
+              >
+                <view>
+                  <text>今日步数</text>
+                  <text v-if="validTodayStepRecord"
+                    >{{ formatSteps(validTodayStepRecord.steps)
+                    }}<text> 步</text></text
+                  >
+                  <text v-else>未同步</text>
+                  <text
+                    >目标 {{ formatSteps(DAILY_STEP_GOAL) }} 步（演示目标）</text
+                  >
+                </view>
+                <view class="daily-steps-card__status">
+                  <text>{{ todayStepProgress }}%</text>
+                  <text v-if="validTodayStepRecord">{{
+                    sourceLabel(validTodayStepRecord.source)
+                  }}</text>
+                  <text v-else>去同步 ›</text>
+                </view>
+              </button>
+              <view class="steps-trend-card" data-testid="steps-trend">
+                <view class="steps-trend-card__head">
+                  <view>
+                    <text>近7日步数趋势</text>
+                    <text>按自然日统计 · 今日高亮</text>
+                  </view>
+                  <text>目标 {{ formatSteps(DAILY_STEP_GOAL) }}</text>
+                </view>
+                <view class="steps-trend-chart">
+                  <view
+                    v-for="item in sevenDayStepTrend"
+                    :key="item.key"
+                    :class="{ today: item.today, missing: item.steps === undefined }"
+                  >
+                    <text>{{
+                      item.steps === undefined ? "—" : formatCompactSteps(item.steps)
+                    }}</text>
+                    <view class="steps-trend-rail"
+                      ><view
+                        :style="{ height: stepBarHeight(item.steps) + '%' }"
+                      /></view
+                    ><text>{{ item.label }}</text>
+                  </view>
+                </view>
+                <text v-if="validStepTrendDays < 2" class="steps-trend-empty"
+                  >有效日期少于2天，暂不足以形成趋势判断。</text
+                >
+              </view>
               <view class="section-heading"
                 ><view
                   ><text>近7次运动</text><text>日期、开始时间与时长</text></view
@@ -1362,8 +1448,50 @@
                     ><text>{{ source.name }}</text
                     ><text>{{ source.copy }}</text></view
                   ></view
-                ><text>{{ deviceConnected ? "已模拟授权" : "去授权" }}</text>
+                ><text>{{
+                  validTodayStepRecord?.source === source.id
+                    ? "今日已同步"
+                    : "去授权"
+                }}</text>
               </button></view
+            ><view class="manual-steps-card" data-testid="manual-steps-card"
+              ><view class="manual-steps-card__head"
+                ><view
+                  ><text>手动补录今日步数</text
+                  ><text>目标 6,000 步（演示目标，不是医生运动处方）</text></view
+                ><text v-if="validTodayStepRecord">{{
+                  sourceLabel(validTodayStepRecord.source)
+                }}</text></view
+              >
+              <view v-if="validTodayStepRecord" class="manual-steps-current"
+                ><text>今日记录</text
+                ><text
+                  >{{ formatSteps(validTodayStepRecord.steps) }} 步 ·
+                  {{ formatStepSyncedTime(validTodayStepRecord.syncedAt) }}</text
+                ></view
+              >
+              <view class="manual-steps-entry"
+                ><input
+                  v-model="manualStepsInput"
+                  data-testid="manual-steps-input"
+                  type="number"
+                  maxlength="6"
+                  placeholder="请输入 0–100000 的整数"
+                  :disabled="hasValidDeviceSteps"
+                /><text>步</text
+                ><button
+                  data-testid="save-manual-steps"
+                  :disabled="hasValidDeviceSteps"
+                  @tap="saveManualSteps"
+                >
+                  保存
+                </button></view
+              >
+              <text class="manual-steps-note">{{
+                hasValidDeviceSteps
+                  ? "设备数据已同步，手动补录已停用；再次设备同步会更新今日记录。"
+                  : "无有效设备数据时可补录；设备同步后将优先使用设备数据。"
+              }}</text></view
             ><view class="privacy-card"
               ><text>原型说明</text
               ><text
@@ -1740,6 +1868,7 @@ import {
   type AssessmentMode,
   type BuddyState,
   type CheckInRecord,
+  type DailyStepRecord,
   type DataQuality,
   type DataSource,
   type DetailView,
@@ -1784,6 +1913,7 @@ interface GardenGrowthFeedback {
 }
 
 const STORAGE_KEY = "magpie-prototype-state";
+const DAILY_STEP_GOAL = 6000;
 const GARDEN_CYCLE_LENGTH = 7;
 const TODAY_PAGE_EXERCISE: TodayPageIndex = 0;
 const TODAY_PAGE_GARDEN: TodayPageIndex = 1;
@@ -1837,6 +1967,8 @@ const wallet = ref<WalletState>({ healthPoints: 160, mCoins: 0 });
 const mem = ref<MemEntitlement>({ unlocked: false, inviteCode: "MEM-2026" });
 const memCode = ref("");
 const redemptions = ref<RedemptionRecord[]>([]);
+const dailyStepRecords = ref<DailyStepRecord[]>(buildSeedDailySteps());
+const manualStepsInput = ref("");
 const deviceConnected = ref(false);
 const liveHeartRate = ref(76);
 const liveOxygen = ref(98);
@@ -1885,19 +2017,19 @@ const deviceSources = [
     id: "apple-health",
     icon: "",
     name: "Apple健康",
-    copy: "心率、血氧与运动记录",
+    copy: "模拟同步步数、心率、血氧与运动记录",
   },
   {
     id: "health-connect",
     icon: "H",
     name: "Health Connect",
-    copy: "Android健康数据授权",
+    copy: "模拟同步Android步数与健康数据",
   },
   {
     id: "demo-device",
     icon: "⌚",
     name: "智能手环 / 血氧仪",
-    copy: "本地模拟设备适配器",
+    copy: "本地模拟步数与生命体征适配器",
   },
 ] as const;
 
@@ -2035,6 +2167,51 @@ const currentMetrics = computed(() =>
   mode.value === "cardiac" ? patientMetrics : publicMetrics,
 );
 const visibleMetrics = computed(() => currentMetrics.value.slice(0, 2));
+const todayStepRecord = computed(() =>
+  dailyStepRecords.value.find((item) => item.date === todayKey()),
+);
+const validTodayStepRecord = computed(() =>
+  todayStepRecord.value?.quality === "valid" ? todayStepRecord.value : undefined,
+);
+const hasValidDeviceSteps = computed(
+  () =>
+    Boolean(validTodayStepRecord.value) &&
+    validTodayStepRecord.value?.source !== "manual",
+);
+const todayStepProgress = computed(() => {
+  if (!validTodayStepRecord.value) return 0;
+  return Math.min(
+    100,
+    Math.round(
+      (validTodayStepRecord.value.steps / validTodayStepRecord.value.goal) * 100,
+    ),
+  );
+});
+const sevenDayStepTrend = computed(() => {
+  const byDate = new Map(
+    dailyStepRecords.value.map((item) => [item.date, item]),
+  );
+  return Array.from({ length: 7 }, (_, index) => {
+    const date = addLocalDays(new Date(), index - 6);
+    const key = localDateKey(date);
+    const record = byDate.get(key);
+    return {
+      key,
+      label: key === todayKey() ? "今日" : `${date.getMonth() + 1}/${date.getDate()}`,
+      steps: record?.quality === "valid" ? record.steps : undefined,
+      today: key === todayKey(),
+    };
+  });
+});
+const validStepTrendDays = computed(
+  () => sevenDayStepTrend.value.filter((item) => item.steps !== undefined).length,
+);
+const stepTrendMaximum = computed(() =>
+  Math.max(
+    DAILY_STEP_GOAL,
+    ...sevenDayStepTrend.value.map((item) => item.steps ?? 0),
+  ),
+);
 const displayName = computed(() =>
   mode.value === "cardiac"
     ? sharedPatientFixture.patient.maskedName
@@ -2382,6 +2559,26 @@ function formatTime(value: string) {
   const date = new Date(value);
   return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
+function formatSteps(value: number) {
+  return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function formatCompactSteps(value: number) {
+  if (value >= 10000) return `${(value / 10000).toFixed(1)}万`;
+  if (value >= 1000) return `${(value / 1000).toFixed(1)}k`;
+  return String(value);
+}
+function formatStepSyncedTime(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "时间未知";
+  return localDateKey(date) === todayKey()
+    ? formatTime(value)
+    : `${date.getMonth() + 1}/${date.getDate()} ${formatTime(value)}`;
+}
+function stepBarHeight(value?: number) {
+  if (value === undefined) return 0;
+  if (value === 0) return 3;
+  return Math.max(5, Math.round((value / stepTrendMaximum.value) * 100));
+}
 function sourceLabel(source: DataSource) {
   return {
     "hospital-device": "医院/直接设备",
@@ -2490,6 +2687,75 @@ function buildSeedCheckIns(count = 6): CheckInRecord[] {
       createdAt: `${localDateKey(date)}T08:00:00`,
     };
   });
+}
+function buildSeedDailySteps(): DailyStepRecord[] {
+  const demoSteps = [4380, 5120, 4760, 5840, 6210, 4980, 5420];
+  return demoSteps.map((steps, index) => {
+    const date = addLocalDays(new Date(), index - (demoSteps.length - 1));
+    const dateKey = localDateKey(date);
+    return {
+      date: dateKey,
+      steps,
+      goal: DAILY_STEP_GOAL,
+      source: "demo-device",
+      quality: "valid",
+      syncedAt:
+        dateKey === todayKey()
+          ? new Date().toISOString()
+          : `${dateKey}T20:00:00`,
+    };
+  });
+}
+function migrateDailyStepRecords(saved: Record<string, any>) {
+  const schemaVersion = Number(saved.schemaVersion);
+  if (!Number.isFinite(schemaVersion) || schemaVersion < 7)
+    return buildSeedDailySteps();
+  if (!Array.isArray(saved.dailyStepRecords)) return [];
+  const sources: DataSource[] = [
+    "hospital-device",
+    "apple-health",
+    "health-connect",
+    "manual",
+    "demo-device",
+  ];
+  const qualities: DataQuality[] = ["valid", "stale", "missing", "denied"];
+  const unique = new Map<string, DailyStepRecord>();
+  saved.dailyStepRecords.forEach((item: Partial<DailyStepRecord>) => {
+    const steps = Number(item.steps);
+    if (
+      !item.date ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(item.date) ||
+      !Number.isInteger(steps) ||
+      steps < 0 ||
+      steps > 100000
+    )
+      return;
+    unique.set(item.date, {
+      date: item.date,
+      steps,
+      goal:
+        Number.isInteger(Number(item.goal)) && Number(item.goal) > 0
+          ? Number(item.goal)
+          : DAILY_STEP_GOAL,
+      source: sources.includes(item.source as DataSource)
+        ? (item.source as DataSource)
+        : "manual",
+      quality: qualities.includes(item.quality as DataQuality)
+        ? (item.quality as DataQuality)
+        : "missing",
+      syncedAt:
+        typeof item.syncedAt === "string" && item.syncedAt
+          ? item.syncedAt
+          : `${item.date}T00:00:00`,
+    });
+  });
+  return [...unique.values()].sort((a, b) => a.date.localeCompare(b.date));
+}
+function upsertDailyStepRecord(record: DailyStepRecord) {
+  dailyStepRecords.value = [
+    ...dailyStepRecords.value.filter((item) => item.date !== record.date),
+    record,
+  ].sort((a, b) => a.date.localeCompare(b.date));
 }
 function createDefaultTeamState(): TeamState {
   return {
@@ -3499,8 +3765,50 @@ function simulateDeviceConnect(source: DataSource) {
   deviceConnected.value = true;
   preSnapshot.value.source = source;
   postSnapshot.value.source = source;
+  const publicStepsBySource: Partial<Record<DataSource, number>> = {
+    "apple-health": 5420,
+    "health-connect": 5270,
+    "demo-device": 5010,
+  };
+  const publicSteps = publicStepsBySource[source] ?? 5000;
+  upsertDailyStepRecord({
+    date: todayKey(),
+    steps: mode.value === "cardiac" ? Math.max(0, publicSteps - 1700) : publicSteps,
+    goal: DAILY_STEP_GOAL,
+    source,
+    quality: "valid",
+    syncedAt: new Date().toISOString(),
+  });
+  manualStepsInput.value = "";
   persistState();
-  uni.showToast({ title: "已完成模拟授权", icon: "none" });
+  uni.showToast({ title: "已模拟同步今日步数", icon: "none" });
+}
+function saveManualSteps() {
+  if (hasValidDeviceSteps.value) {
+    uni.showToast({ title: "设备数据已同步", icon: "none" });
+    return;
+  }
+  const rawValue = String(manualStepsInput.value).trim();
+  if (!/^\d+$/.test(rawValue)) {
+    uni.showToast({ title: "请输入0–100000的整数", icon: "none" });
+    return;
+  }
+  const steps = Number(rawValue);
+  if (!Number.isInteger(steps) || steps < 0 || steps > 100000) {
+    uni.showToast({ title: "步数范围为0–100000", icon: "none" });
+    return;
+  }
+  upsertDailyStepRecord({
+    date: todayKey(),
+    steps,
+    goal: DAILY_STEP_GOAL,
+    source: "manual",
+    quality: "valid",
+    syncedAt: new Date().toISOString(),
+  });
+  manualStepsInput.value = "";
+  persistState();
+  uni.showToast({ title: "今日步数已保存", icon: "none" });
 }
 function createDemoTeam() {
   teamState.value = {
@@ -3659,13 +3967,14 @@ function evaluateMemChallenge() {
 
 function persistState() {
   uni.setStorageSync(STORAGE_KEY, {
-    schemaVersion: 6,
+    schemaVersion: 7,
     ready: appReady.value,
     mode: mode.value,
     healthGoal: healthGoal.value,
     wallet: wallet.value,
     mem: mem.value,
     redemptions: redemptions.value,
+    dailyStepRecords: dailyStepRecords.value,
     checkIns: checkIns.value,
     teamState: teamState.value,
     buddyState: buddyState.value,
@@ -3694,6 +4003,8 @@ function resetPrototype() {
   wallet.value = { healthPoints: 160, mCoins: 0 };
   mem.value = { unlocked: false, inviteCode: "MEM-2026" };
   redemptions.value = [];
+  dailyStepRecords.value = buildSeedDailySteps();
+  manualStepsInput.value = "";
   checkIns.value = buildSeedCheckIns();
   teamState.value = createDefaultTeamState();
   buddyState.value = createDefaultBuddyState();
@@ -3736,6 +4047,7 @@ onMounted(() => {
           status: "completed",
         }))
       : [];
+    dailyStepRecords.value = migrateDailyStepRecords(saved);
     checkIns.value = migrateCheckIns(saved);
     teamState.value = saved.teamState
       ? {

@@ -37,6 +37,15 @@ export interface HealthMetric {
   source: string
 }
 
+export interface DailyStepRecord {
+  date: string
+  steps: number
+  goal: number
+  source: DataSource
+  quality: DataQuality
+  syncedAt: string
+}
+
 export interface RewardItem {
   id: string
   name: string
@@ -512,13 +521,11 @@ export const exerciseGames: ExerciseGame[] = [
 export const patientMetrics: HealthMetric[] = [
   { id: 'METRIC-HR-001', label: '静息心率', value: '68', unit: '次/分', status: '状态佳', tone: 'good', source: '模拟手环' },
   { id: 'METRIC-SPO2-001', label: '血氧', value: '98', unit: '%', status: '正常', tone: 'good', source: '模拟手环' },
-  { id: 'METRIC-STEPS-001', label: '今日步数', value: '3,286', unit: '步', status: '目标 6,000', tone: 'calm', source: '模拟设备' },
   { id: 'METRIC-BMI-001', label: 'BMI', value: '23.1', unit: '', status: '平稳', tone: 'calm', source: '健康档案' },
 ]
 
 export const publicMetrics: HealthMetric[] = [
   { id: 'METRIC-HR-001', label: '平均心率', value: '72', unit: '次/分', status: '状态佳', tone: 'good', source: '模拟设备' },
-  { id: 'METRIC-STEPS-001', label: '今日步数', value: '5,420', unit: '步', status: '还差 580', tone: 'calm', source: '模拟设备' },
   { id: 'METRIC-CAL-001', label: '活动消耗', value: '168', unit: '千卡', status: '稳步积累', tone: 'good', source: '模拟设备' },
   { id: 'METRIC-STREAK-001', label: '连续锻炼', value: '6', unit: '天', status: '明天得徽章', tone: 'attention', source: '打卡记录' },
 ]

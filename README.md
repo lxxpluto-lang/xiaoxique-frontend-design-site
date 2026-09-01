@@ -1,5 +1,7 @@
 # 小喜鹊运动伙伴（UniApp + Rive）
 
+在线演示：[https://lxxpluto-lang.github.io/](https://lxxpluto-lang.github.io/)
+
 这是一个可直接运行的 UniApp Vue 3 工程，已完成三个电影化动作预览：年长女性与小喜鹊同步八段锦、双辫女孩托举小喜鹊完成趣味抗阻，以及小喜鹊唱歌并飞出画面。页面同时包含“打卡成功”奖励动效，并预留 App/H5 与微信小程序两套 Rive 播放路径。
 
 ## 已完成
@@ -40,6 +42,10 @@ npm run build:app
 - `dist/build/h5`
 - `dist/build/mp-weixin`
 - `dist/build/app`
+
+## GitHub Pages 自动发布
+
+仓库的 `main` 分支每次推送后，GitHub Actions 会自动执行类型检查和 H5 生产构建，并将 `dist/build/h5` 发布到账号主页。也可以在 GitHub 的 Actions 页面手动运行 `Deploy H5 to GitHub Pages`。
 
 微信端使用已经安装的微信开发者工具导入 `dist/build/mp-weixin`。App 端使用已经安装的 HBuilderX 导入本工程或 `dist/build/app`。
 
