@@ -119,14 +119,6 @@
           >
             <view class="today-pager-tabs" data-testid="today-pager-tabs">
               <button
-                :class="{ selected: todayPageIndex === TODAY_PAGE_GARDEN }"
-                data-testid="today-tab-garden"
-                data-action="ACT-SHOW-GARDEN"
-                @tap="showTodayPage(TODAY_PAGE_GARDEN)"
-              >
-                <text>菜园</text><text>{{ gardenViewState.progress }}%</text>
-              </button>
-              <button
                 :class="{ selected: todayPageIndex === TODAY_PAGE_EXERCISE }"
                 data-testid="today-tab-exercise"
                 data-action="ACT-SHOW-EXERCISE"
@@ -134,30 +126,28 @@
               >
                 <text>运动</text><text>{{ exercisePageStatus }}</text>
               </button>
+              <button
+                :class="{ selected: todayPageIndex === TODAY_PAGE_GARDEN }"
+                data-testid="today-tab-garden"
+                data-action="ACT-SHOW-GARDEN"
+                @tap="showTodayPage(TODAY_PAGE_GARDEN)"
+              >
+                <text>菜园</text
+                ><text
+                  >{{ gardenViewState.cycleDay }}/{{
+                    gardenViewState.cycleLength
+                  }}</text
+                >
+              </button>
             </view>
 
             <swiper
               class="today-page-swiper"
               :current="todayPageIndex"
+              :disable-touch="prescriptionGestureActive"
               data-testid="today-page-swiper"
               @change="onTodayPageChange"
             >
-              <swiper-item>
-                <scroll-view class="today-page-scroll" scroll-y>
-                  <view
-                    class="today-garden-page"
-                    data-testid="today-garden-page"
-                  >
-                    <RehabGardenPanel
-                      :garden="gardenViewState"
-                      :plan="gardenPlanSummary"
-                      :mode="mode"
-                      @start-exercise="openExerciseFromGarden"
-                    />
-                  </view>
-                </scroll-view>
-              </swiper-item>
-
               <swiper-item>
                 <scroll-view
                   class="today-page-scroll"
@@ -228,70 +218,107 @@
                   }}</text
                 ></view
               >
-              <view class="prescription-list" data-testid="prescription-list">
+              <view
+                class="prescription-carousel"
+                @touchstart.stop="setPrescriptionGesture(true)"
+                @touchmove.stop
+                @touchend.stop="setPrescriptionGesture(false)"
+                @touchcancel.stop="setPrescriptionGesture(false)"
+                @mousedown.stop
+              >
                 <view
-                  v-for="task in prescriptionTasks"
-                  :key="task.key"
-                    class="today-task prescription-card"
-                    :class="{ complete: task.completed }"
-                    data-testid="today-core-task"
-                    ><view class="task-heading"
-                      ><view
-                        ><text>{{ task.item.category }}</text
-                        ><text>{{ task.item.reason }}</text></view
-                      ><text>{{
-                        task.completed ? "已完成" : "待完成"
-                      }}</text></view
-                    ><view class="task-main"
-                      ><view class="task-media"
-                        ><AppIcon
-                          :src="
-                            task.game?.iconPath ||
-                            '/static/icons/magpie-line/exercise.svg'
-                          "
-                          :size="62"
-                          color="#0F766E" /></view
-                      ><view class="task-body"
-                        ><view class="tag-row"
-                          ><text>医院处方</text
-                          ><text>{{
-                            sharedPatientFixture.prescription.version
-                          }}</text
-                          ><text v-if="task.game?.arSupported"
-                            >AR互动</text
-                          ></view
-                        ><text class="task-title">{{ task.item.project }}</text
-                        ><text class="task-copy">{{
-                          task.item.intensity
-                        }}</text></view
-                      ></view
-                    ><view class="task-meta"
-                      ><view
-                        ><text>时长</text
-                        ><text>{{ task.item.duration }}</text></view
-                      ><view
-                        ><text>频次</text
-                        ><text>{{ task.item.frequency }}</text></view
-                      ><view
-                        ><text>状态</text
-                        ><text>{{
-                          task.completed ? "完成" : "待训练"
-                        }}</text></view
-                      ></view
-                    ><text v-if="planAdjustment" class="plan-adjustment"
-                      >医生已确认：{{ planAdjustment }}</text
-                    ><button
-                      v-if="task.game"
-                      class="task-primary"
-                      @tap="startPrescriptionTask(task)"
-                    >
-                      {{
-                        task.completed ? "再次训练" : "开始这一项"
-                      }}</button
-                    ><button v-else class="task-primary" disabled>
-                      暂未适配小程序训练
-                    </button></view
+                  class="prescription-pagination"
+                  data-testid="prescription-pagination"
                 >
+                  <text
+                    >{{ prescriptionSlide + 1 }}/{{
+                      prescriptionTasks.length
+                    }}</text
+                  >
+                  <view>
+                    <text
+                      v-for="(task, index) in prescriptionTasks"
+                      :key="task.key"
+                      :class="{
+                        active: prescriptionSlide === index,
+                        complete: task.completed,
+                      }"
+                    />
+                  </view>
+                </view>
+                <swiper
+                  class="prescription-swiper"
+                  :current="prescriptionSlide"
+                  data-testid="prescription-swiper"
+                  @change="onPrescriptionSlide"
+                >
+                  <swiper-item
+                    v-for="task in prescriptionTasks"
+                    :key="task.key"
+                    data-testid="prescription-slide"
+                  >
+                    <view
+                      class="today-task prescription-card"
+                      :class="{ complete: task.completed }"
+                      data-testid="today-core-task"
+                      ><view class="task-heading"
+                        ><view
+                          ><text>{{ task.item.category }}</text
+                          ><text>{{ task.item.reason }}</text></view
+                        ><text>{{
+                          task.completed ? "已完成" : "待完成"
+                        }}</text></view
+                      ><view class="task-main"
+                        ><view class="task-media"
+                          ><AppIcon
+                            :src="
+                              task.game?.iconPath ||
+                              '/static/icons/magpie-line/exercise.svg'
+                            "
+                            :size="62"
+                            color="#0F766E" /></view
+                        ><view class="task-body"
+                          ><view class="tag-row"
+                            ><text>医院处方</text
+                            ><text>{{
+                              sharedPatientFixture.prescription.version
+                            }}</text
+                            ><text v-if="task.game?.arSupported"
+                              >AR互动</text
+                            ></view
+                          ><text class="task-title">{{ task.item.project }}</text
+                          ><text class="task-copy">{{
+                            task.item.intensity
+                          }}</text></view
+                        ></view
+                      ><view class="task-meta"
+                        ><view
+                          ><text>时长</text
+                          ><text>{{ task.item.duration }}</text></view
+                        ><view
+                          ><text>频次</text
+                          ><text>{{ task.item.frequency }}</text></view
+                        ><view
+                          ><text>状态</text
+                          ><text>{{
+                            task.completed ? "完成" : "待训练"
+                          }}</text></view
+                        ></view
+                      ><text v-if="planAdjustment" class="plan-adjustment"
+                        >医生已确认：{{ planAdjustment }}</text
+                      ><button
+                        v-if="task.game"
+                        class="task-primary"
+                        @tap="startPrescriptionTask(task)"
+                      >
+                        {{
+                          task.completed ? "再次训练" : "开始这一项"
+                        }}</button
+                      ><button v-else class="task-primary" disabled>
+                        暂未适配小程序训练
+                      </button></view
+                  ></swiper-item>
+                </swiper>
               </view>
             </template>
             <view
@@ -375,6 +402,21 @@
                 {{ mode === "public" ? "开始运动" : "开始自选运动" }}
               </button></view
             >
+                  </view>
+                </scroll-view>
+              </swiper-item>
+              <swiper-item>
+                <scroll-view class="today-page-scroll" scroll-y>
+                  <view
+                    class="today-garden-page"
+                    data-testid="today-garden-page"
+                  >
+                    <RehabGardenPanel
+                      :garden="gardenViewState"
+                      :plan="gardenPlanSummary"
+                      :mode="mode"
+                      @start-exercise="openExerciseFromGarden"
+                    />
                   </view>
                 </scroll-view>
               </swiper-item>
@@ -1062,11 +1104,11 @@
                     : "训练完成，小白菜长大啦"
                 }}</text>
                 <text v-if="pendingGardenFeedback.harvested"
-                  >本轮成长 100%，下一训练日将开始新的成长周期。</text
+                  >本轮成长已达到第7/7天，下一轮将从第0/7天开始。</text
                 >
                 <text v-else
-                  >成长值 {{ pendingGardenFeedback.beforeProgress }}% →
-                  {{ pendingGardenFeedback.afterProgress }}%</text
+                  >成长进度：第{{ pendingGardenFeedback.beforeDay }}/7天 →
+                  第{{ pendingGardenFeedback.afterDay }}/7天</text
                 >
               </view>
             </view
@@ -1586,15 +1628,16 @@ type TodayPageIndex = 0 | 1;
 
 interface GardenGrowthFeedback {
   sessionId: string;
-  beforeProgress: number;
-  afterProgress: number;
+  beforeDay: number;
+  afterDay: number;
   harvested: boolean;
   harvestCount: number;
 }
 
 const STORAGE_KEY = "magpie-prototype-state";
-const TODAY_PAGE_GARDEN: TodayPageIndex = 0;
-const TODAY_PAGE_EXERCISE: TodayPageIndex = 1;
+const GARDEN_CYCLE_LENGTH = 7;
+const TODAY_PAGE_EXERCISE: TodayPageIndex = 0;
+const TODAY_PAGE_GARDEN: TodayPageIndex = 1;
 const magpieAsset =
   "/static/rive-source/v4/master/magpie-neutral-master-v4.png";
 const appReady = ref(false);
@@ -1613,8 +1656,10 @@ const expandedCategoryId = ref<ExerciseCategoryId | "">("");
 const selectedGameId = ref<ExerciseGameId>("baduanjin");
 const selfSelectedGameId = ref<ExerciseGameId | "">("");
 const activePrescriptionItemKey = ref("");
-const todayPageIndex = ref<TodayPageIndex>(TODAY_PAGE_GARDEN);
+const todayPageIndex = ref<TodayPageIndex>(TODAY_PAGE_EXERCISE);
 const exerciseScrollTop = ref(0);
+const prescriptionSlide = ref(0);
+const prescriptionGestureActive = ref(false);
 const pendingGardenFeedback = ref<GardenGrowthFeedback | null>(null);
 const selectedKnowledgeId = ref(knowledgeItems[0].id);
 const selectedSessionId = ref("");
@@ -1730,10 +1775,7 @@ const prescriptionTasks = computed(() =>
           (session) => session.prescriptionItemKey === key,
         ),
       };
-    })
-    .sort(
-      (a, b) => Number(a.completed) - Number(b.completed) || a.index - b.index,
-    ),
+    }),
 );
 const firstPrescriptionGame = computed(
   () => prescriptionTasks.value.find((item) => item.game)?.game,
@@ -1918,15 +1960,33 @@ const streak = computed(() => calculateStreak(checkIns.value));
 const totalCheckInDays = computed(
   () => new Set(checkIns.value.map((item) => item.date)).size,
 );
-const gardenStageLabels = ["新种子", "冒芽了", "长成幼苗", "正在舒展", "快成熟了"];
-const gardenCycleStep = computed(() => totalCheckInDays.value % 5);
+const gardenStageLabels = [
+  "新种子",
+  "已经播种",
+  "冒芽了",
+  "长成幼苗",
+  "正在舒展",
+  "茁壮成长",
+  "快成熟了",
+];
+const gardenCycleDay = computed(
+  () => totalCheckInDays.value % GARDEN_CYCLE_LENGTH,
+);
 const gardenViewState = computed(() => ({
-  progress: gardenCycleStep.value * 20,
-  stageIndex: gardenCycleStep.value,
-  stageLabel: gardenStageLabels[gardenCycleStep.value],
-  harvestCount: Math.floor(totalCheckInDays.value / 5),
+  progress: Math.round(
+    (gardenCycleDay.value / GARDEN_CYCLE_LENGTH) * 100,
+  ),
+  cycleDay: gardenCycleDay.value,
+  cycleLength: GARDEN_CYCLE_LENGTH,
+  stageIndex: gardenCycleDay.value,
+  stageLabel: gardenStageLabels[gardenCycleDay.value],
+  harvestCount: Math.floor(
+    totalCheckInDays.value / GARDEN_CYCLE_LENGTH,
+  ),
   remainingDays:
-    gardenCycleStep.value === 0 ? 5 : 5 - gardenCycleStep.value,
+    gardenCycleDay.value === 0
+      ? GARDEN_CYCLE_LENGTH
+      : GARDEN_CYCLE_LENGTH - gardenCycleDay.value,
   checkedToday: checkInDone.value,
 }));
 const nextPrescriptionTask = computed(() =>
@@ -1967,7 +2027,7 @@ const exercisePageStatus = computed(() =>
 const gardenStripTitle = computed(() =>
   checkInDone.value
     ? "小白菜今天已长大"
-    : `小白菜成长${gardenViewState.value.progress}%`,
+    : `小白菜成长第${gardenViewState.value.cycleDay}/7天`,
 );
 const gardenStripCopy = computed(() =>
   checkInDone.value
@@ -2335,7 +2395,8 @@ function bindPatient() {
 function enterApp() {
   appReady.value = true;
   activeNav.value = "today";
-  todayPageIndex.value = TODAY_PAGE_GARDEN;
+  todayPageIndex.value = TODAY_PAGE_EXERCISE;
+  focusFirstIncompletePrescription();
   persistState();
 }
 function switchMode() {
@@ -2344,7 +2405,9 @@ function switchMode() {
   bindingState.value = "idle";
   detailView.value = "none";
   activeNav.value = "today";
-  todayPageIndex.value = TODAY_PAGE_GARDEN;
+  todayPageIndex.value = TODAY_PAGE_EXERCISE;
+  prescriptionSlide.value = 0;
+  prescriptionGestureActive.value = false;
 }
 function setHealthGoal(goal: HealthGoal) {
   healthGoal.value = goal;
@@ -2383,13 +2446,31 @@ function switchNav(nav: NavId) {
   if (nav === "data") dataTab.value = "checkin";
 }
 function showTodayPage(index: TodayPageIndex) {
+  prescriptionGestureActive.value = false;
   todayPageIndex.value = index;
 }
 function onTodayPageChange(event: any) {
+  prescriptionGestureActive.value = false;
   todayPageIndex.value =
     Number(event.detail.current) === TODAY_PAGE_EXERCISE
       ? TODAY_PAGE_EXERCISE
       : TODAY_PAGE_GARDEN;
+}
+function onPrescriptionSlide(event: any) {
+  const next = Number(event.detail.current);
+  const maxIndex = Math.max(0, prescriptionTasks.value.length - 1);
+  prescriptionSlide.value = Number.isFinite(next)
+    ? Math.min(Math.max(next, 0), maxIndex)
+    : 0;
+}
+function setPrescriptionGesture(active: boolean) {
+  prescriptionGestureActive.value = active;
+}
+function focusFirstIncompletePrescription() {
+  const firstIncomplete = prescriptionTasks.value.findIndex(
+    (task) => !task.completed,
+  );
+  prescriptionSlide.value = firstIncomplete >= 0 ? firstIncomplete : 0;
 }
 function openExerciseFromGarden() {
   exerciseScrollTop.value = 1;
@@ -2420,6 +2501,10 @@ function startPrescriptionTask(task: {
   game?: (typeof exerciseGames)[number];
 }) {
   if (!task.game) return;
+  const taskIndex = prescriptionTasks.value.findIndex(
+    (item) => item.key === task.key,
+  );
+  if (taskIndex >= 0) prescriptionSlide.value = taskIndex;
   activePrescriptionItemKey.value = task.key;
   selectExercise(task.game.id);
 }
@@ -2676,13 +2761,15 @@ function autoCheckInCoreExercise() {
   };
   checkIns.value.push(record);
   const afterDays = beforeDays + 1;
-  const harvested = afterDays % 5 === 0;
+  const harvested = afterDays % GARDEN_CYCLE_LENGTH === 0;
   pendingGardenFeedback.value = {
     sessionId: "",
-    beforeProgress: (beforeDays % 5) * 20,
-    afterProgress: harvested ? 100 : (afterDays % 5) * 20,
+    beforeDay: beforeDays % GARDEN_CYCLE_LENGTH,
+    afterDay: harvested
+      ? GARDEN_CYCLE_LENGTH
+      : afterDays % GARDEN_CYCLE_LENGTH,
     harvested,
-    harvestCount: Math.floor(afterDays / 5),
+    harvestCount: Math.floor(afterDays / GARDEN_CYCLE_LENGTH),
   };
   wallet.value.healthPoints += 5;
   return 5;
@@ -3294,7 +3381,9 @@ function resetPrototype() {
   onboardingStep.value = "mode";
   mode.value = "public";
   activeNav.value = "today";
-  todayPageIndex.value = TODAY_PAGE_GARDEN;
+  todayPageIndex.value = TODAY_PAGE_EXERCISE;
+  prescriptionSlide.value = 0;
+  prescriptionGestureActive.value = false;
   detailView.value = "none";
   wallet.value = { healthPoints: 160, mCoins: 0 };
   mem.value = { unlocked: false, inviteCode: "MEM-2026" };
@@ -3403,6 +3492,8 @@ onMounted(() => {
     planAdjustment.value = saved.planAdjustment || "";
     appReady.value = true;
     activeNav.value = "today";
+    todayPageIndex.value = TODAY_PAGE_EXERCISE;
+    focusFirstIncompletePrescription();
     persistState();
   }
 });
