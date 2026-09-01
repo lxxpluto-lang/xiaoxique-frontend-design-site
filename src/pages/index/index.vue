@@ -175,20 +175,28 @@
                       </view>
                       <text>查看 ›</text>
                     </button>
-            <view v-if="mode === 'cardiac'" class="today-summary">
+            <view class="today-summary">
               <view class="today-summary__head"
                 ><view
                   ><text>{{
-                    prescriptionAllDone
-                      ? "今日处方已完成"
-                      : checkInDone
-                        ? "今天已打卡，处方继续完成"
-                        : "医院今日处方"
+                    mode === "cardiac"
+                      ? prescriptionAllDone
+                        ? "今日处方已完成"
+                        : checkInDone
+                          ? "今天已打卡，处方继续完成"
+                          : "医院今日处方"
+                      : publicTodayCompleted
+                        ? "今天已经运动"
+                        : "今天想怎么动？"
                   }}</text
                   ><text>{{
-                    checkInDone
-                      ? "打卡已保存，不需要为了积分额外加量"
-                      : "完成第一项有效运动后自动打卡"
+                    mode === "cardiac"
+                      ? checkInDone
+                        ? "打卡已保存，不需要为了积分额外加量"
+                        : "完成第一项有效运动后自动打卡"
+                      : publicTodayCompleted
+                        ? "今天的运动已记录，按状态休息即可"
+                        : "为你推荐一项，也可以自由选择"
                   }}</text></view
                 ><button @tap="openData('checkin')">打卡日历 ›</button></view
               >
@@ -197,7 +205,12 @@
                   ><text>{{ weeklyCompletedDays }}<text>/7</text></text
                   ><text>本周训练</text></view
                 ><view
-                  ><text>{{ completedMinutes }}<text>分钟</text></text
+                  ><text
+                    >{{
+                      mode === "public"
+                        ? publicCompletedMinutes
+                        : completedMinutes
+                    }}<text>分钟</text></text
                   ><text>今日运动</text></view
                 ><view
                   ><text>{{ streak }}<text>天</text></text
@@ -322,6 +335,77 @@
                 </swiper>
               </view>
             </template>
+            <template v-else>
+              <view class="prescription-head public-recommendation-head">
+                <view>
+                  <text>今日推荐</text>
+                  <text
+                    >根据“{{ publicRecommendationGoalLabel }}”目标推荐</text
+                  >
+                </view>
+                <text>目标推荐</text>
+              </view>
+              <view
+                class="today-task recommended-exercise-card"
+                :class="{ complete: publicRecommendedCompleted }"
+                data-testid="public-recommended-exercise"
+              >
+                <view class="task-heading">
+                  <view>
+                    <text>{{ publicRecommendedCategory.title }}</text>
+                    <text>{{ publicRecommendedGame.subtitle }}</text>
+                  </view>
+                  <text>{{
+                    publicRecommendedCompleted ? "已运动" : "推荐"
+                  }}</text>
+                </view>
+                <view class="task-main">
+                  <view class="task-media">
+                    <AppIcon
+                      :src="publicRecommendedGame.iconPath"
+                      :size="62"
+                      color="#0F766E"
+                    />
+                  </view>
+                  <view class="task-body">
+                    <view class="tag-row">
+                      <text>目标推荐</text>
+                      <text>{{ publicRecommendedCategory.shortTitle }}</text>
+                      <text v-if="publicRecommendedGame.arSupported"
+                        >AR互动</text
+                      >
+                    </view>
+                    <text class="task-title">{{ publicRecommendedGame.title }}</text>
+                    <text class="task-copy">{{ publicRecommendedGame.feature }}</text>
+                  </view>
+                </view>
+                <view class="task-meta">
+                  <view>
+                    <text>时长</text>
+                    <text>{{ publicRecommendedGame.duration }}</text>
+                  </view>
+                  <view>
+                    <text>方式</text>
+                    <text>{{ publicRecommendedGame.feature }}</text>
+                  </view>
+                  <view>
+                    <text>状态</text>
+                    <text>{{
+                      publicRecommendedCompleted ? "已训练" : "可开始"
+                    }}</text>
+                  </view>
+                </view>
+                <button
+                  class="task-primary"
+                  data-testid="start-public-recommended"
+                  @tap="startPublicRecommended"
+                >
+                  {{
+                    publicRecommendedCompleted ? "再次运动" : "开始运动"
+                  }}
+                </button>
+              </view>
+            </template>
             <view
               class="section-heading exercise-picker-heading"
               :data-testid="
@@ -330,10 +414,10 @@
                   : 'cardiac-self-exercise-picker'
               "
               ><view
-                ><text>{{ mode === "public" ? "选择一项运动" : "更多运动" }}</text
+                ><text>更多运动</text
                 ><text>{{
                   mode === "public"
-                    ? "按照自己的状态选择，完成后计入今日成长"
+                    ? "也可以按兴趣自由选择"
                     : "自选内容不会改变医生处方"
                 }}</text></view
               ></view
@@ -1846,10 +1930,47 @@ const prescriptionTasks = computed(() =>
 const firstPrescriptionGame = computed(
   () => prescriptionTasks.value.find((item) => item.game)?.game,
 );
+const publicRecommendedGameId = computed<ExerciseGameId>(() =>
+  healthGoal.value === "weight" ? "walking" : "baduanjin",
+);
+const publicRecommendedGame = computed(
+  () =>
+    exerciseGames.find(
+      (item) => item.id === publicRecommendedGameId.value,
+    ) || exerciseGames[0],
+);
+const publicRecommendedCategory = computed(
+  () =>
+    exerciseCategories.find(
+      (item) => item.id === publicRecommendedGame.value.categoryId,
+    ) || exerciseCategories[0],
+);
+const publicRecommendationGoalLabel = computed(() =>
+  healthGoal.value === "weight" ? "健康减重" : "运动习惯",
+);
+const publicTodayCompletedSessions = computed(() =>
+  completedTodaySessions.value.filter((item) => item.mode === "public"),
+);
+const publicTodayCompleted = computed(
+  () => publicTodayCompletedSessions.value.length > 0,
+);
+const publicCompletedMinutes = computed(() =>
+  Math.round(
+    publicTodayCompletedSessions.value.reduce(
+      (sum, item) => sum + item.durationSeconds,
+      0,
+    ) / 60,
+  ),
+);
+const publicRecommendedCompleted = computed(() =>
+  publicTodayCompletedSessions.value.some(
+    (item) => item.exerciseId === publicRecommendedGame.value.id,
+  ),
+);
 const featuredGame = computed(() =>
   mode.value === "cardiac"
     ? firstPrescriptionGame.value || exerciseGames[0]
-    : exerciseGames[0],
+    : publicRecommendedGame.value,
 );
 const selectedGame = computed(
   () =>
@@ -2006,9 +2127,11 @@ const recentSessions = computed(() =>
   sessions.value.filter((item) => item.status === "completed").slice(0, 7),
 );
 const taskCompleted = computed(() =>
-  completedTodaySessions.value.some(
-    (item) => item.exerciseId === featuredGame.value.id,
-  ),
+  mode.value === "public"
+    ? publicTodayCompleted.value
+    : completedTodaySessions.value.some(
+        (item) => item.exerciseId === featuredGame.value.id,
+      ),
 );
 const prescriptionCompletedCount = computed(
   () => prescriptionTasks.value.filter((item) => item.completed).length,
@@ -2063,12 +2186,18 @@ const gardenPlanSummary = computed(() => {
   if (mode.value === "public")
     return {
       title: "今日运动",
-      itemTitle: featuredGame.value.title,
-      duration: featuredGame.value.duration,
-      intensity: featuredGame.value.subtitle,
-      completedCount: taskCompleted.value ? 1 : 0,
+      itemTitle: publicTodayCompleted.value
+        ? "今天的运动已记录"
+        : publicRecommendedGame.value.title,
+      duration: publicTodayCompleted.value
+        ? `${publicCompletedMinutes.value}分钟`
+        : publicRecommendedGame.value.duration,
+      intensity: publicTodayCompleted.value
+        ? "完成任一有效运动，今日成长已记录"
+        : publicRecommendedGame.value.subtitle,
+      completedCount: publicTodayCompleted.value ? 1 : 0,
       totalCount: 1,
-      allCompleted: taskCompleted.value,
+      allCompleted: publicTodayCompleted.value,
     };
   const task = nextPrescriptionTask.value;
   return {
@@ -2088,7 +2217,9 @@ const gardenPlanSummary = computed(() => {
 const exercisePageStatus = computed(() =>
   mode.value === "cardiac"
     ? `${prescriptionCompletedCount.value}/${prescriptionTasks.value.length}`
-    : "自选",
+    : publicTodayCompleted.value
+      ? "已运动"
+      : "推荐",
 );
 const gardenStripTitle = computed(() =>
   checkInDone.value
@@ -2563,6 +2694,10 @@ function chooseSelfDirected(id: ExerciseGameId) {
   activePrescriptionItemKey.value = "";
   persistState();
   uni.showToast({ title: "已加入自选运动", icon: "none" });
+}
+function startPublicRecommended() {
+  activePrescriptionItemKey.value = "";
+  selectExercise(publicRecommendedGame.value.id);
 }
 function startSelfSelected() {
   if (!selfSelectedGame.value) return;
