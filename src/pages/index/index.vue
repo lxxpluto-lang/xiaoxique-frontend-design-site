@@ -111,21 +111,92 @@
             {{ displayName.slice(0, 1) }}
           </button></view
         >
-        <scroll-view class="page-scroll" scroll-y>
+        <scroll-view class="page-scroll" :scroll-y="activeNav !== 'today'">
           <view
             v-if="activeNav === 'today'"
-            class="screen today-screen"
+            class="today-pager-shell"
             data-testid="today-screen"
           >
+            <view class="today-pager-tabs" data-testid="today-pager-tabs">
+              <button
+                :class="{ selected: todayPageIndex === TODAY_PAGE_GARDEN }"
+                data-testid="today-tab-garden"
+                data-action="ACT-SHOW-GARDEN"
+                @tap="showTodayPage(TODAY_PAGE_GARDEN)"
+              >
+                <text>菜园</text><text>{{ gardenViewState.progress }}%</text>
+              </button>
+              <button
+                :class="{ selected: todayPageIndex === TODAY_PAGE_EXERCISE }"
+                data-testid="today-tab-exercise"
+                data-action="ACT-SHOW-EXERCISE"
+                @tap="showTodayPage(TODAY_PAGE_EXERCISE)"
+              >
+                <text>运动</text><text>{{ exercisePageStatus }}</text>
+              </button>
+            </view>
+
+            <swiper
+              class="today-page-swiper"
+              :current="todayPageIndex"
+              data-testid="today-page-swiper"
+              @change="onTodayPageChange"
+            >
+              <swiper-item>
+                <scroll-view class="today-page-scroll" scroll-y>
+                  <view
+                    class="today-garden-page"
+                    data-testid="today-garden-page"
+                  >
+                    <RehabGardenPanel
+                      :garden="gardenViewState"
+                      :plan="gardenPlanSummary"
+                      :mode="mode"
+                      @start-exercise="openExerciseFromGarden"
+                    />
+                  </view>
+                </scroll-view>
+              </swiper-item>
+
+              <swiper-item>
+                <scroll-view
+                  class="today-page-scroll"
+                  scroll-y
+                  :scroll-top="exerciseScrollTop"
+                >
+                  <view
+                    class="screen today-screen"
+                    data-testid="today-exercise-page"
+                  >
+                    <button
+                      class="exercise-garden-strip"
+                      data-testid="exercise-garden-strip"
+                      data-action="ACT-SHOW-GARDEN"
+                      @tap="showTodayPage(TODAY_PAGE_GARDEN)"
+                    >
+                      <image
+                        src="/static/icons/cabbage-checkin.svg"
+                        mode="aspectFit"
+                      />
+                      <view>
+                        <text>{{ gardenStripTitle }}</text>
+                        <text>{{ gardenStripCopy }}</text>
+                      </view>
+                      <text>查看 ›</text>
+                    </button>
             <view class="today-summary">
               <view class="today-summary__head"
                 ><view
                   ><text>{{
-                    prescriptionAllDone
-                      ? "今日处方已完成"
-                      : checkInDone
-                        ? "今天已打卡，处方继续完成"
-                        : "医院今日处方"
+                    mode === "public"
+                      ? taskCompleted
+                        ? "今日运动已完成"
+                        : "今日运动计划"
+                      : prescriptionAllDone
+                        ? "今日处方已完成"
+                        : checkInDone
+                          ? "今天已打卡，处方继续完成"
+                          : "医院今日处方"
                   }}</text
                   ><text>{{
                     checkInDone
@@ -161,16 +232,10 @@
                   }}</text
                 ></view
               >
-              <swiper
-                class="prescription-swiper"
-                :current="prescriptionSlide"
-                :indicator-dots="true"
-                indicator-color="#cbd5e1"
-                indicator-active-color="#0ea5a4"
-                @change="onPrescriptionSlide"
-              >
-                <swiper-item v-for="task in prescriptionTasks" :key="task.key"
-                  ><view
+              <view class="prescription-list" data-testid="prescription-list">
+                <view
+                  v-for="task in prescriptionTasks"
+                  :key="task.key"
                     class="today-task prescription-card"
                     :class="{ complete: task.completed }"
                     data-testid="today-core-task"
@@ -230,9 +295,8 @@
                     ><button v-else class="task-primary" disabled>
                       暂未适配小程序训练
                     </button></view
-                  ></swiper-item
                 >
-              </swiper>
+              </view>
             </template>
             <view v-else class="today-task" :class="{ complete: taskCompleted }"
               ><view class="task-heading"
@@ -305,6 +369,10 @@
                 >
               </button></view
             >
+                  </view>
+                </scroll-view>
+              </swiper-item>
+            </swiper>
           </view>
 
           <view
@@ -966,6 +1034,36 @@
                     : "未新增积分"
                 }}</text
               ></view
+            ><view
+              v-if="
+                selectedSession?.status === 'completed' &&
+                pendingGardenFeedback &&
+                pendingGardenFeedback.sessionId === selectedSession.id
+              "
+              class="garden-growth-feedback"
+              :class="{ harvested: pendingGardenFeedback.harvested }"
+              data-testid="garden-growth-feedback"
+              data-state="success"
+            >
+              <image
+                src="/static/icons/cabbage-checkin.svg"
+                mode="aspectFit"
+              />
+              <view>
+                <text>{{
+                  pendingGardenFeedback.harvested
+                    ? `恭喜收获第${pendingGardenFeedback.harvestCount}棵小白菜`
+                    : "训练完成，小白菜长大啦"
+                }}</text>
+                <text v-if="pendingGardenFeedback.harvested"
+                  >本轮成长 100%，下一训练日将开始新的成长周期。</text
+                >
+                <text v-else
+                  >成长值 {{ pendingGardenFeedback.beforeProgress }}% →
+                  {{ pendingGardenFeedback.afterProgress }}%</text
+                >
+              </view>
+            </view
             ><view v-if="selectedSession?.assessment" class="comparison-card"
               ><text class="form-title">训练前后变化</text
               ><view
@@ -1418,12 +1516,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 import AppIcon from "@/components/AppIcon.vue";
 import AssistantPanel from "@/components/AssistantPanel.vue";
 import CompanionHub from "@/components/CompanionHub.vue";
 import DetailIntro from "@/components/DetailIntro.vue";
 import KnowledgeHub from "@/components/KnowledgeHub.vue";
+import RehabGardenPanel from "@/components/RehabGardenPanel.vue";
 import StepIndicator from "@/components/StepIndicator.vue";
 import TrainingExperience from "@/components/TrainingExperience.vue";
 import TrainingReports from "@/components/TrainingReports.vue";
@@ -1477,8 +1576,19 @@ type DataTab = "overview" | "checkin" | "reports";
 type HealthGoal = "habit" | "weight" | "cardiac";
 type SocialTab = "none" | "team" | "buddy";
 type ScenarioId = "stable" | "attention" | "stop" | "insufficient";
+type TodayPageIndex = 0 | 1;
+
+interface GardenGrowthFeedback {
+  sessionId: string;
+  beforeProgress: number;
+  afterProgress: number;
+  harvested: boolean;
+  harvestCount: number;
+}
 
 const STORAGE_KEY = "magpie-prototype-state";
+const TODAY_PAGE_GARDEN: TodayPageIndex = 0;
+const TODAY_PAGE_EXERCISE: TodayPageIndex = 1;
 const magpieAsset =
   "/static/rive-source/v4/master/magpie-neutral-master-v4.png";
 const appReady = ref(false);
@@ -1497,7 +1607,9 @@ const expandedCategoryId = ref<ExerciseCategoryId | "">("");
 const selectedGameId = ref<ExerciseGameId>("baduanjin");
 const selfSelectedGameId = ref<ExerciseGameId | "">("");
 const activePrescriptionItemKey = ref("");
-const prescriptionSlide = ref(0);
+const todayPageIndex = ref<TodayPageIndex>(TODAY_PAGE_GARDEN);
+const exerciseScrollTop = ref(0);
+const pendingGardenFeedback = ref<GardenGrowthFeedback | null>(null);
 const selectedKnowledgeId = ref(knowledgeItems[0].id);
 const selectedSessionId = ref("");
 const trainingStatus = ref<TrainingStatus>("idle");
@@ -1799,6 +1911,64 @@ const checkInDone = computed(() =>
 const streak = computed(() => calculateStreak(checkIns.value));
 const totalCheckInDays = computed(
   () => new Set(checkIns.value.map((item) => item.date)).size,
+);
+const gardenStageLabels = ["新种子", "冒芽了", "长成幼苗", "正在舒展", "快成熟了"];
+const gardenCycleStep = computed(() => totalCheckInDays.value % 5);
+const gardenViewState = computed(() => ({
+  progress: gardenCycleStep.value * 20,
+  stageIndex: gardenCycleStep.value,
+  stageLabel: gardenStageLabels[gardenCycleStep.value],
+  harvestCount: Math.floor(totalCheckInDays.value / 5),
+  remainingDays:
+    gardenCycleStep.value === 0 ? 5 : 5 - gardenCycleStep.value,
+  checkedToday: checkInDone.value,
+}));
+const nextPrescriptionTask = computed(() =>
+  prescriptionTasks.value.find((task) => !task.completed) ||
+  prescriptionTasks.value[0],
+);
+const gardenPlanSummary = computed(() => {
+  if (mode.value === "public")
+    return {
+      title: "今日运动",
+      itemTitle: featuredGame.value.title,
+      duration: featuredGame.value.duration,
+      intensity: featuredGame.value.subtitle,
+      completedCount: taskCompleted.value ? 1 : 0,
+      totalCount: 1,
+      allCompleted: taskCompleted.value,
+    };
+  const task = nextPrescriptionTask.value;
+  return {
+    title: "今日处方",
+    itemTitle: prescriptionAllDone.value
+      ? "今日处方已全部完成"
+      : task?.item.project || "暂无可训练处方",
+    duration: task?.item.duration || "--",
+    intensity: prescriptionAllDone.value
+      ? "请按建议完成缓和与休息"
+      : task?.item.intensity || "等待医生确认",
+    completedCount: prescriptionCompletedCount.value,
+    totalCount: prescriptionTasks.value.length,
+    allCompleted: prescriptionAllDone.value,
+  };
+});
+const exercisePageStatus = computed(() =>
+  mode.value === "cardiac"
+    ? `${prescriptionCompletedCount.value}/${prescriptionTasks.value.length}`
+    : taskCompleted.value
+      ? "已完成"
+      : "待完成",
+);
+const gardenStripTitle = computed(() =>
+  checkInDone.value
+    ? "小白菜今天已长大"
+    : `小白菜成长${gardenViewState.value.progress}%`,
+);
+const gardenStripCopy = computed(() =>
+  checkInDone.value
+    ? "明天继续就好，不需要额外加量"
+    : "完成今天第一项有效运动后会继续成长",
 );
 const weeklyCompletedDays = computed(
   () => weeklyPlanDays.value.filter((item) => item.done).length,
@@ -2161,6 +2331,7 @@ function bindPatient() {
 function enterApp() {
   appReady.value = true;
   activeNav.value = "today";
+  todayPageIndex.value = TODAY_PAGE_GARDEN;
   persistState();
 }
 function switchMode() {
@@ -2169,6 +2340,7 @@ function switchMode() {
   bindingState.value = "idle";
   detailView.value = "none";
   activeNav.value = "today";
+  todayPageIndex.value = TODAY_PAGE_GARDEN;
 }
 function setHealthGoal(goal: HealthGoal) {
   healthGoal.value = goal;
@@ -2180,9 +2352,23 @@ function goDetail(view: DetailView) {
   detailView.value = view;
 }
 function closeDetail() {
+  const closingSessionReport = detailView.value === "session-report";
+  const closesNewGrowth = Boolean(
+    closingSessionReport &&
+      pendingGardenFeedback.value &&
+      selectedSession.value?.id === pendingGardenFeedback.value.sessionId,
+  );
   stopTimer();
   detailView.value = "none";
-  activeNav.value = detailReturnNav.value;
+  if (closesNewGrowth) {
+    activeNav.value = "today";
+    todayPageIndex.value = TODAY_PAGE_GARDEN;
+  } else {
+    activeNav.value = detailReturnNav.value;
+    if (closingSessionReport && detailReturnNav.value === "today")
+      todayPageIndex.value = TODAY_PAGE_EXERCISE;
+  }
+  if (closingSessionReport) pendingGardenFeedback.value = null;
 }
 function openData(tab: DataTab) {
   dataTab.value = tab;
@@ -2191,6 +2377,22 @@ function openData(tab: DataTab) {
 function switchNav(nav: NavId) {
   activeNav.value = nav;
   if (nav === "data") dataTab.value = "checkin";
+}
+function showTodayPage(index: TodayPageIndex) {
+  todayPageIndex.value = index;
+}
+function onTodayPageChange(event: any) {
+  todayPageIndex.value =
+    Number(event.detail.current) === TODAY_PAGE_EXERCISE
+      ? TODAY_PAGE_EXERCISE
+      : TODAY_PAGE_GARDEN;
+}
+function openExerciseFromGarden() {
+  exerciseScrollTop.value = 1;
+  todayPageIndex.value = TODAY_PAGE_EXERCISE;
+  nextTick(() => {
+    exerciseScrollTop.value = 0;
+  });
 }
 function handleTodayPrimary() {
   taskCompleted.value
@@ -2221,9 +2423,6 @@ function startPrescriptionTask(task: {
   if (!task.game) return;
   activePrescriptionItemKey.value = task.key;
   selectExercise(task.game.id);
-}
-function onPrescriptionSlide(event: any) {
-  prescriptionSlide.value = Number(event.detail.current) || 0;
 }
 function openSocial(tab: "team" | "buddy") {
   socialTab.value = tab;
@@ -2269,6 +2468,7 @@ function resetTraining() {
   cameraStatus.value = "idle";
   stoppedReason.value = "";
   pendingCheckInAward.value = 0;
+  pendingGardenFeedback.value = null;
   liveHeartRate.value = 76;
   liveOxygen.value = 98;
   liveVitalUpdatedAt.value = "";
@@ -2467,6 +2667,7 @@ function snapshotReady(snapshot: VitalSnapshot, phase: "pre" | "post") {
 }
 function autoCheckInCoreExercise() {
   if (checkInDone.value || trainingStatus.value !== "completed") return 0;
+  const beforeDays = totalCheckInDays.value;
   const record: CheckInRecord = {
     date: todayKey(),
     source: "core-exercise",
@@ -2475,6 +2676,15 @@ function autoCheckInCoreExercise() {
     createdAt: new Date().toISOString(),
   };
   checkIns.value.push(record);
+  const afterDays = beforeDays + 1;
+  const harvested = afterDays % 5 === 0;
+  pendingGardenFeedback.value = {
+    sessionId: "",
+    beforeProgress: (beforeDays % 5) * 20,
+    afterProgress: harvested ? 100 : (afterDays % 5) * 20,
+    harvested,
+    harvestCount: Math.floor(afterDays / 5),
+  };
   wallet.value.healthPoints += 5;
   return 5;
 }
@@ -2697,6 +2907,11 @@ function generateReport() {
   }
   wallet.value.healthPoints += awarded;
   const id = `SESSION-${Date.now()}`;
+  if (pendingGardenFeedback.value)
+    pendingGardenFeedback.value = {
+      ...pendingGardenFeedback.value,
+      sessionId: id,
+    };
   const createdAt = new Date().toISOString();
   const assessment = buildAssessment();
   const advice = buildAdvice(id, assessment);
@@ -2760,7 +2975,6 @@ function generateReport() {
     });
   pendingCheckInAward.value = 0;
   activePrescriptionItemKey.value = "";
-  prescriptionSlide.value = 0;
   evaluateMemChallenge();
   persistState();
   detailView.value = "session-report";
@@ -3081,6 +3295,7 @@ function resetPrototype() {
   onboardingStep.value = "mode";
   mode.value = "public";
   activeNav.value = "today";
+  todayPageIndex.value = TODAY_PAGE_GARDEN;
   detailView.value = "none";
   wallet.value = { healthPoints: 160, mCoins: 0 };
   mem.value = { unlocked: false, inviteCode: "MEM-2026" };
@@ -3096,6 +3311,7 @@ function resetPrototype() {
     exerciseIds: [],
     prescriptionBonusAwarded: false,
   };
+  pendingGardenFeedback.value = null;
   deviceConnected.value = false;
   policyDraft.value = createDefaultPolicy();
   publishedPolicy.value = createDefaultPolicy();
