@@ -16,14 +16,13 @@
     <view class="h5-camera-mount" />
     <!-- #endif -->
 
-    <image
-      v-if="!active || state === 'denied'"
-      class="camera-fallback"
-      src="/static/storyboards/baduanjin-cinematic-v2.png"
-      mode="aspectFill"
-    />
+    <view v-if="!active" class="camera-placeholder" aria-hidden="true">
+      <view class="placeholder-person"><view /><view /></view>
+      <text>后退至全身可见</text>
+    </view>
 
     <view class="camera-shade" />
+    <view v-if="active" class="body-guide" aria-hidden="true"><text>全身入镜区域</text></view>
     <view v-if="active" class="skeleton" aria-hidden="true">
       <view class="joint joint-head" />
       <view class="bone bone-body" />
@@ -150,7 +149,6 @@ export default {
 .camera-preview,
 .native-camera,
 .h5-camera-mount,
-.camera-fallback,
 .camera-shade {
   position: absolute;
   inset: 0;
@@ -163,12 +161,68 @@ export default {
   background: #243441;
 }
 
-.camera-fallback {
-  opacity: 0.72;
-}
-
 .camera-shade {
   background: linear-gradient(180deg, rgba(20, 35, 43, 0.08), rgba(15, 32, 40, 0.58));
+}
+
+.camera-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16rpx;
+  color: rgba(255, 255, 255, 0.74);
+  background: radial-gradient(circle at 50% 38%, #52766f 0, #2f514c 38%, #203b37 100%);
+  font-size: 18rpx;
+}
+
+.placeholder-person {
+  position: relative;
+  width: 96rpx;
+  height: 210rpx;
+  border: 3rpx solid rgba(156, 229, 214, 0.72);
+  border-radius: 52rpx 52rpx 28rpx 28rpx;
+}
+
+.placeholder-person view:first-child {
+  position: absolute;
+  top: -46rpx;
+  left: 50%;
+  width: 48rpx;
+  height: 48rpx;
+  border: 3rpx solid rgba(156, 229, 214, 0.72);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.placeholder-person view:last-child {
+  position: absolute;
+  left: -40rpx;
+  right: -40rpx;
+  top: 78rpx;
+  height: 3rpx;
+  background: rgba(156, 229, 214, 0.72);
+}
+
+.body-guide {
+  position: absolute;
+  inset: 76rpx 20rpx 46rpx;
+  z-index: 1;
+  border: 2rpx dashed rgba(124, 231, 211, 0.76);
+  border-radius: 76rpx 76rpx 32rpx 32rpx;
+  box-shadow: inset 0 0 30rpx rgba(70, 205, 181, 0.08);
+}
+
+.body-guide text {
+  position: absolute;
+  top: -28rpx;
+  left: 50%;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 17rpx;
+  white-space: nowrap;
+  transform: translateX(-50%);
 }
 
 .camera-status {
@@ -216,6 +270,7 @@ export default {
 
 .skeleton {
   position: absolute;
+  z-index: 2;
   left: 50%;
   top: 50%;
   width: 210rpx;
