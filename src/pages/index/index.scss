@@ -768,6 +768,12 @@ text, view, button, input { box-sizing: border-box; }
 .status-number { color: $ink; font-size: 38rpx; font-weight: 700; }
 .status-unit { margin-left: 5rpx; color: $muted; font-size: 22rpx; }
 .status-caption { display: block; margin-top: 8rpx; color: $muted; font-size: 22rpx; }
+.home-checkin-shortcut { display: grid; width: 100%; margin-top: 24rpx; padding: 17rpx 18rpx; grid-template-columns: 54rpx 1fr auto; align-items: center; gap: 12rpx; border: 1rpx solid #b9e9dc; border-radius: 18rpx; background: $brand-soft; text-align: left; }
+.home-checkin-shortcut__icon { display: flex; align-items: center; justify-content: center; width: 54rpx; height: 54rpx; border-radius: 16rpx; background: #fff; }
+.home-checkin-shortcut > view:nth-child(2) { min-width: 0; }
+.home-checkin-shortcut text { display: block; color: $ink; font-size: 23rpx; font-weight: 600; }
+.home-checkin-shortcut view text:last-child { margin-top: 4rpx; color: $muted; font-size: 20rpx; font-weight: 400; }
+.home-checkin-shortcut > text { color: $brand-dark; font-size: 28rpx; }
 .status-device { display: flex; align-items: center; gap: 10rpx; width: 100%; margin-top: 24rpx; padding: 16rpx 18rpx; border-radius: 18rpx; color: $muted; background: #f7f8f8; font-size: 22rpx; }
 .status-device__action { margin-left: auto; color: $green-dark; font-weight: 700; }
 
@@ -1050,7 +1056,7 @@ text, view, button, input { box-sizing: border-box; }
 .plan-evidence text { display: block; color: $muted; font-size: 20rpx; line-height: 1.45; }
 .plan-evidence text:first-child { margin-bottom: 3rpx; color: $brand-dark; font-weight: 700; }
 
-.data-tabs { display: grid; margin-bottom: 18rpx; padding: 6rpx; grid-template-columns: repeat(4, 1fr); gap: 6rpx; border: 1rpx solid $line; border-radius: 20rpx; background: #fff; }
+.data-tabs { display: grid; margin-bottom: 18rpx; padding: 6rpx; grid-template-columns: repeat(5, 1fr); gap: 4rpx; border: 1rpx solid $line; border-radius: 20rpx; background: #fff; }
 .data-tabs button { min-height: 62rpx; border-radius: 15rpx; color: $muted; font-size: 23rpx; text-align: center; }
 .data-tabs button.active { color: $brand-dark; font-weight: 700; background: $brand-soft; }
 .data-panel { min-height: 520rpx; }
@@ -1064,6 +1070,81 @@ text, view, button, input { box-sizing: border-box; }
 .data-explain { margin-top: 16rpx; padding: 20rpx 22rpx; border-radius: 20rpx; color: $muted; font-size: 23rpx; line-height: 1.55; background: $brand-soft; }
 .data-explain text { display: block; }
 .data-explain text:first-child { margin-bottom: 5rpx; color: $brand-dark; font-weight: 700; }
+.checkin-panel { padding-bottom: 20rpx; }
+.checkin-hero { padding: 28rpx; overflow: hidden; border: 1rpx solid #d9e2df; border-radius: 28rpx; background: linear-gradient(145deg, #f4f7f6, #fff); }
+.checkin-hero.done { border-color: #9ed8ca; background: linear-gradient(145deg, #dff6ef, #fff 76%); }
+.checkin-hero__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 18rpx; }
+.checkin-hero__top > view:first-child { min-width: 0; flex: 1; }
+.checkin-hero__title { display: block; margin-top: 7rpx; color: $ink; font-size: 32rpx; font-weight: 700; line-height: 1.35; }
+.checkin-hero__copy { display: block; margin-top: 8rpx; color: $muted; font-size: 22rpx; line-height: 1.5; }
+.checkin-stamp { display: flex; align-items: center; justify-content: center; width: 88rpx; height: 88rpx; flex-shrink: 0; border: 3rpx solid #cbd5d1; border-radius: 50%; color: $muted; font-size: 34rpx; font-weight: 700; background: #fff; }
+.checkin-hero.done .checkin-stamp { border-color: $brand; color: #fff; background: $brand; box-shadow: 0 10rpx 24rpx rgba(22,160,133,.22); }
+.checkin-primary { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 82rpx; margin-top: 22rpx; border-radius: 20rpx; color: #fff; background: $brand; font-size: 25rpx; font-weight: 700; text-align: center; }
+.checkin-success { display: flex; align-items: center; justify-content: space-between; margin-top: 22rpx; padding: 17rpx 19rpx; border-radius: 18rpx; color: $brand-dark; background: rgba(255,255,255,.82); font-size: 23rpx; font-weight: 700; }
+.checkin-stats { display: grid; margin-top: 14rpx; padding: 20rpx 8rpx; grid-template-columns: repeat(3, 1fr); border: 1rpx solid $line; border-radius: 24rpx; background: #fff; }
+.checkin-stats view { border-left: 1rpx solid $line; text-align: center; }
+.checkin-stats view:first-child { border-left: 0; }
+.checkin-stats text { display: block; color: $muted; font-size: 20rpx; }
+.checkin-stats text:first-child { margin-bottom: 5rpx; color: $ink; font-size: 32rpx; font-weight: 700; }
+.calendar-card--featured { margin-top: 18rpx; padding: 24rpx; }
+.calendar-heading { display: grid; margin-bottom: 20rpx; grid-template-columns: 60rpx 1fr 60rpx; align-items: center; text-align: center; }
+.calendar-heading button { display: flex; align-items: center; justify-content: center; width: 54rpx; height: 54rpx; border-radius: 17rpx; color: $brand-dark; background: $brand-soft; font-size: 32rpx; }
+.calendar-heading button:last-child { justify-self: end; }
+.calendar-heading button[disabled] { color: #b8bec4; background: #f4f5f6; }
+.calendar-heading .section-title { display: block; font-size: 29rpx; }
+.calendar-heading view text:last-child { display: block; margin-top: 4rpx; color: $muted; font-size: 19rpx; }
+.calendar-card--featured .calendar-week, .calendar-card--featured .calendar-grid { gap: 7rpx; }
+.calendar-card--featured .calendar-day { position: relative; margin-top: 6rpx; border-radius: 18rpx; background: #f7f8f8; }
+.calendar-card--featured .calendar-day.blank { background: transparent; }
+.calendar-card--featured .calendar-day.future { color: #b9bec3; background: #fafafa; }
+.calendar-card--featured .calendar-day.done { color: $brand-dark; background: $brand-soft; font-weight: 700; }
+.calendar-card--featured .calendar-day.today { outline: 3rpx solid $brand; outline-offset: -2rpx; }
+.calendar-check { position: absolute; right: 4rpx; bottom: 2rpx; display: flex; align-items: center; justify-content: center; width: 24rpx; height: 24rpx; border-radius: 50%; color: #fff; background: $brand; font-size: 15rpx; }
+.calendar-legend { display: flex; align-items: center; gap: 20rpx; margin-top: 20rpx; padding-top: 17rpx; border-top: 1rpx solid $line; color: $muted; font-size: 19rpx; }
+.calendar-legend view { display: flex; align-items: center; gap: 7rpx; }
+.calendar-legend view:last-child { margin-left: auto; }
+.legend-dot { display: inline-block; width: 16rpx; height: 16rpx; border-radius: 5rpx; background: #f4f5f6; }
+.legend-dot--done { background: $brand-soft; box-shadow: inset 0 0 0 2rpx $brand; }
+.legend-dot--today { background: #fff; box-shadow: inset 0 0 0 2rpx $brand; }
+.companion-card { margin-top: 18rpx; padding: 24rpx; border: 1rpx solid $line; border-radius: 26rpx; background: #fff; }
+.companion-heading { margin-bottom: 18rpx; }
+.social-tabs { display: grid; padding: 5rpx; grid-template-columns: repeat(2, 1fr); gap: 6rpx; border-radius: 18rpx; background: #f3f5f5; }
+.social-tabs button { min-height: 62rpx; border-radius: 14rpx; color: $muted; font-size: 23rpx; text-align: center; }
+.social-tabs button.active { color: $brand-dark; font-weight: 700; background: #fff; box-shadow: 0 4rpx 12rpx rgba(31,35,41,.06); }
+.social-panel { margin-top: 18rpx; }
+.team-hero--embedded { padding: 24rpx; }
+.team-hero--embedded .team-avatar-stack { margin-bottom: 16rpx; }
+.team-hero--embedded .team-name { font-size: 28rpx; }
+.remind-button { min-width: 94rpx; padding: 11rpx 14rpx; border-radius: 999rpx; color: #fff; background: $brand; font-size: 20rpx; text-align: center; }
+.remind-button.sent { color: $brand-dark; background: $brand-soft; }
+.social-empty { padding: 28rpx 22rpx; border: 1rpx dashed #b9d8d0; border-radius: 24rpx; background: #f8fcfb; text-align: center; }
+.social-empty__icon { display: flex; align-items: center; justify-content: center; width: 78rpx; height: 78rpx; margin: 0 auto 17rpx; border-radius: 24rpx; color: $brand-dark; background: $brand-soft; font-size: 28rpx; font-weight: 700; }
+.social-empty__icon--buddy { color: #6c6292; background: #f0ecfb; }
+.social-empty .form-title { display: block; margin-bottom: 7rpx; }
+.social-empty > text:not(.form-title) { display: block; color: $muted; font-size: 22rpx; line-height: 1.55; }
+.social-empty .primary-button { margin-top: 20rpx; }
+.team-code-form { display: grid; margin-top: 14rpx; padding: 8rpx; grid-template-columns: 1fr 112rpx; gap: 8rpx; border: 1rpx solid $line; border-radius: 18rpx; background: #fff; }
+.team-code-form input { min-height: 66rpx; padding: 0 14rpx; color: $ink; font-size: 22rpx; }
+.team-code-form button { display: flex; align-items: center; justify-content: center; border-radius: 14rpx; color: #fff; background: $brand; font-size: 22rpx; text-align: center; }
+.companion-demo-button { display: block; width: 100%; margin-top: 10rpx; text-align: center; }
+.buddy-cycle { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15rpx; color: $muted; font-size: 22rpx; }
+.buddy-cycle > view { display: flex; gap: 7rpx; }
+.buddy-cycle button { padding: 10rpx 18rpx; border-radius: 999rpx; color: $muted; background: #f3f5f5; font-size: 21rpx; }
+.buddy-cycle button.active { color: $brand-dark; font-weight: 700; background: $brand-soft; }
+.buddy-card { padding: 24rpx; border: 1rpx solid #d9d2ed; border-radius: 24rpx; background: linear-gradient(145deg, #f8f6fd, #fff); }
+.buddy-card__head { display: grid; grid-template-columns: 72rpx 1fr 72rpx; align-items: center; gap: 14rpx; }
+.buddy-avatar { display: flex; align-items: center; justify-content: center; width: 72rpx; height: 72rpx; border: 4rpx solid #fff; border-radius: 50%; color: $brand-dark; background: $brand-soft; font-size: 24rpx; font-weight: 700; }
+.buddy-avatar--friend { color: #6c6292; background: #ece8f7; }
+.buddy-link { text-align: center; }
+.buddy-link text { display: block; color: $ink; font-size: 23rpx; font-weight: 700; }
+.buddy-link text:last-child { margin-top: 4rpx; color: $muted; font-size: 19rpx; font-weight: 400; }
+.buddy-status { display: grid; margin-top: 20rpx; grid-template-columns: 1fr 1fr; gap: 10rpx; }
+.buddy-status view { padding: 15rpx; border-radius: 17rpx; color: $muted; background: #f4f5f6; text-align: center; }
+.buddy-status view.done { color: $brand-dark; background: $brand-soft; }
+.buddy-status text { display: block; font-size: 20rpx; }
+.buddy-status text:first-child { margin-bottom: 4rpx; color: $ink; font-weight: 700; }
+.buddy-remind { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 70rpx; margin-top: 14rpx; border-radius: 17rpx; color: #fff; background: $brand; font-size: 22rpx; font-weight: 600; text-align: center; }
+.buddy-remind.sent { color: $brand-dark; background: $brand-soft; }
 .trend-chart { display: flex; height: 300rpx; margin-top: 22rpx; padding: 28rpx 18rpx 18rpx; align-items: flex-end; justify-content: space-between; gap: 14rpx; border: 1rpx solid $line; border-radius: 24rpx; background: linear-gradient(180deg, #f7fbfa, #fff); }
 .trend-column { display: flex; height: 100%; flex: 1; align-items: center; justify-content: flex-end; flex-direction: column; gap: 9rpx; }
 .trend-column > view { width: 68%; min-height: 12rpx; border-radius: 999rpx 999rpx 8rpx 8rpx; background: linear-gradient(180deg, #53b8a4, $brand); }

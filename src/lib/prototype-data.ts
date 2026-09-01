@@ -1,5 +1,5 @@
 export type UserMode = 'cardiac' | 'public'
-export type NavId = 'home' | 'knowledge' | 'assistant' | 'reports' | 'growth' | 'profile'
+export type NavId = 'home' | 'knowledge' | 'assistant' | 'reports' | 'profile'
 export type ExerciseGameId = 'baduanjin' | 'resistance' | 'music'
 export type KnowledgeCategory = 'recommended' | 'guide' | 'tip' | 'video'
 export type KnowledgeItemType = 'guide' | 'tip' | 'video'
@@ -15,7 +15,6 @@ export type DetailView =
   | 'knowledge-article'
   | 'knowledge-video'
   | 'assessment'
-  | 'team'
   | 'reward-store'
 
 export interface HealthMetric {
@@ -41,6 +40,31 @@ export interface RewardMilestone {
   day: number
   bonus: number
   label: string
+}
+
+export interface CheckInRecord {
+  date: string
+  source: 'core-exercise' | 'legacy-demo'
+  exerciseId?: ExerciseGameId
+  pointsAwarded: number
+  createdAt: string
+}
+
+export interface TeamState {
+  joined: boolean
+  teamId: string
+  name: string
+  inviteCode: string
+  reminderDates: Record<string, string>
+}
+
+export interface BuddyState {
+  connected: boolean
+  buddyId: string
+  buddyName: string
+  cycleDays: 7 | 30
+  startedAt: string
+  reminderSentDate: string
 }
 
 export interface KnowledgeItem {
@@ -346,9 +370,3 @@ export const rewardMilestones: RewardMilestone[] = [
   { day: 60, bonus: 200, label: '稳定坚持两个月' },
   { day: 100, bonus: 500, label: '完成百日里程碑' },
 ]
-
-export const calendarDays = Array.from({ length: 28 }, (_, index) => ({
-  day: index + 1,
-  done: [1, 2, 3, 5, 6, 7, 9, 10, 12, 13, 14, 18, 19, 20, 21, 25, 26, 27].includes(index + 1),
-  today: index + 1 === 28,
-}))

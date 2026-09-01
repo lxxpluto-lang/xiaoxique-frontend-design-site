@@ -36,6 +36,7 @@
                 <view class="progress-ring" :class="{ complete: taskCompleted }" data-metric="METRIC-TODAY-CORE"><text class="progress-value">{{ taskCompleted ? 1 : 0 }}/1</text><text class="progress-label">核心任务</text></view>
                 <view class="status-stats"><view><text class="status-number">{{ completedMinutes }}</text><text class="status-unit">分钟</text><text class="status-caption">累计运动</text></view><view><text class="status-number">{{ currentMetrics[0].value }}</text><text class="status-unit">{{ currentMetrics[0].unit }}</text><text class="status-caption">{{ currentMetrics[0].label }}</text></view></view>
               </view>
+              <button class="home-checkin-shortcut" data-testid="home-checkin-entry" @tap="openCheckIn()"><view class="home-checkin-shortcut__icon"><AppIcon src="/static/icons/magpie-line/badge.svg" :size="32" /></view><view><text>{{ checkInDone ? '今日已自动打卡' : '完成核心运动后自动打卡' }}</text><text>连续 {{ streak }} 天 · 查看日历与里程碑</text></view><text>›</text></button>
               <button class="status-device" @tap="goDetail('devices')"><AppIcon src="/static/icons/magpie-line/device.svg" :size="30" /><text>{{ deviceConnected ? '模拟设备已连接，数据已同步' : '连接手环，自动同步运动数据' }}</text><text class="status-device__action">{{ deviceConnected ? '已连接' : '去连接' }} ›</text></button>
             </view>
 
@@ -53,7 +54,10 @@
             <button class="assistant-entry" data-action="ACT-OPEN-TASK-ASSISTANT" @tap="activeNav = 'assistant'"><view class="assistant-entry__avatar"><image :src="magpieAsset" mode="aspectFit" /></view><view><text>让小喜帮你完成下一步</text><text class="small-text">今天怎么练 · 数值怎么了 · 报告怎么看 · 计划要调整吗</text></view><text>›</text></button>
           </view>
 
-          <KnowledgeHub v-else-if="activeNav === 'knowledge'" v-model:category="knowledgeCategory" v-model:query="knowledgeQuery" :mode="mode" :items="knowledgeItems" @open="openKnowledgeItem" />
+          <view v-else-if="activeNav === 'knowledge'" class="knowledge-page">
+            <CompanionHub v-model:active-tab="socialTab" :team-joined="teamJoined" :team-state="teamState" :team-members="teamMembers" :team-checked-count="teamCheckedCount" :team-progress="teamProgress" :buddy-state="buddyState" :buddy-day="buddyDay" :check-in-done="checkInDone" :today-key="todayKey()" @create-team="createDemoTeam" @join-team="joinTeamByCode" @join-demo-team="joinDemoTeam" @remind-team="remindTeamMember" @set-buddy-cycle="setBuddyCycle" @connect-buddy="connectDemoBuddy" @remind-buddy="remindBuddy" />
+            <KnowledgeHub v-model:category="knowledgeCategory" v-model:query="knowledgeQuery" :mode="mode" :items="knowledgeItems" @open="openKnowledgeItem" />
+          </view>
 
           <AssistantPanel v-else-if="activeNav === 'assistant'" class="screen" :mode="mode" :display-name="displayName" :mascot="magpieAsset" :metrics="currentMetrics" :completed-count="completedExerciseCount" :streak="streak" :plan-title="featuredGame.title + ' 3分钟'" :plan-completed="taskCompleted" @start-plan="selectExercise(featuredGame.id)" @open-reports="openReports('today')" @open-devices="goDetail('devices')" @open-profile="goDetail('health-archive')" />
 
@@ -68,6 +72,30 @@
               <view class="report-overview"><view><text class="summary-kicker">今日核心计划</text><text class="report-big">{{ taskCompleted ? 1 : 0 }}/1</text><text class="summary-copy">{{ taskCompleted ? '已完成，可查看本次报告' : '待完成，不因中断扣除积分' }}</text></view><view class="report-ring">{{ taskCompleted ? 100 : 0 }}%</view></view>
               <view class="today-data-grid"><view><text>{{ completedMinutes }}</text><text>运动分钟</text></view><view><text>{{ completedExerciseCount }}</text><text>完成项目</text></view><view><text>{{ currentMetrics[0].value }}</text><text>{{ currentMetrics[0].label }}</text></view></view>
               <view class="data-explain"><text>小喜提示</text><text>{{ taskCompleted ? '今天先保持当前剂量，不需要为了积分额外加量。' : '先完成一个 3 分钟核心任务；不适时立即停止。' }}</text></view>
+            </view>
+
+            <view v-else-if="reportTab === 'checkin'" class="checkin-panel" data-testid="report-checkin">
+              <view class="checkin-hero" :class="{ done: checkInDone }">
+                <view class="checkin-hero__top"><view><text class="screen-kicker">今日健康打卡</text><text class="checkin-hero__title">{{ checkInDone ? '今天的坚持已被记录' : '完成核心运动，自动点亮今天' }}</text><text class="checkin-hero__copy">{{ checkInDone ? '无需重复操作，额外运动不会重复奖励。' : '打卡只记录健康行动，不比较体重或身体数值。' }}</text></view><view class="checkin-stamp">{{ checkInDone ? '✓' : streak }}</view></view>
+                <button v-if="!checkInDone" class="checkin-primary" data-testid="checkin-start-core" @tap="selectExercise(featuredGame.id)">去完成今日核心运动</button>
+                <view v-else class="checkin-success"><text>已自动打卡</text><text>+{{ todayCheckInPoints }} 积分</text></view>
+              </view>
+
+              <view class="checkin-stats"><view><text>{{ streak }}</text><text>连续天数</text></view><view><text>{{ totalCheckInDays }}</text><text>累计打卡</text></view><view><text>{{ points }}</text><text>可用积分</text></view></view>
+
+              <view class="calendar-card calendar-card--featured" data-testid="checkin-calendar">
+                <view class="calendar-heading"><button aria-label="上个月" @tap="shiftCalendarMonth(-1)">‹</button><view><text class="section-title">{{ calendarTitle }}</text><text>点亮日期均来自完成记录</text></view><button aria-label="下个月" :disabled="!canGoNextMonth" @tap="shiftCalendarMonth(1)">›</button></view>
+                <view class="calendar-week"><text v-for="day in ['一','二','三','四','五','六','日']" :key="day">{{ day }}</text></view>
+                <view class="calendar-grid"><view v-for="item in calendarCells" :key="item.key" class="calendar-day" :class="{ blank: item.blank, done: item.checked, today: item.today, future: item.future }"><text v-if="!item.blank">{{ item.day }}</text><text v-if="item.checked" class="calendar-check">✓</text></view></view>
+                <view class="calendar-legend"><view><text class="legend-dot legend-dot--done" /><text>已打卡</text></view><view><text class="legend-dot legend-dot--today" /><text>今天</text></view><view><text>断签不扣积分</text></view></view>
+              </view>
+
+              <view class="milestone-card" data-testid="reward-milestones">
+                <view class="data-panel-heading"><view><text class="section-title">下一个里程碑</text><text class="section-subtitle">第 {{ nextMilestone.day }} 天 · {{ nextMilestone.label }}</text></view><text class="milestone-bonus">+{{ nextMilestone.bonus }}</text></view>
+                <view class="milestone-track"><view :style="{ width: milestoneProgress + '%' }" /></view><text class="milestone-copy">已坚持 {{ streak }} 天，还差 {{ Math.max(0, nextMilestone.day - streak) }} 天。中断不扣除已有积分。</text>
+                <view class="milestone-list"><view v-for="item in rewardMilestones" :key="item.day" :class="{ reached: streak >= item.day }"><text>{{ item.day }}天</text><text>+{{ item.bonus }}</text></view></view>
+              </view>
+
             </view>
 
             <view v-else-if="reportTab === 'trend'" class="data-panel" data-testid="report-trend">
@@ -88,38 +116,26 @@
             </view>
           </view>
 
-          <view v-else-if="activeNav === 'growth'" class="screen" data-testid="growth-screen">
-            <view class="growth-hero"><text class="screen-kicker">坚持会被看见</text><text class="growth-number">{{ points }}</text><text class="growth-label">可用积分</text><view class="growth-stats"><view><text class="strong-text">{{ streak }}</text><text>连续天数</text></view><view><text class="strong-text">{{ completedExerciseCount }}</text><text>今日完成</text></view><view><text class="strong-text">3</text><text>虚拟徽章</text></view></view></view>
-            <view class="milestone-card" data-testid="reward-milestones">
-              <view class="data-panel-heading"><view><text class="section-title">下一个里程碑</text><text class="section-subtitle">第 {{ nextMilestone.day }} 天 · {{ nextMilestone.label }}</text></view><text class="milestone-bonus">+{{ nextMilestone.bonus }}</text></view>
-              <view class="milestone-track"><view :style="{ width: milestoneProgress + '%' }" /></view><text class="milestone-copy">已坚持 {{ streak }} 天，还差 {{ Math.max(0, nextMilestone.day - streak) }} 天。中断不扣除已有积分。</text>
-              <view class="milestone-list"><view v-for="item in rewardMilestones" :key="item.day" :class="{ reached: streak >= item.day }"><text>{{ item.day }}天</text><text>+{{ item.bonus }}</text></view></view>
-            </view>
-            <view class="calendar-card"><text class="section-title">本月打卡</text><view class="calendar-week"><text v-for="day in ['一','二','三','四','五','六','日']" :key="day">{{ day }}</text></view><view class="calendar-grid"><view v-for="item in calendarDays" :key="item.day" class="calendar-day" :class="{ done: item.done, today: item.today }"><text>{{ item.day }}</text></view></view></view>
-            <view class="points-rule-card"><text class="section-title">积分怎么来</text><view><text>完成今日核心训练</text><text>+10</text></view><view><text>完成每日打卡</text><text>+5</text></view><view><text>达到长期里程碑</text><text>额外奖励</text></view><text class="points-boundary">浏览商品、邀请拉新等商业行为不计入健康积分，也不会影响今日健康计划。</text></view>
-            <button class="store-banner" @tap="goDetail('reward-store')"><view><text class="store-title">健康权益与徽章</text><text class="store-copy">优先兑换课程、报告解读和设备服务</text></view><text>›</text></button>
-          </view>
-
           <view v-else class="screen profile-screen" data-testid="profile-screen">
             <view class="profile-page-heading"><text>我的</text><button @tap="showAiBoundary = true">设置</button></view>
             <view class="profile-card"><view class="profile-avatar">{{ displayName.slice(0, 1) }}</view><view class="profile-identity"><text class="profile-name">{{ mode === 'cardiac' ? sharedPatientFixture.patient.name : '运动伙伴' }}</text><text class="profile-copy">{{ mode === 'cardiac' ? sharedPatientFixture.hospital.name + ' · ' + sharedPatientFixture.patient.patientNo : '日常运动用户 · 点击完善资料' }}</text><text class="profile-id">UUID·XQ-2026-0901</text></view><button class="profile-edit" @tap="goDetail('health-archive')">编辑 ›</button></view>
 
             <view class="profile-overview">
-              <button @tap="activeNav = 'growth'"><text class="profile-overview__value">{{ points }}</text><text>我的积分</text></button>
-              <button @tap="activeNav = 'growth'"><text class="profile-overview__value">{{ streak }}</text><text>连续天数</text></button>
+              <button @tap="goDetail('reward-store')"><text class="profile-overview__value">{{ points }}</text><text>我的积分</text></button>
+              <button @tap="openCheckIn()"><text class="profile-overview__value">{{ streak }}</text><text>连续天数</text></button>
               <button @tap="activeNav = 'reports'"><text class="profile-overview__value">{{ completedSessionCount }}</text><text>运动报告</text></button>
             </view>
 
             <view class="profile-section-heading"><text>坚持运动</text><text>和伙伴一起更容易坚持</text></view>
             <view class="habit-actions">
-              <button class="habit-card habit-card--checkin" :class="{ done: checkInDone }" data-testid="daily-checkin" @tap="handleDailyCheckIn">
+              <button class="habit-card habit-card--checkin" :class="{ done: checkInDone }" data-testid="daily-checkin" @tap="openCheckIn()">
                 <view class="habit-card__icon"><AppIcon src="/static/icons/magpie-line/badge.svg" :size="42" /></view>
-                <view><text class="habit-card__title">{{ checkInDone ? '今日已打卡' : '今日打卡' }}</text><text class="habit-card__copy">{{ checkInDone ? '连续 ' + streak + ' 天，明天见' : '记录今天的坚持' }}</text></view>
-                <text class="habit-card__action">{{ checkInDone ? '已完成' : '+5积分' }}</text>
+                <view><text class="habit-card__title">{{ checkInDone ? '今日已自动打卡' : '完成核心运动后自动打卡' }}</text><text class="habit-card__copy">{{ checkInDone ? '连续 ' + streak + ' 天，查看打卡日历' : '去查看今日状态与里程碑' }}</text></view>
+                <text class="habit-card__action">查看 ›</text>
               </button>
-              <button class="habit-card" data-testid="team-entry" @tap="goDetail('team')">
+              <button class="habit-card" data-testid="team-entry" @tap="openCompanions('team')">
                 <view class="habit-card__icon"><AppIcon src="/static/icons/magpie-line/profile.svg" :size="42" /></view>
-                <view><text class="habit-card__title">健康组队</text><text class="habit-card__copy">{{ teamJoined ? '已加入·小喜鹊7天轻运动队' : '邀请亲友相互提醒' }}</text></view>
+                <view><text class="habit-card__title">健康组队</text><text class="habit-card__copy">{{ teamJoined ? '已加入·' + teamState.name : '邀请亲友相互提醒' }}</text></view>
                 <text class="habit-card__action">{{ teamJoined ? '查看队伍' : '去组队' }} ›</text>
               </button>
             </view>
@@ -187,13 +203,6 @@
           <view v-else-if="detailView === 'knowledge-article'" class="detail-content" data-testid="knowledge-article"><image class="knowledge-detail-cover" :src="selectedKnowledgeItem.poster" mode="aspectFill" /><view class="knowledge-detail-heading"><view class="tag-row"><text class="tag tag--green">{{ selectedKnowledgeItem.type === 'guide' ? '指南' : '康复小贴士' }}</text><text class="tag">原型内容 · 待医学审核</text></view><text class="knowledge-detail-title">{{ selectedKnowledgeItem.title }}</text><text class="knowledge-detail-summary">{{ selectedKnowledgeItem.summary }}</text><view class="knowledge-detail-meta"><text>{{ selectedKnowledgeItem.duration }}</text><text v-for="tag in selectedKnowledgeItem.tags" :key="tag"># {{ tag }}</text></view></view><view class="knowledge-article-body"><text v-for="(paragraph, index) in selectedKnowledgeItem.body" :key="index">{{ paragraph }}</text></view><view class="knowledge-review-note"><text>内容说明</text><text>当前内容仅用于产品原型与健康教育流程演示，未经过医学专家正式审核，不可替代医生诊断、治疗或个体化康复处方。</text></view><button class="primary-button" @tap="closeDetail">返回知识库</button></view>
           <view v-else-if="detailView === 'knowledge-video'" class="detail-content" data-testid="knowledge-video"><view class="knowledge-video-shell"><video :src="selectedKnowledgeItem.video" :poster="selectedKnowledgeItem.poster" :controls="true" :show-center-play-btn="true" :show-fullscreen-btn="true" object-fit="contain" /></view><view class="knowledge-detail-heading"><view class="tag-row"><text class="tag tag--green">健康短视频</text><text class="tag">{{ selectedKnowledgeItem.duration }}</text></view><text class="knowledge-detail-title">{{ selectedKnowledgeItem.title }}</text><text class="knowledge-detail-summary">{{ selectedKnowledgeItem.summary }}</text><view class="knowledge-detail-meta"><text v-for="tag in selectedKnowledgeItem.tags" :key="tag"># {{ tag }}</text></view></view><view class="knowledge-demo-badge"><image :src="magpieAsset" mode="aspectFit" /><view><text>原型演示素材</text><text>此视频为本地生成的界面演示素材，正式科普内容与动作需经医学专家审核后替换。</text></view></view><view class="knowledge-review-note"><text>医疗边界</text><text>短视频不提供诊断、用药调整或个体化处方。运动中出现胸痛、明显气促、头晕或意识异常时，请立即停止并寻求医疗帮助。</text></view><button class="primary-button" @tap="closeDetail">返回短视频</button></view>
           <view v-else-if="detailView === 'assessment'" class="detail-content"><DetailIntro kicker="体适能记录" title="五项基础评估" copy="以下为原型演示结果，只用于展示页面结构，不代表真实医学判断。" /><view class="assessment-score"><text class="small-text">综合状态</text><text class="result-title">基础活动能力良好</text><text class="result-copy">建议保持规律轻运动，并根据身体感受逐步增加训练。</text></view><view class="assessment-list"><view v-for="item in assessmentItems" :key="item.name"><view><text class="record-title">{{ item.name }}</text><text class="record-copy">{{ item.value }}</text></view><text class="record-status">{{ item.level }}</text></view></view><button class="primary-button" @tap="showAssessmentToast">预约下次评估</button></view>
-          <view v-else-if="detailView === 'team'" class="detail-content team-detail" data-testid="team-screen">
-            <DetailIntro kicker="健康组队" title="小伙伴一起坚持" copy="组队只分享打卡状态，不展示心率、血氧或医院处方等健康隐私数据。" />
-            <view class="team-hero"><view class="team-avatar-stack"><view>喜</view><view>康</view><view>动</view><view>+2</view></view><text class="team-name">小喜鹊7天轻运动队</text><text class="team-meta">5 / 6 人 · 本周共打卡 23 次</text><view class="team-progress"><view style="width: 68%" /></view><text class="team-progress-copy">团队目标完成 68%</text></view>
-            <view v-if="teamJoined" class="team-members"><text class="form-title">队伍成员</text><view v-for="member in teamMembers" :key="member.name" class="team-member"><view>{{ member.name.slice(0, 1) }}</view><view><text>{{ member.name }}</text><text>{{ member.status }}</text></view><text>{{ member.streak }}天</text></view><view class="team-invite-code"><text>邀请码</text><text>XQ-7DAY</text></view></view>
-            <view v-else class="team-join-card"><text class="form-title">加入演示队伍</text><text>加入后即可看到伙伴打卡状态和团队周目标。</text><button class="primary-button" data-testid="join-team" @tap="joinDemoTeam">使用邀请码 XQ-7DAY 加入</button></view>
-            <view class="team-boundary"><text>隐私说明</text><text>队友只能看到“今日已打卡 / 未打卡”和连续天数，无法查看个人健康档案。</text></view>
-          </view>
           <view v-else-if="detailView === 'reward-store'" class="detail-content" data-testid="health-reward-store"><DetailIntro kicker="独立健康积分" title="健康权益与徽章" :copy="'当前有 ' + points + ' 积分。所有兑换均为原型演示，不产生真实权益。'" /><view class="reward-boundary"><text>积分原则</text><text>只奖励健康行动与长期坚持；不包含浏览商品、拉新或付费任务；中断不扣除已经获得的积分。</text></view><view class="reward-grid"><view v-for="reward in visibleRewards" :key="reward.id" class="reward-card"><view class="reward-icon">{{ reward.icon }}</view><text class="reward-name">{{ reward.name }}</text><text class="reward-description">{{ reward.description }}</text><button :disabled="points < reward.cost" @tap="redeemReward(reward)">{{ reward.cost }} 积分</button></view></view></view>
         </scroll-view>
       </view>
@@ -208,6 +217,7 @@
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
 import AppIcon from '@/components/AppIcon.vue'
 import AssistantPanel from '@/components/AssistantPanel.vue'
+import CompanionHub from '@/components/CompanionHub.vue'
 import DetailIntro from '@/components/DetailIntro.vue'
 import KnowledgeHub from '@/components/KnowledgeHub.vue'
 import MagpieMotion from '@/components/MagpieMotion.vue'
@@ -215,13 +225,14 @@ import StepIndicator from '@/components/StepIndicator.vue'
 import TrainingExperience from '@/components/TrainingExperience.vue'
 import VitalForm from '@/components/VitalForm.vue'
 import { activities } from '@/lib/rive-motion'
-import { assessmentItems, calendarDays, exerciseGames, knowledgeItems, navItems, patientMetrics, publicMetrics, rewardItems, rewardMilestones, trendBars, type ActivityResult, type DetailView, type ExerciseGameId, type KnowledgeCategory, type KnowledgeItem, type NavId, type RewardItem, type RewardLedger, type TrainingSession, type TrainingStatus, type UserMode } from '@/lib/prototype-data'
+import { assessmentItems, exerciseGames, knowledgeItems, navItems, patientMetrics, publicMetrics, rewardItems, rewardMilestones, trendBars, type ActivityResult, type BuddyState, type CheckInRecord, type DetailView, type ExerciseGameId, type KnowledgeCategory, type KnowledgeItem, type NavId, type RewardItem, type RewardLedger, type TeamState, type TrainingSession, type TrainingStatus, type UserMode } from '@/lib/prototype-data'
 import { isPrescriptionExercise, isSupportedPatientNo, sharedPatientFixture } from '@/lib/shared-patient'
 
 type OnboardingStep = 'mode' | 'binding'
 type BindingState = 'idle' | 'loading' | 'matched' | 'error'
-type ReportTab = 'today' | 'trend' | 'plan' | 'history'
+type ReportTab = 'today' | 'checkin' | 'trend' | 'plan' | 'history'
 type HealthGoal = 'habit' | 'weight' | 'cardiac'
+type SocialTab = 'none' | 'team' | 'buddy'
 const STORAGE_KEY = 'magpie-partner-v2'
 const appReady = ref(false)
 const onboardingStep = ref<OnboardingStep>('mode')
@@ -251,9 +262,12 @@ const preSymptoms = ref<string[]>([])
 const postFeeling = ref('适中')
 const stoppedReason = ref('')
 const points = ref(160)
-const streak = ref(6)
-const checkInDone = ref(false)
-const teamJoined = ref(false)
+const checkIns = ref<CheckInRecord[]>(buildSeedCheckIns())
+const teamState = ref<TeamState>(createDefaultTeamState())
+const buddyState = ref<BuddyState>(createDefaultBuddyState())
+const socialTab = ref<SocialTab>('none')
+const calendarMonth = ref(monthKey(new Date()))
+const pendingCheckInAward = ref(0)
 const sessions = ref<TrainingSession[]>([])
 const rewardLedger = ref<RewardLedger>({ date: todayKey(), exerciseIds: [], prescriptionBonusAwarded: false })
 const deviceConnected = ref(false)
@@ -263,14 +277,9 @@ const magpieAsset = '/static/rive-source/v4/master/magpie-neutral-master-v4.png'
 const preVitals = reactive({ sbp: '122', dbp: '76', hr: '68', spo2: '98', borg: 1 })
 const postVitals = reactive({ sbp: '126', dbp: '78', hr: '76', spo2: '98', borg: 3 })
 const symptomOptions = [{ value: 'chest-pain', label: '胸痛或胸部不适' }, { value: 'dyspnea', label: '明显气促或呼吸困难' }, { value: 'dizzy', label: '头晕、乏力或意识异常' }, { value: 'palpitation', label: '持续或明显心悸' }]
-const teamMembers = [
-  { name: '运动伙伴', status: '今日已打卡', streak: 7 },
-  { name: '康姐', status: '今日已打卡', streak: 12 },
-  { name: '小动', status: '今日待打卡', streak: 4 },
-  { name: '林叔', status: '今日已打卡', streak: 9 },
-]
 const reportTabs: Array<{ id: ReportTab; label: string }> = [
   { id: 'today', label: '今日' },
+  { id: 'checkin', label: '打卡' },
   { id: 'trend', label: '趋势' },
   { id: 'plan', label: '计划' },
   { id: 'history', label: '记录' },
@@ -298,6 +307,32 @@ const completedSessionCount = computed(() => sessions.value.filter((item) => ite
 const completedExerciseCount = computed(() => new Set(completedTodaySessions.value.map((item) => item.exerciseId)).size)
 const completedMinutes = computed(() => Math.round(completedTodaySessions.value.reduce((sum, item) => sum + item.durationSeconds, 0) / 60))
 const taskCompleted = computed(() => completedTodaySessions.value.some((item) => item.exerciseId === featuredGame.value.id))
+const checkInDone = computed(() => checkIns.value.some((item) => item.date === todayKey()))
+const streak = computed(() => calculateStreak(checkIns.value))
+const totalCheckInDays = computed(() => new Set(checkIns.value.map((item) => item.date)).size)
+const todayCheckInPoints = computed(() => checkIns.value.find((item) => item.date === todayKey())?.pointsAwarded || 0)
+const currentMonthKey = computed(() => monthKey(new Date()))
+const calendarTitle = computed(() => {
+  const [year, month] = calendarMonth.value.split('-').map(Number)
+  return `${year}年${month}月`
+})
+const calendarCells = computed(() => buildCalendarCells(calendarMonth.value, checkIns.value))
+const canGoNextMonth = computed(() => calendarMonth.value < currentMonthKey.value)
+const teamJoined = computed(() => teamState.value.joined)
+const teamMembers = computed(() => [
+  { id: 'self', name: '我', status: checkInDone.value ? '今日已打卡' : '今日待打卡', streak: streak.value, self: true },
+  { id: 'kang', name: '康姐', status: '今日已打卡', streak: 12, self: false },
+  { id: 'dong', name: '小动', status: '今日待打卡', streak: 4, self: false },
+  { id: 'lin', name: '林叔', status: '今日已打卡', streak: 9, self: false },
+  { id: 'xi', name: '喜姨', status: '今日已打卡', streak: 6, self: false },
+])
+const teamCheckedCount = computed(() => teamMembers.value.filter((item) => item.status === '今日已打卡').length)
+const teamProgress = computed(() => Math.round(teamCheckedCount.value / teamMembers.value.length * 100))
+const buddyDay = computed(() => {
+  if (!buddyState.value.startedAt) return 1
+  const elapsed = Math.floor((startOfLocalDay(new Date()).getTime() - parseDateKey(buddyState.value.startedAt).getTime()) / 86400000) + 1
+  return Math.min(buddyState.value.cycleDays, Math.max(1, elapsed))
+})
 const planReason = computed(() => mode.value === 'cardiac' ? '依据医院共享演示计划，今天只突出一个处方内任务' : `依据“${healthGoalLabel.value}”目标，先从可重复的3分钟开始`)
 const planSource = computed(() => mode.value === 'cardiac' ? `${sharedPatientFixture.hospital.name} · ${sharedPatientFixture.prescription.version}` : `目标档案 · ${healthGoalLabel.value}`)
 const healthGoalLabel = computed(() => mode.value === 'cardiac' || healthGoal.value === 'cardiac' ? '完成心脏康复阶段计划' : healthGoal.value === 'weight' ? '用稳定运动支持健康减重' : '建立可持续的日常运动习惯')
@@ -316,13 +351,87 @@ const milestoneProgress = computed(() => {
   return Math.min(100, Math.round((streak.value - start) / Math.max(1, end - start) * 100))
 })
 const visibleRewards = computed(() => rewardItems.filter((item) => item.audience === 'all' || (item.audience === 'cardiac' && mode.value === 'cardiac')))
-const detailTitle = computed(() => ({ precheck: '运动前检查', training: selectedGame.value.title, postcheck: '运动后记录', 'session-report': '本次运动报告', 'hospital-report': '医院运动记录', 'health-archive': '健康档案', devices: '设备与数据来源', 'knowledge-article': '知识详情', 'knowledge-video': '健康短视频', assessment: '体适能评估', team: '健康组队', 'reward-store': '积分与徽章', none: '' }[detailView.value]))
+const detailTitle = computed(() => ({ precheck: '运动前检查', training: selectedGame.value.title, postcheck: '运动后记录', 'session-report': '本次运动报告', 'hospital-report': '医院运动记录', 'health-archive': '健康档案', devices: '设备与数据来源', 'knowledge-article': '知识详情', 'knowledge-video': '健康短视频', assessment: '体适能评估', 'reward-store': '积分与徽章', none: '' }[detailView.value]))
 
-function todayKey() { return new Date().toISOString().slice(0, 10) }
+function padDatePart(value: number) { return String(value).padStart(2, '0') }
+function localDateKey(date: Date) { return `${date.getFullYear()}-${padDatePart(date.getMonth() + 1)}-${padDatePart(date.getDate())}` }
+function todayKey() { return localDateKey(new Date()) }
+function monthKey(date: Date) { return `${date.getFullYear()}-${padDatePart(date.getMonth() + 1)}` }
+function startOfLocalDay(date: Date) { return new Date(date.getFullYear(), date.getMonth(), date.getDate()) }
+function parseDateKey(value: string) {
+  const [year, month, day] = value.split('-').map(Number)
+  return new Date(year, Math.max(0, month - 1), day || 1)
+}
+function addLocalDays(date: Date, amount: number) {
+  const next = startOfLocalDay(date)
+  next.setDate(next.getDate() + amount)
+  return next
+}
+function buildSeedCheckIns(count = 6): CheckInRecord[] {
+  return Array.from({ length: count }, (_, index) => {
+    const date = addLocalDays(new Date(), index - count)
+    return { date: localDateKey(date), source: 'legacy-demo', exerciseId: 'baduanjin', pointsAwarded: 5, createdAt: `${localDateKey(date)}T08:00:00` }
+  })
+}
+function createDefaultTeamState(): TeamState {
+  return { joined: false, teamId: 'TEAM-XQ-7DAY', name: '小喜鹊7天轻运动队', inviteCode: 'XQ-7DAY', reminderDates: {} }
+}
+function createDefaultBuddyState(): BuddyState {
+  return { connected: false, buddyId: 'BUDDY-KANG', buddyName: '康康', cycleDays: 7, startedAt: '', reminderSentDate: '' }
+}
+function calculateStreak(records: CheckInRecord[]) {
+  const dates = new Set(records.map((item) => item.date))
+  let cursor = startOfLocalDay(new Date())
+  if (!dates.has(localDateKey(cursor))) cursor = addLocalDays(cursor, -1)
+  let count = 0
+  while (dates.has(localDateKey(cursor))) { count += 1; cursor = addLocalDays(cursor, -1) }
+  return count
+}
+function buildCalendarCells(value: string, records: CheckInRecord[]) {
+  const [year, month] = value.split('-').map(Number)
+  const firstDay = new Date(year, month - 1, 1)
+  const daysInMonth = new Date(year, month, 0).getDate()
+  const leading = (firstDay.getDay() + 6) % 7
+  const checkedDates = new Set(records.map((item) => item.date))
+  const blanks = Array.from({ length: leading }, (_, index) => ({ key: `blank-${index}`, day: 0, blank: true, checked: false, today: false, future: false }))
+  const days = Array.from({ length: daysInMonth }, (_, index) => {
+    const date = new Date(year, month - 1, index + 1)
+    const key = localDateKey(date)
+    return { key, day: index + 1, blank: false, checked: checkedDates.has(key), today: key === todayKey(), future: date.getTime() > startOfLocalDay(new Date()).getTime() }
+  })
+  return [...blanks, ...days]
+}
+function migrateCheckIns(saved: Record<string, any>): CheckInRecord[] {
+  if (Array.isArray(saved.checkIns) && saved.checkIns.length) {
+    const unique = new Map<string, CheckInRecord>()
+    saved.checkIns.forEach((item: Partial<CheckInRecord>) => {
+      if (!item.date || !/^\d{4}-\d{2}-\d{2}$/.test(item.date)) return
+      unique.set(item.date, { date: item.date, source: item.source === 'core-exercise' ? 'core-exercise' : 'legacy-demo', exerciseId: item.exerciseId, pointsAwarded: Number(item.pointsAwarded) || 0, createdAt: item.createdAt || `${item.date}T08:00:00` })
+    })
+    return [...unique.values()].sort((a, b) => a.date.localeCompare(b.date))
+  }
+  const legacyStreak = Math.min(100, Math.max(0, Number(saved.streak) || 0))
+  if (!legacyStreak && !saved.checkInDate) return buildSeedCheckIns()
+  const endDate = saved.checkInDate === todayKey() ? new Date() : addLocalDays(new Date(), -1)
+  const recordCount = Math.max(legacyStreak, saved.checkInDate ? 1 : 0)
+  return Array.from({ length: recordCount }, (_, index) => {
+    const date = addLocalDays(endDate, index - recordCount + 1)
+    return { date: localDateKey(date), source: 'legacy-demo' as const, exerciseId: 'baduanjin' as const, pointsAwarded: 5, createdAt: `${localDateKey(date)}T08:00:00` }
+  })
+}
 function formatTimer(value: number) { return `${Math.floor(value / 60).toString().padStart(2, '0')}:${(value % 60).toString().padStart(2, '0')}` }
 function formatDuration(value: number) { return value >= 60 ? `${Math.floor(value / 60)}分${value % 60 ? value % 60 + '秒' : ''}` : `${value}秒` }
 function handleTodayPrimary() { if (taskCompleted.value) openReports('today'); else selectExercise(featuredGame.value.id) }
 function openReports(tab: ReportTab) { reportTab.value = tab; activeNav.value = 'reports' }
+function openCheckIn() { openReports('checkin') }
+function openCompanions(tab: Exclude<SocialTab, 'none'>) { socialTab.value = tab; knowledgeQuery.value = ''; knowledgeScrollTop.value = 0; activeNav.value = 'knowledge' }
+function shiftCalendarMonth(amount: number) {
+  const [year, month] = calendarMonth.value.split('-').map(Number)
+  const next = new Date(year, month - 1 + amount, 1)
+  const nextKey = monthKey(next)
+  if (nextKey > currentMonthKey.value) return
+  calendarMonth.value = nextKey
+}
 function setHealthGoal(goal: HealthGoal) { if (mode.value === 'cardiac') return; healthGoal.value = goal; persistState(); uni.showToast({ title: '健康目标已更新', icon: 'none' }) }
 function chooseMode(value: UserMode) { mode.value = value; if (value === 'cardiac') healthGoal.value = 'cardiac'; else if (healthGoal.value === 'cardiac') healthGoal.value = 'habit'; if (value === 'public') enterApp(); else onboardingStep.value = 'binding' }
 function backToMode() { onboardingStep.value = 'mode'; bindingState.value = 'idle'; visitNumber.value = '' }
@@ -330,7 +439,7 @@ function bindPatient() { if (bindingState.value === 'matched') { enterApp(); ret
 function enterApp() { appReady.value = true; activeNav.value = 'home'; persistState() }
 function switchMode() { appReady.value = false; onboardingStep.value = 'mode'; bindingState.value = 'idle'; visitNumber.value = ''; activeNav.value = 'home'; reportTab.value = 'today' }
 function selectExercise(id: ExerciseGameId) { detailReturnNav.value = activeNav.value; selectedGameId.value = id; resetTraining(); if (mode.value === 'cardiac') { trainingStatus.value = 'checking'; detailView.value = 'precheck' } else startTraining() }
-function resetTraining() { stopTimer(); trainingStatus.value = 'idle'; elapsed.value = 0; repCount.value = 0; repStreak.value = 0; rhythmHits.value = 0; rhythmTotal.value = 0; rhythmCombo.value = 0; preSymptoms.value = []; postFeeling.value = '适中'; stoppedReason.value = ''; demoCompleted.value = false; cameraStatus.value = 'idle' }
+function resetTraining() { stopTimer(); trainingStatus.value = 'idle'; elapsed.value = 0; repCount.value = 0; repStreak.value = 0; rhythmHits.value = 0; rhythmTotal.value = 0; rhythmCombo.value = 0; preSymptoms.value = []; postFeeling.value = '适中'; stoppedReason.value = ''; demoCompleted.value = false; cameraStatus.value = 'idle'; pendingCheckInAward.value = 0 }
 function updateSymptoms(event: { detail: { value: string[] } }) { preSymptoms.value = event.detail.value }
 function startTraining() { if (mode.value === 'cardiac' && preSymptoms.value.length) { showStopReason.value = true; return }; detailView.value = 'training'; trainingStatus.value = 'active'; elapsed.value = 0; startTimer() }
 function startTimer() { stopTimer(); trainingTimer = setInterval(() => { if (trainingStatus.value === 'active') { elapsed.value += 1; if (elapsed.value >= 180) finishTraining(false) } }, 1000) }
@@ -338,8 +447,16 @@ function stopTimer() { if (trainingTimer) clearInterval(trainingTimer); training
 function toggleTraining() { trainingStatus.value = trainingStatus.value === 'paused' ? 'active' : 'paused' }
 function recordRep() { if (trainingStatus.value !== 'active' || repCount.value >= 12) return; repCount.value += 1; repStreak.value += 1 }
 function recordBeat() { if (trainingStatus.value !== 'active' || rhythmHits.value >= 24) return; rhythmTotal.value += 1; if (rhythmTotal.value % 7 === 0) rhythmCombo.value = 0; else { rhythmHits.value += 1; rhythmCombo.value += 1 } }
-function finishTraining(isDemo: boolean) { if (isDemo) { elapsed.value = 180; if (selectedGameId.value === 'resistance') { repCount.value = 12; repStreak.value = 12 }; if (selectedGameId.value === 'music') { rhythmHits.value = 24; rhythmTotal.value = 26; rhythmCombo.value = 8 }; demoCompleted.value = true }; stopTimer(); trainingStatus.value = 'completed'; detailView.value = 'postcheck' }
+function finishTraining(isDemo: boolean) { if (isDemo) { elapsed.value = 180; if (selectedGameId.value === 'resistance') { repCount.value = 12; repStreak.value = 12 }; if (selectedGameId.value === 'music') { rhythmHits.value = 24; rhythmTotal.value = 26; rhythmCombo.value = 8 }; demoCompleted.value = true }; stopTimer(); trainingStatus.value = 'completed'; pendingCheckInAward.value = autoCheckInCoreExercise(); detailView.value = 'postcheck' }
 function stopTraining() { stopTimer(); showStopReason.value = false; trainingStatus.value = 'stopped'; stoppedReason.value = '用户主动报告身体不适'; detailView.value = 'postcheck' }
+function autoCheckInCoreExercise() {
+  if (selectedGameId.value !== featuredGame.value.id || checkInDone.value) return 0
+  const record: CheckInRecord = { date: todayKey(), source: 'core-exercise', exerciseId: selectedGameId.value, pointsAwarded: 5, createdAt: new Date().toISOString() }
+  checkIns.value.push(record)
+  points.value += record.pointsAwarded
+  persistState()
+  return record.pointsAwarded
+}
 function resultItems(): ActivityResult[] { if (selectedGameId.value === 'baduanjin') return [{ label: '动作模拟评分', value: `${activityScore.value} 分` }, { label: '摄像头状态', value: cameraStatus.value === 'ready' ? '已开启' : '未启用/演示' }]; if (selectedGameId.value === 'resistance') return [{ label: '完成次数', value: `${repCount.value} / 12` }, { label: '连续完成', value: `${repStreak.value} 次` }]; return [{ label: '节拍命中', value: `${rhythmHits.value} / ${rhythmTotal.value}` }, { label: '命中准确率', value: `${activityScore.value}%` }, { label: '完成组数', value: `${rhythmRound.value} / 3` }] }
 function generateReport() {
   if (rewardLedger.value.date !== todayKey()) rewardLedger.value = { date: todayKey(), exerciseIds: [], prescriptionBonusAwarded: false }
@@ -347,9 +464,10 @@ function generateReport() {
   if (trainingStatus.value === 'completed' && !rewardLedger.value.exerciseIds.includes(selectedGameId.value)) { awarded += 10; rewardLedger.value.exerciseIds.push(selectedGameId.value) }
   if (trainingStatus.value === 'completed' && isCurrentPrescription.value && !rewardLedger.value.prescriptionBonusAwarded) { awarded += 10; rewardLedger.value.prescriptionBonusAwarded = true }
   points.value += awarded
-  if (trainingStatus.value === 'completed') streak.value = Math.max(streak.value, 7)
-  sessions.value.unshift({ id: `SESSION-${Date.now()}`, exerciseId: selectedGameId.value, title: selectedGame.value.title, mode: mode.value, planType: isCurrentPrescription.value ? 'prescription' : 'self-directed', status: trainingStatus.value, durationSeconds: Math.min(180, elapsed.value), demoCompleted: demoCompleted.value, stoppedReason: stoppedReason.value || undefined, score: activityScore.value, results: resultItems(), createdAt: new Date().toISOString(), pointsAwarded: awarded })
-  persistState(); detailView.value = 'session-report'; uni.showToast({ title: awarded ? `报告已生成，获得${awarded}积分` : '报告已生成', icon: 'none' })
+  const totalAwarded = awarded + pendingCheckInAward.value
+  sessions.value.unshift({ id: `SESSION-${Date.now()}`, exerciseId: selectedGameId.value, title: selectedGame.value.title, mode: mode.value, planType: isCurrentPrescription.value ? 'prescription' : 'self-directed', status: trainingStatus.value, durationSeconds: Math.min(180, elapsed.value), demoCompleted: demoCompleted.value, stoppedReason: stoppedReason.value || undefined, score: activityScore.value, results: resultItems(), createdAt: new Date().toISOString(), pointsAwarded: totalAwarded })
+  pendingCheckInAward.value = 0
+  persistState(); detailView.value = 'session-report'; uni.showToast({ title: totalAwarded ? `报告已生成，获得${totalAwarded}积分` : '报告已生成', icon: 'none' })
 }
 function goDetail(view: DetailView) { if (view !== 'training') stopTimer(); detailReturnNav.value = activeNav.value; detailView.value = view }
 function closeDetail() { stopTimer(); detailView.value = 'none'; activeNav.value = detailReturnNav.value }
@@ -357,20 +475,26 @@ function openKnowledge(category: KnowledgeCategory) { knowledgeCategory.value = 
 function openKnowledgeItem(item: KnowledgeItem) { selectedKnowledgeId.value = item.id; detailReturnNav.value = 'knowledge'; detailView.value = item.type === 'video' ? 'knowledge-video' : 'knowledge-article' }
 function rememberPageScroll(event: { detail: { scrollTop: number } }) { if (activeNav.value === 'knowledge') knowledgeScrollTop.value = event.detail.scrollTop }
 function simulateSync() { deviceConnected.value = true; uni.showToast({ title: '已完成模拟连接', icon: 'none' }) }
-function handleDailyCheckIn() {
-  if (checkInDone.value) { uni.showToast({ title: '今日已完成打卡', icon: 'none' }); return }
-  checkInDone.value = true
-  streak.value += 1
-  points.value += 5
-  persistState()
-  uni.showToast({ title: '打卡成功，获得5积分', icon: 'none' })
+function createDemoTeam() { teamState.value = { ...createDefaultTeamState(), joined: true, name: '我的轻运动陪伴队', inviteCode: 'XQ-MYTEAM' }; persistState(); uni.showToast({ title: '演示小队已创建', icon: 'none' }) }
+function joinTeamByCode(code: string) { if (code.trim().toUpperCase() !== 'XQ-7DAY') { uni.showToast({ title: '演示邀请码不正确', icon: 'none' }); return }; joinDemoTeam() }
+function joinDemoTeam() { teamState.value = { ...createDefaultTeamState(), joined: true }; persistState(); uni.showToast({ title: '已加入小喜鹊运动队', icon: 'none' }) }
+function remindTeamMember(memberId: string) {
+  if (teamState.value.reminderDates[memberId] === todayKey()) { uni.showToast({ title: '今天已经温和提醒过啦', icon: 'none' }); return }
+  teamState.value = { ...teamState.value, reminderDates: { ...teamState.value.reminderDates, [memberId]: todayKey() } }
+  persistState(); uni.showToast({ title: '已发送原型提醒', icon: 'none' })
 }
-function joinDemoTeam() { teamJoined.value = true; persistState(); uni.showToast({ title: '已加入小喜鹊运动队', icon: 'none' }) }
+function setBuddyCycle(days: 7 | 30) { buddyState.value = { ...buddyState.value, cycleDays: days }; persistState() }
+function connectDemoBuddy() { buddyState.value = { ...buddyState.value, connected: true, startedAt: todayKey(), reminderSentDate: '' }; persistState(); uni.showToast({ title: `已开启${buddyState.value.cycleDays}天健康陪伴`, icon: 'none' }) }
+function remindBuddy() {
+  if (buddyState.value.reminderSentDate === todayKey()) { uni.showToast({ title: '今天已经提醒过搭子啦', icon: 'none' }); return }
+  buddyState.value = { ...buddyState.value, reminderSentDate: todayKey() }
+  persistState(); uni.showToast({ title: '已发送原型提醒', icon: 'none' })
+}
 function showAssessmentToast() { uni.showToast({ title: '评估预约为原型演示功能', icon: 'none' }) }
 function redeemReward(reward: RewardItem) { if (points.value < reward.cost) return; points.value -= reward.cost; persistState(); uni.showModal({ title: '演示兑换成功', content: `已模拟兑换“${reward.name}”，不会产生真实权益或物流。`, showCancel: false }) }
-function persistState() { uni.setStorageSync(STORAGE_KEY, { ready: appReady.value, mode: mode.value, healthGoal: healthGoal.value, points: points.value, streak: streak.value, checkInDate: checkInDone.value ? todayKey() : '', teamJoined: teamJoined.value, sessions: sessions.value, rewardLedger: rewardLedger.value }) }
-function resetPrototype() { stopTimer(); uni.removeStorageSync(STORAGE_KEY); appReady.value = false; onboardingStep.value = 'mode'; mode.value = 'public'; healthGoal.value = 'habit'; bindingState.value = 'idle'; visitNumber.value = ''; activeNav.value = 'home'; reportTab.value = 'today'; detailView.value = 'none'; points.value = 160; streak.value = 6; checkInDone.value = false; teamJoined.value = false; sessions.value = []; rewardLedger.value = { date: todayKey(), exerciseIds: [], prescriptionBonusAwarded: false } }
-onMounted(() => { const saved = uni.getStorageSync(STORAGE_KEY); if (saved?.ready) { mode.value = saved.mode === 'cardiac' ? 'cardiac' : 'public'; healthGoal.value = saved.healthGoal === 'weight' ? 'weight' : saved.healthGoal === 'cardiac' ? 'cardiac' : 'habit'; points.value = Number(saved.points) || 160; streak.value = Number(saved.streak) || 6; checkInDone.value = saved.checkInDate === todayKey(); teamJoined.value = Boolean(saved.teamJoined); sessions.value = Array.isArray(saved.sessions) ? saved.sessions : []; rewardLedger.value = saved.rewardLedger?.date ? saved.rewardLedger : rewardLedger.value; appReady.value = true } })
+function persistState() { uni.setStorageSync(STORAGE_KEY, { schemaVersion: 3, ready: appReady.value, mode: mode.value, healthGoal: healthGoal.value, points: points.value, checkIns: checkIns.value, teamState: teamState.value, buddyState: buddyState.value, sessions: sessions.value, rewardLedger: rewardLedger.value }) }
+function resetPrototype() { stopTimer(); uni.removeStorageSync(STORAGE_KEY); appReady.value = false; onboardingStep.value = 'mode'; mode.value = 'public'; healthGoal.value = 'habit'; bindingState.value = 'idle'; visitNumber.value = ''; activeNav.value = 'home'; reportTab.value = 'today'; socialTab.value = 'none'; calendarMonth.value = monthKey(new Date()); detailView.value = 'none'; points.value = 160; checkIns.value = buildSeedCheckIns(); teamState.value = createDefaultTeamState(); buddyState.value = createDefaultBuddyState(); sessions.value = []; rewardLedger.value = { date: todayKey(), exerciseIds: [], prescriptionBonusAwarded: false } }
+onMounted(() => { const saved = uni.getStorageSync(STORAGE_KEY); if (saved?.ready) { mode.value = saved.mode === 'cardiac' ? 'cardiac' : 'public'; healthGoal.value = saved.healthGoal === 'weight' ? 'weight' : saved.healthGoal === 'cardiac' ? 'cardiac' : 'habit'; points.value = Number(saved.points) || 160; checkIns.value = migrateCheckIns(saved); const defaultTeam = createDefaultTeamState(); const defaultBuddy = createDefaultBuddyState(); teamState.value = saved.teamState ? { ...defaultTeam, ...saved.teamState, reminderDates: saved.teamState.reminderDates || {} } : { ...defaultTeam, joined: Boolean(saved.teamJoined) }; buddyState.value = saved.buddyState ? { ...defaultBuddy, ...saved.buddyState, cycleDays: saved.buddyState.cycleDays === 30 ? 30 : 7 } : defaultBuddy; sessions.value = Array.isArray(saved.sessions) ? saved.sessions : []; rewardLedger.value = saved.rewardLedger?.date ? saved.rewardLedger : rewardLedger.value; appReady.value = true; persistState() } })
 onUnmounted(stopTimer)
 </script>
 
