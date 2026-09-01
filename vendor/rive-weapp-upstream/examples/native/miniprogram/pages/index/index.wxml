@@ -1,0 +1,33 @@
+<scroll-view scroll-y class="page" enhanced show-scrollbar="{{false}}">
+  <view class="hero">
+    <view class="hero-badge">RIVE · WeChat</view>
+    <view class="hero-title">在小程序里运行 Rive</view>
+    <view class="hero-sub">官方 Rive WASM 运行时 · Canvas 2D 渲染 · 状态机与触摸交互</view>
+  </view>
+
+  <view class="grid">
+    <view
+      class="card"
+      wx:for="{{examples}}"
+      wx:key="file"
+      data-item="{{item}}"
+      bindtap="open"
+      hover-class="card-hover"
+    >
+      <view class="card-art" style="background:{{item.gradient}}">
+        <text class="card-initial">{{item.initial}}</text>
+        <view class="card-play">▶</view>
+      </view>
+      <view class="card-body">
+        <view class="card-title">{{item.title}}</view>
+        <view class="card-sub">{{item.subtitle}}</view>
+        <view class="card-tags">
+          <text class="tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+          <text class="tag tag-dim">{{item.sizeKB}} KB</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">点击任意卡片进入播放页 · 共 {{examples.length}} 个官方示例</view>
+</scroll-view>

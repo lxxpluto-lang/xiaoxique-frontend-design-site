@@ -1,0 +1,86 @@
+.page {
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 24rpx 28rpx 60rpx;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 760rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #20202e 0%, #12121a 70%),
+    repeating-conic-gradient(#14141d 0% 25%, #171722 0% 50%) 0 / 56rpx 56rpx;
+  border: 1rpx solid var(--border);
+}
+.rive {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  color: var(--text-dim);
+  font-size: 26rpx;
+}
+.overlay-error { color: #ff8a8a; }
+.overlay-error-title { font-size: 30rpx; font-weight: 600; }
+.overlay-error-msg { font-size: 22rpx; padding: 0 40rpx; text-align: center; opacity: 0.8; }
+.spinner {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  border: 5rpx solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--accent);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.info { padding: 28rpx 6rpx 8rpx; }
+.info-title { font-size: 38rpx; font-weight: 700; }
+.info-sub { margin-top: 6rpx; font-size: 26rpx; color: var(--text-dim); }
+.hint { display: block; margin-top: 16rpx; font-size: 22rpx; color: var(--accent-2); }
+
+.panel {
+  margin-top: 24rpx;
+  background: var(--bg-card);
+  border: 1rpx solid var(--border);
+  border-radius: 24rpx;
+  padding: 24rpx 26rpx;
+}
+.panel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+.panel-title { font-size: 26rpx; color: var(--text-dim); letter-spacing: 1rpx; }
+.empty { margin-top: 16rpx; font-size: 25rpx; color: var(--text-dim); }
+
+.ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 0;
+  border-top: 1rpx solid var(--border);
+}
+.ctrl:first-of-type { border-top: none; }
+.ctrl-name { font-size: 28rpx; max-width: 40%; }
+.ctrl-widget { display: flex; align-items: center; flex: 1; justify-content: flex-end; }
+.slider { width: 100%; margin-left: 20rpx; }
+
+.state-list { margin-top: 14rpx; display: flex; flex-direction: column; gap: 8rpx; }
+.state-item {
+  font-size: 23rpx;
+  color: var(--text-dim);
+  font-family: "SF Mono", Menlo, monospace;
+}

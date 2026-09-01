@@ -1,0 +1,37 @@
+{
+  "name": "rive-weapp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Run Rive animations in WeChat Mini Programs. A source-built, WeChat-native Rive runtime (Canvas 2D, no WebGL/SIMD) with native and Taro + React example apps.",
+  "license": "MIT",
+  "homepage": "https://github.com/Henry198327091731/rive-weapp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Henry198327091731/rive-weapp.git"
+  },
+  "keywords": [
+    "rive",
+    "wechat",
+    "weapp",
+    "miniprogram",
+    "wasm",
+    "canvas",
+    "animation",
+    "taro"
+  ],
+  "scripts": {
+    "build:lite": "bash tools/rive-build/build-lite-weapp.sh",
+    "build:runtime": "node tools/build-runtime.mjs",
+    "fetch:examples": "node tools/fetch-examples.mjs",
+    "sync": "node tools/sync-sdk.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "riveRuntime": {
+    "package": "@rive-app/canvas-advanced-lite",
+    "version": "2.38.2",
+    "note": "Fallback build (`npm run build:runtime`) repackages Rive's npm-prebuilt lite glue. The PRIMARY build (`npm run build:lite`) compiles Rive from C++ source with a WeChat-native canvas2d renderer (tools/rive-build). Both emit into packages/rive-weapp/vendor; run `npm run sync` to copy the SDK into the example apps."
+  }
+}

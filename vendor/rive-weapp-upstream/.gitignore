@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# Taro demo build output
+examples/taro/dist/
+examples/taro/.swc/
+examples/taro/.temp/
+.taro-cache/
+
+# WeChat DevTools per-user settings + local artifacts (auto-generated)
+project.private.config.json
+**/miniprogram_npm/
+
+# OS / editor
+.DS_Store
+*.log
+*.swp
+.idea/
+.vscode/
+.cache/

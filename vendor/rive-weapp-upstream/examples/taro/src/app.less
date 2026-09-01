@@ -1,0 +1,38 @@
+page {
+  --bg: #0b0b12;
+  --bg-card: #16161f;
+  --bg-card-2: #1d1d2a;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f2f2f7;
+  --text-dim: #9a9aae;
+  --accent: #ff5b4a;
+  --accent-2: #6c8cff;
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.muted {
+  color: var(--text-dim);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rpx 28rpx;
+  margin: 0;
+  border-radius: 999rpx;
+  background: var(--bg-card-2);
+  color: var(--text);
+  font-size: 26rpx;
+  line-height: 1.6;
+  border: 1rpx solid var(--border);
+}
+.btn::after { border: none; }
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  border-color: transparent;
+}

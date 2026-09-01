@@ -1,0 +1,51 @@
+{
+  "miniprogramRoot": "dist/",
+  "projectname": "rive-taro-demo",
+  "description": "Rive 小程序演示 (Taro + React)",
+  "appid": "touristappid",
+  "setting": {
+    "es6": false,
+    "enhance": true,
+    "postcss": false,
+    "minified": true,
+    "urlCheck": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.14.2",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "Rive Demo (vehicles)",
+          "pathName": "pkgRive/demo/index",
+          "query": "file=vehicles.riv&title=Vehicles",
+          "scene": null
+        }
+      ]
+    }
+  },
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {}
+}

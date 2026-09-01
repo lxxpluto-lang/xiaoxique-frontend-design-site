@@ -1,0 +1,30 @@
+{
+  "schema": "rive-production-parts/v4",
+  "canonicalView": "three-quarter-left",
+  "coordinateConvention": {
+    "L": "screen-left / far side",
+    "R": "screen-right / near side"
+  },
+  "sources": {
+    "approvedMagpie": "IP设计/最终选稿（喜鹊）/11-紫色小喜鹊-平面数字伙伴版.png",
+    "rigReadyMaster": "master/magpie-neutral-master-v4.png",
+    "eyeVector": "vector/magpie-eye-module-v4.svg"
+  },
+  "eyeAssembly": {
+    "far": ["sclera_L", "iris_L", "pupil_L", "highlight_L", "upper_lid_L", "lower_lid_L", "lash_L"],
+    "near": ["sclera_R", "iris_R", "pupil_R", "highlight_R", "upper_lid_R", "lower_lid_R", "lash_R"],
+    "importRule": "Preserve SVG ids as Rive object names; clip iris, pupil and highlight with their matching sclera clip."
+  },
+  "rigStrategy": {
+    "vector": ["eyes", "eyelids", "lashes", "upper_beak", "lower_beak"],
+    "imageMesh": ["body_shell", "belly_patch", "face_patch", "wing_L", "wing_R", "tail_L", "tail_R"],
+    "reason": "The approved source exists only as PNG. A vector/image-mesh hybrid preserves the approved painted look while keeping eyes, mouth and joints continuously controllable."
+  },
+  "qualityGates": [
+    "Near eye remains visibly larger than far eye.",
+    "Blink closes with lids; never squash the whole eye.",
+    "Pupil and highlight never leave the sclera clip.",
+    "Default gaze matches the approved source before animation.",
+    "No baked checkerboard, halo or drop shadow in imported assets."
+  ]
+}

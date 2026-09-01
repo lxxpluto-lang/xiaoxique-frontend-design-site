@@ -1,0 +1,59 @@
+{
+  "schema": "magpie-rive-binding/v3",
+  "coordinateNotes": "originX/originY are normalized inside each trimmed PNG; 0,0 is top-left",
+  "characters": {
+    "magpie": [
+      { "part": "tail_lower", "bone": "tail_lower", "originX": 0.50, "originY": 0.10, "drawOrder": 10, "mesh": false },
+      { "part": "tail_upper", "bone": "tail_upper", "originX": 0.50, "originY": 0.10, "drawOrder": 11, "mesh": false },
+      { "part": "foot_left", "bone": "leg_L", "originX": 0.50, "originY": 0.10, "drawOrder": 20, "mesh": false },
+      { "part": "foot_right", "bone": "leg_R", "originX": 0.50, "originY": 0.10, "drawOrder": 21, "mesh": false },
+      { "part": "body_shell", "bone": "bird_body", "originX": 0.50, "originY": 0.58, "drawOrder": 30, "mesh": true, "meshGrid": "4x4", "bind": ["bird_body", "tail_upper", "tail_lower"] },
+      { "part": "wing_left", "bone": "wing_L", "originX": 0.82, "originY": 0.28, "drawOrder": 40, "mesh": false },
+      { "part": "wing_right", "bone": "wing_R", "originX": 0.18, "originY": 0.28, "drawOrder": 41, "mesh": false },
+      { "part": "wing_highlight", "bone": "wing_L", "originX": 0.50, "originY": 0.50, "drawOrder": 42, "mesh": false },
+      { "part": "face_patch", "bone": "bird_body", "originX": 0.50, "originY": 0.50, "drawOrder": 50, "mesh": false },
+      { "part": "eye_left", "bone": "eye_L", "originX": 0.50, "originY": 0.55, "drawOrder": 60, "mesh": false },
+      { "part": "eye_right", "bone": "eye_R", "originX": 0.50, "originY": 0.55, "drawOrder": 61, "mesh": false },
+      { "part": "eyelid_left", "bone": "eye_L", "originX": 0.50, "originY": 0.15, "drawOrder": 62, "mesh": false },
+      { "part": "eyelid_right", "bone": "eye_R", "originX": 0.50, "originY": 0.15, "drawOrder": 63, "mesh": false },
+      { "part": "beak_lower", "bone": "beak_lower", "originX": 0.14, "originY": 0.24, "drawOrder": 69, "mesh": false },
+      { "part": "beak_upper", "bone": "beak_upper", "originX": 0.14, "originY": 0.72, "drawOrder": 70, "mesh": false }
+    ],
+    "girl": [
+      { "part": "braid_left", "bone": "head", "originX": 0.50, "originY": 0.12, "drawOrder": 8, "mesh": true, "meshGrid": "3x5", "bind": ["head", "chest"] },
+      { "part": "braid_right", "bone": "head", "originX": 0.50, "originY": 0.12, "drawOrder": 9, "mesh": true, "meshGrid": "3x5", "bind": ["head", "chest"] },
+      { "part": "green_side_panel", "bone": "chest", "originX": 0.50, "originY": 0.16, "drawOrder": 12, "mesh": false },
+      { "part": "thigh_left", "bone": "thigh_L", "originX": 0.50, "originY": 0.10, "drawOrder": 20, "mesh": false },
+      { "part": "shin_left", "bone": "shin_L", "originX": 0.50, "originY": 0.10, "drawOrder": 21, "mesh": false },
+      { "part": "thigh_right", "bone": "thigh_R", "originX": 0.50, "originY": 0.10, "drawOrder": 22, "mesh": false },
+      { "part": "shin_right", "bone": "shin_R", "originX": 0.50, "originY": 0.10, "drawOrder": 23, "mesh": false },
+      { "part": "upper_arm_left", "bone": "upper_arm_L", "originX": 0.50, "originY": 0.10, "drawOrder": 30, "mesh": false },
+      { "part": "forearm_left", "bone": "forearm_L", "originX": 0.28, "originY": 0.14, "drawOrder": 31, "mesh": false },
+      { "part": "torso", "bone": "chest", "originX": 0.50, "originY": 0.20, "drawOrder": 40, "mesh": true, "meshGrid": "4x5", "bind": ["hip", "spine", "chest"] },
+      { "part": "upper_arm_right", "bone": "upper_arm_R", "originX": 0.50, "originY": 0.10, "drawOrder": 42, "mesh": false },
+      { "part": "forearm_right", "bone": "forearm_R", "originX": 0.72, "originY": 0.14, "drawOrder": 43, "mesh": false },
+      { "part": "head_base", "bone": "head", "originX": 0.50, "originY": 0.72, "drawOrder": 50, "mesh": false },
+      { "part": "hair_front", "bone": "head", "originX": 0.50, "originY": 0.72, "drawOrder": 51, "mesh": false },
+      { "part": "beanie", "bone": "head", "originX": 0.50, "originY": 0.74, "drawOrder": 52, "mesh": false },
+      { "part": "face_features", "bone": "head", "originX": 0.50, "originY": 0.58, "drawOrder": 53, "mesh": false }
+    ],
+    "woman": [
+      { "part": "hair_back", "bone": "head", "originX": 0.50, "originY": 0.70, "drawOrder": 8, "mesh": false },
+      { "part": "thigh_left", "bone": "thigh_L", "originX": 0.50, "originY": 0.10, "drawOrder": 20, "mesh": false },
+      { "part": "shin_left", "bone": "shin_L", "originX": 0.50, "originY": 0.10, "drawOrder": 21, "mesh": false },
+      { "part": "thigh_right", "bone": "thigh_R", "originX": 0.50, "originY": 0.10, "drawOrder": 22, "mesh": false },
+      { "part": "shin_right", "bone": "shin_R", "originX": 0.50, "originY": 0.10, "drawOrder": 23, "mesh": false },
+      { "part": "upper_arm_left", "bone": "upper_arm_L", "originX": 0.50, "originY": 0.10, "drawOrder": 30, "mesh": false },
+      { "part": "forearm_left", "bone": "forearm_L", "originX": 0.30, "originY": 0.14, "drawOrder": 31, "mesh": false },
+      { "part": "torso", "bone": "chest", "originX": 0.50, "originY": 0.20, "drawOrder": 40, "mesh": true, "meshGrid": "4x5", "bind": ["hip", "spine", "chest"] },
+      { "part": "upper_arm_right", "bone": "upper_arm_R", "originX": 0.50, "originY": 0.10, "drawOrder": 42, "mesh": false },
+      { "part": "forearm_right", "bone": "forearm_R", "originX": 0.70, "originY": 0.14, "drawOrder": 43, "mesh": false },
+      { "part": "head_base", "bone": "head", "originX": 0.50, "originY": 0.72, "drawOrder": 50, "mesh": false },
+      { "part": "hair_front", "bone": "head", "originX": 0.50, "originY": 0.72, "drawOrder": 51, "mesh": false },
+      { "part": "face_features", "bone": "head", "originX": 0.50, "originY": 0.58, "drawOrder": 52, "mesh": false },
+      { "part": "brooch", "bone": "chest", "originX": 0.50, "originY": 0.50, "drawOrder": 53, "mesh": false },
+      { "part": "hand_alt_left", "bone": "forearm_L", "originX": 0.50, "originY": 0.22, "drawOrder": 60, "mesh": false, "visibility": "baduanjin_open_palms" },
+      { "part": "hand_alt_right", "bone": "forearm_R", "originX": 0.50, "originY": 0.22, "drawOrder": 61, "mesh": false, "visibility": "baduanjin_open_palms" }
+    ]
+  }
+}

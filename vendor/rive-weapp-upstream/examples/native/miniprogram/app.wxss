@@ -1,0 +1,33 @@
+/* Global dark theme */
+page {
+  --bg: #0b0b12;
+  --bg-card: #16161f;
+  --bg-card-2: #1d1d2a;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f2f2f7;
+  --text-dim: #9a9aae;
+  --accent: #ff5b4a; /* Rive-ish coral */
+  --accent-2: #6c8cff;
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.muted { color: var(--text-dim); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx 28rpx;
+  border-radius: 999rpx;
+  background: var(--bg-card-2);
+  color: var(--text);
+  font-size: 26rpx;
+  border: 1rpx solid var(--border);
+  line-height: 1.2;
+}
+.btn-accent { background: var(--accent); color: #fff; border-color: transparent; }
+.btn:active { opacity: 0.8; }

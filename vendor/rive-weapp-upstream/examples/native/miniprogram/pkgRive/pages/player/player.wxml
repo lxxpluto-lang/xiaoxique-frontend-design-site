@@ -1,0 +1,79 @@
+<scroll-view scroll-y class="page" enhanced show-scrollbar="{{false}}">
+  <view class="stage">
+    <rive-view
+      id="rive"
+      class="rive"
+      src="{{path}}"
+      fit="contain"
+      alignment="center"
+      autoplay="{{true}}"
+      bind:load="onRiveLoad"
+      bind:error="onRiveError"
+      bind:statechange="onStateChange"
+    />
+    <view wx:if="{{!loaded && !error}}" class="overlay">
+      <view class="spinner"></view>
+      <text>加载 WASM 与 .riv…</text>
+    </view>
+    <view wx:if="{{error}}" class="overlay overlay-error">
+      <text class="overlay-error-title">加载失败</text>
+      <text class="overlay-error-msg">{{error}}</text>
+    </view>
+  </view>
+
+  <view class="info">
+    <view class="info-title">{{title}}</view>
+    <view class="info-sub">{{subtitle}}</view>
+    <text class="hint">直接在画面上点击 / 拖动，与状态机交互</text>
+  </view>
+
+  <view class="panel" wx:if="{{loaded}}">
+    <view class="panel-row">
+      <text class="panel-title">控制</text>
+      <button class="btn" size="mini" bindtap="togglePlay">{{paused ? '播放' : '暂停'}}</button>
+    </view>
+
+    <view wx:if="{{inputs.length === 0}}" class="empty">该文件为纯动画，没有状态机输入。</view>
+
+    <view class="ctrl" wx:for="{{inputs}}" wx:key="name">
+      <text class="ctrl-name">{{item.name}}</text>
+      <view class="ctrl-widget">
+        <button
+          wx:if="{{item.type==='trigger'}}"
+          class="btn btn-accent"
+          size="mini"
+          data-name="{{item.name}}"
+          bindtap="onTapTrigger"
+        >触发</button>
+        <switch
+          wx:elif="{{item.type==='bool'}}"
+          color="#ff5b4a"
+          data-name="{{item.name}}"
+          bindchange="onToggleBool"
+        />
+        <slider
+          wx:elif="{{item.type==='number'}}"
+          class="slider"
+          min="0"
+          max="100"
+          step="1"
+          value="{{numberVals[item.name]}}"
+          data-name="{{item.name}}"
+          bindchanging="onNumberChange"
+          bindchange="onNumberChange"
+          activeColor="#ff5b4a"
+          block-size="20"
+          show-value
+        />
+        <text wx:else class="muted">{{item.type}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="panel" wx:if="{{states.length}}">
+    <text class="panel-title">状态变化</text>
+    <view class="state-list">
+      <text class="state-item" wx:for="{{states}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+</scroll-view>

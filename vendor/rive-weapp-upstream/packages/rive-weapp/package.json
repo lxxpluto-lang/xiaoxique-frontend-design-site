@@ -1,0 +1,28 @@
+{
+  "name": "rive-weapp",
+  "version": "0.1.0",
+  "description": "WeChat-native Rive runtime for Mini Programs (Canvas 2D, source-built, no WebGL/SIMD).",
+  "license": "MIT",
+  "main": "index.js",
+  "sideEffects": [
+    "./adapter/polyfill.js"
+  ],
+  "files": [
+    "index.js",
+    "runtime.js",
+    "layout.js",
+    "adapter/",
+    "vendor/",
+    "components/"
+  ],
+  "keywords": [
+    "rive",
+    "wechat",
+    "weapp",
+    "miniprogram",
+    "wasm",
+    "canvas",
+    "animation"
+  ],
+  "comment": "Mini Programs cannot `npm install` this directly — copy these files into a subpackage. See README.md. The repo root keeps this in sync into examples/ via `npm run sync`."
+}

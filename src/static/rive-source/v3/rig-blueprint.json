@@ -1,0 +1,165 @@
+{
+  "schema": "magpie-rive-rig/v3",
+  "artboard": {
+    "width": 720,
+    "height": 600,
+    "frameRate": 60,
+    "fit": "contain",
+    "clip": false
+  },
+  "exports": [
+    "src/static/rive/magpie-baduanjin-v3.riv",
+    "src/static/rive/magpie-resistance-v3.riv",
+    "src/static/rive/magpie-singing-v3.riv"
+  ],
+  "skeletons": {
+    "human": [
+      { "name": "root", "parent": null },
+      { "name": "hip", "parent": "root" },
+      { "name": "spine", "parent": "hip" },
+      { "name": "chest", "parent": "spine" },
+      { "name": "neck", "parent": "chest" },
+      { "name": "head", "parent": "neck" },
+      { "name": "upper_arm_L", "parent": "chest" },
+      { "name": "forearm_L", "parent": "upper_arm_L" },
+      { "name": "upper_arm_R", "parent": "chest" },
+      { "name": "forearm_R", "parent": "upper_arm_R" },
+      { "name": "thigh_L", "parent": "hip" },
+      { "name": "shin_L", "parent": "thigh_L" },
+      { "name": "thigh_R", "parent": "hip" },
+      { "name": "shin_R", "parent": "thigh_R" }
+    ],
+    "magpie": [
+      { "name": "bird_root", "parent": null },
+      { "name": "bird_body", "parent": "bird_root" },
+      { "name": "wing_L", "parent": "bird_body" },
+      { "name": "wing_R", "parent": "bird_body" },
+      { "name": "tail_upper", "parent": "bird_body" },
+      { "name": "tail_lower", "parent": "bird_body" },
+      { "name": "leg_L", "parent": "bird_body" },
+      { "name": "leg_R", "parent": "bird_body" },
+      { "name": "beak_upper", "parent": "bird_body" },
+      { "name": "beak_lower", "parent": "beak_upper" },
+      { "name": "eye_L", "parent": "bird_body" },
+      { "name": "eye_R", "parent": "bird_body" }
+    ]
+  },
+  "stateMachine": {
+    "name": "Motion Machine",
+    "inputs": [
+      { "name": "play", "type": "boolean", "default": true },
+      { "name": "replay", "type": "trigger" },
+      { "name": "celebrate", "type": "trigger" },
+      { "name": "reducedMotion", "type": "boolean", "default": false }
+    ],
+    "states": [
+      { "name": "Idle", "animation": "idle" },
+      { "name": "Main", "animation": "main_loop" },
+      { "name": "Celebrate", "animation": "celebrate_once" },
+      { "name": "Reduced", "animation": "reduced_loop" }
+    ],
+    "transitions": [
+      { "from": "Idle", "to": "Main", "when": "play == true", "mixMs": 240 },
+      { "from": "Main", "to": "Idle", "when": "play == false", "mixMs": 300 },
+      { "from": "*", "to": "Main", "when": "replay fired", "mixMs": 90 },
+      { "from": "*", "to": "Celebrate", "when": "celebrate fired", "mixMs": 120 },
+      { "from": "Celebrate", "to": "Main", "when": "exit time 100%", "mixMs": 220 },
+      { "from": "*", "to": "Reduced", "when": "reducedMotion == true", "mixMs": 200 }
+    ]
+  },
+  "scenes": {
+    "baduanjin": {
+      "export": "magpie-baduanjin-v3.riv",
+      "artboardName": "Baduanjin",
+      "durationMs": 6800,
+      "loop": true,
+      "characters": [
+        { "rig": "woman", "root": { "x": 250, "y": 500, "scale": 0.72 } },
+        { "rig": "magpie", "root": { "x": 520, "y": 500, "scale": 0.50 } }
+      ],
+      "keyframes": [
+        { "time": 0, "pose": "ready", "ease": "cubic(0.33,0,0.2,1)" },
+        { "time": 650, "pose": "gather_dip", "ease": "cubic(0.25,0,0.35,1)" },
+        { "time": 1600, "pose": "hands_to_chest", "ease": "cubic(0.2,0,0.2,1)" },
+        { "time": 2700, "pose": "open_shoulders", "ease": "cubic(0.2,0,0.15,1)" },
+        { "time": 3900, "pose": "diagonal_lift", "ease": "cubic(0.16,0,0.12,1)" },
+        { "time": 4800, "pose": "hold_heavens_overshoot", "ease": "cubic(0.18,1.18,0.3,1)" },
+        { "time": 5550, "pose": "hold_heavens_settle", "ease": "cubic(0.25,0,0.25,1)" },
+        { "time": 6200, "pose": "descending_circle", "ease": "cubic(0.35,0,0.2,1)" },
+        { "time": 6800, "pose": "ready", "ease": "cubic(0.3,0,0.3,1)" }
+      ],
+      "secondaryMotion": {
+        "womanHairDelayMs": 90,
+        "magpieTailDelayMs": 140,
+        "breathingScaleY": 0.018
+      }
+    },
+    "resistance": {
+      "export": "magpie-resistance-v3.riv",
+      "artboardName": "Resistance",
+      "durationMs": 6000,
+      "loop": true,
+      "characters": [
+        { "rig": "girl", "root": { "x": 330, "y": 510, "scale": 0.72 } },
+        { "rig": "magpie", "root": { "x": 430, "y": 300, "scale": 0.34 }, "nested": true }
+      ],
+      "keyframes": [
+        { "time": 0, "pose": "bird_on_palms", "ease": "cubic(0.3,0,0.2,1)" },
+        { "time": 700, "pose": "shared_anticipation", "ease": "cubic(0.4,0,0.5,1)" },
+        { "time": 1350, "pose": "safe_shallow_squat", "ease": "cubic(0.35,0,0.25,1)" },
+        { "time": 1650, "pose": "launch_stretch", "ease": "cubic(0.15,0.9,0.2,1)" },
+        { "time": 2600, "pose": "airborne_apex", "ease": "cubic(0.32,0,0.68,1)" },
+        { "time": 3400, "pose": "descent", "ease": "cubic(0.3,0,0.7,1)" },
+        { "time": 4200, "pose": "landing_squash", "ease": "cubic(0.18,1.2,0.28,1)" },
+        { "time": 4700, "pose": "landing_settle", "ease": "cubic(0.25,0,0.25,1)" },
+        { "time": 5350, "pose": "celebrate", "ease": "cubic(0.2,1.12,0.3,1)" },
+        { "time": 6000, "pose": "bird_on_palms", "ease": "cubic(0.3,0,0.3,1)" }
+      ],
+      "birdPath": [
+        { "time": 0, "x": 430, "y": 300, "rotation": 0, "scaleY": 1.0 },
+        { "time": 1350, "x": 430, "y": 315, "rotation": -5, "scaleY": 0.82 },
+        { "time": 1650, "x": 440, "y": 250, "rotation": 5, "scaleY": 1.16 },
+        { "time": 2600, "x": 485, "y": 125, "rotation": 18, "scaleY": 1.0 },
+        { "time": 3400, "x": 455, "y": 205, "rotation": -8, "scaleY": 1.04 },
+        { "time": 4200, "x": 430, "y": 300, "rotation": 0, "scaleY": 0.78 },
+        { "time": 4700, "x": 430, "y": 292, "rotation": 0, "scaleY": 1.04 }
+      ]
+    },
+    "singing": {
+      "export": "magpie-singing-v3.riv",
+      "artboardName": "SingingScreenBreak",
+      "durationMs": 5200,
+      "loop": true,
+      "transparentArtboard": true,
+      "characters": [
+        { "rig": "magpie", "root": { "x": 360, "y": 455, "scale": 0.72 } }
+      ],
+      "keyframes": [
+        { "time": 0, "pose": "singing_ready", "ease": "cubic(0.3,0,0.2,1)" },
+        { "time": 500, "pose": "chorus_anticipation", "ease": "cubic(0.45,0,0.55,1)" },
+        { "time": 1000, "pose": "chorus_open", "ease": "cubic(0.12,1.15,0.25,1)" },
+        { "time": 1500, "pose": "launch", "ease": "cubic(0.1,0.85,0.15,1)" },
+        { "time": 2050, "pose": "outside_artboard", "ease": "cubic(0.25,0,0.6,1)" },
+        { "time": 2750, "pose": "reenter_upper_right", "ease": "cubic(0.3,0,0.72,1)" },
+        { "time": 3500, "pose": "landing_squash", "ease": "cubic(0.15,1.22,0.25,1)" },
+        { "time": 4100, "pose": "hero_finish", "ease": "cubic(0.2,1.1,0.3,1)" },
+        { "time": 5200, "pose": "singing_ready", "ease": "cubic(0.3,0,0.3,1)" }
+      ],
+      "flightPath": [
+        { "time": 0, "x": 360, "y": 455, "rotation": 0, "scale": 0.72, "opacity": 1 },
+        { "time": 1500, "x": 385, "y": 300, "rotation": 8, "scale": 0.80, "opacity": 1 },
+        { "time": 2050, "x": 500, "y": -180, "rotation": 18, "scale": 0.68, "opacity": 1 },
+        { "time": 2300, "x": 620, "y": -260, "rotation": 24, "scale": 0.50, "opacity": 0 },
+        { "time": 2750, "x": 790, "y": -120, "rotation": -28, "scale": 0.46, "opacity": 1 },
+        { "time": 3300, "x": 440, "y": 300, "rotation": -10, "scale": 0.70, "opacity": 1 },
+        { "time": 3500, "x": 360, "y": 455, "rotation": 0, "scale": 0.78, "opacity": 1 }
+      ],
+      "runtimePlacement": {
+        "layer": "page-overlay",
+        "bounds": "full-page",
+        "pointerEvents": "none",
+        "videoCardClipping": false
+      }
+    }
+  }
+}

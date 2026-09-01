@@ -1,0 +1,10 @@
+<canvas
+  type="2d"
+  id="rivecanvas"
+  class="rive-canvas"
+  bindtouchstart="onTouchStart"
+  catchtouchmove="onTouchMove"
+  bindtouchend="onTouchEnd"
+  bindtouchcancel="onTouchEnd"
+  disable-scroll="{{true}}"
+></canvas>

@@ -1,0 +1,362 @@
+{
+  "version": 3,
+  "characters": [
+    {
+      "character": "magpie",
+      "sourceAtlas": "atlases/magpie-rig-atlas-v3.png",
+      "cleanAtlas": "atlases/magpie-rig-atlas-v3-clean.png",
+      "parts": [
+        {
+          "index": 1,
+          "name": "body_shell",
+          "file": "parts/magpie/01-body_shell.png",
+          "width": 345,
+          "height": 352
+        },
+        {
+          "index": 2,
+          "name": "face_patch",
+          "file": "parts/magpie/02-face_patch.png",
+          "width": 226,
+          "height": 176
+        },
+        {
+          "index": 3,
+          "name": "eye_left",
+          "file": "parts/magpie/03-eye_left.png",
+          "width": 127,
+          "height": 153
+        },
+        {
+          "index": 4,
+          "name": "eye_right",
+          "file": "parts/magpie/04-eye_right.png",
+          "width": 134,
+          "height": 154
+        },
+        {
+          "index": 5,
+          "name": "beak_upper",
+          "file": "parts/magpie/05-beak_upper.png",
+          "width": 153,
+          "height": 107
+        },
+        {
+          "index": 6,
+          "name": "beak_lower",
+          "file": "parts/magpie/06-beak_lower.png",
+          "width": 110,
+          "height": 107
+        },
+        {
+          "index": 7,
+          "name": "wing_left",
+          "file": "parts/magpie/07-wing_left.png",
+          "width": 292,
+          "height": 206
+        },
+        {
+          "index": 8,
+          "name": "wing_right",
+          "file": "parts/magpie/08-wing_right.png",
+          "width": 288,
+          "height": 206
+        },
+        {
+          "index": 9,
+          "name": "foot_left",
+          "file": "parts/magpie/09-foot_left.png",
+          "width": 142,
+          "height": 148
+        },
+        {
+          "index": 10,
+          "name": "foot_right",
+          "file": "parts/magpie/10-foot_right.png",
+          "width": 140,
+          "height": 146
+        },
+        {
+          "index": 11,
+          "name": "tail_upper",
+          "file": "parts/magpie/11-tail_upper.png",
+          "width": 198,
+          "height": 307
+        },
+        {
+          "index": 12,
+          "name": "tail_lower",
+          "file": "parts/magpie/12-tail_lower.png",
+          "width": 207,
+          "height": 267
+        },
+        {
+          "index": 13,
+          "name": "eyelid_left",
+          "file": "parts/magpie/13-eyelid_left.png",
+          "width": 153,
+          "height": 78
+        },
+        {
+          "index": 14,
+          "name": "eyelid_right",
+          "file": "parts/magpie/14-eyelid_right.png",
+          "width": 150,
+          "height": 71
+        },
+        {
+          "index": 15,
+          "name": "wing_highlight",
+          "file": "parts/magpie/15-wing_highlight.png",
+          "width": 171,
+          "height": 108
+        },
+        {
+          "index": 16,
+          "name": "empty",
+          "file": "parts/magpie/16-empty.png",
+          "width": 2,
+          "height": 2
+        }
+      ]
+    },
+    {
+      "character": "girl",
+      "sourceAtlas": "atlases/girl-rig-atlas-v3.png",
+      "cleanAtlas": "atlases/girl-rig-atlas-v3-clean.png",
+      "parts": [
+        {
+          "index": 1,
+          "name": "head_base",
+          "file": "parts/girl/01-head_base.png",
+          "width": 256,
+          "height": 272
+        },
+        {
+          "index": 2,
+          "name": "beanie",
+          "file": "parts/girl/02-beanie.png",
+          "width": 294,
+          "height": 231
+        },
+        {
+          "index": 3,
+          "name": "hair_front",
+          "file": "parts/girl/03-hair_front.png",
+          "width": 277,
+          "height": 205
+        },
+        {
+          "index": 4,
+          "name": "face_features",
+          "file": "parts/girl/04-face_features.png",
+          "width": 208,
+          "height": 175
+        },
+        {
+          "index": 5,
+          "name": "torso",
+          "file": "parts/girl/05-torso.png",
+          "width": 220,
+          "height": 284
+        },
+        {
+          "index": 6,
+          "name": "upper_arm_left",
+          "file": "parts/girl/06-upper_arm_left.png",
+          "width": 121,
+          "height": 233
+        },
+        {
+          "index": 7,
+          "name": "forearm_left",
+          "file": "parts/girl/07-forearm_left.png",
+          "width": 158,
+          "height": 211
+        },
+        {
+          "index": 8,
+          "name": "upper_arm_right",
+          "file": "parts/girl/08-upper_arm_right.png",
+          "width": 120,
+          "height": 226
+        },
+        {
+          "index": 9,
+          "name": "forearm_right",
+          "file": "parts/girl/09-forearm_right.png",
+          "width": 149,
+          "height": 203
+        },
+        {
+          "index": 10,
+          "name": "thigh_left",
+          "file": "parts/girl/10-thigh_left.png",
+          "width": 163,
+          "height": 216
+        },
+        {
+          "index": 11,
+          "name": "shin_left",
+          "file": "parts/girl/11-shin_left.png",
+          "width": 130,
+          "height": 224
+        },
+        {
+          "index": 12,
+          "name": "thigh_right",
+          "file": "parts/girl/12-thigh_right.png",
+          "width": 167,
+          "height": 219
+        },
+        {
+          "index": 13,
+          "name": "shin_right",
+          "file": "parts/girl/13-shin_right.png",
+          "width": 135,
+          "height": 251
+        },
+        {
+          "index": 14,
+          "name": "braid_left",
+          "file": "parts/girl/14-braid_left.png",
+          "width": 153,
+          "height": 289
+        },
+        {
+          "index": 15,
+          "name": "braid_right",
+          "file": "parts/girl/15-braid_right.png",
+          "width": 156,
+          "height": 289
+        },
+        {
+          "index": 16,
+          "name": "green_side_panel",
+          "file": "parts/girl/16-green_side_panel.png",
+          "width": 142,
+          "height": 241
+        }
+      ]
+    },
+    {
+      "character": "woman",
+      "sourceAtlas": "atlases/woman-rig-atlas-v3.png",
+      "cleanAtlas": "atlases/woman-rig-atlas-v3-clean.png",
+      "parts": [
+        {
+          "index": 1,
+          "name": "head_base",
+          "file": "parts/woman/01-head_base.png",
+          "width": 189,
+          "height": 254
+        },
+        {
+          "index": 2,
+          "name": "hair_back",
+          "file": "parts/woman/02-hair_back.png",
+          "width": 238,
+          "height": 229
+        },
+        {
+          "index": 3,
+          "name": "hair_front",
+          "file": "parts/woman/03-hair_front.png",
+          "width": 262,
+          "height": 222
+        },
+        {
+          "index": 4,
+          "name": "face_features",
+          "file": "parts/woman/04-face_features.png",
+          "width": 146,
+          "height": 139
+        },
+        {
+          "index": 5,
+          "name": "torso",
+          "file": "parts/woman/05-torso.png",
+          "width": 229,
+          "height": 293
+        },
+        {
+          "index": 6,
+          "name": "upper_arm_left",
+          "file": "parts/woman/06-upper_arm_left.png",
+          "width": 121,
+          "height": 256
+        },
+        {
+          "index": 7,
+          "name": "forearm_left",
+          "file": "parts/woman/07-forearm_left.png",
+          "width": 213,
+          "height": 216
+        },
+        {
+          "index": 8,
+          "name": "upper_arm_right",
+          "file": "parts/woman/08-upper_arm_right.png",
+          "width": 122,
+          "height": 258
+        },
+        {
+          "index": 9,
+          "name": "forearm_right",
+          "file": "parts/woman/09-forearm_right.png",
+          "width": 190,
+          "height": 205
+        },
+        {
+          "index": 10,
+          "name": "thigh_left",
+          "file": "parts/woman/10-thigh_left.png",
+          "width": 148,
+          "height": 242
+        },
+        {
+          "index": 11,
+          "name": "shin_left",
+          "file": "parts/woman/11-shin_left.png",
+          "width": 129,
+          "height": 275
+        },
+        {
+          "index": 12,
+          "name": "thigh_right",
+          "file": "parts/woman/12-thigh_right.png",
+          "width": 161,
+          "height": 243
+        },
+        {
+          "index": 13,
+          "name": "shin_right",
+          "file": "parts/woman/13-shin_right.png",
+          "width": 135,
+          "height": 278
+        },
+        {
+          "index": 14,
+          "name": "hand_alt_left",
+          "file": "parts/woman/14-hand_alt_left.png",
+          "width": 147,
+          "height": 136
+        },
+        {
+          "index": 15,
+          "name": "hand_alt_right",
+          "file": "parts/woman/15-hand_alt_right.png",
+          "width": 146,
+          "height": 136
+        },
+        {
+          "index": 16,
+          "name": "brooch",
+          "file": "parts/woman/16-brooch.png",
+          "width": 126,
+          "height": 71
+        }
+      ]
+    }
+  ]
+}

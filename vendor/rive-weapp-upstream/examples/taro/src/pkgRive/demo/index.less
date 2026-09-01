@@ -1,0 +1,81 @@
+.page {
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 24rpx 28rpx 60rpx;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 720rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 0%, #20202e 0%, #12121a 70%);
+  border: 1rpx solid var(--border);
+}
+.rive {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 26rpx;
+}
+.overlay-err { color: #ff8a8a; }
+.overlay-err-title { font-size: 30rpx; font-weight: 600; }
+.overlay-err-msg { font-size: 22rpx; padding: 0 40rpx; text-align: center; margin-top: 8rpx; opacity: 0.85; }
+.spinner {
+  width: 56rpx;
+  height: 56rpx;
+  margin-bottom: 18rpx;
+  border-radius: 50%;
+  border: 5rpx solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--accent);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.info { padding: 28rpx 6rpx 8rpx; }
+.info-title { font-size: 38rpx; font-weight: 700; }
+.hint { display: block; margin-top: 12rpx; font-size: 22rpx; color: var(--accent-2); }
+
+.panel {
+  margin-top: 24rpx;
+  background: var(--bg-card);
+  border: 1rpx solid var(--border);
+  border-radius: 24rpx;
+  padding: 24rpx 26rpx;
+}
+.panel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+.panel-title { font-size: 26rpx; color: var(--text-dim); letter-spacing: 1rpx; }
+.empty { margin-top: 16rpx; font-size: 25rpx; color: var(--text-dim); }
+
+.ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 0;
+  border-top: 1rpx solid var(--border);
+}
+.ctrl-name { font-size: 28rpx; max-width: 38%; }
+.ctrl-widget { display: flex; align-items: center; flex: 1; justify-content: flex-end; }
+.slider { width: 100%; margin-left: 20rpx; }
+
+.state-list { margin-top: 14rpx; display: flex; flex-direction: column; }
+.state-item { font-size: 23rpx; color: var(--text-dim); margin-top: 8rpx; }

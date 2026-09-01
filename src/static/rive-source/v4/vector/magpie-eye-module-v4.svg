@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="440" viewBox="0 0 420 220">
+  <defs>
+    <linearGradient id="irisGradient" x1="0" y1="0" x2="0.75" y2="1">
+      <stop offset="0" stop-color="#766c99"/>
+      <stop offset="0.48" stop-color="#554a76"/>
+      <stop offset="1" stop-color="#302b45"/>
+    </linearGradient>
+    <linearGradient id="lidGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6d638e"/>
+      <stop offset="1" stop-color="#554c77"/>
+    </linearGradient>
+    <clipPath id="eyeLClip">
+      <ellipse cx="94" cy="111" rx="50" ry="71" transform="rotate(-8 94 111)"/>
+    </clipPath>
+    <clipPath id="eyeRClip">
+      <ellipse cx="282" cy="108" rx="84" ry="90" transform="rotate(7 282 108)"/>
+    </clipPath>
+  </defs>
+
+  <!-- L = screen-left / far eye in the approved three-quarter pose. -->
+  <g id="eye_L">
+    <ellipse id="sclera_L" cx="94" cy="111" rx="50" ry="71" fill="#fffdf7" transform="rotate(-8 94 111)"/>
+    <g id="eye_L_clip" clip-path="url(#eyeLClip)">
+      <ellipse id="iris_L" cx="103" cy="114" rx="30" ry="48" fill="url(#irisGradient)" transform="rotate(-8 103 114)"/>
+      <ellipse id="pupil_L" cx="106" cy="117" rx="17" ry="34" fill="#211d31" transform="rotate(-8 106 117)"/>
+      <ellipse id="highlight_L" cx="96" cy="91" rx="9" ry="14" fill="#ffffff" transform="rotate(-8 96 91)"/>
+      <path id="upper_lid_L" d="M38 54 C63 21 112 19 151 50 L158 81 C118 54 73 55 34 88 Z" fill="url(#lidGradient)"/>
+      <path id="lower_lid_L" d="M37 164 C73 183 116 184 153 161 L158 187 C119 215 66 214 30 184 Z" fill="url(#lidGradient)"/>
+    </g>
+    <path id="lash_L" d="M40 70 C63 34 113 29 151 61" fill="none" stroke="#17141e" stroke-width="9" stroke-linecap="round"/>
+  </g>
+
+  <!-- R = screen-right / near eye. It is intentionally larger, never mirrored. -->
+  <g id="eye_R">
+    <ellipse id="sclera_R" cx="282" cy="108" rx="84" ry="90" fill="#fffdf7" transform="rotate(7 282 108)"/>
+    <g id="eye_R_clip" clip-path="url(#eyeRClip)">
+      <ellipse id="iris_R" cx="303" cy="111" rx="50" ry="62" fill="url(#irisGradient)" transform="rotate(7 303 111)"/>
+      <ellipse id="pupil_R" cx="310" cy="115" rx="29" ry="46" fill="#211d31" transform="rotate(7 310 115)"/>
+      <ellipse id="highlight_R" cx="292" cy="82" rx="14" ry="19" fill="#ffffff" transform="rotate(7 292 82)"/>
+      <path id="upper_lid_R" d="M190 47 C232 4 316 0 380 42 L390 78 C326 45 250 45 188 86 Z" fill="url(#lidGradient)"/>
+      <path id="lower_lid_R" d="M190 164 C248 200 327 198 383 159 L391 191 C329 235 239 237 181 191 Z" fill="url(#lidGradient)"/>
+    </g>
+    <path id="lash_R" d="M194 67 C235 17 323 12 382 61" fill="none" stroke="#17141e" stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>

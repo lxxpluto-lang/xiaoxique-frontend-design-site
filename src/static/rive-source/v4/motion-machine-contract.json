@@ -1,0 +1,20 @@
+{
+  "stateMachine": "MotionMachine",
+  "inputs": [
+    { "name": "motion", "type": "number", "values": { "idle": 0, "baduanjin": 1, "resistance": 2, "singing": 3 } },
+    { "name": "play", "type": "boolean", "default": false },
+    { "name": "replay", "type": "trigger" },
+    { "name": "celebrate", "type": "trigger" },
+    { "name": "reducedMotion", "type": "boolean", "default": false }
+  ],
+  "states": [
+    { "name": "Idle", "loop": true },
+    { "name": "Baduanjin", "animation": "baduanjin_main", "durationSeconds": 6.8 },
+    { "name": "Resistance", "animation": "resistance_main", "durationSeconds": 6.0 },
+    { "name": "SingingFlight", "animation": "singing_flight_main", "durationSeconds": 5.2 },
+    { "name": "Celebrate", "animation": "checkin_burst", "oneShot": true },
+    { "name": "Reduced", "loop": true }
+  ],
+  "blendMilliseconds": { "min": 180, "max": 300 },
+  "uniAppEvents": ["ready", "motionStart", "motionComplete", "celebrateComplete", "riveError"]
+}

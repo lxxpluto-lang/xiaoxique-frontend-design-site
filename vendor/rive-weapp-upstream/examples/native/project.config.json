@@ -1,0 +1,19 @@
+{
+  "description": "Rive runtime for WeChat Mini Programs",
+  "miniprogramRoot": "miniprogram/",
+  "projectname": "rive-weapp-native",
+  "appid": "touristappid",
+  "compileType": "miniprogram",
+  "libVersion": "latest",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "bundle": false,
+    "useCompilerPlugins": false,
+    "ignoreUploadUnusedFiles": true,
+    "urlCheck": false,
+    "compileHotReLoad": true
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "capturedAt": "2026-09-01",
+  "editor": "Rive Beta 0.8.5673",
+  "file": "Untitled",
+  "artboards": [
+    {
+      "name": "Artboard",
+      "placedLayers": [
+        "wing_near",
+        "wing_far",
+        "tail_upper",
+        "tail_lower",
+        "magpie-eye-module-v4",
+        "magpie-neutral-master-v4"
+      ],
+      "importedNotPlacedYet": [
+        "body_core",
+        "beak",
+        "foot_L",
+        "foot_R"
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "name": "Timeline 1",
+      "durationFrames": 60,
+      "tracks": {
+        "upper_lid_R": "open-close-open blink",
+        "upper_lid_L": "open-close-open blink",
+        "wing_near.rotation": {
+          "pivotPercent": [19.7, 24.5],
+          "keyframesApprox": [
+            { "frame": 2, "degrees": 0 },
+            { "frame": 17, "degrees": -32 },
+            { "frame": 31, "degrees": 0 },
+            { "frame": 46, "degrees": -22 },
+            { "frame": 60, "degrees": 0 }
+          ]
+        }
+      }
+    }
+  ],
+  "stateMachines": [
+    {
+      "name": "State Machine 1",
+      "layers": ["Layer 1"],
+      "states": ["Entry", "Timeline 1", "Any State", "Exit"],
+      "transitions": ["Entry -> Timeline 1"],
+      "inputs": []
+    }
+  ],
+  "runtimeExport": {
+    "rivPresent": false,
+    "reason": "The current Rive Beta desktop UI has not exposed a completed runtime export in this session."
+  }
+}

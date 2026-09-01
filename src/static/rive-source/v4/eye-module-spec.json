@@ -1,0 +1,36 @@
+{
+  "schema": "magpie-eye-module/v4",
+  "canonicalSource": "IP设计/最终选稿（喜鹊）/11-紫色小喜鹊-平面数字伙伴版.png",
+  "view": "three-quarter-left",
+  "parts": [
+    "sclera_L",
+    "iris_L",
+    "pupil_L",
+    "highlight_L",
+    "upper_lid_L",
+    "lower_lid_L",
+    "lash_L",
+    "sclera_R",
+    "iris_R",
+    "pupil_R",
+    "highlight_R",
+    "upper_lid_R",
+    "lower_lid_R",
+    "lash_R"
+  ],
+  "controls": {
+    "gazeX": { "type": "number", "min": -1, "max": 1, "default": -0.16 },
+    "gazeY": { "type": "number", "min": -1, "max": 1, "default": -0.08 },
+    "blink": { "type": "number", "min": 0, "max": 1, "default": 0 },
+    "squint": { "type": "number", "min": 0, "max": 1, "default": 0 },
+    "emotion": { "type": "number", "min": 0, "max": 4, "default": 0 }
+  },
+  "rules": {
+    "irisClippedBySclera": true,
+    "blinkUsesLids": true,
+    "scaleWholeEyeForBlink": false,
+    "leftGazeFactor": 0.72,
+    "rightGazeFactor": 1.0,
+    "highlightsFollowIrises": true
+  }
+}

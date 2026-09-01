@@ -1,0 +1,182 @@
+{
+  "version": 4,
+  "canvas": {
+    "width": 1117,
+    "height": 1011
+  },
+  "assemblyOrigin": [
+    0,
+    0
+  ],
+  "notes": "All crops use original-canvas offsets; joint masks overlap by design.",
+  "parts": {
+    "body_core": {
+      "file": "src/static/rive-source/v4/parts/body_core.png",
+      "canvasOffset": [
+        36,
+        87
+      ],
+      "size": [
+        767,
+        796
+      ],
+      "pivotCanvas": [
+        430,
+        585
+      ],
+      "pivotLocal": [
+        394,
+        498
+      ],
+      "parent": "root",
+      "zIndex": 20
+    },
+    "tail_upper": {
+      "file": "src/static/rive-source/v4/parts/tail_upper.png",
+      "canvasOffset": [
+        603,
+        15
+      ],
+      "size": [
+        380,
+        640
+      ],
+      "pivotCanvas": [
+        657,
+        606
+      ],
+      "pivotLocal": [
+        54,
+        591
+      ],
+      "parent": "tail_root",
+      "zIndex": 4
+    },
+    "tail_lower": {
+      "file": "src/static/rive-source/v4/parts/tail_lower.png",
+      "canvasOffset": [
+        631,
+        238
+      ],
+      "size": [
+        450,
+        451
+      ],
+      "pivotCanvas": [
+        674,
+        628
+      ],
+      "pivotLocal": [
+        43,
+        390
+      ],
+      "parent": "tail_root",
+      "zIndex": 5
+    },
+    "wing_far": {
+      "file": "src/static/rive-source/v4/parts/wing_far.png",
+      "canvasOffset": [
+        62,
+        491
+      ],
+      "size": [
+        167,
+        333
+      ],
+      "pivotCanvas": [
+        129,
+        574
+      ],
+      "pivotLocal": [
+        67,
+        83
+      ],
+      "parent": "chest",
+      "zIndex": 12
+    },
+    "wing_near": {
+      "file": "src/static/rive-source/v4/parts/wing_near.png",
+      "canvasOffset": [
+        356,
+        460
+      ],
+      "size": [
+        463,
+        404
+      ],
+      "pivotCanvas": [
+        447,
+        559
+      ],
+      "pivotLocal": [
+        91,
+        99
+      ],
+      "parent": "chest",
+      "zIndex": 30
+    },
+    "beak": {
+      "file": "src/static/rive-source/v4/parts/beak.png",
+      "canvasOffset": [
+        81,
+        391
+      ],
+      "size": [
+        168,
+        161
+      ],
+      "pivotCanvas": [
+        158,
+        458
+      ],
+      "pivotLocal": [
+        77,
+        67
+      ],
+      "parent": "head",
+      "zIndex": 45
+    },
+    "foot_L": {
+      "file": "src/static/rive-source/v4/parts/foot_L.png",
+      "canvasOffset": [
+        239,
+        812
+      ],
+      "size": [
+        168,
+        155
+      ],
+      "pivotCanvas": [
+        337,
+        845
+      ],
+      "pivotLocal": [
+        98,
+        33
+      ],
+      "parent": "leg_L",
+      "zIndex": 10
+    },
+    "foot_R": {
+      "file": "src/static/rive-source/v4/parts/foot_R.png",
+      "canvasOffset": [
+        434,
+        813
+      ],
+      "size": [
+        158,
+        162
+      ],
+      "pivotCanvas": [
+        505,
+        848
+      ],
+      "pivotLocal": [
+        71,
+        35
+      ],
+      "parent": "leg_R",
+      "zIndex": 11
+    }
+  }
+}

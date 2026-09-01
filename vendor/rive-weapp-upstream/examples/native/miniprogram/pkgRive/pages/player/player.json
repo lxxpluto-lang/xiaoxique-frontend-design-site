@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "Rive",
+  "usingComponents": {
+    "rive-view": "../../components/rive-view/rive-view"
+  }
+}
