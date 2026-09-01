@@ -242,19 +242,13 @@ export interface NavItem {
   id: NavId
   label: string
   iconPath: string
-  mascotPath?: string
 }
 
 export const navItems: NavItem[] = [
-  { id: 'today', label: '今日', iconPath: '/static/icons/magpie-line/home.svg' },
-  { id: 'discover', label: '发现', iconPath: '/static/icons/magpie-line/knowledge.svg' },
-  {
-    id: 'assistant',
-    label: '小喜',
-    iconPath: '/static/icons/magpie-line/assistant.svg',
-    mascotPath: '/static/rive-source/v4/master/magpie-neutral-master-v4.png',
-  },
-  { id: 'data', label: '数据', iconPath: '/static/icons/magpie-line/report.svg' },
+  { id: 'today', label: '任务', iconPath: '/static/icons/magpie-line/home.svg' },
+  { id: 'data', label: '日历', iconPath: '/static/icons/magpie-line/report.svg' },
+  { id: 'assistant', label: '小喜', iconPath: '/static/icons/magpie-line/assistant.svg' },
+  { id: 'discover', label: '资讯', iconPath: '/static/icons/magpie-line/knowledge.svg' },
   { id: 'profile', label: '我的', iconPath: '/static/icons/magpie-line/profile.svg' },
 ]
 

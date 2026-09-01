@@ -48,7 +48,6 @@
           <AssistantPanel v-else-if="activeNav === 'assistant'" class="screen" :mode="mode" :display-name="displayName" :mascot="magpieAsset" :completed-count="completedExerciseCount" :streak="streak" :plan-title="featuredGame.title + ' ' + featuredGame.duration" :plan-completed="taskCompleted" :latest-advice="latestAdvice" @start-plan="selectExercise(featuredGame.id)" @open-reports="openLatestReport" @open-devices="goDetail('devices')" @open-profile="goDetail('health-archive')" />
 
           <view v-else-if="activeNav === 'data'" class="screen data-screen" data-testid="data-screen">
-            <view class="page-heading"><text>我的数据</text><text>看变化，也看数据来源</text></view>
             <view class="data-tabs"><button v-for="tab in dataTabs" :key="tab.id" :class="{ active: dataTab === tab.id }" :data-testid="'data-tab-' + tab.id" @tap="dataTab = tab.id">{{ tab.label }}</button></view>
             <view v-if="dataTab === 'overview'" class="data-panel">
               <view class="today-numbers"><view><text>{{ completedMinutes }}</text><text>今日分钟</text></view><view><text>{{ completedExerciseCount }}</text><text>完成项目</text></view><view><text>{{ streak }}</text><text>连续天数</text></view></view>
@@ -69,7 +68,7 @@
           </view>
 
           <view v-else class="screen profile-screen" data-testid="profile-screen">
-            <view class="profile-card"><view class="profile-avatar">{{ displayName.slice(0, 1) }}</view><view><text>{{ mode === 'cardiac' ? sharedPatientFixture.patient.name : '运动伙伴' }}</text><text>{{ mode === 'cardiac' ? sharedPatientFixture.hospital.shortName + ' · ' + sharedPatientFixture.patient.patientNo : '日常运动用户' }}</text></view><button @tap="goDetail('health-archive')">资料 ›</button></view>
+            <view class="profile-identity"><view class="profile-avatar">{{ displayName.slice(0, 1) }}</view><text>{{ mode === 'cardiac' ? sharedPatientFixture.patient.name : '运动伙伴' }}</text><text>{{ mode === 'cardiac' ? sharedPatientFixture.hospital.shortName + ' · ' + sharedPatientFixture.patient.patientNo : '日常运动用户' }}</text><button @tap="goDetail('health-archive')">查看健康档案</button></view>
             <view class="profile-checkins"><button @tap="openData('checkin')"><text>{{ totalCheckInDays }}</text><text>累计打卡</text></button><button @tap="openData('checkin')"><text>{{ streak }}</text><text>连续打卡</text></button></view>
             <view class="wallet-card"><button @tap="goDetail('reward-store')"><text>{{ wallet.healthPoints }}</text><text>健康积分</text></button><button v-if="mem.unlocked" @tap="goDetail('reward-store')"><text>{{ wallet.mCoins }}</text><text>M币</text></button><button v-else @tap="focusMemUnlock"><text>MEM</text><text>学生权益</text></button></view>
             <view v-if="!mem.unlocked" class="mem-unlock" data-testid="mem-unlock"><text>解锁MEM学生权益</text><view><input v-model="memCode" placeholder="邀请码 MEM-2026" /><button @tap="unlockMem">解锁</button></view></view>
@@ -79,7 +78,7 @@
             <view class="profile-actions"><button @tap="switchMode">切换使用模式</button><button @tap="showAiBoundary = true">隐私与医疗边界</button><button @tap="resetPrototype">重置原型</button></view>
           </view>
         </scroll-view>
-        <view class="bottom-nav"><button v-for="item in navItems" :key="item.id" :class="{ active: activeNav === item.id, assistant: item.id === 'assistant' }" @tap="activeNav = item.id"><view><image v-if="item.mascotPath" :src="item.mascotPath" mode="aspectFit" /><AppIcon v-else :src="item.iconPath" :size="38" :active="activeNav === item.id" :color="activeNav === item.id ? '#172B28' : '#929B98'" /></view><text>{{ item.label }}</text></button></view>
+        <view class="bottom-nav"><button v-for="item in navItems" :key="item.id" :class="{ active: activeNav === item.id }" @tap="switchNav(item.id)"><view><AppIcon :src="item.iconPath" :size="42" :active="activeNav === item.id" :color="activeNav === item.id ? '#0EA5A4' : '#64748B'" /></view><text>{{ item.label }}</text></button></view>
       </view>
 
       <view v-else class="detail-frame" :data-detail-view="detailView">
@@ -108,7 +107,7 @@
           <view v-else-if="detailView === 'doctor-reviews'" class="detail-content" data-testid="doctor-review-console"><DetailIntro kicker="本地医生工作台" title="建议审核" :copy="pendingReviewCount + ' 条建议等待确认，未经确认不会修改患者计划。'" /><view class="review-list"><view v-for="review in doctorReviews" :key="review.id"><view class="review-head"><view><text>{{ adviceForReview(review)?.title || '运动建议' }}</text><text>{{ formatDateTime(review.createdAt) }}</text></view><text>{{ reviewStatusLabel(review.status) }}</text></view><text>{{ review.proposedChange }}</text><view v-if="review.status === 'pending'"><button @tap="resolveReview(review.id,'approved')">同意调整</button><button @tap="resolveReview(review.id,'maintained')">维持计划</button><button @tap="resolveReview(review.id,'rejected')">驳回</button></view></view><view v-if="!doctorReviews.length" class="empty-card">暂无待审核建议。</view></view></view>
 
           <view v-else-if="detailView === 'knowledge-article'" class="detail-content"><view class="knowledge-detail-banner"><view><AppIcon src="/static/icons/magpie-line/knowledge.svg" :size="50" color="#0F766E" /></view><text>{{ selectedKnowledgeItem.duration }}</text></view><DetailIntro kicker="精选指南" :title="selectedKnowledgeItem.title" :copy="selectedKnowledgeItem.summary" /><view class="article-body"><text v-for="(paragraph,index) in selectedKnowledgeItem.body" :key="index">{{ paragraph }}</text></view><text class="knowledge-boundary">原型内容待医学审核，不替代医生诊断或处方。</text></view>
-          <view v-else-if="detailView === 'knowledge-video'" class="detail-content"><video class="knowledge-video" :src="selectedKnowledgeItem.video" :controls="true" object-fit="contain" /><DetailIntro kicker="健康短视频" :title="selectedKnowledgeItem.title" :copy="selectedKnowledgeItem.summary" /><text class="knowledge-boundary">视频为原型素材，动作与内容待医学审核。</text></view>
+          <view v-else-if="detailView === 'knowledge-video'" class="detail-content video-detail-content"><video class="knowledge-video" :src="selectedKnowledgeItem.video" :controls="true" :show-center-play-btn="true" object-fit="contain" /><view class="video-detail-body"><DetailIntro kicker="健康短视频" :title="selectedKnowledgeItem.title" :copy="selectedKnowledgeItem.summary" /><text class="knowledge-boundary">视频为原型素材，动作与内容待医学审核。</text></view></view>
         </scroll-view>
       </view>
     </template>
@@ -152,7 +151,7 @@ const mode = ref<UserMode>('public')
 const visitNumber = ref('')
 const bindingState = ref<BindingState>('idle')
 const activeNav = ref<NavId>('today')
-const dataTab = ref<DataTab>('overview')
+const dataTab = ref<DataTab>('checkin')
 const detailView = ref<DetailView>('none')
 const detailReturnNav = ref<NavId>('today')
 const healthGoal = ref<HealthGoal>('habit')
@@ -193,7 +192,7 @@ const policyDraft = ref<TrainingAssessmentPolicy>(createDefaultPolicy())
 const publishedPolicy = ref<TrainingAssessmentPolicy>(createDefaultPolicy())
 let trainingTimer: ReturnType<typeof setInterval> | undefined
 
-const dataTabs: Array<{ id: DataTab; label: string }> = [{ id: 'overview', label: '概览' }, { id: 'checkin', label: '打卡' }, { id: 'history', label: '记录' }]
+const dataTabs: Array<{ id: DataTab; label: string }> = [{ id: 'checkin', label: '日历' }, { id: 'overview', label: '数据' }, { id: 'history', label: '记录' }]
 const assessmentModes: Array<{ id: AssessmentMode; label: string }> = [{ id: 'off', label: '关闭' }, { id: 'optional', label: '可选' }, { id: 'required', label: '必填' }]
 const policyFieldOptions: Array<{ id: keyof TrainingAssessmentPolicy['fields']; label: string; copy: string }> = [
   { id: 'heartRate', label: '心率', copy: '设备自动采集' }, { id: 'oxygenSaturation', label: '血氧', copy: '设备自动采集' },
@@ -216,7 +215,9 @@ const latestAdvice = computed(() => sessions.value.find((item) => item.advice)?.
 const currentMetrics = computed(() => mode.value === 'cardiac' ? patientMetrics : publicMetrics)
 const visibleMetrics = computed(() => currentMetrics.value.slice(0, 2))
 const displayName = computed(() => mode.value === 'cardiac' ? sharedPatientFixture.patient.maskedName : '运动伙伴')
-const topbarTitle = computed(() => ({ today: `${greeting()}，${displayName.value}`, discover: '发现', assistant: '小喜', data: '数据', profile: '我的' }[activeNav.value]))
+const topbarTitle = computed(() => activeNav.value === 'data'
+  ? dataTab.value === 'checkin' ? '训练日历' : dataTab.value === 'overview' ? '训练数据' : '运动记录'
+  : ({ today: `${greeting()}，${displayName.value}`, discover: '康复资讯', assistant: '小喜', profile: '个人信息' }[activeNav.value]))
 const todayLabel = computed(() => `${new Date().getMonth() + 1}月${new Date().getDate()}日 · ${mode.value === 'cardiac' ? '按计划安全运动' : '完成今天的一小步'}`)
 const healthGoalLabel = computed(() => mode.value === 'cardiac' || healthGoal.value === 'cardiac' ? '完成心脏康复阶段计划' : healthGoal.value === 'weight' ? '用稳定运动支持健康减重' : '建立可持续的运动习惯')
 const planReason = computed(() => mode.value === 'cardiac' ? `来自${sharedPatientFixture.hospital.shortName}的今日处方` : '先完成一个容易重复的小任务')
@@ -294,6 +295,10 @@ function setHealthGoal(goal: HealthGoal){if(mode.value==='cardiac')return;health
 function goDetail(view: DetailView){if(view!=='training')stopTimer();detailReturnNav.value=activeNav.value;detailView.value=view}
 function closeDetail(){stopTimer();detailView.value='none';activeNav.value=detailReturnNav.value}
 function openData(tab: DataTab){dataTab.value=tab;activeNav.value='data'}
+function switchNav(nav: NavId){
+  activeNav.value=nav
+  if(nav==='data') dataTab.value='checkin'
+}
 function handleTodayPrimary(){taskCompleted.value?openLatestReport():selectExercise(featuredGame.value.id)}
 function openCategory(id: ExerciseCategoryId){selectedCategoryId.value=id;goDetail('exercise-category')}
 function openKnowledgeItem(item: typeof knowledgeItems[number]){selectedKnowledgeId.value=item.id;detailReturnNav.value='discover';detailView.value=item.type==='video'?'knowledge-video':'knowledge-article'}

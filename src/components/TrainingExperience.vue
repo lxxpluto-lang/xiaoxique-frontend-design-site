@@ -78,28 +78,28 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 .experience { width: 100%; }
-.camera-training { display: grid; grid-template-columns: 1fr 1fr; gap: 14rpx; }
-.training-pane { position: relative; height: 390rpx; overflow: hidden; border-radius: 24rpx; background: #eaf8f4; }
-.pane-label { position: absolute; right: 14rpx; bottom: 14rpx; padding: 7rpx 13rpx; border-radius: 999rpx; color: #fff; font-size: 22rpx; background: rgba(23, 50, 77, 0.7); }
-.experience-result { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: center; gap: 8rpx; padding: 20rpx; border-radius: 24rpx; color: #646a73; background: #fff; }
-.score { color: #0c7464; font-size: 42rpx; font-weight: 700; }
-.prototype-label { display: block; grid-column: 1 / -1; color: #7b8b99; font-size: 22rpx; line-height: 1.5; text-align: center; }
-.game-stage { display: flex; min-height: 620rpx; padding: 36rpx 28rpx; align-items: center; flex-direction: column; border: 1rpx solid #ebeef2; border-radius: 24rpx; background: #fff; }
+.camera-training { display: grid; grid-template-columns: 1fr; gap: 20rpx; }
+.training-pane { position: relative; height: 420rpx; overflow: hidden; border-radius: 16rpx; background: #e2e8f0; }.training-pane:nth-child(2) { height: 360rpx; }
+.pane-label { position: absolute; right: 16rpx; bottom: 16rpx; padding: 6rpx 16rpx; border-radius: 8rpx; color: #fff; font-size: 24rpx; background: rgba(15,23,42,.72); }
+.experience-result { display: flex; align-items: baseline; justify-content: center; gap: 8rpx; padding: 24rpx; border-radius: 24rpx; color: #64748b; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
+.score { color: #0f766e; font-size: 48rpx; font-weight: 700; }
+.prototype-label { display: block; color: #64748b; font-size: 22rpx; line-height: 1.5; text-align: center; }
+.game-stage { display: flex; min-height: 620rpx; padding: 32rpx; align-items: center; flex-direction: column; border: 0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
 .game-mascot { width: 300rpx; height: 260rpx; }
-.game-kicker { color: #0c7464; font-size: 22rpx; font-weight: 600; }
-.game-title { margin-top: 8rpx; color: #1f2329; font-size: 32rpx; font-weight: 600; }
+.game-kicker { color: #0f766e; font-size: 24rpx; font-weight: 600; }
+.game-title { margin-top: 8rpx; color: #1e293b; font-size: 32rpx; font-weight: 600; }
 .rep-progress { width: 100%; height: 18rpx; margin-top: 34rpx; overflow: hidden; border-radius: 999rpx; background: #ebeef2; }
-.rep-progress view { height: 100%; border-radius: inherit; background: #16a085; transition: width 0.2s ease; }
-.rep-count { display: flex; align-items: baseline; gap: 8rpx; margin: 26rpx 0; color: #646a73; }
-.rep-count text:first-child { color: #1f2329; font-size: 72rpx; font-weight: 700; }
-.game-action, .beat-button { display: flex; width: 100%; min-height: 88rpx; align-items: center; justify-content: center; border-radius: 20rpx; color: #fff; font-size: 26rpx; font-weight: 600; background: #16a085; }
+.rep-progress view { height: 100%; border-radius: inherit; background: #0ea5a4; transition: width 0.2s ease; }
+.rep-count { display: flex; align-items: baseline; gap: 8rpx; margin: 26rpx 0; color: #64748b; }
+.rep-count text:first-child { color: #1e293b; font-size: 72rpx; font-weight: 700; }
+.game-action, .beat-button { display: flex; width: 100%; min-height: 88rpx; align-items: center; justify-content: center; border-radius: 16rpx; color: #fff; font-size: 32rpx; font-weight: 600; background: #0ea5a4; }
 .game-action[disabled], .beat-button[disabled] { opacity: 0.55; }
 .resistance-stage .prototype-label { margin-top: 24rpx; }
 .rhythm-stage { position: relative; overflow: hidden; }
-.rhythm-motion { width: 100%; height: 260rpx; margin: -36rpx -28rpx 24rpx; }
+.rhythm-motion { width: calc(100% + 64rpx); height: 420rpx; margin: -32rpx -32rpx 24rpx; background: #000; }
 .rhythm-copy { display: flex; align-items: center; flex-direction: column; }
 .rhythm-stats { display: grid; width: 100%; margin: 28rpx 0; grid-template-columns: repeat(3, 1fr); gap: 12rpx; }
-.rhythm-stats view { display: flex; padding: 18rpx 8rpx; align-items: center; flex-direction: column; border-radius: 20rpx; color: #646a73; font-size: 22rpx; background: #fff; }
+.rhythm-stats view { display: flex; padding: 18rpx 8rpx; align-items: center; flex-direction: column; border-radius: 16rpx; color: #64748b; font-size: 22rpx; background: #f8fafc; }
 .beat-button { gap: 16rpx; min-height: 112rpx; }
 .beat-button text:first-child { font-size: 50rpx; }
 .rhythm-stage .prototype-label { margin-top: 22rpx; }

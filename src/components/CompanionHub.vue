@@ -150,4 +150,13 @@ const inviteCode = ref('XQ-7DAY')
 .team-boundary { margin-top: 15rpx; padding: 17rpx 19rpx; border-radius: 18rpx; color: #646a73; font-size: 20rpx; line-height: 1.5; background: #f4f7f8; }
 .team-boundary text { display: block; }
 .team-boundary text:first-child { margin-bottom: 5rpx; color: #1f2329; font-weight: 700; }
+
+/* corMem 卡片与字体规范 */
+.knowledge-companion { padding: 24rpx 24rpx 8rpx; }
+.companion-hero { min-height: 176rpx; padding: 32rpx; border-radius: 24rpx; box-shadow: 0 8rpx 24rpx rgba(14,165,164,.2); }
+.companion-hero > view:first-child > text:first-child { font-size: 22rpx; }.companion-hero > view:first-child > text:nth-child(2) { margin-top: 6rpx; font-size: 28rpx; }.companion-hero > view:first-child > text:nth-child(2) text { font-size: 40rpx; }.companion-hero > view:first-child > text:last-child { margin-top: 10rpx; font-size: 22rpx; }
+.companion-entry-grid { margin-top: 20rpx; padding: 16rpx 8rpx; border: 0; border-radius: 24rpx; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
+.companion-entry-grid > button { min-height: 144rpx; }.companion-entry-grid button > text:nth-child(2) { font-size: 24rpx; }.companion-entry-grid button > text:last-child { font-size: 20rpx; }
+.knowledge-social-panel { margin-top: 24rpx; }.team-hero,.team-members,.social-empty,.buddy-card { border-radius: 24rpx; }.team-name { font-size: 30rpx; }.team-meta,.team-progress-copy,.buddy-cycle { font-size: 24rpx; }.form-title { font-size: 28rpx; }.team-member { min-height: 88rpx; }.team-member > view:nth-child(2) text { font-size: 26rpx; }.team-member > view:nth-child(2) text:last-child { font-size: 22rpx; }
+.primary-button { min-height: 88rpx; border-radius: 16rpx; background: #0ea5a4; font-size: 28rpx; }.buddy-remind { min-height: 72rpx; border-radius: 16rpx; background: #0ea5a4; font-size: 26rpx; }.team-boundary { padding: 20rpx 24rpx; border-radius: 16rpx; font-size: 22rpx; background: #f1f5f9; }
 </style>

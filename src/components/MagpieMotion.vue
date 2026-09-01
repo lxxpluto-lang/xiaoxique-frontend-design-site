@@ -246,7 +246,7 @@ export default {
 
 .motion-shell {
   overflow: hidden;
-  background: #f4f0fb;
+  background: #000;
 }
 
 .motion-shell--transparent {
