@@ -1,8 +1,16 @@
 <template>
-  <view class="knowledge-companion" data-testid="knowledge-companions">
+  <view class="knowledge-companion" :class="{ 'knowledge-companion--entry': entryOnly }" data-testid="knowledge-companions">
+    <view v-if="entryOnly" class="companion-hero">
+      <view>
+        <text>连续同行</text>
+        <view><text>{{ streak }}</text><text>天</text></view>
+        <text>{{ companionSummary }}</text>
+      </view>
+      <view class="companion-hero__art"><view class="companion-heart">♥</view><image src="/static/rive-source/v4/master/magpie-neutral-master-v4.png" mode="aspectFit" /></view>
+    </view>
     <view class="companion-entry-grid">
-      <button :class="{ active: activeTab === 'team' }" data-testid="knowledge-team-entry" @tap="open('team')"><view class="companion-entry-icon">队</view><text>健康小队</text><text>{{ teamJoined ? teamCheckedCount + '/' + teamMembers.length + ' 已打卡' : '一起坚持运动' }}</text></button>
       <button :class="{ active: activeTab === 'buddy' }" data-testid="knowledge-buddy-entry" @tap="open('buddy')"><view class="companion-entry-icon companion-entry-icon--buddy">伴</view><text>健康搭子</text><text>{{ buddyState.connected ? '陪伴第 ' + buddyDay + ' 天' : '找一位同行者' }}</text></button>
+      <button :class="{ active: activeTab === 'team' }" data-testid="knowledge-team-entry" @tap="open('team')"><view class="companion-entry-icon">队</view><text>健康小队</text><text>{{ teamJoined ? teamCheckedCount + '/' + teamMembers.length + ' 已打卡' : '组队打卡' }}</text></button>
     </view>
 
     <view v-if="!entryOnly && activeTab === 'team'" class="social-panel knowledge-social-panel" data-testid="team-panel">
@@ -30,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { BuddyState, TeamState } from '@/lib/prototype-data'
 
 interface TeamMember {
@@ -41,7 +49,7 @@ interface TeamMember {
   self: boolean
 }
 
-defineProps<{
+const props = defineProps<{
   entryOnly?: boolean
   activeTab: 'none' | 'team' | 'buddy'
   streak: number
@@ -70,24 +78,23 @@ const emit = defineEmits<{
 }>()
 
 const inviteCode = ref('XQ-7DAY')
+const companionSummary = computed(() => props.buddyState.connected ? `和${props.buddyState.buddyName}一起完成今天的健康行动` : props.teamJoined ? `${props.teamMembers.length} 人小队正在互相陪伴` : '找一个人或一群人，温和地坚持运动')
 function open(tab: 'team' | 'buddy') { emit('update:activeTab', tab); emit('openSocial', tab) }
 </script>
 
 <style scoped lang="scss">
 .knowledge-companion { margin: 0; padding: 10rpx 24rpx 8rpx; background: #f8fafc; }
-.companion-hero { display: flex; min-height: 164rpx; padding: 24rpx; align-items: center; justify-content: space-between; border-radius: 24rpx; color: #fff; background: linear-gradient(135deg,#0ea5a4,#0f766e); box-shadow: 0 8rpx 24rpx rgba(15,118,110,.1); }
+.companion-hero { position: relative; display: flex; min-height: 200rpx; padding: 26rpx 28rpx 50rpx; overflow: hidden; align-items: center; justify-content: space-between; border-radius: 28rpx 28rpx 18rpx 18rpx; color: #24443e; background: linear-gradient(145deg,#dcf5ef,#edf9f6); box-shadow: none; }
 .companion-hero text { display: block; }
-.companion-hero > view:first-child > text:first-child { color: rgba(255,255,255,.72); font-size: 20rpx; }
-.companion-hero > view:first-child > text:nth-child(2) { margin-top: 3rpx; color: #fff; font-size: 26rpx; font-weight: 650; }
-.companion-hero > view:first-child > text:nth-child(2) text { display: inline; color: #fff; font-size: 42rpx; font-weight: 760; line-height: 1; }
-.companion-hero > view:first-child > text:last-child { margin-top: 8rpx; color: rgba(255,255,255,.72); font-size: 18rpx; }
-.companion-hero__badge { display: flex; width: 72rpx; height: 72rpx; align-items: center; justify-content: center; border: 3rpx solid rgba(255,255,255,.5); border-radius: 50%; color: #fff; background: rgba(255,255,255,.12); font-size: 25rpx; font-weight: 750; }
-.companion-entry-grid { display: grid; margin-top: 12rpx; padding: 14rpx 8rpx; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1rpx solid #e2e8f0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
+.companion-hero > view:first-child { position: relative; z-index: 2; max-width: 64%; }.companion-hero > view:first-child > text:first-child { color: #66817b; font-size: 19rpx; font-weight: 650; }.companion-hero > view:first-child > view { display: flex; margin-top: 2rpx; align-items: baseline; gap: 5rpx; }.companion-hero > view:first-child > view text:first-child { color: #1e6f60; font-size: 56rpx; font-weight: 780; line-height: 1; }.companion-hero > view:first-child > view text:last-child { color: #65837b; font-size: 22rpx; }.companion-hero > view:first-child > text:last-child { margin-top: 10rpx; color: #617a74; font-size: 18rpx; line-height: 1.45; }
+.companion-hero__art { position: absolute; right: 4rpx; bottom: 18rpx; width: 190rpx; height: 180rpx; }.companion-hero__art image { position: absolute; right: -8rpx; bottom: -5rpx; width: 174rpx; height: 164rpx; }.companion-heart { position: absolute; top: 4rpx; left: 0; display: flex; width: 52rpx; height: 52rpx; align-items: center; justify-content: center; border-radius: 50%; color: #6db9a8; background: rgba(255,255,255,.72); font-size: 25rpx; }
+.companion-entry-grid { position: relative; z-index: 3; display: grid; margin-top: -32rpx; padding: 14rpx 8rpx; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 0; border-radius: 24rpx; background: #fff; box-shadow: 0 12rpx 30rpx rgba(30,75,65,.09); }
 .companion-entry-grid > button { display: grid; min-width: 0; min-height: 116rpx; padding: 16rpx 18rpx; grid-template-columns: 62rpx 1fr; grid-template-rows: auto auto; align-content: center; align-items: center; column-gap: 14rpx; border-left: 1rpx solid #edf1f0; background: #fff; text-align: left; }
+.companion-entry-grid > button::after { border: 0; }
 .companion-entry-grid > button:first-child { border-left: 0; }
-.companion-entry-grid > button.active { border-color: #0ea5a4; box-shadow: inset 0 0 0 1rpx #0ea5a4; }
-.companion-entry-icon { display: flex; align-items: center; justify-content: center; width: 58rpx; height: 58rpx; border-radius: 18rpx; color: #0f766e; background: #f0fdfa; font-size: 22rpx; font-weight: 700; }
-.companion-entry-icon--buddy { color: #6c6292; background: #f0ecfb; }
+.companion-entry-grid > button.active { border-color: transparent; background: #fbfefd; }
+.companion-entry-icon { display: flex; align-items: center; justify-content: center; width: 62rpx; height: 62rpx; border-radius: 19rpx; color: #36806e; background: #e6f6ed; font-size: 22rpx; font-weight: 700; }
+.companion-entry-icon--buddy { color: #d16f43; background: #fff0e9; }
 .companion-entry-icon--checkin { color: #9b7310; background: #fff5d5; }
 .companion-entry-grid .companion-entry-icon { grid-row: 1 / 3; }.companion-entry-grid button > text:nth-child(2) { color: #1f2329; font-size: 25rpx; font-weight: 700; }.companion-entry-grid button > text:last-child { overflow: hidden; color: #7a8783; font-size: 19rpx; text-overflow: ellipsis; white-space: nowrap; }
 .knowledge-social-panel { margin-top: 18rpx; }
@@ -149,9 +156,8 @@ function open(tab: 'team' | 'buddy') { emit('update:activeTab', tab); emit('open
 
 /* corMem 卡片与字体规范 */
 .knowledge-companion { padding: 24rpx 24rpx 8rpx; }
-.companion-hero { min-height: 176rpx; padding: 32rpx; border-radius: 24rpx; box-shadow: 0 8rpx 24rpx rgba(14,165,164,.2); }
-.companion-hero > view:first-child > text:first-child { font-size: 22rpx; }.companion-hero > view:first-child > text:nth-child(2) { margin-top: 6rpx; font-size: 28rpx; }.companion-hero > view:first-child > text:nth-child(2) text { font-size: 40rpx; }.companion-hero > view:first-child > text:last-child { margin-top: 10rpx; font-size: 22rpx; }
-.companion-entry-grid { margin-top: 20rpx; padding: 16rpx 8rpx; border: 0; border-radius: 24rpx; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
+.companion-entry-grid { padding: 16rpx 8rpx; border: 0; border-radius: 24rpx; }
+.knowledge-companion:not(.knowledge-companion--entry) .companion-entry-grid { margin-top: 0; }
 .companion-entry-grid > button { min-height: 144rpx; }.companion-entry-grid button > text:nth-child(2) { font-size: 24rpx; }.companion-entry-grid button > text:last-child { font-size: 20rpx; }
 .knowledge-social-panel { margin-top: 24rpx; }.team-hero,.team-members,.social-empty,.buddy-card { border-radius: 24rpx; }.team-name { font-size: 30rpx; }.team-meta,.team-progress-copy,.buddy-cycle { font-size: 24rpx; }.form-title { font-size: 28rpx; }.team-member { min-height: 88rpx; }.team-member > view:nth-child(2) text { font-size: 26rpx; }.team-member > view:nth-child(2) text:last-child { font-size: 22rpx; }
 .primary-button { min-height: 88rpx; border-radius: 16rpx; background: #0ea5a4; font-size: 28rpx; }.buddy-remind { min-height: 72rpx; border-radius: 16rpx; background: #0ea5a4; font-size: 26rpx; }.team-boundary { padding: 20rpx 24rpx; border-radius: 16rpx; font-size: 22rpx; background: #f1f5f9; }
