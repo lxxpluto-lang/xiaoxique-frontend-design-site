@@ -159,6 +159,7 @@
                     data-testid="today-exercise-page"
                   >
                     <button
+                      v-if="mode === 'cardiac'"
                       class="exercise-garden-strip"
                       data-testid="exercise-garden-strip"
                       data-action="ACT-SHOW-GARDEN"
