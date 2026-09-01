@@ -7,7 +7,7 @@
     >
       <view class="garden-heading">
         <view>
-          <text class="garden-kicker">我的康复小菜园</text>
+          <text class="garden-kicker">我的运动小菜园</text>
           <text class="garden-title">{{ garden.stageLabel }}</text>
         </view>
         <view class="harvest-count">

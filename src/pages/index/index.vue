@@ -184,19 +184,15 @@
                       </view>
                       <text>查看 ›</text>
                     </button>
-            <view class="today-summary">
+            <view v-if="mode === 'cardiac'" class="today-summary">
               <view class="today-summary__head"
                 ><view
                   ><text>{{
-                    mode === "public"
-                      ? taskCompleted
-                        ? "今日运动已完成"
-                        : "今日运动计划"
-                      : prescriptionAllDone
-                        ? "今日处方已完成"
-                        : checkInDone
-                          ? "今天已打卡，处方继续完成"
-                          : "医院今日处方"
+                    prescriptionAllDone
+                      ? "今日处方已完成"
+                      : checkInDone
+                        ? "今天已打卡，处方继续完成"
+                        : "医院今日处方"
                   }}</text
                   ><text>{{
                     checkInDone
@@ -298,47 +294,33 @@
                 >
               </view>
             </template>
-            <view v-else class="today-task" :class="{ complete: taskCompleted }"
-              ><view class="task-heading"
-                ><view
-                  ><text>今日运动计划</text><text>{{ planReason }}</text></view
-                ><text>{{ taskCompleted ? "已完成" : "待完成" }}</text></view
-              ><view class="task-main"
-                ><view class="task-media"
-                  ><AppIcon
-                    :src="featuredGame.iconPath"
-                    :size="62"
-                    color="#0F766E" /></view
-                ><view class="task-body"
-                  ><text class="task-title">{{ featuredGame.title }}</text
-                  ><text class="task-copy">{{
-                    featuredGame.subtitle
-                  }}</text></view
-                ></view
-              ><button class="task-primary" @tap="handleTodayPrimary">
-                {{ taskCompleted ? "查看本次解读" : "开始今天的运动" }}
-              </button></view
-            >
-            <view v-if="selfSelectedGame" class="self-selected-card"
-              ><view><text>自选运动</text><text>非医院处方</text></view
-              ><text>{{ selfSelectedGame.title }}</text
-              ><text
-                >{{ selfSelectedGame.subtitle }} ·
-                {{ selfSelectedGame.duration }}</text
-              ><text>不影响医生今日计划</text
-              ><button @tap="startSelfSelected">开始自选运动</button></view
-            >
-            <view class="section-heading"
+            <view
+              class="section-heading exercise-picker-heading"
+              :data-testid="
+                mode === 'public'
+                  ? 'public-exercise-picker'
+                  : 'cardiac-self-exercise-picker'
+              "
               ><view
-                ><text>更多运动</text
-                ><text>自选内容不会改变医生处方</text></view
+                ><text>{{ mode === "public" ? "选择一项运动" : "更多运动" }}</text
+                ><text>{{
+                  mode === "public"
+                    ? "按照自己的状态选择，完成后计入今日成长"
+                    : "自选内容不会改变医生处方"
+                }}</text></view
               ></view
             >
             <view class="category-grid"
               ><button
                 v-for="category in exerciseCategories"
                 :key="category.id"
-                :class="{ active: expandedCategoryId === category.id }"
+                :class="{
+                  active:
+                    (mode === 'public'
+                      ? selectedCategoryId
+                      : expandedCategoryId) === category.id,
+                }"
+                data-testid="exercise-category"
                 @tap="toggleCategory(category.id)"
               >
                 <view
@@ -349,11 +331,15 @@
                 ><text>{{ category.shortTitle }}</text>
               </button></view
             >
-            <view v-if="expandedCategoryId" class="inline-game-grid"
+            <view
+              v-if="mode === 'public' || expandedCategoryId"
+              class="inline-game-grid"
+              data-testid="self-directed-game-list"
               ><button
-                v-for="game in expandedCategoryGames"
+                v-for="game in visibleSelfDirectedGames"
                 :key="game.id"
                 :class="{ selected: selfSelectedGameId === game.id }"
+                data-testid="self-directed-game"
                 @tap="chooseSelfDirected(game.id)"
               >
                 <view
@@ -367,6 +353,26 @@
                   ><text>{{ game.duration }}</text
                   ><text v-if="game.arSupported">AR互动</text></view
                 >
+              </button></view
+            >
+            <view
+              v-if="selfSelectedGame"
+              class="self-selected-card"
+              data-testid="selected-self-exercise"
+              ><view
+                ><text>自选运动</text
+                ><text>{{ mode === "cardiac" ? "非医院处方" : "已选择" }}</text></view
+              ><text>{{ selfSelectedGame.title }}</text
+              ><text
+                >{{ selfSelectedGame.subtitle }} ·
+                {{ selfSelectedGame.duration }}</text
+              ><text>{{
+                mode === "cardiac"
+                  ? "不影响医生今日计划"
+                  : "准备好后即可开始运动"
+              }}</text
+              ><button data-testid="start-self-exercise" @tap="startSelfSelected">
+                {{ mode === "public" ? "开始运动" : "开始自选运动" }}
               </button></view
             >
                   </view>
@@ -1762,6 +1768,11 @@ const expandedCategoryGames = computed(() =>
       )
     : [],
 );
+const visibleSelfDirectedGames = computed(() =>
+  mode.value === "public"
+    ? categoryGames.value
+    : expandedCategoryGames.value,
+);
 const selfSelectedGame = computed(() =>
   selfSelectedGameId.value
     ? exerciseGames.find((item) => item.id === selfSelectedGameId.value)
@@ -1824,11 +1835,6 @@ const healthGoalLabel = computed(() =>
     : healthGoal.value === "weight"
       ? "用稳定运动支持健康减重"
       : "建立可持续的运动习惯",
-);
-const planReason = computed(() =>
-  mode.value === "cardiac"
-    ? `来自${sharedPatientFixture.hospital.shortName}的今日处方`
-    : "先完成一个容易重复的小任务",
 );
 const activeTrainingTitle = computed(
   () => activePrescriptionTask.value?.item.project || selectedGame.value.title,
@@ -1956,9 +1962,7 @@ const gardenPlanSummary = computed(() => {
 const exercisePageStatus = computed(() =>
   mode.value === "cardiac"
     ? `${prescriptionCompletedCount.value}/${prescriptionTasks.value.length}`
-    : taskCompleted.value
-      ? "已完成"
-      : "待完成",
+    : "自选",
 );
 const gardenStripTitle = computed(() =>
   checkInDone.value
@@ -2393,11 +2397,6 @@ function openExerciseFromGarden() {
   nextTick(() => {
     exerciseScrollTop.value = 0;
   });
-}
-function handleTodayPrimary() {
-  taskCompleted.value
-    ? openLatestReport()
-    : selectExercise(featuredGame.value.id);
 }
 function toggleCategory(id: ExerciseCategoryId) {
   selectedCategoryId.value = id;
