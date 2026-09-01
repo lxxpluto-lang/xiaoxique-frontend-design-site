@@ -4,6 +4,27 @@
   background: #f5f7f6;
 }
 
+/* #ifdef H5 */
+@media (min-width: 600px) {
+  body { background: #e7ecea; }
+
+  .prototype-shell {
+    position: relative;
+    width: 390px;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 0 42px rgba(24, 57, 49, .14);
+  }
+
+  .prototype-shell .modal-mask {
+    right: auto;
+    left: 50%;
+    width: 390px;
+    transform: translateX(-50%);
+  }
+}
+/* #endif */
+
 button {
   margin: 0;
   padding: 0;
