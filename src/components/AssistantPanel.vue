@@ -3,15 +3,11 @@
     <view class="assistant-hero">
       <image :src="mascot" mode="aspectFit" />
       <view>
-        <text class="eyebrow">小喜 · 今日建议</text>
-        <text class="title">{{ suggestionTitle }}</text>
-        <text class="copy">{{ suggestionCopy }}</text>
+        <text class="eyebrow">小喜 · 健康问答</text>
+        <text class="title">有问题就问我</text>
+        <text class="copy">我可以解释今日处方、身体数据和训练报告。</text>
       </view>
     </view>
-    <view v-if="latestAdvice" class="advice-brief" :class="'level-' + latestAdvice.level" @tap="emit('open-reports')">
-      <view><text>最近一次运动解读</text><text>{{ latestAdvice.title }}</text><text>{{ latestAdvice.summary }}</text></view><text>查看 ›</text>
-    </view>
-    <button class="assistant-primary" @tap="handlePrimary">{{ planCompleted ? '查看本次解读' : '开始今日运动' }}</button>
     <view class="question-block">
       <text class="section-title">你可以这样问</text>
       <view class="prompt-list"><button v-for="prompt in prompts" :key="prompt" @tap="ask(prompt)">{{ prompt }}<text>›</text></button></view>
@@ -23,26 +19,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import type { AIAdvice, UserMode } from '@/lib/prototype-data'
 
 const props = defineProps<{ mode: UserMode; displayName: string; mascot: string; completedCount: number; streak: number; planTitle: string; planCompleted: boolean; latestAdvice?: AIAdvice }>()
-const emit = defineEmits<{ (event: 'start-plan'): void; (event: 'open-reports'): void; (event: 'open-devices'): void; (event: 'open-profile'): void }>()
-const prompts = ['今天适合怎么练？', '身体数据怎么理解？', '为什么建议联系医生？']
+defineEmits<{ (event: 'start-plan'): void; (event: 'open-reports'): void; (event: 'open-devices'): void; (event: 'open-profile'): void }>()
+const prompts = ['医生今天给我安排了什么？', '身体数据怎么理解？', '单次报告怎么看？']
 const messages = ref<Array<{ role: 'user' | 'assistant'; text: string }>>([])
 const query = ref('')
-const suggestionTitle = computed(() => props.planCompleted ? '今天的核心行动已完成' : `先完成 ${props.planTitle}`)
-const suggestionCopy = computed(() => {
-  if (props.latestAdvice?.level === 'stop') return '身体信号优先，先停止运动并按提示寻求专业帮助。'
-  if (props.latestAdvice?.level === 'attention') return '最近一次恢复状态需要关注，患者计划等待医生确认。'
-  if (props.planCompleted) return `连续 ${props.streak} 天，今天不需要为了积分额外加量。`
-  return props.mode === 'cardiac' ? '开始前会按医院策略读取状态，异常时不会进入训练。' : '普通用户直接开始，完成后自动记录运动。'
-})
-function handlePrimary() { props.planCompleted ? emit('open-reports') : emit('start-plan') }
 function answer(question: string) {
   if (/数据|心率|血氧/.test(question)) return props.latestAdvice ? `${props.latestAdvice.title}：${props.latestAdvice.summary}` : '先确认数据来源和时间；缺失或过期数据不会被判断为正常。'
   if (/医生|联系/.test(question)) return '患者计划的调整必须由医生确认。小喜只说明触发规则和下一步，不替代诊断。'
-  if (/怎么练|今天/.test(question)) return props.planCompleted ? '今天保持当前剂量即可，明天继续本周路径。' : `先完成 ${props.planTitle}；有不适时立即停止。`
+  if (/处方|怎么练|今天/.test(question)) return props.mode === 'cardiac' ? `请按“今日”中的医院处方逐项完成；当前卡片会展示强度和时长。有不适时立即停止。` : `可从“今日”选择 ${props.planTitle}，完成后会自动记录。`
+  if (/报告/.test(question)) return '单次报告合并当天全部运动；阶段性报告在当月累计5个有效训练日后生成。缺失数据会明确标记为未采集。'
   if (/胸痛|气促|晕/.test(question)) return '请立即停止运动。症状明显、持续或加重时及时就医；紧急情况请呼叫120。'
   return '我会围绕今日计划、身体数据和运动报告回答；处方调整由医生确认。'
 }

@@ -1,17 +1,11 @@
 <template>
   <view class="knowledge-companion" data-testid="knowledge-companions">
-    <view class="companion-hero">
-      <view><text>连续打卡</text><text><text>{{ streak }}</text> 天</text><text>{{ checkInDone ? '今天已完成，和伙伴一起保持节奏' : '完成今天的计划，再去看看伙伴' }}</text></view>
-      <view class="companion-hero__badge">{{ checkInDone ? '✓' : '待' }}</view>
-    </view>
-
     <view class="companion-entry-grid">
-      <button :class="{ active: activeTab === 'team' }" data-testid="knowledge-team-entry" @tap="emit('update:activeTab', activeTab === 'team' ? 'none' : 'team')"><view class="companion-entry-icon">队</view><text>健康小队</text><text>{{ teamJoined ? teamCheckedCount + '/' + teamMembers.length + '已打卡' : '去组队' }}</text></button>
-      <button :class="{ active: activeTab === 'buddy' }" data-testid="knowledge-buddy-entry" @tap="emit('update:activeTab', activeTab === 'buddy' ? 'none' : 'buddy')"><view class="companion-entry-icon companion-entry-icon--buddy">伴</view><text>健康搭子</text><text>{{ buddyState.connected ? '第' + buddyDay + '天' : '去配对' }}</text></button>
-      <button data-testid="knowledge-checkin-entry" @tap="emit('openCheckin')"><view class="companion-entry-icon companion-entry-icon--checkin">签</view><text>打卡日历</text><text>{{ checkInDone ? '今天已完成' : '查看记录' }}</text></button>
+      <button :class="{ active: activeTab === 'team' }" data-testid="knowledge-team-entry" @tap="open('team')"><view class="companion-entry-icon">队</view><text>健康小队</text><text>{{ teamJoined ? teamCheckedCount + '/' + teamMembers.length + ' 已打卡' : '一起坚持运动' }}</text></button>
+      <button :class="{ active: activeTab === 'buddy' }" data-testid="knowledge-buddy-entry" @tap="open('buddy')"><view class="companion-entry-icon companion-entry-icon--buddy">伴</view><text>健康搭子</text><text>{{ buddyState.connected ? '陪伴第 ' + buddyDay + ' 天' : '找一位同行者' }}</text></button>
     </view>
 
-    <view v-if="activeTab === 'team'" class="social-panel knowledge-social-panel" data-testid="team-panel">
+    <view v-if="!entryOnly && activeTab === 'team'" class="social-panel knowledge-social-panel" data-testid="team-panel">
       <template v-if="teamJoined">
         <view class="team-hero team-hero--embedded"><view class="team-avatar-stack"><view>我</view><view>康</view><view>动</view><view>+2</view></view><text class="team-name">{{ teamState.name }}</text><text class="team-meta">{{ teamMembers.length }} 人 · 今日 {{ teamCheckedCount }} 人已打卡</text><view class="team-progress"><view :style="{ width: teamProgress + '%' }" /></view><text class="team-progress-copy">今日共同完成 {{ teamProgress }}%</text></view>
         <view class="team-members"><text class="form-title">队伍成员</text><view v-for="member in teamMembers" :key="member.id" class="team-member"><view>{{ member.name.slice(0, 1) }}</view><view><text>{{ member.name }}</text><text>{{ member.status }}</text></view><button v-if="!member.self && member.status === '今日待打卡'" class="remind-button" :class="{ sent: teamState.reminderDates[member.id] === todayKey }" @tap="emit('remindTeam', member.id)">{{ teamState.reminderDates[member.id] === todayKey ? '已提醒' : '提醒TA' }}</button><text v-else>{{ member.streak }}天</text></view><view class="team-invite-code"><text>邀请亲友加入</text><text>{{ teamState.inviteCode }}</text></view></view>
@@ -23,7 +17,7 @@
       </template>
     </view>
 
-    <view v-else-if="activeTab === 'buddy'" class="social-panel knowledge-social-panel" data-testid="buddy-panel">
+    <view v-else-if="!entryOnly && activeTab === 'buddy'" class="social-panel knowledge-social-panel" data-testid="buddy-panel">
       <view class="buddy-cycle"><text>陪伴周期</text><view><button :class="{ active: buddyState.cycleDays === 7 }" @tap="emit('setBuddyCycle', 7)">7天</button><button :class="{ active: buddyState.cycleDays === 30 }" @tap="emit('setBuddyCycle', 30)">30天</button></view></view>
       <template v-if="buddyState.connected">
         <view class="buddy-card"><view class="buddy-card__head"><view class="buddy-avatar">我</view><view class="buddy-link"><text>健康搭子</text><text>第 {{ buddyDay }} / {{ buddyState.cycleDays }} 天</text></view><view class="buddy-avatar buddy-avatar--friend">康</view></view><view class="buddy-status"><view :class="{ done: checkInDone }"><text>我</text><text>{{ checkInDone ? '今日已打卡' : '今日待打卡' }}</text></view><view><text>{{ buddyState.buddyName }}</text><text>今日待打卡</text></view></view><button class="buddy-remind" :class="{ sent: buddyState.reminderSentDate === todayKey }" @tap="emit('remindBuddy')">{{ buddyState.reminderSentDate === todayKey ? '今天已温和提醒' : '提醒搭子完成今天的行动' }}</button></view>
@@ -31,7 +25,7 @@
       <view v-else class="social-empty"><view class="social-empty__icon social-empty__icon--buddy">伴</view><text class="form-title">找一位健康搭子互相陪伴</text><text>漏打卡不会解除关系，也不会扣除积分。</text><button class="primary-button" data-testid="connect-buddy" @tap="emit('connectBuddy')">体验演示配对</button></view>
     </view>
 
-    <view v-if="activeTab !== 'none'" class="team-boundary"><text>温和陪伴原则</text><text>不按运动量、体重、心率或康复指标排名；提醒仅为本地原型，不会发送真实消息。</text></view>
+    <view v-if="!entryOnly && activeTab !== 'none'" class="team-boundary"><text>温和陪伴原则</text><text>不按运动量、体重、心率或康复指标排名；提醒仅为本地原型，不会发送真实消息。</text></view>
   </view>
 </template>
 
@@ -48,6 +42,7 @@ interface TeamMember {
 }
 
 defineProps<{
+  entryOnly?: boolean
   activeTab: 'none' | 'team' | 'buddy'
   streak: number
   teamJoined: boolean
@@ -71,9 +66,11 @@ const emit = defineEmits<{
   (event: 'setBuddyCycle', days: 7 | 30): void
   (event: 'connectBuddy'): void
   (event: 'remindBuddy'): void
+  (event: 'openSocial', value: 'team' | 'buddy'): void
 }>()
 
 const inviteCode = ref('XQ-7DAY')
+function open(tab: 'team' | 'buddy') { emit('update:activeTab', tab); emit('openSocial', tab) }
 </script>
 
 <style scoped lang="scss">
@@ -85,15 +82,14 @@ const inviteCode = ref('XQ-7DAY')
 .companion-hero > view:first-child > text:nth-child(2) text { display: inline; color: #fff; font-size: 42rpx; font-weight: 760; line-height: 1; }
 .companion-hero > view:first-child > text:last-child { margin-top: 8rpx; color: rgba(255,255,255,.72); font-size: 18rpx; }
 .companion-hero__badge { display: flex; width: 72rpx; height: 72rpx; align-items: center; justify-content: center; border: 3rpx solid rgba(255,255,255,.5); border-radius: 50%; color: #fff; background: rgba(255,255,255,.12); font-size: 25rpx; font-weight: 750; }
-.companion-entry-grid { display: grid; margin-top: 12rpx; padding: 10rpx 8rpx; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1rpx solid #e2e8f0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
-.companion-entry-grid > button { display: flex; min-width: 0; min-height: 132rpx; padding: 12rpx 5rpx; align-items: center; flex-direction: column; border-left: 1rpx solid #edf1f0; background: #fff; text-align: center; }
+.companion-entry-grid { display: grid; margin-top: 12rpx; padding: 14rpx 8rpx; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1rpx solid #e2e8f0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
+.companion-entry-grid > button { display: grid; min-width: 0; min-height: 116rpx; padding: 16rpx 18rpx; grid-template-columns: 62rpx 1fr; grid-template-rows: auto auto; align-content: center; align-items: center; column-gap: 14rpx; border-left: 1rpx solid #edf1f0; background: #fff; text-align: left; }
 .companion-entry-grid > button:first-child { border-left: 0; }
 .companion-entry-grid > button.active { border-color: #0ea5a4; box-shadow: inset 0 0 0 1rpx #0ea5a4; }
 .companion-entry-icon { display: flex; align-items: center; justify-content: center; width: 58rpx; height: 58rpx; border-radius: 18rpx; color: #0f766e; background: #f0fdfa; font-size: 22rpx; font-weight: 700; }
 .companion-entry-icon--buddy { color: #6c6292; background: #f0ecfb; }
 .companion-entry-icon--checkin { color: #9b7310; background: #fff5d5; }
-.companion-entry-grid button > text:nth-child(2) { margin-top: 8rpx; color: #1f2329; font-size: 21rpx; font-weight: 700; }
-.companion-entry-grid button > text:last-child { margin-top: 3rpx; overflow: hidden; color: #7a8783; font-size: 17rpx; text-overflow: ellipsis; white-space: nowrap; }
+.companion-entry-grid .companion-entry-icon { grid-row: 1 / 3; }.companion-entry-grid button > text:nth-child(2) { color: #1f2329; font-size: 25rpx; font-weight: 700; }.companion-entry-grid button > text:last-child { overflow: hidden; color: #7a8783; font-size: 19rpx; text-overflow: ellipsis; white-space: nowrap; }
 .knowledge-social-panel { margin-top: 18rpx; }
 .team-hero { padding: 24rpx; border: 1rpx solid #b9e9dc; border-radius: 24rpx; background: linear-gradient(145deg, #e9f9f4, #fff); }
 .team-avatar-stack { display: flex; margin-bottom: 16rpx; padding-left: 12rpx; }

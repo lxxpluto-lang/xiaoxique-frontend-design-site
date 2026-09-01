@@ -1,6 +1,6 @@
 import fixtureJson from '../../../shared-demo-data/fengtai-p-256572.json'
 
-export type SharedExerciseId = 'baduanjin' | 'resistance' | 'music'
+export type SharedExerciseId = 'baduanjin' | 'power-bike' | 'resistance' | 'stretch' | 'breathing' | 'music'
 
 export interface SharedPrescriptionItem {
   category: string
@@ -63,5 +63,18 @@ export function isSupportedPatientNo(value: string) {
 }
 
 export function isPrescriptionExercise(exerciseId: SharedExerciseId) {
-  return sharedPatientFixture.prescription.items.some((item) => item.appExerciseId === exerciseId)
+  return sharedPatientFixture.prescription.items.some((item) => prescriptionItemGameId(item) === exerciseId)
+}
+
+export function prescriptionItemKey(item: SharedPrescriptionItem, index: number) {
+  return `${sharedPatientFixture.prescription.id}-${index}-${item.project}`
+}
+
+export function prescriptionItemGameId(item: SharedPrescriptionItem): SharedExerciseId | null {
+  if (item.appExerciseId) return item.appExerciseId
+  if (/腹式呼吸|呼吸/.test(item.project)) return 'breathing'
+  if (/功率车|单车|骑行/.test(item.project)) return 'power-bike'
+  if (/柔韧|拉伸/.test(item.project)) return 'stretch'
+  if (/哑铃|抗阻|力量/.test(item.project)) return 'resistance'
+  return null
 }

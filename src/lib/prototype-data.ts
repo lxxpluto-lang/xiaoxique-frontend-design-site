@@ -1,7 +1,7 @@
 export type UserMode = 'cardiac' | 'public'
 export type NavId = 'today' | 'discover' | 'assistant' | 'data' | 'profile'
 export type ExerciseCategoryId = 'traditional' | 'aerobic' | 'strength' | 'mobility' | 'recovery'
-export type ExerciseGameId = 'baduanjin' | 'taichi' | 'walking' | 'resistance' | 'stretch' | 'balance' | 'music' | 'breathing'
+export type ExerciseGameId = 'baduanjin' | 'taichi' | 'walking' | 'power-bike' | 'resistance' | 'stretch' | 'balance' | 'music' | 'breathing'
 export type KnowledgeCategory = 'recommended' | 'guide' | 'tip' | 'video'
 export type KnowledgeItemType = 'guide' | 'tip' | 'video'
 export type AssessmentMode = 'off' | 'optional' | 'required'
@@ -25,6 +25,7 @@ export type DetailView =
   | 'exercise-category'
   | 'prototype-policy'
   | 'doctor-reviews'
+  | 'social-hub'
 
 export interface HealthMetric {
   id: string
@@ -143,6 +144,8 @@ export interface RedemptionRecord {
   rewardName: string
   currency: 'health-points' | 'm-coins'
   cost: number
+  quantity: number
+  status: 'completed'
   createdAt: string
 }
 
@@ -166,6 +169,7 @@ export interface TeamState {
   name: string
   inviteCode: string
   reminderDates: Record<string, string>
+  applicationStatus: 'idle' | 'pending' | 'approved'
 }
 
 export interface BuddyState {
@@ -175,6 +179,7 @@ export interface BuddyState {
   cycleDays: 7 | 30
   startedAt: string
   reminderSentDate: string
+  applicationStatus: 'idle' | 'pending' | 'approved'
 }
 
 export interface KnowledgeItem {
@@ -188,6 +193,7 @@ export interface KnowledgeItem {
   duration: string
   body: string[]
   video?: string
+  poster?: string
   reviewStatus: 'prototype-pending-review'
 }
 
@@ -226,10 +232,35 @@ export interface TrainingSession {
   score: number
   results: ActivityResult[]
   createdAt: string
+  localDate: string
+  prescriptionId?: string
+  prescriptionVersion?: string
+  prescriptionItemKey?: string
   pointsAwarded: number
   policyVersion?: number
   assessment?: TrainingAssessment
   advice?: AIAdvice
+}
+
+export interface DailyTrainingReport {
+  id: string
+  date: string
+  sessionIds: string[]
+  totalSeconds: number
+  completedCount: number
+  prescriptionCompleted: number
+  prescriptionTotal: number
+  completeness: 'complete' | 'partial' | 'missing'
+}
+
+export interface MonthlyTrainingReport {
+  id: string
+  month: string
+  validDays: number
+  sessionIds: string[]
+  totalSeconds: number
+  completionRate: number
+  dataCompletenessRate: number
 }
 
 export interface RewardLedger {
@@ -242,12 +273,13 @@ export interface NavItem {
   id: NavId
   label: string
   iconPath: string
+  kind?: 'icon' | 'mascot'
 }
 
 export const navItems: NavItem[] = [
-  { id: 'today', label: '任务', iconPath: '/static/icons/magpie-line/home.svg' },
-  { id: 'data', label: '日历', iconPath: '/static/icons/magpie-line/report.svg' },
-  { id: 'assistant', label: '小喜', iconPath: '/static/icons/magpie-line/assistant.svg' },
+  { id: 'today', label: '今日', iconPath: '/static/icons/magpie-line/home.svg' },
+  { id: 'data', label: '训练', iconPath: '/static/icons/magpie-line/report.svg' },
+  { id: 'assistant', label: '小喜', iconPath: '/static/rive-source/v4/master/magpie-neutral-master-v4.png', kind: 'mascot' },
   { id: 'discover', label: '资讯', iconPath: '/static/icons/magpie-line/knowledge.svg' },
   { id: 'profile', label: '我的', iconPath: '/static/icons/magpie-line/profile.svg' },
 ]
@@ -360,6 +392,7 @@ export const knowledgeItems: KnowledgeItem[] = [
     duration: '00:12',
     body: ['本视频为可播放的原型演示素材，正式科普内容与动作需经医学专家审核。'],
     video: '/static/knowledge/videos/warm-up-demo.mp4',
+    poster: '/static/previews/continuous-v3/baduanjin-poster-v3.png',
     reviewStatus: 'prototype-pending-review',
   },
   {
@@ -373,6 +406,7 @@ export const knowledgeItems: KnowledgeItem[] = [
     duration: '00:12',
     body: ['本视频为可播放的原型演示素材，不构成诊断、治疗或处方调整建议。'],
     video: '/static/knowledge/videos/cardiac-check-demo.mp4',
+    poster: '/static/previews/continuous-v3/resistance-poster-v3.png',
     reviewStatus: 'prototype-pending-review',
   },
   {
@@ -386,6 +420,7 @@ export const knowledgeItems: KnowledgeItem[] = [
     duration: '00:12',
     body: ['本视频为可播放的原型演示素材，正式内容待医学与健康教育专家审核。'],
     video: '/static/knowledge/videos/habit-demo.mp4',
+    poster: '/static/previews/continuous-v3/singing-poster-v3.png',
     reviewStatus: 'prototype-pending-review',
   },
 ]
@@ -420,6 +455,10 @@ export const exerciseGames: ExerciseGame[] = [
   {
     id: 'walking', categoryId: 'aerobic', title: '步行节律', subtitle: '低冲击节奏 · 原地完成', duration: '10 分钟', durationMinutes: 10,
     iconPath: '/static/icons/magpie-line/exercise.svg', activityId: 'singing', poster: '/static/previews/continuous-v3/singing-poster-v3.png', feature: '稳定节拍', arSupported: false, interaction: 'rhythm-game',
+  },
+  {
+    id: 'power-bike', categoryId: 'aerobic', title: '功率车', subtitle: '目标心率 100–116 bpm · 48–62W', duration: '10 分钟', durationMinutes: 10,
+    iconPath: '/static/icons/magpie-line/exercise.svg', activityId: 'singing', poster: '/static/previews/continuous-v3/singing-poster-v3.png', feature: '稳定功率', arSupported: false, interaction: 'rhythm-game',
   },
   {
     id: 'resistance',
