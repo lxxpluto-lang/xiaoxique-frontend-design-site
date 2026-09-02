@@ -1,0 +1,29 @@
+<svg width="480" height="360" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="soil" x1="240" y1="229" x2="240" y2="334" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B98552"/>
+      <stop offset="1" stop-color="#765036"/>
+    </linearGradient>
+    <linearGradient id="leafA" x1="190" y1="94" x2="251" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BDE792"/>
+      <stop offset="1" stop-color="#56A667"/>
+    </linearGradient>
+    <linearGradient id="leafB" x1="290" y1="105" x2="234" y2="235" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#91D079"/>
+      <stop offset="1" stop-color="#438E59"/>
+    </linearGradient>
+    <filter id="shadow" x="58" y="198" width="364" height="154" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+  <ellipse cx="240" cy="302" rx="168" ry="28" fill="#5F493B" fill-opacity=".15" filter="url(#shadow)"/>
+  <path d="M72 280C112 228 177 215 240 220C307 213 372 231 408 280C366 324 112 324 72 280Z" fill="url(#soil)"/>
+  <ellipse cx="240" cy="220" rx="73" ry="20" fill="#684834" opacity=".3"/>
+  <path d="M239 231C238 198 240 164 242 124" stroke="#448954" stroke-width="11" stroke-linecap="round"/>
+  <path d="M240 206C185 204 154 174 158 132C207 124 239 154 240 206Z" fill="url(#leafA)" stroke="#4C985D" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M242 190C294 187 326 157 325 117C279 111 246 142 242 190Z" fill="url(#leafB)" stroke="#3F8D57" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M241 158C204 150 183 124 188 88C223 87 244 114 241 158Z" fill="#94D178" stroke="#4A955B" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M242 139C270 132 287 113 285 86C257 84 241 106 242 139Z" fill="#74BC6A" stroke="#3E8A54" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M163 136C190 153 215 177 237 201M320 120C292 138 267 161 245 186M191 92C211 109 227 131 240 154M282 90C264 104 251 119 243 136" stroke="#E2F3C3" stroke-width="5" stroke-linecap="round" opacity=".78"/>
+  <path d="M124 253C131 240 140 232 151 230M351 257C346 243 337 234 326 232" stroke="#71A663" stroke-width="5" stroke-linecap="round"/>
+</svg>

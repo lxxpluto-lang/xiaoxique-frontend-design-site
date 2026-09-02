@@ -111,65 +111,12 @@
             {{ displayName.slice(0, 1) }}
           </button></view
         >
-        <scroll-view class="page-scroll" :scroll-y="activeNav !== 'today'">
+        <scroll-view class="page-scroll" scroll-y>
           <view
             v-if="activeNav === 'today'"
-            class="today-pager-shell"
+            class="screen today-screen"
             data-testid="today-screen"
           >
-            <view class="today-pager-tabs" data-testid="today-pager-tabs">
-              <button
-                :class="{ selected: todayPageIndex === TODAY_PAGE_EXERCISE }"
-                data-testid="today-tab-exercise"
-                data-action="ACT-SHOW-EXERCISE"
-                @tap="showTodayPage(TODAY_PAGE_EXERCISE)"
-              >
-                <text>运动</text><text>{{ exercisePageStatus }}</text>
-              </button>
-              <button
-                :class="{ selected: todayPageIndex === TODAY_PAGE_GARDEN }"
-                data-testid="today-tab-garden"
-                data-action="ACT-SHOW-GARDEN"
-                @tap="showTodayPage(TODAY_PAGE_GARDEN)"
-              >
-                <text>菜园</text>
-              </button>
-            </view>
-
-            <swiper
-              class="today-page-swiper"
-              :current="todayPageIndex"
-              :disable-touch="prescriptionGestureActive"
-              data-testid="today-page-swiper"
-              @change="onTodayPageChange"
-            >
-              <swiper-item>
-                <scroll-view
-                  class="today-page-scroll"
-                  scroll-y
-                  :scroll-top="exerciseScrollTop"
-                >
-                  <view
-                    class="screen today-screen"
-                    data-testid="today-exercise-page"
-                  >
-                    <button
-                      v-if="mode === 'cardiac'"
-                      class="exercise-garden-strip"
-                      data-testid="exercise-garden-strip"
-                      data-action="ACT-SHOW-GARDEN"
-                      @tap="showTodayPage(TODAY_PAGE_GARDEN)"
-                    >
-                      <image
-                        src="/static/icons/cabbage-checkin.svg"
-                        mode="aspectFit"
-                      />
-                      <view>
-                        <text>{{ gardenStripTitle }}</text>
-                        <text>{{ gardenStripCopy }}</text>
-                      </view>
-                      <text>查看 ›</text>
-                    </button>
             <view class="today-summary">
               <view class="today-summary__head"
                 ><view
@@ -189,11 +136,10 @@
                       ? checkInDone
                         ? "打卡已保存，不需要为了积分额外加量"
                         : "完成第一项有效运动后自动打卡"
-                      : publicTodayCompleted
-                        ? "今天的运动已记录，按状态休息即可"
-                        : "为你推荐一项，也可以自由选择"
-                  }}</text></view
-                ><button @tap="openGardenCheckIn">打卡日历 ›</button></view
+                     : publicTodayCompleted
+                       ? "今天的运动已记录，按状态休息即可"
+                        : "选择一项适合自己的运动开始吧"
+                  }}</text></view></view
               >
               <view class="today-summary__numbers"
                 ><view
@@ -257,11 +203,6 @@
               >
               <view
                 class="prescription-carousel"
-                @touchstart.stop="setPrescriptionGesture(true)"
-                @touchmove.stop
-                @touchend.stop="setPrescriptionGesture(false)"
-                @touchcancel.stop="setPrescriptionGesture(false)"
-                @mousedown.stop
               >
                 <view
                   class="prescription-pagination"
@@ -358,77 +299,26 @@
                 </swiper>
               </view>
             </template>
-            <template v-else>
-              <view class="prescription-head public-recommendation-head">
-                <view>
-                  <text>今日推荐</text>
-                  <text
-                    >根据“{{ publicRecommendationGoalLabel }}”目标推荐</text
-                  >
-                </view>
-                <text>目标推荐</text>
-              </view>
-              <view
-                class="today-task recommended-exercise-card"
-                :class="{ complete: publicRecommendedCompleted }"
-                data-testid="public-recommended-exercise"
-              >
-                <view class="task-heading">
-                  <view>
-                    <text>{{ publicRecommendedCategory.title }}</text>
-                    <text>{{ publicRecommendedGame.subtitle }}</text>
-                  </view>
-                  <text>{{
-                    publicRecommendedCompleted ? "已运动" : "推荐"
-                  }}</text>
-                </view>
-                <view class="task-main">
-                  <view class="task-media">
-                    <AppIcon
-                      :src="publicRecommendedGame.iconPath"
-                      :size="62"
-                      color="#0F766E"
-                    />
-                  </view>
-                  <view class="task-body">
-                    <view class="tag-row">
-                      <text>目标推荐</text>
-                      <text>{{ publicRecommendedCategory.shortTitle }}</text>
-                      <text v-if="publicRecommendedGame.arSupported"
-                        >AR互动</text
-                      >
-                    </view>
-                    <text class="task-title">{{ publicRecommendedGame.title }}</text>
-                    <text class="task-copy">{{ publicRecommendedGame.feature }}</text>
-                  </view>
-                </view>
-                <view class="task-meta">
-                  <view>
-                    <text>时长</text>
-                    <text>{{ publicRecommendedGame.duration }}</text>
-                  </view>
-                  <view>
-                    <text>方式</text>
-                    <text>{{ publicRecommendedGame.feature }}</text>
-                  </view>
-                  <view>
-                    <text>状态</text>
-                    <text>{{
-                      publicRecommendedCompleted ? "已训练" : "可开始"
-                    }}</text>
-                  </view>
-                </view>
-                <button
-                  class="task-primary"
-                  data-testid="start-public-recommended"
-                  @tap="startPublicRecommended"
+            <button
+              v-if="mode === 'cardiac'"
+              class="today-garden-entry"
+              data-testid="today-garden-entry"
+              @tap="openGarden('growth')"
+            >
+              <image
+                src="/static/icons/cabbage-checkin.svg"
+                mode="aspectFit"
+              />
+              <view>
+                <text
+                  >小白菜 · 成长第{{ gardenViewState.cycleDay }}/{{
+                    gardenViewState.cycleLength
+                  }}天</text
                 >
-                  {{
-                    publicRecommendedCompleted ? "再次运动" : "开始运动"
-                  }}
-                </button>
+                <text>{{ checkInDone ? "今天已成长" : "今天待成长" }}</text>
               </view>
-            </template>
+              <text>查看菜园 ›</text>
+            </button>
             <view
               class="section-heading exercise-picker-heading"
               :data-testid="
@@ -437,10 +327,10 @@
                   : 'cardiac-self-exercise-picker'
               "
               ><view
-                ><text>更多运动</text
+                ><text>{{ mode === "public" ? "选择一项运动" : "更多运动" }}</text
                 ><text>{{
                   mode === "public"
-                    ? "也可以按兴趣自由选择"
+                    ? "按自己的兴趣和当前状态选择"
                     : "自选内容不会改变医生处方"
                 }}</text></view
               ></view
@@ -510,30 +400,23 @@
                 {{ mode === "public" ? "开始运动" : "开始自选运动" }}
               </button></view
             >
-                  </view>
-                </scroll-view>
-              </swiper-item>
-              <swiper-item>
-                <scroll-view
-                  class="today-page-scroll"
-                  scroll-y
-                  :scroll-top="gardenScrollTop"
+            <button
+              v-if="mode === 'public'"
+              class="today-garden-entry"
+              data-testid="today-garden-entry"
+              @tap="openGarden('growth')"
+            >
+              <image src="/static/icons/cabbage-checkin.svg" mode="aspectFit" />
+              <view>
+                <text
+                  >小白菜 · 成长第{{ gardenViewState.cycleDay }}/{{
+                    gardenViewState.cycleLength
+                  }}天</text
                 >
-                  <view
-                    class="today-garden-page"
-                    data-testid="today-garden-page"
-                  >
-                    <RehabGardenPanel
-                      :garden="gardenViewState"
-                      :check-in="gardenCheckInViewState"
-                      :section="gardenSection"
-                      @update:section="setGardenSection"
-                      @shift-month="shiftCalendarMonth"
-                    />
-                  </view>
-                </scroll-view>
-              </swiper-item>
-            </swiper>
+                <text>{{ checkInDone ? "今天已成长" : "今天待成长" }}</text>
+              </view>
+              <text>查看菜园 ›</text>
+            </button>
           </view>
 
           <view
@@ -728,15 +611,40 @@
                 查看健康档案
               </button></view
             >
-            <view class="profile-checkins"
-              ><button @tap="openGardenCheckIn">
-                <text>{{ totalCheckInDays }}</text
-                ><text>累计打卡</text></button
-              ><button @tap="openGardenCheckIn">
-                <text>{{ streak }}</text
-                ><text>连续打卡</text>
-              </button></view
-            >
+            <view class="profile-garden-card" data-testid="profile-garden-card">
+              <button
+                class="profile-garden-main"
+                data-testid="profile-garden-growth"
+                @tap="openGarden('growth')"
+              >
+                <image
+                  src="/static/icons/cabbage-checkin.svg"
+                  mode="aspectFit"
+                />
+                <view>
+                  <text>我的运动小菜园</text>
+                  <text>{{ gardenViewState.stageLabel }}</text>
+                  <text
+                    >成长第{{ gardenViewState.cycleDay }}/{{
+                      gardenViewState.cycleLength
+                    }}天</text
+                  >
+                </view>
+                <text>查看菜园 ›</text>
+              </button>
+              <view class="profile-garden-footer">
+                <view>
+                  <text>连续{{ streak }}天</text>
+                  <text>累计{{ totalCheckInDays }}天</text>
+                </view>
+                <button
+                  data-testid="profile-garden-checkin"
+                  @tap="openGarden('checkin')"
+                >
+                  查看打卡记录 ›
+                </button>
+              </view>
+            </view>
             <view class="profile-section"
               ><text>健康管理</text
               ><view class="service-grid health-management-grid"
@@ -1307,6 +1215,16 @@
             </button></view
           >
 
+          <RehabGardenPanel
+            v-else-if="detailView === 'garden'"
+            class="garden-detail"
+            :garden="gardenViewState"
+            :check-in="gardenCheckInViewState"
+            :section="gardenSection"
+            @update:section="setGardenSection"
+            @shift-month="shiftCalendarMonth"
+          />
+
           <TrainingReports
             v-else-if="detailView === 'training-reports'"
             class="detail-content training-reports-detail"
@@ -1417,12 +1335,12 @@
               :title="
                 mode === 'cardiac'
                   ? '确认身份、医生计划和数据来源'
-                  : '管理少量个人信息和健康目标'
+                  : '管理必要的个人信息和健康目标'
               "
               :copy="
                 mode === 'cardiac'
                   ? '医疗字段只读；个人目标和设备授权由你管理。'
-                  : '只保存姓名、年龄和健康目标，不收集不必要的信息。'
+                  : '只保存姓名、出生日期、性别和健康目标，不收集不必要的信息。'
               "
             /><view
               v-if="mode === 'public'"
@@ -1443,27 +1361,53 @@
                 }}</text>
               </label>
               <label class="public-profile-field">
-                <text>年龄</text>
-                <view>
-                  <input
-                    v-model="publicProfileDraft.age"
-                    data-testid="public-profile-age"
-                    type="number"
-                    maxlength="3"
-                    placeholder="18–100"
-                  />
-                  <text>岁</text>
-                </view>
-                <text v-if="publicProfileErrors.age" class="field-error">{{
-                  publicProfileErrors.age
+                <text>出生日期</text>
+                <picker
+                  mode="date"
+                  :value="publicProfileDraft.birthDate"
+                  :end="todayKey()"
+                  data-testid="public-profile-birth-date"
+                  @change="setPublicBirthDate"
+                >
+                  <view class="public-profile-picker">
+                    <text>{{
+                      publicProfileDraft.birthDate || "请选择出生日期"
+                    }}</text>
+                    <text>›</text>
+                  </view>
+                </picker>
+                <text
+                  v-if="publicProfileErrors.birthDate"
+                  class="field-error"
+                  >{{
+                  publicProfileErrors.birthDate
                 }}</text>
               </label>
+              <view class="public-profile-field">
+                <text>性别</text>
+                <view
+                  class="public-profile-gender"
+                  data-testid="public-profile-gender"
+                >
+                  <button
+                    v-for="item in publicGenderOptions"
+                    :key="item.value"
+                    :class="{ active: publicProfileDraft.gender === item.value }"
+                    @tap="publicProfileDraft.gender = item.value"
+                  >
+                    {{ item.label }}
+                  </button>
+                </view>
+              </view>
+              <view v-if="publicProfileAge !== null" class="profile-age-hint">
+                当前年龄由出生日期计算：{{ publicProfileAge }}岁
+              </view>
               <button
                 class="archive-action"
                 data-testid="public-profile-save"
                 @tap="savePublicProfile"
               >
-                保存个人信息
+                保存健康档案
               </button>
             </view
             ><view v-if="mode === 'cardiac'" class="archive-card"
@@ -1854,8 +1798,8 @@ type BindingState = "idle" | "loading" | "matched" | "error";
 type HealthGoal = "habit" | "weight" | "cardiac";
 type SocialTab = "none" | "team" | "buddy";
 type ScenarioId = "stable" | "attention" | "stop" | "insufficient";
-type TodayPageIndex = 0 | 1;
 type GardenSection = "growth" | "checkin";
+type PublicGender = "male" | "female" | "undisclosed";
 type PreVitalInputMode = "none" | "device" | "manual";
 type PreVitalField =
   | "systolicBloodPressure"
@@ -1872,14 +1816,13 @@ interface GardenGrowthFeedback {
 
 interface PublicHealthProfile {
   name: string;
-  age: number | null;
+  birthDate: string;
+  gender: PublicGender;
 }
 
 const STORAGE_KEY = "magpie-prototype-state";
 const DAILY_STEP_GOAL = 6000;
 const GARDEN_CYCLE_LENGTH = 7;
-const TODAY_PAGE_EXERCISE: TodayPageIndex = 0;
-const TODAY_PAGE_GARDEN: TodayPageIndex = 1;
 const magpieAsset =
   "/static/rive-source/v4/master/magpie-neutral-master-v4.png";
 const appReady = ref(false);
@@ -1897,12 +1840,8 @@ const expandedCategoryId = ref<ExerciseCategoryId | "">("");
 const selectedGameId = ref<ExerciseGameId>("baduanjin");
 const selfSelectedGameId = ref<ExerciseGameId | "">("");
 const activePrescriptionItemKey = ref("");
-const todayPageIndex = ref<TodayPageIndex>(TODAY_PAGE_EXERCISE);
-const exerciseScrollTop = ref(0);
-const gardenScrollTop = ref(0);
 const gardenSection = ref<GardenSection>("growth");
 const prescriptionSlide = ref(0);
-const prescriptionGestureActive = ref(false);
 const pendingGardenFeedback = ref<GardenGrowthFeedback | null>(null);
 const selectedKnowledgeId = ref(knowledgeItems[0].id);
 const selectedSessionId = ref("");
@@ -1941,10 +1880,20 @@ const doctorReviews = ref<DoctorReview[]>([]);
 const planAdjustment = ref("");
 const publicHealthProfile = ref<PublicHealthProfile>({
   name: "运动伙伴",
-  age: null,
+  birthDate: "",
+  gender: "undisclosed",
 });
-const publicProfileDraft = ref({ name: "运动伙伴", age: "" });
-const publicProfileErrors = ref({ name: "", age: "" });
+const publicProfileDraft = ref<{
+  name: string;
+  birthDate: string;
+  gender: PublicGender;
+}>({ name: "运动伙伴", birthDate: "", gender: "undisclosed" });
+const publicProfileErrors = ref({ name: "", birthDate: "" });
+const publicGenderOptions: { value: PublicGender; label: string }[] = [
+  { value: "male", label: "男" },
+  { value: "female", label: "女" },
+  { value: "undisclosed", label: "不便透露" },
+];
 const showAiBoundary = ref(false);
 const showStopReason = ref(false);
 const preSnapshot = ref<VitalSnapshot>(createVitalSnapshot("pre"));
@@ -2027,24 +1976,6 @@ const prescriptionTasks = computed(() =>
 const firstPrescriptionGame = computed(
   () => prescriptionTasks.value.find((item) => item.game)?.game,
 );
-const publicRecommendedGameId = computed<ExerciseGameId>(() =>
-  healthGoal.value === "weight" ? "walking" : "baduanjin",
-);
-const publicRecommendedGame = computed(
-  () =>
-    exerciseGames.find(
-      (item) => item.id === publicRecommendedGameId.value,
-    ) || exerciseGames[0],
-);
-const publicRecommendedCategory = computed(
-  () =>
-    exerciseCategories.find(
-      (item) => item.id === publicRecommendedGame.value.categoryId,
-    ) || exerciseCategories[0],
-);
-const publicRecommendationGoalLabel = computed(() =>
-  healthGoal.value === "weight" ? "健康减重" : "运动习惯",
-);
 const publicTodayCompletedSessions = computed(() =>
   completedTodaySessions.value.filter((item) => item.mode === "public"),
 );
@@ -2059,15 +1990,11 @@ const publicCompletedMinutes = computed(() =>
     ) / 60,
   ),
 );
-const publicRecommendedCompleted = computed(() =>
-  publicTodayCompletedSessions.value.some(
-    (item) => item.exerciseId === publicRecommendedGame.value.id,
-  ),
-);
 const featuredGame = computed(() =>
   mode.value === "cardiac"
     ? firstPrescriptionGame.value || exerciseGames[0]
-    : publicRecommendedGame.value,
+    : exerciseGames.find((item) => item.id === selfSelectedGameId.value) ||
+      exerciseGames[0],
 );
 const selectedGame = computed(
   () =>
@@ -2203,6 +2130,9 @@ const healthGoalLabel = computed(() =>
       ? "用稳定运动支持健康减重"
       : "建立可持续的运动习惯",
 );
+const publicProfileAge = computed(() =>
+  calculateAgeFromBirthDate(publicProfileDraft.value.birthDate),
+);
 const activeTrainingTitle = computed(
   () => activePrescriptionTask.value?.item.project || selectedGame.value.title,
 );
@@ -2287,6 +2217,9 @@ const streak = computed(() => calculateStreak(checkIns.value));
 const totalCheckInDays = computed(
   () => new Set(checkIns.value.map((item) => item.date)).size,
 );
+const sortedUniqueCheckInDates = computed(() =>
+  [...new Set(checkIns.value.map((item) => item.date))].sort(),
+);
 const gardenStageLabels = [
   "新种子",
   "已经播种",
@@ -2299,6 +2232,14 @@ const gardenStageLabels = [
 const gardenCycleDay = computed(
   () => totalCheckInDays.value % GARDEN_CYCLE_LENGTH,
 );
+const gardenCycleStartLabel = computed(() => {
+  if (gardenCycleDay.value === 0) return "下一次有效运动后开始";
+  const startDate =
+    sortedUniqueCheckInDates.value[
+      sortedUniqueCheckInDates.value.length - gardenCycleDay.value
+    ];
+  return startDate ? formatCheckInDate(startDate) : "本轮首次有效运动";
+});
 const gardenViewState = computed(() => ({
   progress: Math.round(
     (gardenCycleDay.value / GARDEN_CYCLE_LENGTH) * 100,
@@ -2315,24 +2256,8 @@ const gardenViewState = computed(() => ({
       ? GARDEN_CYCLE_LENGTH
       : GARDEN_CYCLE_LENGTH - gardenCycleDay.value,
   checkedToday: checkInDone.value,
+  cycleStartLabel: gardenCycleStartLabel.value,
 }));
-const exercisePageStatus = computed(() =>
-  mode.value === "cardiac"
-    ? `${prescriptionCompletedCount.value}/${prescriptionTasks.value.length}`
-    : publicTodayCompleted.value
-      ? "已运动"
-      : "推荐",
-);
-const gardenStripTitle = computed(() =>
-  checkInDone.value
-    ? "小白菜今天已长大"
-    : `小白菜成长第${gardenViewState.value.cycleDay}/7天`,
-);
-const gardenStripCopy = computed(() =>
-  checkInDone.value
-    ? "明天继续就好，不需要额外加量"
-    : "完成今天第一项有效运动后会继续成长",
-);
 const weeklyCompletedDays = computed(
   () => weeklyPlanDays.value.filter((item) => item.done).length,
 );
@@ -2363,6 +2288,37 @@ const calendarCells = computed(() =>
 const canGoNextMonth = computed(
   () => calendarMonth.value < currentMonthKey.value,
 );
+const recentGardenCheckIns = computed(() =>
+  [...sortedUniqueCheckInDates.value]
+    .reverse()
+    .slice(0, 7)
+    .map((date) => {
+      const dailySessions = sessions.value.filter(
+        (session) =>
+          session.status === "completed" && session.localDate === date,
+      );
+      const checkIn = checkIns.value.find((item) => item.date === date);
+      const fallbackGame = checkIn?.exerciseId
+        ? exerciseGames.find((item) => item.id === checkIn.exerciseId)
+        : undefined;
+      const totalSeconds = dailySessions.reduce(
+        (sum, session) => sum + session.durationSeconds,
+        0,
+      );
+      return {
+        key: date,
+        dateLabel: formatCheckInDate(date),
+        title:
+          dailySessions.length > 1
+            ? `${dailySessions[0].title}等${dailySessions.length}项`
+            : dailySessions[0]?.title || fallbackGame?.title || "有效运动",
+        durationLabel:
+          totalSeconds > 0
+            ? `${Math.max(1, Math.round(totalSeconds / 60))}分钟`
+            : "已打卡",
+      };
+    }),
+);
 const gardenCheckInViewState = computed(() => ({
   checkedToday: checkInDone.value,
   streak: streak.value,
@@ -2370,6 +2326,7 @@ const gardenCheckInViewState = computed(() => ({
   calendarTitle: calendarTitle.value,
   canGoNextMonth: canGoNextMonth.value,
   calendarCells: calendarCells.value,
+  recentRecords: recentGardenCheckIns.value,
 }));
 const teamJoined = computed(() => teamState.value.joined);
 const teamMembers = computed(() => [
@@ -2429,6 +2386,7 @@ const detailTitle = computed(
       training: activeTrainingTitle.value,
       postcheck: "训练后状态",
       "session-report": "运动解读",
+      garden: "我的运动小菜园",
       "training-reports": "训练报告",
       "health-archive": "健康档案",
       devices: "设备与授权",
@@ -2469,6 +2427,26 @@ function parseDateKey(value: string) {
   const [year, month, day] = value.split("-").map(Number);
   return new Date(year, Math.max(0, month - 1), day || 1);
 }
+function calculateAgeFromBirthDate(value: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+  const [year, month, day] = value.split("-").map(Number);
+  const birthDate = new Date(year, month - 1, day);
+  if (
+    birthDate.getFullYear() !== year ||
+    birthDate.getMonth() !== month - 1 ||
+    birthDate.getDate() !== day ||
+    birthDate > new Date()
+  )
+    return null;
+  const now = new Date();
+  let age = now.getFullYear() - year;
+  if (
+    now.getMonth() < month - 1 ||
+    (now.getMonth() === month - 1 && now.getDate() < day)
+  )
+    age -= 1;
+  return age;
+}
 function greeting() {
   const hour = new Date().getHours();
   return hour < 12 ? "上午好" : hour < 18 ? "下午好" : "晚上好";
@@ -2484,6 +2462,10 @@ function formatDuration(value: number) {
 function formatDateTime(value: string) {
   const date = new Date(value);
   return `${date.getMonth() + 1}月${date.getDate()}日 ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+function formatCheckInDate(value: string) {
+  const date = parseDateKey(value);
+  return `${date.getMonth() + 1}月${date.getDate()}日`;
 }
 function compactSessionDate(value: string) {
   const date = new Date(value);
@@ -2800,7 +2782,6 @@ function bindPatient() {
 function enterApp() {
   appReady.value = true;
   activeNav.value = "today";
-  todayPageIndex.value = TODAY_PAGE_EXERCISE;
   focusFirstIncompletePrescription();
   persistState();
 }
@@ -2810,10 +2791,8 @@ function switchMode() {
   bindingState.value = "idle";
   detailView.value = "none";
   activeNav.value = "today";
-  todayPageIndex.value = TODAY_PAGE_EXERCISE;
   gardenSection.value = "growth";
   prescriptionSlide.value = 0;
-  prescriptionGestureActive.value = false;
 }
 function setHealthGoal(goal: HealthGoal) {
   healthGoal.value = goal;
@@ -2822,29 +2801,35 @@ function setHealthGoal(goal: HealthGoal) {
 function syncPublicProfileDraft() {
   publicProfileDraft.value = {
     name: publicHealthProfile.value.name,
-    age:
-      publicHealthProfile.value.age === null
-        ? ""
-        : String(publicHealthProfile.value.age),
+    birthDate: publicHealthProfile.value.birthDate,
+    gender: publicHealthProfile.value.gender,
   };
-  publicProfileErrors.value = { name: "", age: "" };
+  publicProfileErrors.value = { name: "", birthDate: "" };
+}
+function setPublicBirthDate(event: any) {
+  publicProfileDraft.value.birthDate = String(event.detail.value || "");
+  publicProfileErrors.value.birthDate = "";
 }
 function savePublicProfile() {
   const name = publicProfileDraft.value.name.trim();
-  const ageText = String(publicProfileDraft.value.age).trim();
-  const age = Number(ageText);
+  const birthDate = publicProfileDraft.value.birthDate;
+  const age = calculateAgeFromBirthDate(birthDate);
   const nameError =
     name.length < 1 || name.length > 20 ? "请输入1–20个字符的姓名" : "";
-  const ageError =
-    !/^\d+$/.test(ageText) || !Number.isInteger(age) || age < 18 || age > 100
-      ? "请输入18–100之间的整数年龄"
+  const birthDateError =
+    age === null || age < 18 || age > 100
+      ? "请选择有效出生日期，年龄需在18–100岁之间"
       : "";
-  publicProfileErrors.value = { name: nameError, age: ageError };
-  if (nameError || ageError) return;
-  publicHealthProfile.value = { name, age };
-  publicProfileDraft.value = { name, age: String(age) };
+  publicProfileErrors.value = { name: nameError, birthDate: birthDateError };
+  if (nameError || birthDateError) return;
+  publicHealthProfile.value = {
+    name,
+    birthDate,
+    gender: publicProfileDraft.value.gender,
+  };
+  publicProfileDraft.value = { ...publicHealthProfile.value };
   persistState();
-  uni.showToast({ title: "个人信息已保存", icon: "success" });
+  uni.showToast({ title: "健康档案已保存", icon: "success" });
 }
 function goDetail(view: DetailView) {
   if (view !== "training") stopTimer();
@@ -2860,42 +2845,33 @@ function closeDetail() {
       pendingGardenFeedback.value &&
       selectedSession.value?.id === pendingGardenFeedback.value.sessionId,
   );
+  const growthFeedback = closesNewGrowth
+    ? pendingGardenFeedback.value
+    : null;
   stopTimer();
   detailView.value = "none";
-  if (closesNewGrowth) {
+  if (growthFeedback) {
     activeNav.value = "today";
-    todayPageIndex.value = TODAY_PAGE_GARDEN;
-    gardenSection.value = "growth";
+    uni.showToast({
+      title: growthFeedback.harvested
+        ? "已收获一棵小白菜"
+        : `小白菜长大啦 · 第${growthFeedback.afterDay}/7天`,
+      icon: "none",
+    });
   } else {
     activeNav.value = detailReturnNav.value;
-    if (closingSessionReport && detailReturnNav.value === "today")
-      todayPageIndex.value = TODAY_PAGE_EXERCISE;
   }
   if (closingSessionReport) pendingGardenFeedback.value = null;
 }
 function switchNav(nav: NavId) {
   activeNav.value = nav;
 }
-function openGardenCheckIn() {
-  activeNav.value = "today";
-  todayPageIndex.value = TODAY_PAGE_GARDEN;
-  gardenSection.value = "checkin";
-  gardenScrollTop.value = 0;
+function openGarden(section: GardenSection) {
+  gardenSection.value = section;
+  goDetail("garden");
 }
 function setGardenSection(section: GardenSection) {
   gardenSection.value = section;
-  gardenScrollTop.value = 0;
-}
-function showTodayPage(index: TodayPageIndex) {
-  prescriptionGestureActive.value = false;
-  todayPageIndex.value = index;
-}
-function onTodayPageChange(event: any) {
-  prescriptionGestureActive.value = false;
-  todayPageIndex.value =
-    Number(event.detail.current) === TODAY_PAGE_EXERCISE
-      ? TODAY_PAGE_EXERCISE
-      : TODAY_PAGE_GARDEN;
 }
 function onPrescriptionSlide(event: any) {
   const next = Number(event.detail.current);
@@ -2903,9 +2879,6 @@ function onPrescriptionSlide(event: any) {
   prescriptionSlide.value = Number.isFinite(next)
     ? Math.min(Math.max(next, 0), maxIndex)
     : 0;
-}
-function setPrescriptionGesture(active: boolean) {
-  prescriptionGestureActive.value = active;
 }
 function focusFirstIncompletePrescription() {
   const firstIncomplete = prescriptionTasks.value.findIndex(
@@ -2923,10 +2896,6 @@ function chooseSelfDirected(id: ExerciseGameId) {
   activePrescriptionItemKey.value = "";
   persistState();
   uni.showToast({ title: "已加入自选运动", icon: "none" });
-}
-function startPublicRecommended() {
-  activePrescriptionItemKey.value = "";
-  selectExercise(publicRecommendedGame.value.id);
 }
 function startSelfSelected() {
   if (!selfSelectedGame.value) return;
@@ -3934,10 +3903,20 @@ function evaluateMemChallenge() {
 function normalizePublicHealthProfile(value: any): PublicHealthProfile {
   const name =
     typeof value?.name === "string" ? value.name.trim().slice(0, 20) : "";
-  const age = Number(value?.age);
+  const birthDate =
+    typeof value?.birthDate === "string" &&
+    calculateAgeFromBirthDate(value.birthDate) !== null
+      ? value.birthDate
+      : "";
+  const gender: PublicGender = ["male", "female", "undisclosed"].includes(
+    value?.gender,
+  )
+    ? value.gender
+    : "undisclosed";
   return {
     name: name || "运动伙伴",
-    age: Number.isInteger(age) && age >= 18 && age <= 100 ? age : null,
+    birthDate,
+    gender,
   };
 }
 
@@ -3974,10 +3953,8 @@ function resetPrototype() {
   mode.value = "public";
   healthGoal.value = "habit";
   activeNav.value = "today";
-  todayPageIndex.value = TODAY_PAGE_EXERCISE;
   gardenSection.value = "growth";
   prescriptionSlide.value = 0;
-  prescriptionGestureActive.value = false;
   detailView.value = "none";
   wallet.value = { healthPoints: 160, mCoins: 0 };
   mem.value = { unlocked: false, inviteCode: "MEM-2026" };
@@ -4001,7 +3978,11 @@ function resetPrototype() {
   publishedPolicy.value = createDefaultPolicy();
   doctorReviews.value = [];
   planAdjustment.value = "";
-  publicHealthProfile.value = { name: "运动伙伴", age: null };
+  publicHealthProfile.value = {
+    name: "运动伙伴",
+    birthDate: "",
+    gender: "undisclosed",
+  };
   syncPublicProfileDraft();
 }
 onMounted(() => {
@@ -4095,7 +4076,6 @@ onMounted(() => {
     planAdjustment.value = saved.planAdjustment || "";
     appReady.value = true;
     activeNav.value = "today";
-    todayPageIndex.value = TODAY_PAGE_EXERCISE;
     gardenSection.value = "growth";
     focusFirstIncompletePrescription();
     persistState();
