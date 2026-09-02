@@ -198,7 +198,7 @@
                         ? "今天的运动已记录，按状态休息即可"
                         : "为你推荐一项，也可以自由选择"
                   }}</text></view
-                ><button @tap="openData('checkin')">打卡日历 ›</button></view
+                ><button @tap="openGardenCheckIn">打卡日历 ›</button></view
               >
               <view class="today-summary__numbers"
                 ><view
@@ -519,17 +519,82 @@
                 </scroll-view>
               </swiper-item>
               <swiper-item>
-                <scroll-view class="today-page-scroll" scroll-y>
+                <scroll-view
+                  class="today-page-scroll"
+                  scroll-y
+                  :scroll-top="gardenScrollTop"
+                >
                   <view
                     class="today-garden-page"
                     data-testid="today-garden-page"
                   >
-                    <RehabGardenPanel
-                      :garden="gardenViewState"
-                      :plan="gardenPlanSummary"
-                      :mode="mode"
-                      @start-exercise="openExerciseFromGarden"
-                    />
+                    <RehabGardenPanel :garden="gardenViewState" />
+                    <view
+                      class="garden-checkin-panel"
+                      data-testid="garden-checkin-panel"
+                    >
+                      <view class="garden-checkin-heading">
+                        <view>
+                          <text>打卡记录</text>
+                          <text>有效运动完成后自动记录，每天最多一次</text>
+                        </view>
+                      </view>
+                      <view
+                        class="checkin-hero"
+                        data-testid="garden-checkin-summary"
+                      >
+                        <view>
+                          <text>{{
+                            checkInDone
+                              ? "今天已自动打卡"
+                              : "完成一次有效运动后自动打卡"
+                          }}</text>
+                          <text
+                            >连续 {{ streak }} 天 · 累计
+                            {{ totalCheckInDays }} 天</text
+                          >
+                        </view>
+                        <text>{{ checkInDone ? "✓" : streak }}</text>
+                      </view>
+                      <view
+                        class="calendar-card"
+                        data-testid="garden-checkin-calendar"
+                      >
+                        <view class="calendar-heading"
+                          ><button @tap="shiftCalendarMonth(-1)">‹</button
+                          ><text>{{ calendarTitle }}</text
+                          ><button
+                            :disabled="!canGoNextMonth"
+                            @tap="shiftCalendarMonth(1)"
+                          >
+                            ›
+                          </button></view
+                        >
+                        <view class="calendar-week"
+                          ><text
+                            v-for="day in ['一', '二', '三', '四', '五', '六', '日']"
+                            :key="day"
+                            >{{ day }}</text
+                          ></view
+                        >
+                        <view class="calendar-grid"
+                          ><view
+                            v-for="item in calendarCells"
+                            :key="item.key"
+                            :class="{
+                              blank: item.blank,
+                              done: item.checked,
+                              today: item.today,
+                              future: item.future,
+                            }"
+                            ><text v-if="!item.blank">{{ item.day }}</text
+                            ><image
+                              v-if="item.checked"
+                              src="/static/icons/cabbage-checkin.svg"
+                              mode="aspectFit" /></view></view
+                        >
+                      </view>
+                    </view>
                   </view>
                 </scroll-view>
               </swiper-item>
@@ -543,6 +608,7 @@
           >
             <CompanionHub
               entry-only
+              disabled
               v-model:active-tab="socialTab"
               :streak="streak"
               :team-joined="teamJoined"
@@ -585,22 +651,11 @@
             class="screen data-screen"
             data-testid="data-screen"
           >
-            <view class="data-tabs"
-              ><button
-                v-for="tab in dataTabs"
-                :key="tab.id"
-                :class="{ active: dataTab === tab.id }"
-                :data-testid="'data-tab-' + tab.id"
-                @tap="dataTab = tab.id"
-              >
-                {{ tab.label }}
-              </button></view
-            >
-            <view v-if="dataTab === 'overview'" class="data-panel">
+            <view class="data-panel">
               <view class="today-numbers"
                 ><view
                   ><text>{{ totalMinutes }}</text
-                  ><text>总共分钟</text></view
+                  ><text>运动时间</text></view
                 ><view
                   ><text>{{ totalCompletedSessions }}</text
                   ><text>完成项目</text></view
@@ -713,70 +768,6 @@
                 ><text v-if="!recentSessions.length">还没有完成记录</text></view
               >
             </view>
-            <view
-              v-else-if="dataTab === 'checkin'"
-              class="data-panel"
-              data-testid="checkin-panel"
-            >
-              <view class="checkin-hero"
-                ><view
-                  ><text>{{
-                    checkInDone ? "今天已自动打卡" : "完成核心运动后自动打卡"
-                  }}</text
-                  ><text
-                    >连续 {{ streak }} 天 · 累计 {{ totalCheckInDays }} 天</text
-                  ></view
-                ><text>{{ checkInDone ? "✓" : streak }}</text></view
-              >
-              <view class="calendar-card"
-                ><view class="calendar-heading"
-                  ><button @tap="shiftCalendarMonth(-1)">‹</button
-                  ><text>{{ calendarTitle }}</text
-                  ><button
-                    :disabled="!canGoNextMonth"
-                    @tap="shiftCalendarMonth(1)"
-                  >
-                    ›
-                  </button></view
-                ><view class="calendar-week"
-                  ><text
-                    v-for="day in ['一', '二', '三', '四', '五', '六', '日']"
-                    :key="day"
-                    >{{ day }}</text
-                  ></view
-                ><view class="calendar-grid"
-                  ><view
-                    v-for="item in calendarCells"
-                    :key="item.key"
-                    :class="{
-                      blank: item.blank,
-                      done: item.checked,
-                      today: item.today,
-                      future: item.future,
-                    }"
-                    ><text v-if="!item.blank">{{ item.day }}</text
-                    ><image
-                      v-if="item.checked"
-                      src="/static/icons/cabbage-checkin.svg"
-                      mode="aspectFit" /></view></view
-              ></view>
-              <view class="milestone-list"
-                ><view
-                  v-for="item in rewardMilestones"
-                  :key="item.day"
-                  :class="{ reached: streak >= item.day }"
-                  ><text>{{ item.day }}天</text><text>{{ item.label }}</text
-                  ><text>+{{ item.bonus }}</text></view
-                ></view
-              >
-            </view>
-            <TrainingReports
-              v-else
-              class="data-panel"
-              :sessions="sessions"
-              :prescription-items="sharedPatientFixture.prescription.items"
-              :prescription-version="sharedPatientFixture.prescription.version"
-            />
           </view>
 
           <view
@@ -789,7 +780,7 @@
               ><text>{{
                 mode === "cardiac"
                   ? sharedPatientFixture.patient.name
-                  : "运动伙伴"
+                  : displayName
               }}</text
               ><text>{{
                 mode === "cardiac"
@@ -803,53 +794,17 @@
               </button></view
             >
             <view class="profile-checkins"
-              ><button @tap="openData('checkin')">
+              ><button @tap="openGardenCheckIn">
                 <text>{{ totalCheckInDays }}</text
                 ><text>累计打卡</text></button
-              ><button @tap="openData('checkin')">
+              ><button @tap="openGardenCheckIn">
                 <text>{{ streak }}</text
                 ><text>连续打卡</text>
               </button></view
             >
-            <view class="wallet-card"
-              ><button @tap="goDetail('reward-store')">
-                <text>{{ wallet.healthPoints }}</text
-                ><text>健康积分</text></button
-              ><button v-if="mem.unlocked" @tap="goDetail('reward-store')">
-                <text>{{ wallet.mCoins }}</text
-                ><text>M币</text></button
-              ><button v-else @tap="focusMemUnlock">
-                <text>MEM</text><text>学生权益</text>
-              </button></view
-            >
-            <view
-              v-if="!mem.unlocked"
-              class="mem-unlock"
-              data-testid="mem-unlock"
-              ><text>解锁MEM学生权益</text
-              ><view
-                ><input
-                  v-model="memCode"
-                  placeholder="邀请码 MEM-2026"
-                /><button @tap="unlockMem">解锁</button></view
-              ></view
-            >
-            <view v-else class="mem-status"
-              ><view
-                ><text>MEM 7日挑战</text
-                ><text
-                  >连续 {{ memChallengeDays }}/7 天 · 整套八段锦＋评分</text
-                ></view
-              ><button
-                :disabled="wallet.healthPoints < 100"
-                @tap="convertPoints"
-              >
-                100积分换5M币
-              </button></view
-            >
             <view class="profile-section"
               ><text>健康管理</text
-              ><view class="service-grid"
+              ><view class="service-grid health-management-grid"
                 ><button @tap="goDetail('devices')">
                   <view
                     ><AppIcon
@@ -865,12 +820,23 @@
                       src="/static/icons/magpie-line/archive.svg"
                       :size="36" /></view
                   ><text>健康档案</text><text>目标与来源</text></button
-                ><button @tap="goDetail('reward-store')">
+                ><button @tap="openTrainingReports">
+                  <view
+                    ><AppIcon
+                      src="/static/icons/magpie-line/report.svg"
+                      :size="36" /></view
+                  ><text>训练报告</text><text>单次与阶段</text></button
+                ><button
+                  class="service-disabled"
+                  disabled
+                  aria-disabled="true"
+                  data-testid="points-exchange-unavailable"
+                >
                   <view
                     ><AppIcon
                       src="/static/icons/magpie-line/badge.svg"
                       :size="36" /></view
-                  ><text>积分礼品</text><text>双钱包</text>
+                  ><text>积分兑换</text><text>暂未开放</text>
                 </button></view
               ></view
             >
@@ -1406,6 +1372,14 @@
             </button></view
           >
 
+          <TrainingReports
+            v-else-if="detailView === 'training-reports'"
+            class="detail-content training-reports-detail"
+            :sessions="sessions"
+            :prescription-items="sharedPatientFixture.prescription.items"
+            :prescription-version="sharedPatientFixture.prescription.version"
+          />
+
           <view v-else-if="detailView === 'social-hub'" class="detail-content"
             ><DetailIntro
               kicker="温和陪伴"
@@ -1505,9 +1479,59 @@
             class="detail-content archive-detail"
             ><DetailIntro
               kicker="我的健康档案"
-              title="确认身份、医生计划和数据来源"
-              copy="医疗字段只读；个人目标和设备授权由你管理。"
-            /><view v-if="mode === 'cardiac'" class="archive-card"
+              :title="
+                mode === 'cardiac'
+                  ? '确认身份、医生计划和数据来源'
+                  : '管理少量个人信息和健康目标'
+              "
+              :copy="
+                mode === 'cardiac'
+                  ? '医疗字段只读；个人目标和设备授权由你管理。'
+                  : '只保存姓名、年龄和健康目标，不收集不必要的信息。'
+              "
+            /><view
+              v-if="mode === 'public'"
+              class="archive-card public-profile-form"
+              data-testid="public-profile-form"
+            >
+              <text class="form-title">个人信息</text>
+              <label class="public-profile-field">
+                <text>姓名</text>
+                <input
+                  v-model="publicProfileDraft.name"
+                  data-testid="public-profile-name"
+                  maxlength="20"
+                  placeholder="请输入姓名"
+                />
+                <text v-if="publicProfileErrors.name" class="field-error">{{
+                  publicProfileErrors.name
+                }}</text>
+              </label>
+              <label class="public-profile-field">
+                <text>年龄</text>
+                <view>
+                  <input
+                    v-model="publicProfileDraft.age"
+                    data-testid="public-profile-age"
+                    type="number"
+                    maxlength="3"
+                    placeholder="18–100"
+                  />
+                  <text>岁</text>
+                </view>
+                <text v-if="publicProfileErrors.age" class="field-error">{{
+                  publicProfileErrors.age
+                }}</text>
+              </label>
+              <button
+                class="archive-action"
+                data-testid="public-profile-save"
+                @tap="savePublicProfile"
+              >
+                保存个人信息
+              </button>
+            </view
+            ><view v-if="mode === 'cardiac'" class="archive-card"
               ><text class="form-title">我的健康身份</text
               ><view class="source-row"
                 ><text>姓名</text
@@ -1862,7 +1886,6 @@ import {
   patientMetrics,
   publicMetrics,
   rewardItems,
-  rewardMilestones,
   type AdviceLevel,
   type AIAdvice,
   type AssessmentMode,
@@ -1893,7 +1916,6 @@ import {
 
 type OnboardingStep = "mode" | "binding";
 type BindingState = "idle" | "loading" | "matched" | "error";
-type DataTab = "overview" | "checkin" | "reports";
 type HealthGoal = "habit" | "weight" | "cardiac";
 type SocialTab = "none" | "team" | "buddy";
 type ScenarioId = "stable" | "attention" | "stop" | "insufficient";
@@ -1912,6 +1934,11 @@ interface GardenGrowthFeedback {
   harvestCount: number;
 }
 
+interface PublicHealthProfile {
+  name: string;
+  age: number | null;
+}
+
 const STORAGE_KEY = "magpie-prototype-state";
 const DAILY_STEP_GOAL = 6000;
 const GARDEN_CYCLE_LENGTH = 7;
@@ -1925,7 +1952,6 @@ const mode = ref<UserMode>("public");
 const visitNumber = ref("");
 const bindingState = ref<BindingState>("idle");
 const activeNav = ref<NavId>("today");
-const dataTab = ref<DataTab>("checkin");
 const detailView = ref<DetailView>("none");
 const detailReturnNav = ref<NavId>("today");
 const healthGoal = ref<HealthGoal>("habit");
@@ -1937,6 +1963,7 @@ const selfSelectedGameId = ref<ExerciseGameId | "">("");
 const activePrescriptionItemKey = ref("");
 const todayPageIndex = ref<TodayPageIndex>(TODAY_PAGE_EXERCISE);
 const exerciseScrollTop = ref(0);
+const gardenScrollTop = ref(0);
 const prescriptionSlide = ref(0);
 const prescriptionGestureActive = ref(false);
 const pendingGardenFeedback = ref<GardenGrowthFeedback | null>(null);
@@ -1975,6 +2002,12 @@ const liveOxygen = ref(98);
 const liveVitalUpdatedAt = ref("");
 const doctorReviews = ref<DoctorReview[]>([]);
 const planAdjustment = ref("");
+const publicHealthProfile = ref<PublicHealthProfile>({
+  name: "运动伙伴",
+  age: null,
+});
+const publicProfileDraft = ref({ name: "运动伙伴", age: "" });
+const publicProfileErrors = ref({ name: "", age: "" });
 const showAiBoundary = ref(false);
 const showStopReason = ref(false);
 const preSnapshot = ref<VitalSnapshot>(createVitalSnapshot("pre"));
@@ -1984,11 +2017,6 @@ const policyDraft = ref<TrainingAssessmentPolicy>(createDefaultPolicy());
 const publishedPolicy = ref<TrainingAssessmentPolicy>(createDefaultPolicy());
 let trainingTimer: ReturnType<typeof setInterval> | undefined;
 
-const dataTabs: Array<{ id: DataTab; label: string }> = [
-  { id: "checkin", label: "打卡" },
-  { id: "overview", label: "数据" },
-  { id: "reports", label: "报告" },
-];
 const assessmentModes: Array<{ id: AssessmentMode; label: string }> = [
   { id: "off", label: "关闭" },
   { id: "optional", label: "可选" },
@@ -2215,15 +2243,11 @@ const stepTrendMaximum = computed(() =>
 const displayName = computed(() =>
   mode.value === "cardiac"
     ? sharedPatientFixture.patient.maskedName
-    : "运动伙伴",
+    : publicHealthProfile.value.name,
 );
 const topbarTitle = computed(() =>
   activeNav.value === "data"
-    ? dataTab.value === "checkin"
-      ? "训练打卡"
-      : dataTab.value === "overview"
-        ? "训练数据"
-        : "训练报告"
+    ? "训练数据"
     : {
         today: `${greeting()}，${displayName.value}`,
         discover: "康复资讯",
@@ -2355,42 +2379,6 @@ const gardenViewState = computed(() => ({
       : GARDEN_CYCLE_LENGTH - gardenCycleDay.value,
   checkedToday: checkInDone.value,
 }));
-const nextPrescriptionTask = computed(() =>
-  prescriptionTasks.value.find((task) => !task.completed) ||
-  prescriptionTasks.value[0],
-);
-const gardenPlanSummary = computed(() => {
-  if (mode.value === "public")
-    return {
-      title: "今日运动",
-      itemTitle: publicTodayCompleted.value
-        ? "今天的运动已记录"
-        : publicRecommendedGame.value.title,
-      duration: publicTodayCompleted.value
-        ? `${publicCompletedMinutes.value}分钟`
-        : publicRecommendedGame.value.duration,
-      intensity: publicTodayCompleted.value
-        ? "完成任一有效运动，今日成长已记录"
-        : publicRecommendedGame.value.subtitle,
-      completedCount: publicTodayCompleted.value ? 1 : 0,
-      totalCount: 1,
-      allCompleted: publicTodayCompleted.value,
-    };
-  const task = nextPrescriptionTask.value;
-  return {
-    title: "今日处方",
-    itemTitle: prescriptionAllDone.value
-      ? "今日处方已全部完成"
-      : task?.item.project || "暂无可训练处方",
-    duration: task?.item.duration || "--",
-    intensity: prescriptionAllDone.value
-      ? "请按建议完成缓和与休息"
-      : task?.item.intensity || "等待医生确认",
-    completedCount: prescriptionCompletedCount.value,
-    totalCount: prescriptionTasks.value.length,
-    allCompleted: prescriptionAllDone.value,
-  };
-});
 const exercisePageStatus = computed(() =>
   mode.value === "cardiac"
     ? `${prescriptionCompletedCount.value}/${prescriptionTasks.value.length}`
@@ -2496,6 +2484,7 @@ const detailTitle = computed(
       training: activeTrainingTitle.value,
       postcheck: "训练后状态",
       "session-report": "运动解读",
+      "training-reports": "训练报告",
       "health-archive": "健康档案",
       devices: "设备与授权",
       "knowledge-article": "指南",
@@ -2884,8 +2873,37 @@ function setHealthGoal(goal: HealthGoal) {
   healthGoal.value = goal;
   persistState();
 }
+function syncPublicProfileDraft() {
+  publicProfileDraft.value = {
+    name: publicHealthProfile.value.name,
+    age:
+      publicHealthProfile.value.age === null
+        ? ""
+        : String(publicHealthProfile.value.age),
+  };
+  publicProfileErrors.value = { name: "", age: "" };
+}
+function savePublicProfile() {
+  const name = publicProfileDraft.value.name.trim();
+  const ageText = String(publicProfileDraft.value.age).trim();
+  const age = Number(ageText);
+  const nameError =
+    name.length < 1 || name.length > 20 ? "请输入1–20个字符的姓名" : "";
+  const ageError =
+    !/^\d+$/.test(ageText) || !Number.isInteger(age) || age < 18 || age > 100
+      ? "请输入18–100之间的整数年龄"
+      : "";
+  publicProfileErrors.value = { name: nameError, age: ageError };
+  if (nameError || ageError) return;
+  publicHealthProfile.value = { name, age };
+  publicProfileDraft.value = { name, age: String(age) };
+  persistState();
+  uni.showToast({ title: "个人信息已保存", icon: "success" });
+}
 function goDetail(view: DetailView) {
   if (view !== "training") stopTimer();
+  if (view === "health-archive" && mode.value === "public")
+    syncPublicProfileDraft();
   detailReturnNav.value = activeNav.value;
   detailView.value = view;
 }
@@ -2908,13 +2926,16 @@ function closeDetail() {
   }
   if (closingSessionReport) pendingGardenFeedback.value = null;
 }
-function openData(tab: DataTab) {
-  dataTab.value = tab;
-  activeNav.value = "data";
-}
 function switchNav(nav: NavId) {
   activeNav.value = nav;
-  if (nav === "data") dataTab.value = "checkin";
+}
+function openGardenCheckIn() {
+  activeNav.value = "today";
+  todayPageIndex.value = TODAY_PAGE_GARDEN;
+  gardenScrollTop.value = 0;
+  nextTick(() => {
+    gardenScrollTop.value = 999999;
+  });
 }
 function showTodayPage(index: TodayPageIndex) {
   prescriptionGestureActive.value = false;
@@ -2942,13 +2963,6 @@ function focusFirstIncompletePrescription() {
     (task) => !task.completed,
   );
   prescriptionSlide.value = firstIncomplete >= 0 ? firstIncomplete : 0;
-}
-function openExerciseFromGarden() {
-  exerciseScrollTop.value = 1;
-  todayPageIndex.value = TODAY_PAGE_EXERCISE;
-  nextTick(() => {
-    exerciseScrollTop.value = 0;
-  });
 }
 function toggleCategory(id: ExerciseCategoryId) {
   selectedCategoryId.value = id;
@@ -3001,11 +3015,14 @@ function openSession(session: TrainingSession) {
 }
 function openLatestReport() {
   if (!sessions.value.length) {
-    openData("reports");
+    openTrainingReports();
     return;
   }
   selectedSessionId.value = sessions.value[0].id;
   goDetail("session-report");
+}
+function openTrainingReports() {
+  goDetail("training-reports");
 }
 function shiftCalendarMonth(amount: number) {
   const [year, month] = calendarMonth.value.split("-").map(Number);
@@ -3965,12 +3982,23 @@ function evaluateMemChallenge() {
   }
 }
 
+function normalizePublicHealthProfile(value: any): PublicHealthProfile {
+  const name =
+    typeof value?.name === "string" ? value.name.trim().slice(0, 20) : "";
+  const age = Number(value?.age);
+  return {
+    name: name || "运动伙伴",
+    age: Number.isInteger(age) && age >= 18 && age <= 100 ? age : null,
+  };
+}
+
 function persistState() {
   uni.setStorageSync(STORAGE_KEY, {
     schemaVersion: 7,
     ready: appReady.value,
     mode: mode.value,
     healthGoal: healthGoal.value,
+    publicHealthProfile: publicHealthProfile.value,
     wallet: wallet.value,
     mem: mem.value,
     redemptions: redemptions.value,
@@ -3995,6 +4023,7 @@ function resetPrototype() {
   appReady.value = false;
   onboardingStep.value = "mode";
   mode.value = "public";
+  healthGoal.value = "habit";
   activeNav.value = "today";
   todayPageIndex.value = TODAY_PAGE_EXERCISE;
   prescriptionSlide.value = 0;
@@ -4022,6 +4051,8 @@ function resetPrototype() {
   publishedPolicy.value = createDefaultPolicy();
   doctorReviews.value = [];
   planAdjustment.value = "";
+  publicHealthProfile.value = { name: "运动伙伴", age: null };
+  syncPublicProfileDraft();
 }
 onMounted(() => {
   const saved = uni.getStorageSync(STORAGE_KEY);
@@ -4033,6 +4064,10 @@ onMounted(() => {
         : saved.healthGoal === "cardiac"
           ? "cardiac"
           : "habit";
+    publicHealthProfile.value = normalizePublicHealthProfile(
+      saved.publicHealthProfile,
+    );
+    syncPublicProfileDraft();
     wallet.value = saved.wallet
       ? {
           healthPoints: Number(saved.wallet.healthPoints) || 0,

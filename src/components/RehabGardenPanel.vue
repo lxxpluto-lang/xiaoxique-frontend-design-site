@@ -63,31 +63,6 @@
       </view>
     </view>
 
-    <view class="garden-plan" data-testid="garden-prescription-summary">
-      <view class="garden-plan-heading">
-        <view>
-          <text>{{ plan.title }}</text>
-          <text v-if="mode === 'cardiac'">医院处方 · 已完成 {{ plan.completedCount }}/{{ plan.totalCount }} 项</text>
-          <text v-else>{{ plan.allCompleted ? "今日已完成" : "今日推荐" }}</text>
-        </view>
-        <text>{{ plan.allCompleted ? "已完成" : "待运动" }}</text>
-      </view>
-      <text class="garden-plan-title">{{ plan.itemTitle }}</text>
-      <view class="garden-plan-meta">
-        <view><text>时长</text><text>{{ plan.duration }}</text></view>
-        <view><text>强度</text><text>{{ plan.intensity }}</text></view>
-      </view>
-      <button
-        class="start-exercise"
-        data-testid="garden-start-exercise"
-        data-action="ACT-GARDEN-START-EXERCISE"
-        @tap="emit('start-exercise')"
-      >
-        {{ plan.allCompleted ? "查看运动记录" : "开始运动" }}
-      </button>
-      <text class="start-note">先进入运动页选择项目，不会直接开启摄像头</text>
-    </view>
-
     <text class="garden-boundary">成长代表训练打卡，不代表康复疗效。</text>
   </view>
 </template>
@@ -106,24 +81,8 @@ interface GardenViewState {
   checkedToday: boolean;
 }
 
-interface GardenPlanSummary {
-  title: string;
-  itemTitle: string;
-  duration: string;
-  intensity: string;
-  completedCount: number;
-  totalCount: number;
-  allCompleted: boolean;
-}
-
 const props = defineProps<{
   garden: GardenViewState;
-  plan: GardenPlanSummary;
-  mode: "cardiac" | "public";
-}>();
-
-const emit = defineEmits<{
-  (event: "start-exercise"): void;
 }>();
 
 const stages = ["播种", "冒芽", "幼苗", "舒展", "茁壮", "成熟", "收获"];
@@ -146,6 +105,6 @@ const growthMessage = computed(() =>
 .garden-progress-copy { display:flex; margin-top:14rpx; align-items:flex-end; justify-content:space-between; gap:16rpx; }.garden-progress-copy text:first-child { font-size:28rpx; font-weight:800; }.garden-progress-copy text:last-child { color:#64748b; font-size:19rpx; text-align:right; }
 .growth-track { position:relative; display:grid; margin-top:22rpx; grid-template-columns:repeat(7,1fr); gap:3rpx; }.growth-track::before { position:absolute; top:20rpx; right:7%; left:7%; height:4rpx; content:""; background:#d8e6d9; }.growth-node { position:relative; z-index:1; display:flex; min-width:0; align-items:center; flex-direction:column; }.growth-node>view { display:flex; width:40rpx; height:40rpx; align-items:center; justify-content:center; border:4rpx solid #eef6ef; border-radius:50%; color:#74847d; background:#d8e6d9; font-size:15rpx; font-weight:700; }.growth-node.reached>view { color:#fff; background:#64a967; }.growth-node.current>view { box-shadow:0 0 0 5rpx rgba(100,169,103,.18); }.growth-node>text { margin-top:9rpx; overflow:hidden; color:#74847d; font-size:14rpx; white-space:nowrap; }.growth-node.current>text { color:#245c4d; font-weight:700; }
 .today-growth { display:grid; padding:24rpx; grid-template-columns:72rpx 1fr; align-items:center; gap:18rpx; border-radius:24rpx; background:#fff7e8; }.today-growth.done { background:#eaf8f1; }.today-growth-icon { display:flex; width:64rpx; height:64rpx; align-items:center; justify-content:center; border-radius:20rpx; color:#8a641c; background:#ffe7a7; font-size:25rpx; font-weight:800; }.today-growth.done .today-growth-icon { color:#fff; background:#2e9b7b; }.today-growth view:last-child text { display:block; }.today-growth view:last-child text:first-child { color:#1e293b; font-size:27rpx; font-weight:750; }.today-growth view:last-child text:last-child { margin-top:6rpx; color:#64748b; font-size:21rpx; line-height:1.55; }
-.garden-plan { padding:28rpx; border-radius:28rpx; background:#fff; box-shadow:0 6rpx 22rpx rgba(15,23,42,.06); }.garden-plan-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:16rpx; }.garden-plan-heading view text { display:block; }.garden-plan-heading view text:first-child { color:#1e293b; font-size:29rpx; font-weight:750; }.garden-plan-heading view text:last-child { margin-top:5rpx; color:#64748b; font-size:20rpx; }.garden-plan-heading>text { padding:7rpx 13rpx; border-radius:999rpx; color:#0f766e; background:#e9f8f4; font-size:19rpx; font-weight:700; }.garden-plan-title { display:block; margin-top:22rpx; color:#1e293b; font-size:34rpx; font-weight:800; }.garden-plan-meta { display:grid; margin-top:18rpx; grid-template-columns:1fr 1fr; gap:12rpx; }.garden-plan-meta view { padding:16rpx; border-radius:18rpx; background:#f8fafc; }.garden-plan-meta text { display:block; }.garden-plan-meta text:first-child { color:#64748b; font-size:19rpx; }.garden-plan-meta text:last-child { margin-top:4rpx; color:#1e293b; font-size:23rpx; font-weight:700; }.start-exercise { display:flex; width:100%; min-height:88rpx; margin-top:22rpx; align-items:center; justify-content:center; border-radius:18rpx; color:#fff; background:#0ea5a4; font-size:30rpx; font-weight:700; }.start-note { display:block; margin-top:12rpx; color:#7b8783; font-size:18rpx; text-align:center; }.garden-boundary { display:block; padding:18rpx 22rpx; border-radius:20rpx; color:#6c7673; background:#eef1f0; font-size:20rpx; line-height:1.5; text-align:center; }
+.garden-boundary { display:block; padding:18rpx 22rpx; border-radius:20rpx; color:#6c7673; background:#eef1f0; font-size:20rpx; line-height:1.5; text-align:center; }
 @media (prefers-reduced-motion: reduce) { .plant-wrap { transition:none; } }
 </style>

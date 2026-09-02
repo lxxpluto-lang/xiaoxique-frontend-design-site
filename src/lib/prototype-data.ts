@@ -15,6 +15,7 @@ export type DetailView =
   | 'training'
   | 'postcheck'
   | 'session-report'
+  | 'training-reports'
   | 'hospital-report'
   | 'health-archive'
   | 'devices'

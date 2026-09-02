@@ -279,6 +279,21 @@ text { word-break: break-word; }
 
 .garden-growth-feedback { display:grid; margin-top:16rpx; padding:24rpx; grid-template-columns:88rpx 1fr; align-items:center; gap:18rpx; border:2rpx solid #bde6d5; border-radius:24rpx; background:#effbf5; }.garden-growth-feedback.harvested { border-color:#f0d17b; background:#fff8df; }.garden-growth-feedback image { width:84rpx; height:84rpx; }.garden-growth-feedback view text { display:block; }.garden-growth-feedback view text:first-child { color:#1e293b; font-size:28rpx; font-weight:750; }.garden-growth-feedback view text:last-child { margin-top:7rpx; color:#527068; font-size:21rpx; line-height:1.5; }.garden-growth-feedback.harvested view text:last-child { color:#7a6228; }
 
+/* 精简版：菜园打卡、训练数据与健康管理 */
+.garden-checkin-panel { display:grid; gap:20rpx; padding:0 32rpx 56rpx; }
+.garden-checkin-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:16rpx; }
+.garden-checkin-heading view text { display:block; }.garden-checkin-heading view text:first-child { color:#1e293b; font-size:32rpx; font-weight:700; }.garden-checkin-heading view text:last-child { margin-top:6rpx; color:#64748b; font-size:21rpx; line-height:1.45; }
+.garden-checkin-panel .checkin-hero,.garden-checkin-panel .calendar-card { margin-top:0; }
+.data-screen > .data-panel { margin-top:0; }
+.health-management-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8rpx; }
+.health-management-grid .service-disabled { color:#94a3b8; background:#f8fafc; opacity:1; pointer-events:none; cursor:not-allowed; }
+.health-management-grid .service-disabled > view { background:#e2e8f0; filter:grayscale(1); opacity:.68; }
+.health-management-grid .service-disabled > text:nth-child(2),.health-management-grid .service-disabled > text:last-child { color:#94a3b8; }
+.training-reports-detail { min-height:100%; }
+.public-profile-form { display:grid; gap:18rpx; }
+.public-profile-field { display:grid; gap:8rpx; }.public-profile-field>text:first-child { color:#334155; font-size:22rpx; font-weight:650; }.public-profile-field>input,.public-profile-field>view { min-height:76rpx; padding:0 18rpx; border:1rpx solid #dbe4e1; border-radius:16rpx; background:#f8fafc; }
+.public-profile-field>input { width:100%; box-sizing:border-box; color:#1e293b; font-size:24rpx; }.public-profile-field>view { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:10rpx; }.public-profile-field>view input { width:100%; color:#1e293b; font-size:24rpx; }.public-profile-field>view>text { color:#64748b; font-size:21rpx; }.public-profile-field .field-error { color:#b42318; font-size:19rpx; line-height:1.4; }
+
 .bottom-nav { height:calc(112rpx + env(safe-area-inset-bottom)); padding:8rpx 16rpx env(safe-area-inset-bottom); overflow:hidden; }.bottom-nav button { min-height:96rpx; }
 
 /* 健康档案与扇贝式积分站 */
@@ -308,4 +323,5 @@ text { word-break: break-word; }
   .discomfort-scale text { font-size:15rpx; }
   .precheck-danger-entry { align-items:flex-start; flex-direction:column; }.precheck-danger-entry>text { max-width:none; text-align:left; }
   .precheck-vital-form { grid-template-columns:1fr; }
+  .garden-checkin-panel { padding-right:24rpx; padding-left:24rpx; }
 }
