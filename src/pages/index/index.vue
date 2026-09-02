@@ -132,12 +132,7 @@
                 data-action="ACT-SHOW-GARDEN"
                 @tap="showTodayPage(TODAY_PAGE_GARDEN)"
               >
-                <text>菜园</text
-                ><text
-                  >{{ gardenViewState.cycleDay }}/{{
-                    gardenViewState.cycleLength
-                  }}</text
-                >
+                <text>菜园</text>
               </button>
             </view>
 
@@ -528,73 +523,13 @@
                     class="today-garden-page"
                     data-testid="today-garden-page"
                   >
-                    <RehabGardenPanel :garden="gardenViewState" />
-                    <view
-                      class="garden-checkin-panel"
-                      data-testid="garden-checkin-panel"
-                    >
-                      <view class="garden-checkin-heading">
-                        <view>
-                          <text>打卡记录</text>
-                          <text>有效运动完成后自动记录，每天最多一次</text>
-                        </view>
-                      </view>
-                      <view
-                        class="checkin-hero"
-                        data-testid="garden-checkin-summary"
-                      >
-                        <view>
-                          <text>{{
-                            checkInDone
-                              ? "今天已自动打卡"
-                              : "完成一次有效运动后自动打卡"
-                          }}</text>
-                          <text
-                            >连续 {{ streak }} 天 · 累计
-                            {{ totalCheckInDays }} 天</text
-                          >
-                        </view>
-                        <text>{{ checkInDone ? "✓" : streak }}</text>
-                      </view>
-                      <view
-                        class="calendar-card"
-                        data-testid="garden-checkin-calendar"
-                      >
-                        <view class="calendar-heading"
-                          ><button @tap="shiftCalendarMonth(-1)">‹</button
-                          ><text>{{ calendarTitle }}</text
-                          ><button
-                            :disabled="!canGoNextMonth"
-                            @tap="shiftCalendarMonth(1)"
-                          >
-                            ›
-                          </button></view
-                        >
-                        <view class="calendar-week"
-                          ><text
-                            v-for="day in ['一', '二', '三', '四', '五', '六', '日']"
-                            :key="day"
-                            >{{ day }}</text
-                          ></view
-                        >
-                        <view class="calendar-grid"
-                          ><view
-                            v-for="item in calendarCells"
-                            :key="item.key"
-                            :class="{
-                              blank: item.blank,
-                              done: item.checked,
-                              today: item.today,
-                              future: item.future,
-                            }"
-                            ><text v-if="!item.blank">{{ item.day }}</text
-                            ><image
-                              v-if="item.checked"
-                              src="/static/icons/cabbage-checkin.svg"
-                              mode="aspectFit" /></view></view
-                        >
-                      </view>
-                    </view>
+                    <RehabGardenPanel
+                      :garden="gardenViewState"
+                      :check-in="gardenCheckInViewState"
+                      :section="gardenSection"
+                      @update:section="setGardenSection"
+                      @shift-month="shiftCalendarMonth"
+                    />
                   </view>
                 </scroll-view>
               </swiper-item>
@@ -1920,6 +1855,7 @@ type HealthGoal = "habit" | "weight" | "cardiac";
 type SocialTab = "none" | "team" | "buddy";
 type ScenarioId = "stable" | "attention" | "stop" | "insufficient";
 type TodayPageIndex = 0 | 1;
+type GardenSection = "growth" | "checkin";
 type PreVitalInputMode = "none" | "device" | "manual";
 type PreVitalField =
   | "systolicBloodPressure"
@@ -1964,6 +1900,7 @@ const activePrescriptionItemKey = ref("");
 const todayPageIndex = ref<TodayPageIndex>(TODAY_PAGE_EXERCISE);
 const exerciseScrollTop = ref(0);
 const gardenScrollTop = ref(0);
+const gardenSection = ref<GardenSection>("growth");
 const prescriptionSlide = ref(0);
 const prescriptionGestureActive = ref(false);
 const pendingGardenFeedback = ref<GardenGrowthFeedback | null>(null);
@@ -2426,6 +2363,14 @@ const calendarCells = computed(() =>
 const canGoNextMonth = computed(
   () => calendarMonth.value < currentMonthKey.value,
 );
+const gardenCheckInViewState = computed(() => ({
+  checkedToday: checkInDone.value,
+  streak: streak.value,
+  totalDays: totalCheckInDays.value,
+  calendarTitle: calendarTitle.value,
+  canGoNextMonth: canGoNextMonth.value,
+  calendarCells: calendarCells.value,
+}));
 const teamJoined = computed(() => teamState.value.joined);
 const teamMembers = computed(() => [
   {
@@ -2866,6 +2811,7 @@ function switchMode() {
   detailView.value = "none";
   activeNav.value = "today";
   todayPageIndex.value = TODAY_PAGE_EXERCISE;
+  gardenSection.value = "growth";
   prescriptionSlide.value = 0;
   prescriptionGestureActive.value = false;
 }
@@ -2919,6 +2865,7 @@ function closeDetail() {
   if (closesNewGrowth) {
     activeNav.value = "today";
     todayPageIndex.value = TODAY_PAGE_GARDEN;
+    gardenSection.value = "growth";
   } else {
     activeNav.value = detailReturnNav.value;
     if (closingSessionReport && detailReturnNav.value === "today")
@@ -2932,10 +2879,12 @@ function switchNav(nav: NavId) {
 function openGardenCheckIn() {
   activeNav.value = "today";
   todayPageIndex.value = TODAY_PAGE_GARDEN;
+  gardenSection.value = "checkin";
   gardenScrollTop.value = 0;
-  nextTick(() => {
-    gardenScrollTop.value = 999999;
-  });
+}
+function setGardenSection(section: GardenSection) {
+  gardenSection.value = section;
+  gardenScrollTop.value = 0;
 }
 function showTodayPage(index: TodayPageIndex) {
   prescriptionGestureActive.value = false;
@@ -4026,6 +3975,7 @@ function resetPrototype() {
   healthGoal.value = "habit";
   activeNav.value = "today";
   todayPageIndex.value = TODAY_PAGE_EXERCISE;
+  gardenSection.value = "growth";
   prescriptionSlide.value = 0;
   prescriptionGestureActive.value = false;
   detailView.value = "none";
@@ -4146,6 +4096,7 @@ onMounted(() => {
     appReady.value = true;
     activeNav.value = "today";
     todayPageIndex.value = TODAY_PAGE_EXERCISE;
+    gardenSection.value = "growth";
     focusFirstIncompletePrescription();
     persistState();
   }

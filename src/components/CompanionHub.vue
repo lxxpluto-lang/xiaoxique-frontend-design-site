@@ -9,8 +9,8 @@
       <view class="companion-hero__art"><view class="companion-heart">♥</view><image src="/static/rive-source/v4/master/magpie-neutral-master-v4.png" mode="aspectFit" /></view>
     </view>
     <view class="companion-entry-grid">
-      <button :class="{ active: activeTab === 'buddy', unavailable: disabled }" :disabled="disabled" data-testid="knowledge-buddy-entry" @tap="open('buddy')"><view class="companion-entry-icon companion-entry-icon--buddy">伴</view><text>健康搭子</text><text>{{ disabled ? '暂未开放' : buddyState.connected ? '陪伴第 ' + buddyDay + ' 天' : '找一位同行者' }}</text></button>
-      <button :class="{ active: activeTab === 'team', unavailable: disabled }" :disabled="disabled" data-testid="knowledge-team-entry" @tap="open('team')"><view class="companion-entry-icon">队</view><text>健康小队</text><text>{{ disabled ? '暂未开放' : teamJoined ? teamCheckedCount + '/' + teamMembers.length + ' 已打卡' : '组队打卡' }}</text></button>
+      <button :class="{ active: activeTab === 'buddy', unavailable: disabled }" :disabled="disabled" :aria-disabled="disabled ? 'true' : 'false'" data-testid="knowledge-buddy-entry" @tap="open('buddy')"><view class="companion-entry-icon companion-entry-icon--buddy">伴</view><text>健康搭子</text><text>{{ disabled ? '暂未开放' : buddyState.connected ? '陪伴第 ' + buddyDay + ' 天' : '找一位同行者' }}</text></button>
+      <button :class="{ active: activeTab === 'team', unavailable: disabled }" :disabled="disabled" :aria-disabled="disabled ? 'true' : 'false'" data-testid="knowledge-team-entry" @tap="open('team')"><view class="companion-entry-icon">队</view><text>健康小队</text><text>{{ disabled ? '暂未开放' : teamJoined ? teamCheckedCount + '/' + teamMembers.length + ' 已打卡' : '组队打卡' }}</text></button>
     </view>
 
     <view v-if="!entryOnly && activeTab === 'team'" class="social-panel knowledge-social-panel" data-testid="team-panel">
@@ -94,9 +94,8 @@ function open(tab: 'team' | 'buddy') { if (props.disabled) return; emit('update:
 .companion-entry-grid > button::after { border: 0; }
 .companion-entry-grid > button:first-child { border-left: 0; }
 .companion-entry-grid > button.active { border-color: transparent; background: #fbfefd; }
-.companion-entry-grid > button.unavailable { color:#94a3b8; background:#f8fafc; opacity:1; }
-.companion-entry-grid > button.unavailable .companion-entry-icon { color:#94a3b8; background:#e2e8f0; }
-.companion-entry-grid > button.unavailable > text:nth-child(2),.companion-entry-grid > button.unavailable > text:last-child { color:#94a3b8; }
+.companion-entry-grid > button.unavailable { background:#fff; opacity:1; pointer-events:none; cursor:not-allowed; }
+.companion-entry-grid > button.unavailable > text:last-child { color:#94a3b8; }
 .companion-entry-icon { display: flex; align-items: center; justify-content: center; width: 62rpx; height: 62rpx; border-radius: 19rpx; color: #36806e; background: #e6f6ed; font-size: 22rpx; font-weight: 700; }
 .companion-entry-icon--buddy { color: #d16f43; background: #fff0e9; }
 .companion-entry-icon--checkin { color: #9b7310; background: #fff5d5; }

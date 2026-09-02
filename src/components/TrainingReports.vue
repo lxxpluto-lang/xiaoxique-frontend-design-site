@@ -1,6 +1,21 @@
 <template>
   <view class="reports" data-testid="training-reports">
-    <view class="report-tabs"><button :class="{ active: tab === 'daily' }" @tap="tab = 'daily'">单次报告</button><button :class="{ active: tab === 'monthly' }" @tap="tab = 'monthly'">阶段性报告</button></view>
+    <view class="report-tabs" role="tablist">
+      <button
+        :class="{ active: tab === 'daily' }"
+        :aria-selected="tab === 'daily' ? 'true' : 'false'"
+        data-testid="report-tab-daily"
+        role="tab"
+        @tap="selectTab('daily')"
+      >单次报告</button>
+      <button
+        :class="{ active: tab === 'monthly' }"
+        :aria-selected="tab === 'monthly' ? 'true' : 'false'"
+        data-testid="report-tab-monthly"
+        role="tab"
+        @tap="selectTab('monthly')"
+      >阶段性报告</button>
+    </view>
 
     <template v-if="tab === 'daily'">
       <view v-if="selectedDaily" class="report-detail">
@@ -49,6 +64,11 @@ const props = defineProps<{ sessions: TrainingSession[]; prescriptionItems: Shar
 const tab = ref<'daily' | 'monthly'>('daily')
 const selectedDate = ref('')
 const selectedMonth = ref('')
+function selectTab(nextTab: 'daily' | 'monthly') {
+  tab.value = nextTab
+  selectedDate.value = ''
+  selectedMonth.value = ''
+}
 const completedSessions = computed(() => props.sessions.filter((item) => item.status === 'completed'))
 const dailyReports = computed(() => {
   const dates = [...new Set(props.sessions.map((item) => item.localDate || item.createdAt.slice(0,10)))]
@@ -84,7 +104,7 @@ function stageAverage(key:'heartRate'|'borg'){const values=monthSessions.value.f
 </script>
 
 <style scoped lang="scss">
-.reports { display:grid; gap:20rpx; }.report-tabs { display:grid; grid-template-columns:1fr 1fr; padding:8rpx; border-radius:18rpx; background:#fff; }.report-tabs button { min-height:72rpx; border-radius:14rpx; color:#64748b; font-size:25rpx; }.report-tabs button.active { color:#fff; background:#0ea5a4; font-weight:700; }
+.reports { display:grid; align-content:start; gap:20rpx; }.report-tabs { display:grid; min-height:80rpx; grid-template-columns:1fr 1fr; padding:8rpx; border:1rpx solid #dce7e3; border-radius:18rpx; background:#eef4f1; }.report-tabs button { min-height:64rpx; border-radius:14rpx; color:#64748b; background:transparent; font-size:25rpx; font-weight:650; }.report-tabs button.active { color:#0f766e; background:#fff; font-weight:750; box-shadow:0 4rpx 12rpx rgba(15,118,110,.1); }
 .report-list { display:block; overflow:hidden; border-radius:20rpx; background:#fff; box-shadow:0 4rpx 16rpx rgba(15,23,42,.05); }.report-list>button { display:grid; width:100%; min-height:92rpx; padding:18rpx 20rpx; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:16rpx; border-top:1rpx solid #eef2f1; text-align:left; }.report-list>button:first-child { border-top:0; }.report-list-date { color:#1e293b; font-size:24rpx; font-weight:700; white-space:nowrap; }.report-list-summary { min-width:0; overflow:hidden; color:#64748b; font-size:21rpx; text-overflow:ellipsis; white-space:nowrap; }.report-list-tail { display:flex; align-items:center; gap:8rpx; color:#0f766e; white-space:nowrap; }.report-list-tail text { font-size:20rpx; }.report-list-tail text:last-child { font-size:28rpx; }.empty { padding:44rpx 28rpx; color:#64748b; background:#fff; font-size:24rpx; text-align:center; }
 .back { color:#0f766e; font-size:24rpx; }.report-detail { display:grid; gap:18rpx; }.report-hero,.stage-hero { display:flex; padding:30rpx; flex-direction:column; border-radius:24rpx; color:#fff; background:linear-gradient(135deg,#0f766e,#0ea5a4); }.report-hero text:first-child { color:#ccfbf1; font-size:21rpx; }.report-hero text:nth-child(2),.stage-hero>text:first-child { margin-top:8rpx; font-size:34rpx; font-weight:700; }.report-hero text:last-child,.stage-hero>text:nth-child(2) { margin-top:10rpx; color:#ccfbf1; font-size:23rpx; line-height:1.5; }.report-section { padding:26rpx; border-radius:24rpx; background:#fff; box-shadow:0 4rpx 16rpx rgba(15,23,42,.04); }.section-title { display:block; color:#1e293b; font-size:28rpx; font-weight:700; }.patient-summary { display:block; margin-top:12rpx; color:#475569; font-size:24rpx; line-height:1.65; }.metric-grid { display:grid; margin-top:20rpx; grid-template-columns:1fr 1fr; gap:12rpx; }.metric-grid view { display:flex; padding:18rpx; align-items:center; flex-direction:column; border-radius:16rpx; background:#f8fafc; }.metric-grid view text:first-child { color:#0f766e; font-size:31rpx; font-weight:700; }.metric-grid view text:last-child { margin-top:5rpx; color:#64748b; font-size:20rpx; }.execution-row { display:flex; min-height:86rpx; align-items:center; justify-content:space-between; border-top:1rpx solid #f1f5f9; }.execution-row view { display:flex; min-width:0; flex-direction:column; gap:5rpx; }.execution-row view text:first-child { color:#1e293b; font-size:25rpx; font-weight:600; }.execution-row view text:last-child { color:#64748b; font-size:20rpx; }.execution-row>text { color:#94a3b8; font-size:21rpx; }.execution-row>text.done { color:#0ea5a4; }.session-card { display:grid; padding:20rpx 0; grid-template-columns:1fr auto; gap:10rpx; border-top:1rpx solid #f1f5f9; }.session-card>view:first-child { display:flex; flex-direction:column; gap:5rpx; }.session-card>view:first-child text:first-child { color:#1e293b; font-size:26rpx; font-weight:650; }.session-card text { color:#64748b; font-size:20rpx; }.session-metrics { display:grid; grid-column:1/3; grid-template-columns:1fr 1fr; gap:8rpx; }.session-metrics text { padding:10rpx; border-radius:10rpx; background:#f8fafc; }.advice { grid-column:1/3; padding:14rpx; border-radius:12rpx; color:#475569!important; background:#ecfdf5; line-height:1.5; }.boundary { background:#f8fafc; }.boundary>text:last-child { display:block; margin-top:10rpx; color:#64748b; font-size:22rpx; line-height:1.6; }.stage-hero>view { display:grid; margin-top:24rpx; grid-template-columns:repeat(3,1fr); }.stage-hero>view text:nth-child(odd) { font-size:32rpx; font-weight:700; }.stage-hero>view text:nth-child(even) { color:#ccfbf1; font-size:18rpx; }
 </style>
