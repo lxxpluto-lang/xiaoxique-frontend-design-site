@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "updatedAt": "2026-08-19T08:10:00+08:00",
   "hospital": {
-    "id": "BJFTRH-DEMO",
-    "name": "北京市丰台康复医院",
-    "shortName": "丰台康复医院"
+    "id": "BJXXXRH-DEMO",
+    "name": "北京市xxx康复医院",
+    "shortName": "xxx康复医院"
   },
   "patient": {
     "patientId": "P-DEMO-001",
