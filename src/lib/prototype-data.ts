@@ -1,4 +1,5 @@
 export type UserMode = 'cardiac' | 'public'
+export type UserType = 'patient' | 'public' | 'mem'
 export type NavId = 'today' | 'discover' | 'assistant' | 'data' | 'profile'
 export type ExerciseCategoryId = 'traditional' | 'aerobic' | 'strength' | 'mobility' | 'recovery'
 export type ExerciseGameId = 'baduanjin' | 'taichi' | 'walking' | 'power-bike' | 'resistance' | 'stretch' | 'balance' | 'music' | 'breathing'

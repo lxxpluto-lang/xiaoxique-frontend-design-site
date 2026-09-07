@@ -751,7 +751,40 @@
                   ? '医疗字段只读；个人目标和设备授权由你管理。'
                   : '只保存姓名、出生日期、性别和健康目标，不收集不必要的信息。'
               "
-            /><view
+            /><view class="archive-card user-type-card" data-testid="profile-user-type-card">
+              <text class="form-title">用户类型</text>
+              <text class="archive-copy">选择后可看到对应的档案入口；医院数据仅使用本机演示数据关联。</text>
+              <view class="user-type-options" data-testid="profile-user-type-options">
+                <button
+                  v-for="item in userTypeOptions"
+                  :key="item.value"
+                  :class="{ active: publicProfileDraft.userType === item.value }"
+                  :data-testid="'profile-user-type-' + item.value"
+                  @tap="publicProfileDraft.userType = item.value"
+                >
+                  <text>{{ item.label }}</text>
+                  <text>{{ item.copy }}</text>
+                </button>
+              </view>
+              <view v-if="publicProfileDraft.userType === 'patient'" class="patient-link-form" data-testid="patient-link-form">
+                <label class="public-profile-field">
+                  <text>医院</text>
+                  <input v-model="publicProfileDraft.hospitalName" data-testid="patient-hospital-name" maxlength="40" placeholder="请输入医院名称" />
+                </label>
+                <label class="public-profile-field">
+                  <text>档案号</text>
+                  <input v-model="publicProfileDraft.recordNumber" data-testid="patient-record-number" maxlength="24" placeholder="输入医院档案号，如 P-256572" />
+                </label>
+                <view class="patient-link-status" :class="'is-' + patientAssociation.status" data-testid="patient-link-status">
+                  <text>{{ patientAssociation.label }}</text>
+                  <text v-if="patientAssociation.status === 'matched'">{{ sharedPatientFixture.patient.maskedName }} · {{ sharedPatientFixture.patient.rehabStage }} · {{ sharedPatientFixture.prescription.version }}</text>
+                </view>
+              </view>
+              <view v-else-if="publicProfileDraft.userType === 'mem'" class="profile-type-hint" data-testid="mem-user-type-hint">
+                MEM身份与兑换邀请码分开管理；如需使用M币权益，请在“健康积分与权益”中完成演示解锁。
+              </view>
+              <button class="archive-action" data-testid="profile-user-type-save" @tap="saveUserProfileSettings">保存用户身份</button>
+            </view><view
               v-if="mode === 'public'"
               class="archive-card public-profile-form"
               data-testid="public-profile-form"
@@ -1180,6 +1213,7 @@ import {
   type TrainingSession,
   type TrainingStatus,
   type UserMode,
+  type UserType,
   type VitalSnapshot,
   type WalletState,
 } from "@/lib/prototype-data";
@@ -1209,6 +1243,9 @@ interface PublicHealthProfile {
   name: string;
   birthDate: string;
   gender: PublicGender;
+  userType: UserType;
+  hospitalName: string;
+  recordNumber: string;
 }
 
 const STORAGE_KEY = "magpie-prototype-state";
@@ -1279,17 +1316,28 @@ const publicHealthProfile = ref<PublicHealthProfile>({
   name: "运动伙伴",
   birthDate: "",
   gender: "undisclosed",
+  userType: "public",
+  hospitalName: "",
+  recordNumber: "",
 });
 const publicProfileDraft = ref<{
   name: string;
   birthDate: string;
   gender: PublicGender;
-}>({ name: "运动伙伴", birthDate: "", gender: "undisclosed" });
+  userType: UserType;
+  hospitalName: string;
+  recordNumber: string;
+}>({ name: "运动伙伴", birthDate: "", gender: "undisclosed", userType: "public", hospitalName: "", recordNumber: "" });
 const publicProfileErrors = ref({ name: "", birthDate: "" });
 const publicGenderOptions: { value: PublicGender; label: string }[] = [
   { value: "male", label: "男" },
   { value: "female", label: "女" },
   { value: "undisclosed", label: "不便透露" },
+];
+const userTypeOptions: { value: UserType; label: string; copy: string }[] = [
+  { value: "patient", label: "医院患者", copy: "关联医院康复档案" },
+  { value: "public", label: "普通用户", copy: "记录日常运动" },
+  { value: "mem", label: "MEM用户", copy: "使用MEM专属权益" },
 ];
 const showAiBoundary = ref(false);
 const showStopReason = ref(false);
@@ -1530,6 +1578,22 @@ const healthGoalLabel = computed(() =>
 const publicProfileAge = computed(() =>
   calculateAgeFromBirthDate(publicProfileDraft.value.birthDate),
 );
+const patientAssociation = computed(() => {
+  const hospitalName = publicProfileDraft.value.hospitalName.trim();
+  const recordNumber = publicProfileDraft.value.recordNumber.trim();
+  if (!hospitalName || !recordNumber) {
+    return { status: "incomplete", label: "填写医院和档案号后关联医院数据" };
+  }
+  const knownHospital =
+    hospitalName === sharedPatientFixture.hospital.name ||
+    hospitalName === sharedPatientFixture.hospital.shortName ||
+    sharedPatientFixture.hospital.name.includes(hospitalName) ||
+    hospitalName.includes(sharedPatientFixture.hospital.shortName);
+  if (knownHospital && isSupportedPatientNo(recordNumber)) {
+    return { status: "matched", label: "已关联本机医院演示数据" };
+  }
+  return { status: "unmatched", label: "暂未匹配本机医院数据，真实医院接口尚未接入" };
+});
 const activeTrainingTitle = computed(
   () => activePrescriptionTask.value?.item.project || selectedGame.value.title,
 );
@@ -2153,6 +2217,12 @@ function chooseMode(value: UserMode) {
   mode.value = value;
   if (value === "cardiac") {
     healthGoal.value = "cardiac";
+    publicHealthProfile.value = {
+      ...publicHealthProfile.value,
+      userType: "patient",
+      hospitalName: publicHealthProfile.value.hospitalName || sharedPatientFixture.hospital.shortName,
+    };
+    syncPublicProfileDraft();
     onboardingStep.value = "binding";
   } else {
     healthGoal.value = "habit";
@@ -2171,9 +2241,18 @@ function bindPatient() {
   }
   bindingState.value = "loading";
   setTimeout(() => {
-    bindingState.value = isSupportedPatientNo(visitNumber.value)
-      ? "matched"
-      : "error";
+    if (isSupportedPatientNo(visitNumber.value)) {
+      publicHealthProfile.value = {
+        ...publicHealthProfile.value,
+        userType: "patient",
+        hospitalName: sharedPatientFixture.hospital.shortName,
+        recordNumber: visitNumber.value.trim(),
+      };
+      syncPublicProfileDraft();
+      bindingState.value = "matched";
+    } else {
+      bindingState.value = "error";
+    }
   }, 420);
 }
 function enterApp() {
@@ -2210,8 +2289,32 @@ function syncPublicProfileDraft() {
     name: publicHealthProfile.value.name,
     birthDate: publicHealthProfile.value.birthDate,
     gender: publicHealthProfile.value.gender,
+    userType: publicHealthProfile.value.userType,
+    hospitalName: publicHealthProfile.value.hospitalName,
+    recordNumber: publicHealthProfile.value.recordNumber,
   };
   publicProfileErrors.value = { name: "", birthDate: "" };
+}
+function saveUserProfileSettings() {
+  const userType = publicProfileDraft.value.userType;
+  const hospitalName = publicProfileDraft.value.hospitalName.trim();
+  const recordNumber = publicProfileDraft.value.recordNumber.trim();
+  if (userType === "patient" && (!hospitalName || !recordNumber)) {
+    uni.showToast({ title: "请填写医院和档案号", icon: "none" });
+    return;
+  }
+  publicHealthProfile.value = {
+    ...publicHealthProfile.value,
+    userType,
+    hospitalName: userType === "patient" ? hospitalName : "",
+    recordNumber: userType === "patient" ? recordNumber : "",
+  };
+  publicProfileDraft.value = { ...publicProfileDraft.value, hospitalName: publicHealthProfile.value.hospitalName, recordNumber: publicHealthProfile.value.recordNumber };
+  persistState();
+  uni.showToast({
+    title: userType === "patient" && patientAssociation.value.status === "matched" ? "已关联医院数据" : "用户身份已保存",
+    icon: "success",
+  });
 }
 function setPublicBirthDate(event: any) {
   publicProfileDraft.value.birthDate = String(event.detail.value || "");
@@ -2233,6 +2336,9 @@ function savePublicProfile() {
     name,
     birthDate,
     gender: publicProfileDraft.value.gender,
+    userType: publicProfileDraft.value.userType,
+    hospitalName: publicHealthProfile.value.hospitalName,
+    recordNumber: publicHealthProfile.value.recordNumber,
   };
   publicProfileDraft.value = { ...publicHealthProfile.value };
   persistState();
@@ -3315,7 +3421,7 @@ function evaluateMemChallenge() {
   }
 }
 
-function normalizePublicHealthProfile(value: any): PublicHealthProfile {
+function normalizePublicHealthProfile(value: any, fallbackUserType: UserType = "public"): PublicHealthProfile {
   const name =
     typeof value?.name === "string" ? value.name.trim().slice(0, 20) : "";
   const birthDate =
@@ -3328,10 +3434,20 @@ function normalizePublicHealthProfile(value: any): PublicHealthProfile {
   )
     ? value.gender
     : "undisclosed";
+  const userType: UserType = ["patient", "public", "mem"].includes(value?.userType)
+    ? value.userType
+    : fallbackUserType;
+  const hospitalName =
+    typeof value?.hospitalName === "string" ? value.hospitalName.trim().slice(0, 40) : "";
+  const recordNumber =
+    typeof value?.recordNumber === "string" ? value.recordNumber.trim().slice(0, 24) : "";
   return {
     name: name || "运动伙伴",
     birthDate,
     gender,
+    userType,
+    hospitalName,
+    recordNumber,
   };
 }
 
@@ -3397,6 +3513,9 @@ function resetPrototype() {
     name: "运动伙伴",
     birthDate: "",
     gender: "undisclosed",
+    userType: "public",
+    hospitalName: "",
+    recordNumber: "",
   };
   syncPublicProfileDraft();
 }
@@ -3415,9 +3534,7 @@ onMounted(() => {
         : saved.healthGoal === "cardiac"
           ? "cardiac"
           : "habit";
-    publicHealthProfile.value = normalizePublicHealthProfile(
-      saved.publicHealthProfile,
-    );
+    publicHealthProfile.value = normalizePublicHealthProfile(saved.publicHealthProfile, mode.value === "cardiac" ? "patient" : "public");
     syncPublicProfileDraft();
     wallet.value = saved.wallet
       ? {

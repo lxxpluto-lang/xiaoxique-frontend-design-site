@@ -3038,6 +3038,82 @@ text {
   display: grid;
   gap: 18rpx;
 }
+.user-type-card {
+  display: grid;
+  gap: 16rpx;
+}
+.user-type-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8rpx;
+  padding: 6rpx;
+  border-radius: 18rpx;
+  background: #edf2f0;
+}
+.user-type-options button {
+  display: grid;
+  min-height: 92rpx;
+  padding: 10rpx 6rpx;
+  align-content: center;
+  gap: 5rpx;
+  border-radius: 14rpx;
+  color: var(--color-text-secondary);
+  font-size: 23rpx;
+  text-align: center;
+}
+.user-type-options button text {
+  display: block;
+}
+.user-type-options button text:last-child {
+  color: #78908a;
+  font-size: 18rpx;
+  line-height: 1.35;
+}
+.user-type-options button.active {
+  color: #fff;
+  background: var(--color-brand);
+  font-weight: 700;
+  box-shadow: 0 5rpx 12rpx rgba(14, 165, 164, .18);
+}
+.user-type-options button.active text:last-child {
+  color: #d9fff4;
+}
+.patient-link-form {
+  display: grid;
+  gap: 16rpx;
+  padding-top: 4rpx;
+}
+.patient-link-status {
+  display: grid;
+  gap: 6rpx;
+  padding: 15rpx 17rpx;
+  border-radius: 16rpx;
+  color: #637a72;
+  background: #f1f7f4;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+.patient-link-status.is-matched {
+  color: #087b65;
+  background: #e8f8f0;
+}
+.patient-link-status.is-incomplete,
+.patient-link-status.is-unmatched {
+  color: #8a6b39;
+  background: #fff8e8;
+}
+.patient-link-status text:last-child {
+  color: inherit;
+  font-size: 21rpx;
+}
+.profile-type-hint {
+  padding: 15rpx 17rpx;
+  border-radius: 16rpx;
+  color: #537068;
+  background: #eefaf3;
+  font-size: 22rpx;
+  line-height: 1.6;
+}
 .public-profile-field {
   display: grid;
   gap: 8rpx;
