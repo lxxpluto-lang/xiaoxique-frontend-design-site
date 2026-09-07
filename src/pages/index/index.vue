@@ -1,6 +1,8 @@
 <template>
   <view class="prototype-shell" :class="{ 'is-training': detailView === 'training', 'is-report': detailView === 'session-report' }" :data-user-mode="mode" :data-state="trainingStatus">
-    <OnboardingView v-if="!appReady"
+    <PrototypeLogin v-if="accountLoginVisible" :display-name="displayName" @continue="continueAccountSwitch" @back="closeAccountLogin" />
+
+    <OnboardingView v-else-if="!appReady"
       :step="onboardingStep" :binding-state="bindingState" v-model:visit-number="visitNumber"
       :hospital="sharedPatientFixture.hospital.name" :patient="sharedPatientFixture.patient.maskedName"
       :stage="sharedPatientFixture.patient.rehabStage" :version="sharedPatientFixture.prescription.version"
@@ -176,7 +178,7 @@
             @reports="openTrainingReports" @privacy="showAiBoundary = true" @policy="goDetail('prototype-policy')"
             @reviews="goDetail('doctor-reviews')" @team="openSocial('team')" @buddy="openSocial('buddy')"
             @rewards="goDetail('reward-store')" @mini-report="goDetail('hospital-report')"
-            @switch-mode="switchMode" @reset="resetPrototype" />
+            @switch-mode="switchMode" @switch-account="openAccountLogin" @reset="resetPrototype" />
         </scroll-view>
           <AssistantPanel
             v-if="activeNav === 'assistant'"
@@ -1126,6 +1128,7 @@ import StepIndicator from "@/components/StepIndicator.vue";
 import TrainingExperience from "@/components/TrainingExperience.vue";
 import TrainingReports from "@/components/TrainingReports.vue";
 import OnboardingView from "@/components/OnboardingView.vue";
+import PrototypeLogin from "@/components/PrototypeLogin.vue";
 import RehabMiniReport from "@/components/RehabMiniReport.vue";
 import SessionReportSummary from "@/components/SessionReportSummary.vue";
 import PrescriptionTaskCard from "@/components/PrescriptionTaskCard.vue";
@@ -1214,6 +1217,7 @@ const GARDEN_CYCLE_LENGTH = 7;
 const magpieAsset =
   "/static/replica-v7/welcome.png";
 const appReady = ref(false);
+const accountLoginVisible = ref(false);
 const prototypeDemoEnabled = ref(false);
 // #ifdef H5
 prototypeDemoEnabled.value = ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname)
@@ -2186,6 +2190,16 @@ function switchMode() {
   activeNav.value = "today";
   gardenSection.value = "growth";
   prescriptionSlide.value = 0;
+}
+function openAccountLogin() {
+  accountLoginVisible.value = true;
+}
+function closeAccountLogin() {
+  accountLoginVisible.value = false;
+}
+function continueAccountSwitch() {
+  accountLoginVisible.value = false;
+  switchMode();
 }
 function setHealthGoal(goal: HealthGoal) {
   healthGoal.value = goal;
