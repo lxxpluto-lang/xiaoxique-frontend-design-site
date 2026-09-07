@@ -10,7 +10,7 @@
     </view></view>
     <button class="v7-profile-privacy-note" data-testid="profile-privacy" @tap="emit('privacy')">健康数据仅用于康复陪伴 · 隐私与医疗边界 ›</button>
     <button class="v7-profile-account-action" data-testid="profile-switch-account" @tap="emit('switch-account')"><view><text>切换账号</text><text>返回账号入口，不清除本机训练记录</text></view><text>›</text></button>
-    <view v-if="demoEnabled" class="v7-profile-demo-workspace" data-testid="prototype-demo-tools"><text>本地原型演示工具</text><button @tap="emit('policy')">训练状态策略 ›</button><button @tap="emit('reviews')">医生审核队列 ›</button><button data-testid="preview-team" @tap="emit('team')">健康小队 ›</button><button data-testid="preview-buddy" @tap="emit('buddy')">健康搭子 ›</button><button data-testid="preview-rewards" @tap="emit('rewards')">健康积分与权益 ›</button><button data-testid="profile-mini-report" @tap="emit('mini-report')">康复小报告 ›</button><button @tap="emit('switch-mode')">切换使用模式</button><button @tap="emit('reset')">重置原型</button></view>
+    <view v-if="demoEnabled" class="v7-profile-demo-workspace" data-testid="prototype-demo-tools"><text>本地原型演示工具</text><button data-testid="profile-user-type-demo" @tap="emit('archive')">健康档案与医院关联 ›</button><button @tap="emit('policy')">训练状态策略 ›</button><button @tap="emit('reviews')">医生审核队列 ›</button><button data-testid="preview-team" @tap="emit('team')">健康小队 ›</button><button data-testid="preview-buddy" @tap="emit('buddy')">健康搭子 ›</button><button data-testid="preview-rewards" @tap="emit('rewards')">健康积分与权益 ›</button><button data-testid="profile-mini-report" @tap="emit('mini-report')">康复小报告 ›</button><button @tap="emit('switch-mode')">切换使用模式</button><button @tap="emit('reset')">重置原型</button></view>
   </view>
 </template>
 <script setup lang="ts">
