@@ -1,9 +1,5 @@
 <template>
   <view class="v7-today" data-testid="today-screen">
-    <view class="v7-home-welcome-row">
-      <image src="/static/replica-v7/welcome.png" mode="aspectFit" />
-      <view><text class="v7-home-welcome-title">{{ greeting }}，{{ displayName }}</text><text class="v7-home-welcome-copy">{{ mode === 'cardiac' ? '今天也按医生计划，稳稳向前' : '选择适合今天状态的一项运动' }}</text></view>
-    </view>
     <view class="v7-home-summary-card">
       <view class="v7-home-summary-head"><view><text class="v7-home-summary-title">{{ checkedToday ? '今天已完成打卡' : '今日计划待完成' }}</text><text class="v7-home-summary-copy">{{ checkedToday ? '按状态休息，不必为积分额外加量' : '完成 1 项有效运动即可打卡' }}</text></view><button data-testid="home-checkin" @tap="emit('checkin')">打卡日历 ›</button></view>
       <view class="v7-home-summary-numbers"><view><text>{{ weeklyDays }}<text>/7</text></text><text>本周训练</text></view><view><text>{{ minutes }}<text>分钟</text></text><text>今日运动</text></view><view><text>{{ streak }}<text>天</text></text><text>连续打卡</text></view></view>
