@@ -35,6 +35,7 @@
         />
         <MagpieMotion
           v-else
+          :paused="paused"
           :label="activity.title + '示范动作'"
           :video-src="activity.video"
           :poster="activity.poster"
@@ -46,13 +47,13 @@
       </view>
       <view class="training-pane">
         <text class="pane-heading">我的画面</text>
-        <CameraPreview @status="emit('camera-status', $event)" />
+        <CameraPreview :paused="paused" @status="emit('camera-status', $event)" />
       </view>
       </view>
     </view>
 
     <view v-else-if="game.interaction === 'rep-game'" class="game-stage resistance-stage">
-      <image class="game-mascot" src="/static/rive-source/v4/master/magpie-neutral-master-v4.png" mode="aspectFit" />
+      <image class="game-mascot" src="/static/replica-v7/growth-bird.png" mode="aspectFit" />
       <text class="game-kicker">托举小喜鹊</text>
       <text class="game-title">跟随节奏，完成 12 次动作</text>
       <view class="rep-progress"><view :style="{ width: Math.min(100, repCount / 12 * 100) + '%' }" /></view>
@@ -64,7 +65,8 @@
     <view v-else class="game-stage rhythm-stage">
       <MagpieMotion
         class="rhythm-motion"
-        :label="activity.title"
+        :paused="paused"
+          :label="activity.title"
         :video-src="activity.video"
         :poster="activity.poster"
         :riv-src="activity.rive.enabled ? activity.rive.src : ''"
@@ -144,35 +146,215 @@ const emit = defineEmits<{
 </script>
 
 <style scoped lang="scss">
-.experience { width: 100%; }
-.camera-training { display: grid; grid-template-columns: 1fr; gap: 10rpx; }
-.segment-card { padding: 10rpx 4rpx 12rpx; background: transparent; }
-.segment-heading { display: flex; align-items: center; justify-content: space-between; gap: 12rpx; }
-.segment-heading > text:first-child { overflow: hidden; color: #1e293b; font-size: 22rpx; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }.segment-heading > text:last-child { color: #0f766e; font-size: 21rpx; font-weight: 760; }
-.segment-dots { display: grid; margin-top: 9rpx; grid-template-columns: repeat(8, 1fr); gap: 7rpx; }.segment-dots view { height: 7rpx; border-radius: 999rpx; background: #dce6e3; }.segment-dots view.done { background: #74c7b3; }.segment-dots view.active { background: #0f8b72; }
-.dual-camera-stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8rpx; }
-.training-pane { position: relative; height: 860rpx; overflow: hidden; border: 2rpx solid #cde5df; border-radius: 18rpx; background: #dce9e5; }.training-pane:nth-child(2) { height: 860rpx; }
-.pane-heading { position: absolute; z-index: 4; top: 0; left: 0; right: 0; padding: 12rpx 8rpx; color: #fff; background: rgba(16,75,64,.88); font-size: 19rpx; font-weight: 700; text-align: center; }
-.baduanjin-course-video { display: block; width: 100%; height: 100%; background: #000; }
-.score { color: #0f766e; font-size: 48rpx; font-weight: 700; }
-.prototype-label { display: block; color: #64748b; font-size: 22rpx; line-height: 1.5; text-align: center; }
-.game-stage { display: flex; min-height: 620rpx; padding: 32rpx; align-items: center; flex-direction: column; border: 0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }
-.game-mascot { width: 300rpx; height: 260rpx; }
-.game-kicker { color: #0f766e; font-size: 24rpx; font-weight: 600; }
-.game-title { margin-top: 8rpx; color: #1e293b; font-size: 32rpx; font-weight: 600; }
-.rep-progress { width: 100%; height: 18rpx; margin-top: 34rpx; overflow: hidden; border-radius: 999rpx; background: #ebeef2; }
-.rep-progress view { height: 100%; border-radius: inherit; background: #0ea5a4; transition: width 0.2s ease; }
-.rep-count { display: flex; align-items: baseline; gap: 8rpx; margin: 26rpx 0; color: #64748b; }
-.rep-count text:first-child { color: #1e293b; font-size: 72rpx; font-weight: 700; }
-.game-action, .beat-button { display: flex; width: 100%; min-height: 88rpx; align-items: center; justify-content: center; border-radius: 16rpx; color: #fff; font-size: 32rpx; font-weight: 600; background: #0ea5a4; }
-.game-action[disabled], .beat-button[disabled] { opacity: 0.55; }
-.resistance-stage .prototype-label { margin-top: 24rpx; }
-.rhythm-stage { position: relative; overflow: hidden; }
-.rhythm-motion { width: calc(100% + 64rpx); height: 420rpx; margin: -32rpx -32rpx 24rpx; background: #000; }
-.rhythm-copy { display: flex; align-items: center; flex-direction: column; }
-.rhythm-stats { display: grid; width: 100%; margin: 28rpx 0; grid-template-columns: repeat(3, 1fr); gap: 12rpx; }
-.rhythm-stats view { display: flex; padding: 18rpx 8rpx; align-items: center; flex-direction: column; border-radius: 16rpx; color: #64748b; font-size: 22rpx; background: #f8fafc; }
-.beat-button { gap: 16rpx; min-height: 112rpx; }
-.beat-button text:first-child { font-size: 50rpx; }
-.rhythm-stage .prototype-label { margin-top: 22rpx; }
+.experience {
+  width: 100%;
+}
+.camera-training {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10rpx;
+}
+.segment-card {
+  padding: 10rpx 4rpx 12rpx;
+  background: transparent;
+}
+.segment-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+.segment-heading > text:first-child {
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 25rpx;
+  color: #e4fff0;
+}
+.segment-heading > text:last-child {
+  font-size: 23rpx;
+  font-weight: 760;
+  color: #a5edd2;
+}
+.segment-dots {
+  display: grid;
+  margin-top: 9rpx;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 7rpx;
+}
+.segment-dots view {
+  height: 7rpx;
+  border-radius: 999rpx;
+  background: #256c5d;
+}
+.segment-dots view.done {
+  background: #74c7b3;
+}
+.segment-dots view.active {
+  background: #5be39e;
+}
+.dual-camera-stage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8rpx;
+}
+.training-pane {
+  position: relative;
+  overflow: hidden;
+  height: 650rpx;
+  border: 2rpx solid #77b9a7;
+  border-radius: 28rpx;
+  background: #254f44;
+}
+.training-pane:nth-child(2) {
+  height: 650rpx;
+}
+.pane-heading {
+  position: absolute;
+  z-index: 4;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  top: 18rpx;
+  left: 15%;
+  right: 15%;
+  padding: 9rpx 2rpx;
+  border: 1rpx solid #65c8a8;
+  border-radius: 999rpx;
+  background: #00766190;
+  font-size: 23rpx;
+}
+.baduanjin-course-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+.score {
+  color: #baf5d1;
+  font-size: 48rpx;
+  font-weight: 700;
+}
+.prototype-label {
+  display: block;
+  font-size: 23rpx;
+  line-height: 1.5;
+  text-align: center;
+  color: #b0d9c8;
+}
+.game-stage {
+  display: flex;
+  padding: 32rpx;
+  align-items: center;
+  flex-direction: column;
+  border-radius: var(--radius-card);
+  box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04);
+  min-height: 650rpx;
+  background: linear-gradient(160deg,#145f54,#00473d);
+  border: 1rpx solid #58a995;
+  color: #e6fff3;
+}
+.game-mascot {
+  width: 300rpx;
+  height: 260rpx;
+}
+.game-kicker {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #9de9c9;
+}
+.game-title {
+  margin-top: 8rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #fff;
+}
+.rep-progress {
+  width: 100%;
+  height: 18rpx;
+  margin-top: 34rpx;
+  overflow: hidden;
+  border-radius: 999rpx;
+  background: #ebeef2;
+}
+.rep-progress view {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-brand);
+  transition: width 0.2s ease;
+}
+.rep-count {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+  margin: 26rpx 0;
+  color: var(--color-text-secondary);
+}
+.rep-count text:first-child {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: #fff;
+}
+.game-action, .beat-button {
+  display: flex;
+  width: 100%;
+  min-height: 92rpx;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  background: linear-gradient(120deg,#36cb6b,#08a04b);
+  border: 1rpx solid #8cebb1;
+  border-radius: 28rpx;
+}
+.game-action[disabled], .beat-button[disabled] {
+  opacity: 0.55;
+}
+.resistance-stage .prototype-label {
+  margin-top: 24rpx;
+}
+.rhythm-stage {
+  position: relative;
+  overflow: hidden;
+}
+.rhythm-motion {
+  width: calc(100% + 64rpx);
+  height: 420rpx;
+  margin: -32rpx -32rpx 24rpx;
+  background: #000;
+}
+.rhythm-copy {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.rhythm-stats {
+  display: grid;
+  width: 100%;
+  margin: 28rpx 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12rpx;
+}
+.rhythm-stats view {
+  display: flex;
+  padding: 18rpx 8rpx;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 16rpx;
+  font-size: 23rpx;
+  background: #ffffff0f;
+  color: #c7eddc;
+}
+.beat-button {
+  gap: 16rpx;
+  min-height: 112rpx;
+}
+.beat-button text:first-child {
+  font-size: 50rpx;
+}
+.rhythm-stage .prototype-label {
+  margin-top: 22rpx;
+}
 </style>

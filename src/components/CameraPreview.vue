@@ -51,7 +51,38 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, getCurrentInstance, nextTick, onBeforeUnmount, watch } from 'vue'
+
+const props = withDefaults(defineProps<{ paused?: boolean }>(), { paused: false })
+// #ifdef H5
+const componentInstance = getCurrentInstance()
+let h5Stream: MediaStream | undefined
+let h5Video: HTMLVideoElement | undefined
+async function startH5Camera() {
+  try {
+    await nextTick()
+    const mount = (componentInstance?.proxy?.$el as HTMLElement | undefined)?.querySelector('.h5-camera-mount')
+    if (!mount || !navigator.mediaDevices?.getUserMedia) throw new Error('camera unavailable')
+    stopH5Camera()
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
+    if (!active.value) { stream.getTracks().forEach(track => track.stop()); return }
+    h5Stream = stream
+    h5Video = document.createElement('video')
+    h5Video.autoplay = true
+    h5Video.muted = true
+    h5Video.playsInline = true
+    h5Video.style.cssText = 'width:100%;height:100%;object-fit:cover'
+    h5Video.srcObject = stream
+    mount.replaceChildren(h5Video)
+    await h5Video.play()
+    if (props.paused) h5Video.pause()
+    markReady()
+  } catch { stopH5Camera(); markDenied() }
+}
+function stopH5Camera() { h5Stream?.getTracks().forEach(track => track.stop()); h5Stream=undefined; if(h5Video)h5Video.srcObject=null; h5Video=undefined }
+watch(()=>props.paused,paused=>{ if(paused)h5Video?.pause();else h5Video?.play().catch(()=>{}) })
+onBeforeUnmount(()=>{ active.value=false;stopH5Camera() })
+// #endif
 
 const active = ref(false)
 const state = ref<'idle' | 'requesting' | 'ready' | 'denied'>('idle')
@@ -71,7 +102,10 @@ function enableCamera() {
   state.value = 'requesting'
   active.value = true
   emit('status', state.value)
-  // 微信由 camera 组件回调；H5 由 renderjs 回调。
+  // #ifdef H5
+  void startH5Camera()
+  // #endif
+  // 微信由 camera 组件回调；App 由 renderjs 回调。
 }
 
 function markReady() {
@@ -112,6 +146,10 @@ export default {
       cameraStore.delete('stream')
     },
     async toggle(value = false) {
+      // #ifdef H5
+      // H5 uses the component-local runtime so Vue state updates are reliable.
+      return
+      // #endif
       if (!value) {
         this.stopCamera()
         return
@@ -175,7 +213,7 @@ export default {
   gap: 16rpx;
   color: rgba(255, 255, 255, 0.74);
   background: radial-gradient(circle at 50% 38%, #52766f 0, #2f514c 38%, #203b37 100%);
-  font-size: 18rpx;
+  font-size: 23rpx;
 }
 
 .placeholder-person {
@@ -220,14 +258,14 @@ export default {
   top: -28rpx;
   left: 50%;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 17rpx;
+  font-size: 23rpx;
   white-space: nowrap;
   transform: translateX(-50%);
 }
 
 .camera-status {
   position: absolute;
-  top: 18rpx;
+  bottom: 18rpx;
   left: 18rpx;
   right: 18rpx;
   display: flex;
@@ -237,7 +275,7 @@ export default {
   border-radius: 999rpx;
   color: #fff;
   background: rgba(18, 35, 43, 0.66);
-  font-size: 22rpx;
+  font-size: 23rpx;
 }
 
 .status-dot {

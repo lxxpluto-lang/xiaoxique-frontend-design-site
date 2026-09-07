@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-09-06T23:32:12.865Z",
+  "baseUrl": "http://127.0.0.1:4173/",
+  "runDir": "/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/dist/runtime-delivery/run-N3EGR6",
+  "manifestSha256": "bbc30d9b7a032b60cd10dd84ddd8ed0af6b8abb7e6c9d39a6a500c5d3140f300",
+  "results": [
+    {
+      "name": "三端分发所有保留文件与原编译逐字节一致",
+      "status": "PASS",
+      "actual": {
+        "files": 310,
+        "platforms": [
+          "h5",
+          "mp-weixin",
+          "app"
+        ]
+      }
+    },
+    {
+      "name": "原素材与未纳入分发的历史文件仍完整",
+      "status": "PASS",
+      "actual": {
+        "sourceAssets": 233,
+        "notDistributedButPreserved": 171,
+        "sourceFiles": 49
+      }
+    },
+    {
+      "name": "精简H5每个文件HTTP返回与白名单hash一致",
+      "status": "FAIL",
+      "actual": "AssertionError [ERR_ASSERTION]: assets/index-B29Eq4Jv.css response is not the packaged bytes\n+ actual - expected\n\n+ '32a0ff802514d631b4c3f0773f902f9382e13b23f4203de03f4e0f9521be2394'\n- '34623524210c71b820a7ab3f94504a10e17ae19111f52ed4a97b5d91793f473e'\n\n    at /Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-delivery-qa.cjs:23:249\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async check (/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-delivery-qa.cjs:7:47)\n    at async main (/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-delivery-qa.cjs:20:2)"
+    },
+    {
+      "name": "六个原视频可Range读取且内容未变",
+      "status": "PASS",
+      "actual": {
+        "videos": [
+          "/static/knowledge/videos/cardiac-check-demo.mp4",
+          "/static/knowledge/videos/habit-demo.mp4",
+          "/static/knowledge/videos/warm-up-demo.mp4",
+          "/static/videos/baduanjin-full-course-mobile.mp4",
+          "/static/videos/magpie-resistance-continuous-v3.mp4",
+          "/static/videos/magpie-singing-continuous-v3.mp4"
+        ],
+        "range": "0-1023",
+        "note": "Byte/Range check, not proof of full-duration viewing; browser playback separately tested"
+      }
+    },
+    {
+      "name": "服务没有回落到全量历史素材目录",
+      "status": "FAIL",
+      "actual": "AssertionError [ERR_ASSERTION]: Excluded asset unexpectedly served: /static/backgrounds/card-switch-v1/baduanjin-cute-v2.png\n    at /Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-delivery-qa.cjs:37:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async check (/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-delivery-qa.cjs:7:47)\n    at async main (/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-delivery-qa.cjs:32:2)"
+    }
+  ],
+  "requests": [
+    {
+      "file": "assets/index-B29Eq4Jv.css",
+      "status": 200,
+      "bytes": 918,
+      "sha256": "32a0ff802514d631b4c3f0773f902f9382e13b23f4203de03f4e0f9521be2394"
+    }
+  ],
+  "notProven": [
+    "WeChat/App device runtime",
+    "platform upload size/approval",
+    "all possible future dynamic paths",
+    "pixel-identical visual acceptance"
+  ]
+}

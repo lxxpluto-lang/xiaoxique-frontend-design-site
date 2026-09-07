@@ -1,0 +1,105 @@
+/* v7 presentation boundary. State and safety behavior remain in the existing controllers. */
+.prototype-shell { background: var(--color-page); }
+.prototype-shell .onboarding { background:#f4f7f7; }
+.prototype-shell .postcheck-detail .assessment-intro { position:relative;padding-right:155rpx; }
+.prototype-shell .v7-postcheck-person { position:absolute;right:6rpx;bottom:0;width:166rpx;height:187rpx; }
+.prototype-shell .v7-session-companion { width:130rpx;height:112rpx;float:left;margin:4rpx 18rpx 8rpx 0; }
+.prototype-shell.is-report .advice-list { clear:both; }
+.prototype-shell .archive-card,.prototype-shell .policy-version,.prototype-shell .policy-phase,.prototype-shell .policy-fields,.prototype-shell .policy-source,.prototype-shell .points-task,.prototype-shell .points-hero,.prototype-shell .milestone-card,.prototype-shell .reward-catalog,.prototype-shell .review-card { background:#fff;border-color:#e6eceb;border-radius:30rpx; }
+.prototype-shell .review-icon { background:#edf7f4; }
+.prototype-shell .points-hero>image { width:310rpx;height:270rpx;right:0;top:0; }
+.prototype-shell .points-hero>text:first-of-type { max-width:60%;font-size:30rpx; }
+.prototype-shell .knowledge-featured { display:block; }
+.prototype-shell .app-frame { display:flex;flex-direction:column;height:100vh;min-height:0; }
+.prototype-shell .topbar { flex-shrink:0;height:auto;min-height:96rpx;padding:calc(env(safe-area-inset-top) + 18rpx) 32rpx 16rpx;background:var(--color-page); }
+.prototype-shell .topbar-title { font-size:39rpx;line-height:1.3; }
+.prototype-shell .avatar-button { width:72rpx;height:72rpx;min-width:36px;min-height:36px;font-size:27rpx;letter-spacing:2rpx; }
+.prototype-shell .page-scroll { flex:1;min-height:0;height:0; }
+.prototype-shell .bottom-nav { flex-shrink:0;min-height:111rpx;height:calc(111rpx + env(safe-area-inset-bottom));background:#fff;border-color:#edf1f2;box-shadow:0 -3rpx 18rpx #14282e04; }
+.prototype-shell .bottom-nav button { min-height:88rpx; }
+.prototype-shell .bottom-nav button.active { color:#009d8d; }
+.prototype-shell .bottom-nav button>text { font-size:23rpx; }
+.prototype-shell .bottom-nav .nav-mascot { width:62rpx;height:62rpx; }
+.prototype-shell .detail-frame,.prototype-shell .detail-header,.prototype-shell .detail-scroll { background:var(--color-page); }
+.prototype-shell.is-training .detail-frame { background:linear-gradient(145deg,#003e3c,#005c53 64%,#003e38); }
+.prototype-shell.is-training .detail-header,.prototype-shell.is-training .detail-scroll { background:transparent; }
+.prototype-shell.is-report .detail-header>text { color:#153034; }
+.prototype-shell.is-report .detail-header button { background:#fff;color:#153034; }
+.prototype-shell .assessment-intro { background:#fff;box-shadow:var(--shadow-card);border-radius:28rpx; }
+.prototype-shell .knowledge-detail .back-button { width:100%; }
+.prototype-shell.is-training[data-state="active"] .detail-frame { background:#f4f7f7; }
+.prototype-shell.is-training[data-state="active"] .detail-header>text { color:#153034; }
+.prototype-shell.is-training[data-state="active"] .detail-header button { background:#fff;border-color:#e5ece9;color:#153034; }
+.prototype-shell.is-training[data-state="active"] .training-state,
+.prototype-shell.is-training[data-state="active"] .training-timer>text,
+.prototype-shell.is-training[data-state="active"] .training-score-card>view>text { color:#153b3e; }
+.prototype-shell.is-training[data-state="active"] .training-score-card { background:#fff;border:0;box-shadow:var(--shadow-card); }
+.prototype-shell.is-training[data-state="active"] .training-score-card>view:nth-child(2)>text:last-child { color:#607078; }
+.prototype-shell.is-training[data-state="active"] .training-health-cards>view { background:#fff;border-color:#e5eeeb; }
+.prototype-shell.is-training[data-state="active"] .training-health-cards>view>text { color:#16413e; }
+.prototype-shell.is-training[data-state="active"] .training-health-cards>text { color:#607078; }
+.prototype-shell.is-training[data-state="active"] .exercise-controls>button { background:#fff;border-color:#d6e9e4;color:#173f3d; }
+.prototype-shell.is-training[data-state="active"] .exercise-controls>.danger-button { color:#a4483d;border-color:#f3ceca; }
+.prototype-shell.is-training[data-state="active"] .text-button { color:#607078; }
+.prototype-shell.is-training[data-state="active"] .training-strip.training-strip--compact .training-state-group>text.training-state { color:#28635c; }
+.prototype-shell .training-detail>.primary-button { background:var(--gradient-brand);border:0; }
+.prototype-shell .data-screen { padding:8rpx 28rpx 28rpx; }
+.prototype-shell .data-panel { display:grid;gap:22rpx; }
+.prototype-shell .data-stat-icon{width:56rpx;height:56rpx}
+.prototype-shell .data-vital-icon{width:58rpx;height:58rpx;flex-shrink:0}
+.prototype-shell .data-section .metric-row>view{position:relative;padding:16rpx 14rpx 15rpx 73rpx;min-height:140rpx}
+.prototype-shell .data-metric-label{display:flex;align-items:center;gap:7rpx}
+.prototype-shell .data-metric-label>.data-vital-icon{position:absolute;left:10rpx;top:21rpx}
+.prototype-shell .data-section .metric-row>view>text:nth-child(2){font-size:43rpx;margin-top:8rpx;line-height:1.3}
+.prototype-shell .data-section .metric-row>view>text:last-child{font-size:19rpx;line-height:1.5;margin-top:9rpx;color:#009d8d}
+.prototype-shell .data-panel .today-numbers { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:22rpx 10rpx;background:#fff;border:0;border-radius:30rpx;box-shadow:var(--shadow-card); }
+.prototype-shell .data-panel .today-numbers>view { padding:0 8rpx;border-radius:0;border:0;box-shadow:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:8rpx; }
+.prototype-shell .data-panel .today-numbers>view+view { border-left:1rpx solid #e7eeeb; }
+.prototype-shell .data-panel .today-numbers .data-stat-value { color:#102f32;font-size:49rpx;font-weight:750;line-height:1.15; }
+.prototype-shell .data-panel .today-numbers>view>text:last-child { font-size:23rpx;color:#617284; }
+.prototype-shell .data-section { padding:20rpx;border-radius:30rpx;background:#fff;box-shadow:var(--shadow-card); }
+.prototype-shell .data-section .section-heading { margin:0 0 18rpx; }
+.prototype-shell .data-section .section-heading>view>text:first-child { font-size:29rpx;font-weight:700; }
+.prototype-shell .data-section .section-heading>view>text+text { font-size:20rpx; }
+.prototype-shell .data-section .section-heading>button { font-size:22rpx; }
+.prototype-shell .data-section .metric-row { gap:20rpx; }
+.prototype-shell .data-section .metric-row>view { border:1rpx solid #eef2f1;border-radius:24rpx;box-shadow:0 4rpx 15rpx #1b2b3206;background:#fff; }
+.prototype-shell .data-activity-card { padding:18rpx;border-radius:30rpx;background:#fff;box-shadow:var(--shadow-card); }
+.prototype-shell .data-activity-card .daily-activity-heading { margin:0 0 12rpx; }
+.prototype-shell .data-activity-card .daily-activity-heading>view>text:first-child { font-size:27rpx; }
+.prototype-shell .data-activity-card .daily-activity-heading>view>text:last-child { display:none; }
+.prototype-shell .data-activity-columns { display:grid;grid-template-columns:1fr 1fr;gap:14rpx; }
+.prototype-shell .data-activity-columns .daily-steps-card { display:flex;padding:9rpx 4rpx;min-height:0;background:#fff;border:0;border-radius:0;box-shadow:none; }
+.prototype-shell .daily-steps-card__status { display:none; }
+.prototype-shell .data-activity-columns .daily-steps-card>view>text:first-child { font-size:24rpx; }
+.prototype-shell .data-activity-columns .daily-steps-card>view>text:nth-child(2) { font-size:37rpx; }
+.prototype-shell .data-activity-columns .daily-steps-card>view>text:nth-child(3) { font-size:20rpx;line-height:1.5; }
+.prototype-shell .data-activity-columns .steps-trend-card { padding:0 0 0 12rpx;border-left:1rpx solid #e7eeeb;border-radius:0;box-shadow:none;background:#fff; }
+.prototype-shell .steps-trend-card__head>view>text:first-child { font-size:22rpx; }
+.prototype-shell .steps-trend-card__head>view>text:last-child,.prototype-shell .steps-trend-card__head>text { display:none; }
+.prototype-shell .steps-trend-chart { gap:7rpx;margin-top:13rpx; }
+.prototype-shell .steps-trend-rail { height:72rpx;max-width:14rpx; }
+.prototype-shell .steps-trend-chart>view>text { font-size:16rpx; }
+.prototype-shell .steps-trend-chart>view>text:first-child { display:none; }
+.prototype-shell .recent-session-list { background:#fff;border:0;padding:0;border-radius:0;box-shadow:none; }
+.prototype-shell .recent-session-list>button { display:flex;align-items:center;justify-content:space-between;gap:12rpx;text-align:left;width:100%;padding:16rpx 0;border-bottom:1rpx solid #edf0f1;min-height:85rpx; }
+.prototype-shell .recent-session-list>button>view { flex:1; }
+.prototype-shell .recent-session-list>button>view>text { display:block;font-size:26rpx; }
+.prototype-shell .recent-session-list>button>view>text+text { font-size:22rpx;color:#65798b;margin-top:6rpx; }
+.prototype-shell .recent-session-list>button>text { font-size:23rpx; }
+.prototype-shell .recent-session-list>button.recent-all { justify-content:center;color:#009d8d;border:0;font-size:25rpx;padding:10rpx; }
+.prototype-shell .data-section .section-heading{gap:8rpx;margin-bottom:12rpx}
+.prototype-shell .data-panel .section-heading>button{min-height:40rpx;padding:0;line-height:1.5}
+.prototype-shell .data-activity-card .daily-activity-heading{display:none}
+.prototype-shell .data-activity-columns{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+.prototype-shell .data-activity-columns .steps-trend-chart{height:auto;min-height:0;gap:6rpx;margin-top:12rpx}
+.prototype-shell .data-activity-columns .steps-trend-chart>view{height:auto;grid-template-rows:72rpx 24rpx;gap:7rpx}
+.prototype-shell .data-activity-columns .steps-trend-rail{height:72rpx;width:14rpx}
+.prototype-shell .data-activity-columns .steps-trend-chart>view>text{font-size:17rpx;line-height:1.4}
+.prototype-shell .data-activity-columns .daily-steps-card>view:first-child>text:nth-child(2){margin-top:10rpx}
+.prototype-shell .data-activity-columns .daily-steps-card>view:first-child>text:nth-child(3){font-size:19rpx;margin-top:9rpx}
+.prototype-shell .data-section .metric-row>view{min-height:120rpx}
+.prototype-shell .recent-session-list>button> .recent-exercise-icon{width:49rpx;height:57rpx;flex-shrink:0}
+/* #ifdef H5 */
+@media(min-width:600px){.prototype-shell .app-frame{height:844px;min-height:0}.prototype-shell .page-scroll{height:0}}
+/* #endif */

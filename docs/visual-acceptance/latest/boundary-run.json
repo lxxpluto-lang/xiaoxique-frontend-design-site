@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-09-06T23:34:45.268Z",
+  "results": [
+    {
+      "name": "ARUN-01-自然计时完成",
+      "status": "PASS",
+      "actual": "浏览器时钟加速执行 180 秒计时器，非快速演示按钮；completed 且 demoCompleted=false。不是人体运动或实时 3 分钟验收。"
+    },
+    {
+      "name": "ARUN-05-暂停继续单计时器",
+      "status": "PASS",
+      "actual": "暂停 5 秒计时不变；继续后 2 秒只累计 2 秒，没有重复计时器。"
+    },
+    {
+      "name": "ARUN-08-空报告与5日门槛",
+      "status": "PASS",
+      "actual": "空状态、0日不足、5个日期合成记录达到门槛；不伪造真实跨日使用。"
+    },
+    {
+      "name": "ARUN-10-小队创建邀请码和提醒去重",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "ARUN-10-搭子缺卡不解除不扣分",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "ARUN-11-不足取消兑换与换币",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "ARUN-12-四类建议与审核边界",
+      "status": "PASS",
+      "actual": "四类建议生成正确；未审核时计划调整字段保持原值。同意/维持/驳回实测另见 browser-run.json。"
+    },
+    {
+      "name": "ARUN-13-公众过滤与禁用原入口",
+      "status": "PASS",
+      "actual": "原社交与积分入口仍禁用，独立本地预览不改变源业务开放状态。"
+    },
+    {
+      "name": "CAMERA-拒绝权限安全回退",
+      "status": "PASS",
+      "actual": "断言通过"
+    }
+  ],
+  "errors": []
+}

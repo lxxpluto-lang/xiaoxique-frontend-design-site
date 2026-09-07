@@ -1,0 +1,513 @@
+{
+  "generatedAt": "2026-09-07T08:10:14.046Z",
+  "pages": 28,
+  "images": 84,
+  "failedImages": 0,
+  "errors": [],
+  "results": [
+    {
+      "src": "comparison/01-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/01-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/01-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/02-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/02-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/02-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/03-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/03-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/03-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/04-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/04-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/04-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/05-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/05-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/05-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/06-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/06-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/06-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/07-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/07-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/07-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/08-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/08-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/08-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/09-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/09-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/09-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/10-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/10-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/10-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/11-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/11-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/11-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/12-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/12-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/12-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/13-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/13-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/13-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/14-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/14-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/14-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/15-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/15-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/15-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/16-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/16-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/16-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/17-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/17-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/17-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/18-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/18-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/18-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/19-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/19-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/19-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/20-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/20-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/20-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/21-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/21-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/21-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/22-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/22-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/22-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/23-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/23-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/23-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/24-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/24-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/24-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/25-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/25-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/25-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/26-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/26-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/26-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/27-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/27-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/27-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/28-reference.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/28-runtime.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "src": "comparison/28-overlay.png",
+      "ok": true,
+      "width": 390,
+      "height": 844
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-09-07T08:07:49.250Z",
+  "results": [
+    {
+      "name": "normal-patient-entry-boundary",
+      "status": "PASS",
+      "actual": "assertions passed"
+    },
+    {
+      "name": "schema3-roundtrip-and-array-sanitizing",
+      "status": "PASS",
+      "actual": "assertions passed"
+    },
+    {
+      "name": "missing-stale-denied-steps-not-displayed-as-valid",
+      "status": "PASS",
+      "actual": "assertions passed"
+    },
+    {
+      "name": "manual-validation-and-device-priority",
+      "status": "PASS",
+      "actual": "assertions passed"
+    },
+    {
+      "name": "prescription-and-self-selection-association",
+      "status": "PASS",
+      "actual": "Hospital entry keeps prescription association; self-selection does not inherit it. Assistant plan and duplicate shortcuts removed by user request."
+    },
+    {
+      "name": "report-source-details-expand-and-collapse",
+      "status": "PASS",
+      "actual": "assertions passed"
+    },
+    {
+      "name": "insight-and-garden-demonstration-states",
+      "status": "PASS",
+      "actual": "5 recent / 3 previous completed sessions show adherence improvement only; 5 check-in days render grown tree. Explicit synthetic fixture recorded."
+    },
+    {
+      "name": "local-demo-tools-opt-in",
+      "status": "PASS",
+      "actual": "assertions passed"
+    }
+  ],
+  "errors": []
+}

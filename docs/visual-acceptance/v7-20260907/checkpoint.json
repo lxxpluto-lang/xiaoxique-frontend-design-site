@@ -1,0 +1,197 @@
+{
+  "generatedAt": "2026-09-07T08:11:08.980Z",
+  "status": "IN_PROGRESS_VISUAL_GAPS",
+  "scope": "Existing prototype copy only; no deployment or original-reference edits",
+  "baselineCommit": "c1b56ff43a94c0e7e096bb80f0f19f998673a48c",
+  "currentCommit": "c1b56ff43a94c0e7e096bb80f0f19f998673a48c",
+  "changedExistingFiles": [
+    {
+      "file": "src/App.vue",
+      "bytes": 3017,
+      "sha256": "11824e3d8a14d9d6a8bd97f579a6a40a16508931ab99d2e15d5954979cb48152",
+      "exists": true,
+      "currentHash": "8a3402f1548d218a594bf03a447c5b286ad7c82c88dbd01580ad8efb06b70905"
+    },
+    {
+      "file": "src/components/AssistantPanel.vue",
+      "bytes": 12003,
+      "sha256": "af50c202f79f4e051b75bc6d59f9c521816de0fd6d6c3cc89a853c0ce6fa38ed",
+      "exists": true,
+      "currentHash": "7df947c01552ce3746e76217dc4be73f5c285ffa5dbdf616747679c1a6c5116c"
+    },
+    {
+      "file": "src/components/CompanionHub.vue",
+      "bytes": 23425,
+      "sha256": "955b4ba3c209a7d0b6da94c09305764833f0efc05b470a76e55a9616579d953d",
+      "exists": true,
+      "currentHash": "0d1aeb911f9c5a473da91c472f7d646a8cd0182d4fa5143aca879a584e8cbf96"
+    },
+    {
+      "file": "src/components/DetailIntro.vue",
+      "bytes": 1118,
+      "sha256": "af4a8be1ee70fae3ec0df894d73a051ff23dcd3a17a4f392b8e64df1edf443ec",
+      "exists": true,
+      "currentHash": "bf3f75a0fca72fb04c7d703a7453ed0ca830915ea55fb1e7b03bb1b5d5e1daf5"
+    },
+    {
+      "file": "src/components/ExerciseSelection.vue",
+      "bytes": 9730,
+      "sha256": "2775bd7f4ac66a14ba7c26a7a7500601cf2030dc850f9d7744c11ff573bc61f7",
+      "exists": true,
+      "currentHash": "380920bb8560f53c1a63294a0e6c99a95aa4d975e5263432a53bb392eea156db"
+    },
+    {
+      "file": "src/components/KnowledgeDetail.vue",
+      "bytes": 7737,
+      "sha256": "ba105af59a073f0e860ca1bea689e44ec8d8abfc404fa2e075882e43083c5dbc",
+      "exists": true,
+      "currentHash": "8be2af48edb8f2b6133b94f2018ef80b1b0ce46d4a8f5ca5cb5c0e8ca18755ed"
+    },
+    {
+      "file": "src/components/KnowledgeHub.vue",
+      "bytes": 12568,
+      "sha256": "82af072cb989e7fd052db684b9d57be034ec5bf8414a1ac4abcdecdd015de481",
+      "exists": true,
+      "currentHash": "5b7184f6e2e5434b2755491634dedb0b60507ae57b782fbd91643bd7dc400a65"
+    },
+    {
+      "file": "src/components/OnboardingView.vue",
+      "bytes": 11374,
+      "sha256": "ac9bfcecd4bb365eb8f87780b3f96ed70ac24dc31325de4ea10b228fe703ef46",
+      "exists": true,
+      "currentHash": "e40adbeab6474772acfaddf4dfa8829b98f775bd3e151a17381518c3f2ef3f57"
+    },
+    {
+      "file": "src/components/RehabGardenPanel.vue",
+      "bytes": 17683,
+      "sha256": "52570e63624ff8a7c8273288622c1f4bb4f9988058a53afb38d8f70e56eb471e",
+      "exists": true,
+      "currentHash": "22511893f075397c9cf576d4980f90c7427ff9cd3f3a4947b3f2ba3378522965"
+    },
+    {
+      "file": "src/components/RehabMiniReport.vue",
+      "bytes": 10433,
+      "sha256": "e4743097bc6e589892c52de922e531ad9d5d9b1656b57f5921c754ccf3d344d4",
+      "exists": true,
+      "currentHash": "0f07de04c70ecdcc4cea02ffe7c8042dbe008d4f2d912a353f9fb35988fd3e3f"
+    },
+    {
+      "file": "src/components/RewardProductCard.vue",
+      "bytes": 2877,
+      "sha256": "45c636468f93c3989532814b5eb41205e3c7954e4a182825b4f5b8c4259519b8",
+      "exists": true,
+      "currentHash": "76dc6e2d0412755fc344bede699bb36497bc9dfc4882389bd6294255ae6c06e5"
+    },
+    {
+      "file": "src/components/SessionReportSummary.vue",
+      "bytes": 8785,
+      "sha256": "4bafe9a9fa1a5c4c86f8d4d5579fc520b252dd3cca7f03f32c157624fe9d8f3e",
+      "exists": true,
+      "currentHash": "5d96c23bd36a3718d56560c7f50c2bf5d4ded72cc801c6f3507dc55b76fbfee8"
+    },
+    {
+      "file": "src/components/TrainingExperience.vue",
+      "bytes": 10292,
+      "sha256": "cce60b672bde9d9d79e8b7c4320fc5091805b50574e28d6b19a7661aa98d70b3",
+      "exists": true,
+      "currentHash": "327993dab9960742a2b55a64d45a274834db39f6153f4c589c13c0c3d85b7b8a"
+    },
+    {
+      "file": "src/pages/index/index.vue",
+      "bytes": 152248,
+      "sha256": "405c3bacba1573d265546d423d14f87c0077c6091e65faa84c7526cf6db0b938",
+      "exists": true,
+      "currentHash": "02f181bf4ab52820124c979827931a1ac002fd915539ea912a89c57f4caf5ec3"
+    }
+  ],
+  "removedExistingFiles": [],
+  "changedOriginalAssets": [],
+  "core": [
+    {
+      "file": "src/lib/prototype-data.ts",
+      "unchanged": true
+    },
+    {
+      "file": "src/lib/shared-patient.ts",
+      "unchanged": true
+    },
+    {
+      "file": "src/lib/rive-motion.ts",
+      "unchanged": true
+    },
+    {
+      "file": "src/pages.json",
+      "unchanged": true
+    },
+    {
+      "file": "src/manifest.json",
+      "unchanged": true
+    },
+    {
+      "file": "package.json",
+      "unchanged": true
+    },
+    {
+      "file": "package-lock.json",
+      "unchanged": true
+    }
+  ],
+  "browser": {
+    "passed": 19,
+    "failed": 0,
+    "errors": 0
+  },
+  "state": {
+    "passed": 8,
+    "failed": 0,
+    "errors": 0
+  },
+  "safety": {
+    "passed": 4,
+    "failed": 0,
+    "errors": 0
+  },
+  "pause": {
+    "passed": 3,
+    "failed": 0,
+    "errors": 0
+  },
+  "responsive": {
+    "combinations": 144,
+    "overflowCases": 0
+  },
+  "pages": {
+    "MATCH": 0,
+    "PARTIAL": 28,
+    "BLOCKED": 0
+  },
+  "assetCount": 81,
+  "assetBytes": 6728348,
+  "logs": [
+    {
+      "file": "type-check.log",
+      "exists": true,
+      "modifiedAt": "2026-09-07T08:09:00.453Z"
+    },
+    {
+      "file": "rive-runtime.log",
+      "exists": true,
+      "modifiedAt": "2026-09-07T08:09:00.725Z"
+    },
+    {
+      "file": "build-h5.log",
+      "exists": true,
+      "modifiedAt": "2026-09-07T08:09:06.461Z"
+    },
+    {
+      "file": "build-mp-weixin.log",
+      "exists": true,
+      "modifiedAt": "2026-09-07T08:09:09.665Z"
+    },
+    {
+      "file": "build-app.log",
+      "exists": true,
+      "modifiedAt": "2026-09-07T08:09:12.532Z"
+    }
+  ]
+}

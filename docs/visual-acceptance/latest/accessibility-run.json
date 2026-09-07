@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-09-06T23:34:36.633Z",
+  "environment": "Chrome H5 localhost; disposable data",
+  "results": [
+    {
+      "name": "审计器嵌套文字与不可推断背景",
+      "status": "PASS",
+      "actual": "内部span被计入字号；隐藏文本/禁用点击目标不计入；渐变背景明确待像素核验，不伪造通过。"
+    },
+    {
+      "name": "六个策略开关44像素边缘命中",
+      "status": "PASS",
+      "actual": "6个开关上/下1px边缘都切换一次并恢复；草稿未发布，已发布字段不变。页头/策略页签文字垂直中心偏差<4px。仅H5命中与布局证据，非真机触控证明。"
+    },
+    {
+      "name": "运动前评分滑条扩展区域实际生效",
+      "status": "PASS",
+      "actual": "44px滑条顶部右端写入10，底部左端写入0；沿用原评分处理器与0—10步进，没有新增医疗阈值。"
+    },
+    {
+      "name": "三尺寸44像素按钮与输入框基线",
+      "status": "PASS",
+      "actual": "360/390/430助手页含可用发送按钮、输入框、任务和导航；DOM目标均≥44px且文本≥11px。渐变及图像背景不在纯色对比度结论中。"
+    }
+  ],
+  "errors": [],
+  "notProven": [
+    "keyboard navigation and focus semantics",
+    "native mini-program/device touch",
+    "screen reader",
+    "gradient/image contrast",
+    "all conditional states"
+  ]
+}

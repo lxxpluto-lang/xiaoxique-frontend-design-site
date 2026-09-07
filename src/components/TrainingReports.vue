@@ -15,7 +15,11 @@
         role="tab"
         @tap="selectTab('monthly')"
       >阶段性报告</button>
+      <button data-testid="report-tab-mini" role="tab" @tap="emit('open-mini-report')">小报告</button>
     </view>
+
+    <view v-if="!selectedDate && !selectedMonth" class="report-overview" data-testid="region-report-overview"><text>每一次运动，都有记录</text><view class="overview-metrics"><view><text>{{ completedSessions.length }}</text><text>完成训练</text></view><view><text>{{ allTrainingDays }}</text><text>有效训练日</text></view><view><text>{{ sessions.filter(s=>s.status === 'stopped').length }}</text><text>停止记录</text></view></view><view v-if="dailyReports.length>=2" class="history-bars"><view v-for="day in dailyReports.slice(0,7).slice().reverse()" :key="day.date"><text>{{ day.completedCount }}次</text><view :style="{height:Math.max(8,day.completedCount/maximumDayCount*90)+'rpx'}" /><text>{{ day.date.slice(5) }}</text></view></view><text v-else class="trend-empty">不同日期记录不足，暂不展示变化趋势</text></view>
+    <button class="mini-report-entry" data-testid="report-center-mini-entry" @tap="emit('open-mini-report')"><view><text>康复小报告</text><text>{{ completedSessions.length }} 次完成训练 · 待医生确认</text></view><text>查看报告 ›</text></button>
 
     <template v-if="tab === 'daily'">
       <view v-if="selectedDaily" class="report-detail">
@@ -61,6 +65,7 @@ import { prescriptionItemKey, type SharedPrescriptionItem } from '@/lib/shared-p
 import type { MonthlyTrainingReport, TrainingSession, VitalSnapshot } from '@/lib/prototype-data'
 
 const props = defineProps<{ sessions: TrainingSession[]; prescriptionItems: SharedPrescriptionItem[]; prescriptionVersion: string }>()
+const emit = defineEmits<{ (e:'open-mini-report'):void }>()
 const tab = ref<'daily' | 'monthly'>('daily')
 const selectedDate = ref('')
 const selectedMonth = ref('')
@@ -70,6 +75,8 @@ function selectTab(nextTab: 'daily' | 'monthly') {
   selectedMonth.value = ''
 }
 const completedSessions = computed(() => props.sessions.filter((item) => item.status === 'completed'))
+const allTrainingDays = computed(() => new Set(completedSessions.value.map(item=>item.localDate || item.createdAt.slice(0,10))).size)
+const maximumDayCount = computed(() => Math.max(1,...dailyReports.value.slice(0,7).map(day=>day.completedCount)))
 const dailyReports = computed(() => {
   const dates = [...new Set(props.sessions.map((item) => item.localDate || item.createdAt.slice(0,10)))]
   return dates.sort().reverse().map((date) => {
@@ -104,7 +111,298 @@ function stageAverage(key:'heartRate'|'borg'){const values=monthSessions.value.f
 </script>
 
 <style scoped lang="scss">
-.reports { display:grid; align-content:start; gap:20rpx; }.report-tabs { display:grid; min-height:80rpx; grid-template-columns:1fr 1fr; padding:8rpx; border:1rpx solid #dce7e3; border-radius:18rpx; background:#eef4f1; }.report-tabs button { min-height:64rpx; border-radius:14rpx; color:#64748b; background:transparent; font-size:25rpx; font-weight:650; }.report-tabs button.active { color:#0f766e; background:#fff; font-weight:750; box-shadow:0 4rpx 12rpx rgba(15,118,110,.1); }
-.report-list { display:block; overflow:hidden; border-radius:20rpx; background:#fff; box-shadow:0 4rpx 16rpx rgba(15,23,42,.05); }.report-list>button { display:grid; width:100%; min-height:92rpx; padding:18rpx 20rpx; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:16rpx; border-top:1rpx solid #eef2f1; text-align:left; }.report-list>button:first-child { border-top:0; }.report-list-date { color:#1e293b; font-size:24rpx; font-weight:700; white-space:nowrap; }.report-list-summary { min-width:0; overflow:hidden; color:#64748b; font-size:21rpx; text-overflow:ellipsis; white-space:nowrap; }.report-list-tail { display:flex; align-items:center; gap:8rpx; color:#0f766e; white-space:nowrap; }.report-list-tail text { font-size:20rpx; }.report-list-tail text:last-child { font-size:28rpx; }.empty { padding:44rpx 28rpx; color:#64748b; background:#fff; font-size:24rpx; text-align:center; }
-.back { color:#0f766e; font-size:24rpx; }.report-detail { display:grid; gap:18rpx; }.report-hero,.stage-hero { display:flex; padding:30rpx; flex-direction:column; border-radius:24rpx; color:#fff; background:linear-gradient(135deg,#0f766e,#0ea5a4); }.report-hero text:first-child { color:#ccfbf1; font-size:21rpx; }.report-hero text:nth-child(2),.stage-hero>text:first-child { margin-top:8rpx; font-size:34rpx; font-weight:700; }.report-hero text:last-child,.stage-hero>text:nth-child(2) { margin-top:10rpx; color:#ccfbf1; font-size:23rpx; line-height:1.5; }.report-section { padding:26rpx; border-radius:24rpx; background:#fff; box-shadow:0 4rpx 16rpx rgba(15,23,42,.04); }.section-title { display:block; color:#1e293b; font-size:28rpx; font-weight:700; }.patient-summary { display:block; margin-top:12rpx; color:#475569; font-size:24rpx; line-height:1.65; }.metric-grid { display:grid; margin-top:20rpx; grid-template-columns:1fr 1fr; gap:12rpx; }.metric-grid view { display:flex; padding:18rpx; align-items:center; flex-direction:column; border-radius:16rpx; background:#f8fafc; }.metric-grid view text:first-child { color:#0f766e; font-size:31rpx; font-weight:700; }.metric-grid view text:last-child { margin-top:5rpx; color:#64748b; font-size:20rpx; }.execution-row { display:flex; min-height:86rpx; align-items:center; justify-content:space-between; border-top:1rpx solid #f1f5f9; }.execution-row view { display:flex; min-width:0; flex-direction:column; gap:5rpx; }.execution-row view text:first-child { color:#1e293b; font-size:25rpx; font-weight:600; }.execution-row view text:last-child { color:#64748b; font-size:20rpx; }.execution-row>text { color:#94a3b8; font-size:21rpx; }.execution-row>text.done { color:#0ea5a4; }.session-card { display:grid; padding:20rpx 0; grid-template-columns:1fr auto; gap:10rpx; border-top:1rpx solid #f1f5f9; }.session-card>view:first-child { display:flex; flex-direction:column; gap:5rpx; }.session-card>view:first-child text:first-child { color:#1e293b; font-size:26rpx; font-weight:650; }.session-card text { color:#64748b; font-size:20rpx; }.session-metrics { display:grid; grid-column:1/3; grid-template-columns:1fr 1fr; gap:8rpx; }.session-metrics text { padding:10rpx; border-radius:10rpx; background:#f8fafc; }.advice { grid-column:1/3; padding:14rpx; border-radius:12rpx; color:#475569!important; background:#ecfdf5; line-height:1.5; }.boundary { background:#f8fafc; }.boundary>text:last-child { display:block; margin-top:10rpx; color:#64748b; font-size:22rpx; line-height:1.6; }.stage-hero>view { display:grid; margin-top:24rpx; grid-template-columns:repeat(3,1fr); }.stage-hero>view text:nth-child(odd) { font-size:32rpx; font-weight:700; }.stage-hero>view text:nth-child(even) { color:#ccfbf1; font-size:18rpx; }
+.report-overview{padding:30rpx;border:2rpx solid #fff;border-radius:35rpx;background:linear-gradient(135deg,#e1f8ef,#f4fcf8);box-shadow:var(--shadow-card)}.report-overview>text:first-child{display:block;font-size:32rpx;font-weight:750;color:#155f4d}.overview-metrics{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28rpx}.overview-metrics>view{text-align:center;border-right:1rpx solid #c9e6d8}.overview-metrics>view:last-child{border:0}.overview-metrics text{display:block}.overview-metrics text:first-child{font-size:51rpx;font-weight:750;color:#007d60}.overview-metrics text:last-child{margin-top:10rpx;font-size:23rpx;color:#638573}.trend-empty{display:block;margin-top:27rpx;font-size:23rpx;color:#779286;text-align:center}.history-bars{display:flex;align-items:flex-end;gap:15rpx;margin-top:35rpx}.history-bars>view{flex:1;display:flex;gap:12rpx;align-items:center;flex-direction:column}.history-bars>view>view{width:30rpx;min-height:8rpx;border-radius:12rpx;background:var(--gradient-brand)}.history-bars text{font-size:23rpx;color:#53836d}
+.reports {
+  display: grid;
+  align-content: start;
+  gap: 20rpx;
+}
+.report-tabs {
+  display: grid;
+  min-height: 80rpx;
+  grid-template-columns: repeat(3,1fr);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  gap: 10rpx;
+}
+.report-tabs button {
+  border-radius: 14rpx;
+  color: var(--color-text-secondary);
+  font-weight: 650;
+  position: relative;
+  min-height: 92rpx;
+  font-size: 28rpx;
+  background: transparent;
+}
+.report-tabs button.active {
+  font-weight: 750;
+  background: transparent;
+  box-shadow: none;
+  color: var(--color-brand-pressed);
+}
+.report-list {
+  display: block;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(15,23,42,.05);
+  border-radius: 32rpx;
+}
+.report-list>button {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto minmax(0,1fr) auto;
+  align-items: center;
+  gap: 16rpx;
+  border-top: 1rpx solid #eef2f1;
+  text-align: left;
+  min-height: 125rpx;
+  padding: 24rpx;
+}
+.report-list>button:first-child {
+  border-top: 0;
+}
+.report-list-date {
+  color: var(--color-text-primary);
+  font-size: 24rpx;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.report-list-summary {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text-secondary);
+  font-size: 23rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.report-list-tail {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  color: var(--color-brand-pressed);
+  white-space: nowrap;
+}
+.report-list-tail text {
+  font-size: 23rpx;
+}
+.report-list-tail text:last-child {
+  font-size: 28rpx;
+}
+.empty {
+  padding: 44rpx 28rpx;
+  color: var(--color-text-secondary);
+  background: #fff;
+  font-size: 24rpx;
+  text-align: center;
+}
+.back {
+  color: var(--color-brand-pressed);
+  font-size: 24rpx;
+}
+.report-detail {
+  display: grid;
+  gap: 18rpx;
+}
+.report-hero,.stage-hero {
+  display: flex;
+  padding: 30rpx;
+  flex-direction: column;
+  border-radius: var(--radius-card);
+  color: #fff;
+  background: linear-gradient(135deg,var(--color-brand-pressed),var(--color-brand));
+}
+.report-hero text:first-child {
+  color: var(--color-brand-soft);
+  font-size: 23rpx;
+}
+.report-hero text:nth-child(2),.stage-hero>text:first-child {
+  margin-top: 8rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+.report-hero text:last-child,.stage-hero>text:nth-child(2) {
+  margin-top: 10rpx;
+  color: var(--color-brand-soft);
+  font-size: 23rpx;
+  line-height: 1.5;
+}
+.report-section {
+  background: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04);
+  border-radius: 34rpx;
+  padding: 30rpx;
+}
+.section-title {
+  display: block;
+  color: var(--color-text-primary);
+  font-size: 28rpx;
+  font-weight: 700;
+}
+.patient-summary {
+  display: block;
+  margin-top: 12rpx;
+  color: var(--color-text-secondary);
+  font-size: 24rpx;
+  line-height: 1.65;
+}
+.metric-grid {
+  display: grid;
+  margin-top: 20rpx;
+  grid-template-columns: 1fr 1fr;
+  gap: 12rpx;
+}
+.metric-grid view {
+  display: flex;
+  padding: 18rpx;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 16rpx;
+  background: var(--color-page);
+}
+.metric-grid view text:first-child {
+  color: var(--color-brand-pressed);
+  font-size: 31rpx;
+  font-weight: 700;
+}
+.metric-grid view text:last-child {
+  margin-top: 5rpx;
+  color: var(--color-text-secondary);
+  font-size: 23rpx;
+}
+.execution-row {
+  display: flex;
+  min-height: 86rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1rpx solid #edf6f1;
+}
+.execution-row view {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5rpx;
+}
+.execution-row view text:first-child {
+  color: var(--color-text-primary);
+  font-size: 25rpx;
+  font-weight: 600;
+}
+.execution-row view text:last-child {
+  color: var(--color-text-secondary);
+  font-size: 23rpx;
+}
+.execution-row>text {
+  color: var(--color-text-tertiary);
+  font-size: 23rpx;
+}
+.execution-row>text.done {
+  color: var(--color-brand);
+}
+.session-card {
+  display: grid;
+  padding: 20rpx 0;
+  grid-template-columns: 1fr auto;
+  gap: 10rpx;
+  border-top: 1rpx solid #edf6f1;
+}
+.session-card>view:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5rpx;
+}
+.session-card>view:first-child text:first-child {
+  color: var(--color-text-primary);
+  font-size: 26rpx;
+  font-weight: 650;
+}
+.session-card text {
+  color: var(--color-text-secondary);
+  font-size: 23rpx;
+}
+.session-metrics {
+  display: grid;
+  grid-column: 1/3;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rpx;
+}
+.session-metrics text {
+  padding: 10rpx;
+  border-radius: 10rpx;
+  background: var(--color-page);
+}
+.advice {
+  grid-column: 1/3;
+  padding: 14rpx;
+  border-radius: 12rpx;
+  background: #ecfdf5;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+.boundary {
+  background: var(--color-page);
+}
+.boundary>text:last-child {
+  display: block;
+  margin-top: 10rpx;
+  color: var(--color-text-secondary);
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+.stage-hero>view {
+  display: grid;
+  margin-top: 24rpx;
+  grid-template-columns: repeat(3,1fr);
+}
+.stage-hero>view text:nth-child(odd) {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+.stage-hero>view text:nth-child(even) {
+  color: var(--color-brand-soft);
+  font-size: 23rpx;
+}
+.report-tabs button.active::after {
+  content: '';
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 0;
+  height: 5rpx;
+  border-radius: 5rpx;
+  background: var(--color-brand);
+}
+.mini-report-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+  min-height: 156rpx;
+  padding: 28rpx;
+  border: 1rpx solid #b7ead8;
+  border-radius: 32rpx;
+  background: linear-gradient(120deg,#e7fcf2,#f6fcf9);
+  text-align: left;
+}
+.mini-report-entry>view>text {
+  display: block;
+}
+.mini-report-entry>view>text:first-child {
+  color: #086b53;
+  font-size: 31rpx;
+  font-weight: 750;
+}
+.mini-report-entry>view>text:last-child {
+  margin-top: 16rpx;
+  font-size: 23rpx;
+  color: var(--color-text-secondary);
+}
+.mini-report-entry>text {
+  color: #fff;
+  padding: 16rpx;
+  border-radius: 999rpx;
+  background: var(--gradient-brand);
+  font-size: 23rpx;
+}
 </style>

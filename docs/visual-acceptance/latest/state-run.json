@@ -1,0 +1,85 @@
+{
+  "results": [
+    {
+      "name": "schema7-roundtrip",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "schema3-compatible",
+      "status": "PASS",
+      "actual": "旧 v3 可载入并重存为源项目 v7；旧版步数沿用源项目的演示迁移规则。"
+    },
+    {
+      "name": "legacy-fields",
+      "status": "PASS",
+      "actual": "旧 points 保留；单独 streak/checkInDate 沿用源项目回落 6 条演示打卡，不宣称该旧字段被完整迁移。"
+    },
+    {
+      "name": "malformed-root-null",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "malformed-root-broken-jso",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "malformed-root-{invalid",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "malformed-root-42",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "malformed-array-entries",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "steps-missing",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "steps-stale",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "steps-denied",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "manual-and-device-priority",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "manual-invalid-value",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "policy-draft-publish",
+      "status": "PASS",
+      "actual": "断言通过"
+    },
+    {
+      "name": "same-day-growth-idempotence",
+      "status": "PASS",
+      "actual": "重复完成不重复增加当天打卡/树成长；积分其他奖励沿用源项目，不混为自动打卡的 +5。"
+    },
+    {
+      "name": "garden-empty-middle-mature",
+      "status": "PASS",
+      "actual": "可查看幼芽/中期/收获；源项目空 checkIns 会回落演示数据，所以幼芽用一条过往演示记录呈现，不伪称真实零数据。"
+    }
+  ],
+  "errors": []
+}

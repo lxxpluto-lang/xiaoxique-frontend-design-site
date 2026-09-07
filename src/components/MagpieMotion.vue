@@ -2,17 +2,17 @@
   <view class="motion-shell" :class="{ 'motion-shell--transparent': transparent }" :aria-label="label">
     <!-- #ifdef MP-WEIXIN -->
     <rive-view
-      v-if="rivSrc"
+      v-if="effectiveRivSrc"
       class="rive-stage"
-      :src="rivSrc"
+      :src="effectiveRivSrc"
       :artboard="artboard"
       :state-machine="stateMachine"
       :fit="fit"
-      :autoplay="true"
+      :autoplay="!paused"
       :max-dpr="2"
       :play-token="playToken"
       :celebrate-token="celebrateToken"
-      :reduced-motion="reducedMotion"
+      :reduced-motion="reducedMotion || paused"
       @load="onRiveLoad"
       @error="onRiveError"
     />
@@ -20,9 +20,10 @@
       v-else
       :key="videoSrc"
       class="motion-video"
+      :id="videoId"
       :src="videoSrc"
       :poster="poster"
-      :autoplay="true"
+      :autoplay="!paused"
       :loop="true"
       :muted="true"
       :controls="false"
@@ -36,7 +37,7 @@
 
     <!-- #ifndef MP-WEIXIN -->
     <canvas
-      v-if="rivSrc"
+      v-if="effectiveRivSrc"
       class="rive-canvas"
       :data-options="renderOptions"
       :change:data-options="riveRenderer.loadRive"
@@ -45,9 +46,10 @@
       v-else
       :key="videoSrc"
       class="motion-video"
+      :id="videoId"
       :src="videoSrc"
       :poster="poster"
-      :autoplay="true"
+      :autoplay="!paused"
       :loop="true"
       :muted="true"
       :controls="false"
@@ -63,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, getCurrentInstance, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 
 declare const riveRenderer: {
   loadRive: (options: {
@@ -89,6 +91,7 @@ const props = withDefaults(defineProps<{
   celebrateToken?: number
   reducedMotion?: boolean
   transparent?: boolean
+  paused?: boolean
 }>(), {
   rivSrc: '',
   artboard: '',
@@ -98,6 +101,7 @@ const props = withDefaults(defineProps<{
   celebrateToken: 0,
   reducedMotion: false,
   transparent: false,
+  paused: false,
 })
 
 const emit = defineEmits<{
@@ -105,8 +109,43 @@ const emit = defineEmits<{
   (event: 'error', message: string): void
 }>()
 
+const instance = getCurrentInstance()
+const videoId = 'magpie-motion-' + instance?.uid
+const failedRive = ref(false)
+const effectiveRivSrc = computed(() => failedRive.value ? '' : props.rivSrc)
+let disposed = false
+async function syncPlayback() {
+  await nextTick()
+  if (disposed) return
+  // #ifdef H5
+  // Uni's H5 VideoContext does not return the native play promise.
+  // Own it here so navigating away while media loads cannot reject globally.
+  const video = (instance?.proxy?.$el as HTMLElement | undefined)?.querySelector('video')
+  if (!video) return
+  if (props.paused) video.pause()
+  else {
+    try { await video.play() }
+    catch (error) {
+      if (!disposed && video.isConnected && (error as DOMException)?.name !== 'AbortError')
+        emit('error', '视频暂时无法播放，请稍后重试')
+    }
+  }
+  return
+  // #endif
+  // #ifndef H5
+  const videoContext = uni.createVideoContext(videoId, instance?.proxy as any)
+  if (props.paused) videoContext.pause()
+  else videoContext.play()
+  // #endif
+}
+onBeforeUnmount(() => { disposed = true })
+onMounted(() => { if (!effectiveRivSrc.value) void syncPlayback() })
+watch(() => props.rivSrc, () => { failedRive.value = false })
+watch([() => props.paused, effectiveRivSrc], () => { if (!effectiveRivSrc.value) void syncPlayback() })
+
 const renderOptions = computed(() => ({
-  src: props.rivSrc,
+  src: effectiveRivSrc.value,
+  paused: props.paused,
   artboard: props.artboard,
   stateMachine: props.stateMachine,
   fit: props.fit,
@@ -124,12 +163,14 @@ function handleRiveReady() {
 }
 
 function handleRiveRenderError(message?: string) {
+  failedRive.value = true
   emit('error', message || 'Rive 加载失败，已保留 MP4 备用素材')
 }
 
 defineExpose({ handleRiveReady, handleRiveRenderError })
 
 function onRiveError(event: { detail?: { error?: string } }) {
+  failedRive.value = true
   emit('error', event?.detail?.error || 'Rive 加载失败，已保留 MP4 备用素材')
 }
 
@@ -167,7 +208,9 @@ export default {
       const input = (name) => inputs.find((item) => item.name === name)
 
       const play = input('play')
-      if (play) play.value = true
+      if (play) play.value = !options.paused
+      if (options.paused) instance.pause()
+      else instance.play()
 
       const reducedMotion = input('reducedMotion')
       if (reducedMotion) reducedMotion.value = Boolean(options.reducedMotion)
@@ -186,7 +229,7 @@ export default {
       }
       runtimeStore.set('celebrateToken', options.celebrateToken)
     },
-    loadRive(options = { src: '', artboard: '', stateMachine: '', fit: 'contain' }) {
+    loadRive(options = { src: '', artboard: '', stateMachine: '', fit: 'contain', paused: false }) {
       if (!options || !options.src) {
         cleanupRuntime()
         return
@@ -203,7 +246,7 @@ export default {
       const instance = new Rive({
         src: options.src,
         canvas,
-        autoplay: true,
+        autoplay: !options.paused,
         artboard: options.artboard || undefined,
         stateMachines: options.stateMachine || undefined,
         layout: new Layout({

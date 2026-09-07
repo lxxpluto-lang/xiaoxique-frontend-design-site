@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-09-07T08:09:12.532Z",
+  "result": [
+    {
+      "name": "type-check",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "rive-runtime",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "build-h5",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "build-mp-weixin",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "build-app",
+      "pass": true,
+      "exitCode": 0
+    }
+  ]
+}

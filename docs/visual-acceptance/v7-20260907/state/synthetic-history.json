@@ -1,0 +1,538 @@
+{
+  "purpose": "Disposable QA fixture; not real patient records",
+  "sessions": [
+    {
+      "id": "V7-QA-HISTORY-0",
+      "exerciseId": "breathing",
+      "title": "腹式呼吸",
+      "mode": "cardiac",
+      "planType": "prescription",
+      "status": "completed",
+      "durationSeconds": 600,
+      "demoCompleted": true,
+      "fullRoutineCompleted": false,
+      "poseScored": false,
+      "score": 92,
+      "results": [
+        {
+          "label": "节拍命中",
+          "value": "24/26"
+        },
+        {
+          "label": "完成组数",
+          "value": "3/3"
+        }
+      ],
+      "createdAt": "2026-09-07T08:07:46.891Z",
+      "localDate": "2026-09-07",
+      "prescriptionId": "RX-DEMO-001",
+      "prescriptionVersion": "V1",
+      "pointsAwarded": 25,
+      "policyVersion": 1,
+      "assessment": {
+        "id": "ASSESS-1788768466891",
+        "policyVersion": 1,
+        "pre": {
+          "phase": "pre",
+          "heartRate": 68,
+          "oxygenSaturation": 98,
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78,
+          "discomfortScore": 2,
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.691Z",
+          "syncedAt": "2026-09-07T08:07:46.691Z",
+          "quality": "valid"
+        },
+        "post": {
+          "phase": "post",
+          "heartRate": 76,
+          "oxygenSaturation": 98,
+          "borg": 3,
+          "feeling": "适中",
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.825Z",
+          "syncedAt": "2026-09-07T08:07:46.825Z",
+          "quality": "valid"
+        },
+        "completeness": "complete",
+        "comparison": "训练前不适程度 2/10，血压 128/78 mmHg；训练前后血氧变化 0 个百分点。"
+      },
+      "startedAt": "2026-09-07T08:00:00+08:00",
+      "endedAt": "2026-09-07T08:10:00+08:00"
+    },
+    {
+      "id": "V7-QA-HISTORY-1",
+      "exerciseId": "breathing",
+      "title": "腹式呼吸",
+      "mode": "cardiac",
+      "planType": "prescription",
+      "status": "completed",
+      "durationSeconds": 600,
+      "demoCompleted": true,
+      "fullRoutineCompleted": false,
+      "poseScored": false,
+      "score": 92,
+      "results": [
+        {
+          "label": "节拍命中",
+          "value": "24/26"
+        },
+        {
+          "label": "完成组数",
+          "value": "3/3"
+        }
+      ],
+      "createdAt": "2026-09-07T08:07:46.891Z",
+      "localDate": "2026-09-06",
+      "prescriptionId": "RX-DEMO-001",
+      "prescriptionVersion": "V1",
+      "pointsAwarded": 25,
+      "policyVersion": 1,
+      "assessment": {
+        "id": "ASSESS-1788768466891",
+        "policyVersion": 1,
+        "pre": {
+          "phase": "pre",
+          "heartRate": 68,
+          "oxygenSaturation": 98,
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78,
+          "discomfortScore": 2,
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.691Z",
+          "syncedAt": "2026-09-07T08:07:46.691Z",
+          "quality": "valid"
+        },
+        "post": {
+          "phase": "post",
+          "heartRate": 76,
+          "oxygenSaturation": 98,
+          "borg": 3,
+          "feeling": "适中",
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.825Z",
+          "syncedAt": "2026-09-07T08:07:46.825Z",
+          "quality": "valid"
+        },
+        "completeness": "complete",
+        "comparison": "训练前不适程度 2/10，血压 128/78 mmHg；训练前后血氧变化 0 个百分点。"
+      },
+      "startedAt": "2026-09-06T08:00:00+08:00",
+      "endedAt": "2026-09-06T08:10:00+08:00"
+    },
+    {
+      "id": "V7-QA-HISTORY-2",
+      "exerciseId": "breathing",
+      "title": "腹式呼吸",
+      "mode": "cardiac",
+      "planType": "prescription",
+      "status": "completed",
+      "durationSeconds": 600,
+      "demoCompleted": true,
+      "fullRoutineCompleted": false,
+      "poseScored": false,
+      "score": 92,
+      "results": [
+        {
+          "label": "节拍命中",
+          "value": "24/26"
+        },
+        {
+          "label": "完成组数",
+          "value": "3/3"
+        }
+      ],
+      "createdAt": "2026-09-07T08:07:46.891Z",
+      "localDate": "2026-09-05",
+      "prescriptionId": "RX-DEMO-001",
+      "prescriptionVersion": "V1",
+      "pointsAwarded": 25,
+      "policyVersion": 1,
+      "assessment": {
+        "id": "ASSESS-1788768466891",
+        "policyVersion": 1,
+        "pre": {
+          "phase": "pre",
+          "heartRate": 68,
+          "oxygenSaturation": 98,
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78,
+          "discomfortScore": 2,
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.691Z",
+          "syncedAt": "2026-09-07T08:07:46.691Z",
+          "quality": "valid"
+        },
+        "post": {
+          "phase": "post",
+          "heartRate": 76,
+          "oxygenSaturation": 98,
+          "borg": 3,
+          "feeling": "适中",
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.825Z",
+          "syncedAt": "2026-09-07T08:07:46.825Z",
+          "quality": "valid"
+        },
+        "completeness": "complete",
+        "comparison": "训练前不适程度 2/10，血压 128/78 mmHg；训练前后血氧变化 0 个百分点。"
+      },
+      "startedAt": "2026-09-05T08:00:00+08:00",
+      "endedAt": "2026-09-05T08:10:00+08:00"
+    },
+    {
+      "id": "V7-QA-HISTORY-3",
+      "exerciseId": "breathing",
+      "title": "腹式呼吸",
+      "mode": "cardiac",
+      "planType": "prescription",
+      "status": "completed",
+      "durationSeconds": 600,
+      "demoCompleted": true,
+      "fullRoutineCompleted": false,
+      "poseScored": false,
+      "score": 92,
+      "results": [
+        {
+          "label": "节拍命中",
+          "value": "24/26"
+        },
+        {
+          "label": "完成组数",
+          "value": "3/3"
+        }
+      ],
+      "createdAt": "2026-09-07T08:07:46.891Z",
+      "localDate": "2026-09-04",
+      "prescriptionId": "RX-DEMO-001",
+      "prescriptionVersion": "V1",
+      "pointsAwarded": 25,
+      "policyVersion": 1,
+      "assessment": {
+        "id": "ASSESS-1788768466891",
+        "policyVersion": 1,
+        "pre": {
+          "phase": "pre",
+          "heartRate": 68,
+          "oxygenSaturation": 98,
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78,
+          "discomfortScore": 2,
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.691Z",
+          "syncedAt": "2026-09-07T08:07:46.691Z",
+          "quality": "valid"
+        },
+        "post": {
+          "phase": "post",
+          "heartRate": 76,
+          "oxygenSaturation": 98,
+          "borg": 3,
+          "feeling": "适中",
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.825Z",
+          "syncedAt": "2026-09-07T08:07:46.825Z",
+          "quality": "valid"
+        },
+        "completeness": "complete",
+        "comparison": "训练前不适程度 2/10，血压 128/78 mmHg；训练前后血氧变化 0 个百分点。"
+      },
+      "startedAt": "2026-09-04T08:00:00+08:00",
+      "endedAt": "2026-09-04T08:10:00+08:00"
+    },
+    {
+      "id": "V7-QA-HISTORY-4",
+      "exerciseId": "breathing",
+      "title": "腹式呼吸",
+      "mode": "cardiac",
+      "planType": "prescription",
+      "status": "completed",
+      "durationSeconds": 600,
+      "demoCompleted": true,
+      "fullRoutineCompleted": false,
+      "poseScored": false,
+      "score": 92,
+      "results": [
+        {
+          "label": "节拍命中",
+          "value": "24/26"
+        },
+        {
+          "label": "完成组数",
+          "value": "3/3"
+        }
+      ],
+      "createdAt": "2026-09-07T08:07:46.891Z",
+      "localDate": "2026-09-03",
+      "prescriptionId": "RX-DEMO-001",
+      "prescriptionVersion": "V1",
+      "pointsAwarded": 25,
+      "policyVersion": 1,
+      "assessment": {
+        "id": "ASSESS-1788768466891",
+        "policyVersion": 1,
+        "pre": {
+          "phase": "pre",
+          "heartRate": 68,
+          "oxygenSaturation": 98,
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78,
+          "discomfortScore": 2,
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.691Z",
+          "syncedAt": "2026-09-07T08:07:46.691Z",
+          "quality": "valid"
+        },
+        "post": {
+          "phase": "post",
+          "heartRate": 76,
+          "oxygenSaturation": 98,
+          "borg": 3,
+          "feeling": "适中",
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.825Z",
+          "syncedAt": "2026-09-07T08:07:46.825Z",
+          "quality": "valid"
+        },
+        "completeness": "complete",
+        "comparison": "训练前不适程度 2/10，血压 128/78 mmHg；训练前后血氧变化 0 个百分点。"
+      },
+      "startedAt": "2026-09-03T08:00:00+08:00",
+      "endedAt": "2026-09-03T08:10:00+08:00"
+    },
+    {
+      "id": "V7-QA-HISTORY-5",
+      "exerciseId": "breathing",
+      "title": "腹式呼吸",
+      "mode": "cardiac",
+      "planType": "prescription",
+      "status": "completed",
+      "durationSeconds": 600,
+      "demoCompleted": true,
+      "fullRoutineCompleted": false,
+      "poseScored": false,
+      "score": 92,
+      "results": [
+        {
+          "label": "节拍命中",
+          "value": "24/26"
+        },
+        {
+          "label": "完成组数",
+          "value": "3/3"
+        }
+      ],
+      "createdAt": "2026-09-07T08:07:46.891Z",
+      "localDate": "2026-08-31",
+      "prescriptionId": "RX-DEMO-001",
+      "prescriptionVersion": "V1",
+      "pointsAwarded": 25,
+      "policyVersion": 1,
+      "assessment": {
+        "id": "ASSESS-1788768466891",
+        "policyVersion": 1,
+        "pre": {
+          "phase": "pre",
+          "heartRate": 68,
+          "oxygenSaturation": 98,
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78,
+          "discomfortScore": 2,
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.691Z",
+          "syncedAt": "2026-09-07T08:07:46.691Z",
+          "quality": "valid"
+        },
+        "post": {
+          "phase": "post",
+          "heartRate": 76,
+          "oxygenSaturation": 98,
+          "borg": 3,
+          "feeling": "适中",
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.825Z",
+          "syncedAt": "2026-09-07T08:07:46.825Z",
+          "quality": "valid"
+        },
+        "completeness": "complete",
+        "comparison": "训练前不适程度 2/10，血压 128/78 mmHg；训练前后血氧变化 0 个百分点。"
+      },
+      "startedAt": "2026-08-31T08:00:00+08:00",
+      "endedAt": "2026-08-31T08:10:00+08:00"
+    },
+    {
+      "id": "V7-QA-HISTORY-6",
+      "exerciseId": "breathing",
+      "title": "腹式呼吸",
+      "mode": "cardiac",
+      "planType": "prescription",
+      "status": "completed",
+      "durationSeconds": 600,
+      "demoCompleted": true,
+      "fullRoutineCompleted": false,
+      "poseScored": false,
+      "score": 92,
+      "results": [
+        {
+          "label": "节拍命中",
+          "value": "24/26"
+        },
+        {
+          "label": "完成组数",
+          "value": "3/3"
+        }
+      ],
+      "createdAt": "2026-09-07T08:07:46.891Z",
+      "localDate": "2026-08-30",
+      "prescriptionId": "RX-DEMO-001",
+      "prescriptionVersion": "V1",
+      "pointsAwarded": 25,
+      "policyVersion": 1,
+      "assessment": {
+        "id": "ASSESS-1788768466891",
+        "policyVersion": 1,
+        "pre": {
+          "phase": "pre",
+          "heartRate": 68,
+          "oxygenSaturation": 98,
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78,
+          "discomfortScore": 2,
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.691Z",
+          "syncedAt": "2026-09-07T08:07:46.691Z",
+          "quality": "valid"
+        },
+        "post": {
+          "phase": "post",
+          "heartRate": 76,
+          "oxygenSaturation": 98,
+          "borg": 3,
+          "feeling": "适中",
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.825Z",
+          "syncedAt": "2026-09-07T08:07:46.825Z",
+          "quality": "valid"
+        },
+        "completeness": "complete",
+        "comparison": "训练前不适程度 2/10，血压 128/78 mmHg；训练前后血氧变化 0 个百分点。"
+      },
+      "startedAt": "2026-08-30T08:00:00+08:00",
+      "endedAt": "2026-08-30T08:10:00+08:00"
+    },
+    {
+      "id": "V7-QA-HISTORY-7",
+      "exerciseId": "breathing",
+      "title": "腹式呼吸",
+      "mode": "cardiac",
+      "planType": "prescription",
+      "status": "completed",
+      "durationSeconds": 600,
+      "demoCompleted": true,
+      "fullRoutineCompleted": false,
+      "poseScored": false,
+      "score": 92,
+      "results": [
+        {
+          "label": "节拍命中",
+          "value": "24/26"
+        },
+        {
+          "label": "完成组数",
+          "value": "3/3"
+        }
+      ],
+      "createdAt": "2026-09-07T08:07:46.891Z",
+      "localDate": "2026-08-29",
+      "prescriptionId": "RX-DEMO-001",
+      "prescriptionVersion": "V1",
+      "pointsAwarded": 25,
+      "policyVersion": 1,
+      "assessment": {
+        "id": "ASSESS-1788768466891",
+        "policyVersion": 1,
+        "pre": {
+          "phase": "pre",
+          "heartRate": 68,
+          "oxygenSaturation": 98,
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78,
+          "discomfortScore": 2,
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.691Z",
+          "syncedAt": "2026-09-07T08:07:46.691Z",
+          "quality": "valid"
+        },
+        "post": {
+          "phase": "post",
+          "heartRate": 76,
+          "oxygenSaturation": 98,
+          "borg": 3,
+          "feeling": "适中",
+          "symptoms": [],
+          "source": "demo-device",
+          "measuredAt": "2026-09-07T08:07:46.825Z",
+          "syncedAt": "2026-09-07T08:07:46.825Z",
+          "quality": "valid"
+        },
+        "completeness": "complete",
+        "comparison": "训练前不适程度 2/10，血压 128/78 mmHg；训练前后血氧变化 0 个百分点。"
+      },
+      "startedAt": "2026-08-29T08:00:00+08:00",
+      "endedAt": "2026-08-29T08:10:00+08:00"
+    }
+  ],
+  "checkIns": [
+    {
+      "date": "2026-09-03",
+      "source": "core-exercise",
+      "exerciseId": "baduanjin",
+      "pointsAwarded": 5,
+      "createdAt": "2026-09-03T08:10:00+08:00"
+    },
+    {
+      "date": "2026-09-04",
+      "source": "core-exercise",
+      "exerciseId": "baduanjin",
+      "pointsAwarded": 5,
+      "createdAt": "2026-09-04T08:10:00+08:00"
+    },
+    {
+      "date": "2026-09-05",
+      "source": "core-exercise",
+      "exerciseId": "baduanjin",
+      "pointsAwarded": 5,
+      "createdAt": "2026-09-05T08:10:00+08:00"
+    },
+    {
+      "date": "2026-09-06",
+      "source": "core-exercise",
+      "exerciseId": "baduanjin",
+      "pointsAwarded": 5,
+      "createdAt": "2026-09-06T08:10:00+08:00"
+    },
+    {
+      "date": "2026-09-07",
+      "source": "core-exercise",
+      "exerciseId": "baduanjin",
+      "pointsAwarded": 5,
+      "createdAt": "2026-09-07T08:10:00+08:00"
+    }
+  ]
+}

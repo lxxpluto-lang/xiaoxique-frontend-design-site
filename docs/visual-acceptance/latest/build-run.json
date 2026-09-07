@@ -1,0 +1,32 @@
+[
+  {
+    "script": "type-check",
+    "started": "2026-09-07T00:13:26.287Z",
+    "finished": "2026-09-07T00:13:29.370Z",
+    "code": 0
+  },
+  {
+    "script": "test:rive-runtime",
+    "started": "2026-09-07T00:13:29.371Z",
+    "finished": "2026-09-07T00:13:29.653Z",
+    "code": 0
+  },
+  {
+    "script": "build:h5",
+    "started": "2026-09-07T00:13:29.653Z",
+    "finished": "2026-09-07T00:13:35.271Z",
+    "code": 0
+  },
+  {
+    "script": "build:mp-weixin",
+    "started": "2026-09-07T00:13:35.272Z",
+    "finished": "2026-09-07T00:13:38.470Z",
+    "code": 0
+  },
+  {
+    "script": "build:app",
+    "started": "2026-09-07T00:13:38.471Z",
+    "finished": "2026-09-07T00:13:41.368Z",
+    "code": 0
+  }
+]

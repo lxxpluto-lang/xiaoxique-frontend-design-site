@@ -32,38 +32,54 @@ function lineClass(step: number) {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin: 12rpx 0 30rpx;
+  margin: 16rpx 0 30rpx;
 }
 .step {
   display: flex;
   align-items: center;
-  width: 84rpx;
   flex-direction: column;
   color: #9ba7a3;
+  width: 110rpx;
 }
 .step > text {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 46rpx;
-  height: 46rpx;
   border-radius: 50%;
-  color: #84918c;
-  background: #e6ece9;
-  font-size: 22rpx;
+  color: #646e6a;
   font-weight: 700;
+  width: 58rpx;
+  height: 58rpx;
+  font-size: 28rpx;
+  background: #e6f5ef;
 }
-.step .small-text { margin-top: 8rpx; font-size: 22rpx; }
+.step .small-text {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  margin-top: 12rpx;
+  background: transparent;
+  font-size: 25rpx;
+}
 .step.active > text,
-.step.done > text { color: #fff; background: #16a085; }
+.step.done > text {
+  color: #fff;
+  background: var(--color-brand-pressed);
+}
 .step.active .small-text,
-.step.done .small-text { color: #0c7464; font-weight: 600; }
+.step.done .small-text {
+  font-weight: 600;
+  background: transparent;
+  color: var(--color-brand-pressed);
+}
 .step-line {
-  width: 85rpx;
   height: 5rpx;
-  margin-top: 21rpx;
   background: #dfe7e4;
+  width: 100rpx;
+  margin-top: 28rpx;
 }
 .step-line.done,
-.step-line.active { background: #16a085; }
+.step-line.active {
+  background: #16a085;
+}
 </style>

@@ -78,7 +78,7 @@ function setBorg(event: any) {
 .vital-grid label > text {
   display: block;
   color: #646a73;
-  font-size: 22rpx;
+  font-size: 23rpx;
 }
 .vital-grid label > view {
   display: flex;
@@ -93,7 +93,7 @@ function setBorg(event: any) {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
-.vital-grid .small-text { color: #646a73; font-size: 22rpx; }
+.vital-grid .small-text { color: #646a73; font-size: 23rpx; }
 .field-label {
   margin: 20rpx 0 12rpx;
   color: #4f4b57;

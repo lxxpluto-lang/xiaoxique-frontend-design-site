@@ -1,0 +1,281 @@
+{
+  "generatedAt": "2026-09-07T00:10:26.199Z",
+  "environment": "Chrome H5 local http://127.0.0.1:4183/",
+  "results": [
+    {
+      "name": "ARUN-03-绑定与错误重试",
+      "status": "PASS",
+      "actual": "错误编号未进入应用且输入保留；P-256572 匹配并进入患者首页。"
+    },
+    {
+      "name": "ARUN-02-患者演示训练闭环",
+      "status": "PASS",
+      "actual": "患者前检查、暂停计时冻结、继续、快速演示、后检查、报告均可达；沿用源项目快速演示打卡规则，不当作真实训练验收。"
+    },
+    {
+      "name": "ARUN-06-不适停止",
+      "status": "PASS",
+      "actual": "停止原因保存；停止记录保留，已有积分和打卡数不增加。"
+    },
+    {
+      "name": "ARUN-04-训练前不适阻断",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "ARUN-08-报告与数据页面",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "ARUN-09-花园与月历",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "UI-09-全部运动分类",
+      "status": "PASS",
+      "actual": "5 个分类可切换，共 9 个运动项目。"
+    },
+    {
+      "name": "ARUN-07-设备页面",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "UI-11-助手任务和问答",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "ARUN-13-知识搜索文章视频",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "ARUN-10-小队搭子",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "ARUN-11-积分权益",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "ARUN-12-策略与审核",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "ARUN-14-当前数据刷新恢复",
+      "status": "PASS",
+      "actual": "当前 schemaVersion 7 训练/钱包/队伍/搭子刷新恢复通过；兼容 v3 与损坏数据另见 state-run.json。"
+    },
+    {
+      "name": "VIEWPORT-360",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "VIEWPORT-390",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "VIEWPORT-430",
+      "status": "PASS",
+      "actual": "操作与断言通过"
+    },
+    {
+      "name": "ARUN-01-公众模式与三类训练",
+      "status": "PASS",
+      "actual": "公众无需绑定；动作跟练使用 Chrome 合成摄像头（未读取真实摄像头）；视频与计时暂停，计次暂停禁用，停止记录刷新恢复。"
+    },
+    {
+      "name": "RESPONSIVE-28页三尺寸",
+      "status": "PASS",
+      "actual": "84 个页面尺寸组合；横向溢出 0 项。"
+    }
+  ],
+  "errors": [],
+  "responses": [],
+  "networkFailures": [
+    {
+      "url": "http://127.0.0.1:4183/static/knowledge/videos/warm-up-demo.mp4",
+      "reason": "net::ERR_ABORTED",
+      "resourceType": "media"
+    }
+  ],
+  "externalRequests": [],
+  "assetRequests": [
+    {
+      "url": "http://127.0.0.1:4183/static/rive-source/v4/master/magpie-neutral-master-v4.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/safety.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/magpie-flying.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/onboarding-shoe-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/knowledge-checklist-v1.png",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/archive.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/heart-rate.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/device.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/profile.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/record.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/stretch.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/exercise.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/report.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/assessment.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/resistance.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/music.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/knowledge.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/home.svg",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/previews/continuous-v3/singing-poster-v3.png",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/previews/continuous-v3/resistance-poster-v3.png",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/previews/continuous-v3/baduanjin-poster-v3.png",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/tree-mature.png",
+      "status": 304
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/videos/magpie-singing-continuous-v3.mp4",
+      "status": 206
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/magpie-resting-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/safety-chest-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/safety-dizzy-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/safety-breath-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/health-heart.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/icons/magpie-line/badge.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/tree-sprout.svg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/exercise-clinician-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/previews/baduanjin-full-course-poster.jpg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/knowledge-leaves-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/knowledge-effort-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/social-friends.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/buddy-friends.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/knowledge/videos/warm-up-demo.mp4",
+      "status": 206
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/reward-guardian-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/reward-handbook-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/reward-resistance-band-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/reward-mem-badge-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4183/static/replica/reward-notebook-v1.png",
+      "status": 200
+    }
+  ]
+}

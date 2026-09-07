@@ -1,0 +1,1374 @@
+{
+  "generatedAt": "2026-09-07T00:07:11.731Z",
+  "environment": "http://127.0.0.1:4173/",
+  "results": [
+    {
+      "name": "taichi",
+      "status": "PASS",
+      "measurements": [
+        {
+          "width": 360,
+          "height": 800,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 14.390625,
+              "y": 636.90625,
+              "width": 331.21875,
+              "height": 50.875,
+              "right": 345.609375
+            },
+            {
+              "text": "结束本次运动",
+              "x": 14.390625,
+              "y": 696.40625,
+              "width": 161.296875,
+              "height": 44.15625,
+              "right": 175.6875
+            },
+            {
+              "text": "我有不适",
+              "x": 184.3125,
+              "y": 696.40625,
+              "width": 161.296875,
+              "height": 44.15625,
+              "right": 345.609375
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 23,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "太极舒展",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 05:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.camera-training > uni-view.dual-camera-stage > uni-view.training-pane > uni-text.pane-heading",
+                "text": "动作示范",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.camera-training > uni-view.dual-camera-stage > uni-view.training-pane > uni-text.pane-heading",
+                "text": "我的画面",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-pane > uni-view.camera-preview > uni-view.body-guide > uni-text",
+                "text": "全身入镜区域",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-pane > uni-view.camera-preview > uni-view.camera-status > uni-text",
+                "text": "摄像头已开启 · 评分为演示结果",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "动作评分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "82分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view > uni-text > span > uni-text",
+                "text": "分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "跟随示范，保持自然呼吸",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "评分为互动演示，不评估康复疗效。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 15.59375,
+              "y": 689.90625,
+              "width": 358.8125,
+              "height": 55.109375,
+              "right": 374.40625
+            },
+            {
+              "text": "结束本次运动",
+              "x": 15.59375,
+              "y": 754.375,
+              "width": 174.71875,
+              "height": 47.828125,
+              "right": 190.3125
+            },
+            {
+              "text": "我有不适",
+              "x": 199.671875,
+              "y": 754.375,
+              "width": 174.734375,
+              "height": 47.828125,
+              "right": 374.40625
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 23,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "太极舒展",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 05:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.camera-training > uni-view.dual-camera-stage > uni-view.training-pane > uni-text.pane-heading",
+                "text": "动作示范",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.camera-training > uni-view.dual-camera-stage > uni-view.training-pane > uni-text.pane-heading",
+                "text": "我的画面",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-pane > uni-view.camera-preview > uni-view.body-guide > uni-text",
+                "text": "全身入镜区域",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-pane > uni-view.camera-preview > uni-view.camera-status > uni-text",
+                "text": "摄像头已开启 · 评分为演示结果",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "动作评分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "82分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view > uni-text > span > uni-text",
+                "text": "分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "跟随示范，保持自然呼吸",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "评分为互动演示，不评估康复疗效。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        },
+        {
+          "width": 430,
+          "height": 932,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 17.1875,
+              "y": 759.21875,
+              "width": 395.625,
+              "height": 60.765625,
+              "right": 412.8125
+            },
+            {
+              "text": "结束本次运动",
+              "x": 17.1875,
+              "y": 830.296875,
+              "width": 192.65625,
+              "height": 52.734375,
+              "right": 209.84375
+            },
+            {
+              "text": "我有不适",
+              "x": 220.15625,
+              "y": 830.296875,
+              "width": 192.65625,
+              "height": 52.734375,
+              "right": 412.8125
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 23,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "太极舒展",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 05:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.camera-training > uni-view.dual-camera-stage > uni-view.training-pane > uni-text.pane-heading",
+                "text": "动作示范",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.camera-training > uni-view.dual-camera-stage > uni-view.training-pane > uni-text.pane-heading",
+                "text": "我的画面",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-pane > uni-view.camera-preview > uni-view.body-guide > uni-text",
+                "text": "全身入镜区域",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-pane > uni-view.camera-preview > uni-view.camera-status > uni-text",
+                "text": "摄像头已开启 · 评分为演示结果",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "动作评分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "82分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view > uni-text > span > uni-text",
+                "text": "分",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "跟随示范，保持自然呼吸",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.training-score-card > uni-view > uni-text",
+                "text": "评分为互动演示，不评估康复疗效。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        }
+      ],
+      "completionPaths": [
+        {
+          "action": "end-paused-training",
+          "status": "completed",
+          "demoCompleted": false,
+          "pointsDelta": 15
+        },
+        {
+          "action": "demo-complete",
+          "status": "completed",
+          "demoCompleted": true,
+          "pointsDelta": 15
+        }
+      ],
+      "actual": "Three sizes: resting purple art, primary continue, original completion/demo actions preserved. Timer freezes/resumes; discomfort cancel stays paused; explicit safety stop adds no rewards. Ordinary and demo completion still use baseline completed semantics."
+    },
+    {
+      "name": "resistance",
+      "status": "PASS",
+      "measurements": [
+        {
+          "width": 360,
+          "height": 800,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 14.390625,
+              "y": 597.96875,
+              "width": 331.21875,
+              "height": 50.875,
+              "right": 345.609375
+            },
+            {
+              "text": "结束本次运动",
+              "x": 14.390625,
+              "y": 657.46875,
+              "width": 161.296875,
+              "height": 44.15625,
+              "right": 175.6875
+            },
+            {
+              "text": "我有不适",
+              "x": 184.3125,
+              "y": 657.46875,
+              "width": 161.296875,
+              "height": 44.15625,
+              "right": 345.609375
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 20,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "抗阻训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 03:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.game-kicker",
+                "text": "托举小喜鹊",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.game-title",
+                "text": "跟随节奏，完成 12 次动作",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.resistance-stage > uni-view.rep-count > uni-text",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.resistance-stage > uni-view.rep-count > uni-text",
+                "text": "/ 12 次",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-button.game-action",
+                "text": "完成一次动作",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.prototype-label",
+                "text": "当前通过点击模拟动作完成，未接入人体姿态识别",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 15.59375,
+              "y": 649.203125,
+              "width": 358.8125,
+              "height": 55.109375,
+              "right": 374.40625
+            },
+            {
+              "text": "结束本次运动",
+              "x": 15.59375,
+              "y": 713.671875,
+              "width": 174.71875,
+              "height": 47.828125,
+              "right": 190.3125
+            },
+            {
+              "text": "我有不适",
+              "x": 199.671875,
+              "y": 713.671875,
+              "width": 174.734375,
+              "height": 47.828125,
+              "right": 374.40625
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 20,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "抗阻训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 03:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.game-kicker",
+                "text": "托举小喜鹊",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.game-title",
+                "text": "跟随节奏，完成 12 次动作",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.resistance-stage > uni-view.rep-count > uni-text",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.resistance-stage > uni-view.rep-count > uni-text",
+                "text": "/ 12 次",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-button.game-action",
+                "text": "完成一次动作",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.prototype-label",
+                "text": "当前通过点击模拟动作完成，未接入人体姿态识别",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        },
+        {
+          "width": 430,
+          "height": 932,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 17.1875,
+              "y": 714.9375,
+              "width": 395.625,
+              "height": 60.765625,
+              "right": 412.8125
+            },
+            {
+              "text": "结束本次运动",
+              "x": 17.1875,
+              "y": 786.015625,
+              "width": 192.65625,
+              "height": 52.734375,
+              "right": 209.84375
+            },
+            {
+              "text": "我有不适",
+              "x": 220.15625,
+              "y": 786.015625,
+              "width": 192.65625,
+              "height": 52.734375,
+              "right": 412.8125
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 20,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "抗阻训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 03:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.game-kicker",
+                "text": "托举小喜鹊",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.game-title",
+                "text": "跟随节奏，完成 12 次动作",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.resistance-stage > uni-view.rep-count > uni-text",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.resistance-stage > uni-view.rep-count > uni-text",
+                "text": "/ 12 次",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-button.game-action",
+                "text": "完成一次动作",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.resistance-stage > uni-text.prototype-label",
+                "text": "当前通过点击模拟动作完成，未接入人体姿态识别",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        }
+      ],
+      "completionPaths": [
+        {
+          "action": "end-paused-training",
+          "status": "completed",
+          "demoCompleted": false,
+          "pointsDelta": 15
+        },
+        {
+          "action": "demo-complete",
+          "status": "completed",
+          "demoCompleted": true,
+          "pointsDelta": 15
+        }
+      ],
+      "actual": "Three sizes: resting purple art, primary continue, original completion/demo actions preserved. Timer freezes/resumes; discomfort cancel stays paused; explicit safety stop adds no rewards. Ordinary and demo completion still use baseline completed semantics."
+    },
+    {
+      "name": "music",
+      "status": "PASS",
+      "measurements": [
+        {
+          "width": 360,
+          "height": 800,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 14.390625,
+              "y": 686.375,
+              "width": 331.21875,
+              "height": 50.875,
+              "right": 345.609375
+            },
+            {
+              "text": "结束本次运动",
+              "x": 14.390625,
+              "y": 745.875,
+              "width": 161.296875,
+              "height": 44.15625,
+              "right": 175.6875
+            },
+            {
+              "text": "我有不适",
+              "x": 184.3125,
+              "y": 745.875,
+              "width": 161.296875,
+              "height": 44.15625,
+              "right": 345.609375
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 25,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "音乐律动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 03:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-view.rhythm-copy > uni-text.game-kicker",
+                "text": "呼吸与节拍",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-view.rhythm-copy > uni-text.game-title",
+                "text": "跟随提示轻轻点击",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "命中",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "连击",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "/ 3 组",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-button.beat-button > uni-text",
+                "text": "♪",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-button.beat-button > uni-text",
+                "text": "点击节拍",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.rhythm-stage > uni-text.prototype-label",
+                "text": "3 组 × 8 拍，准确率由原型互动规则生成",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 15.59375,
+              "y": 743.578125,
+              "width": 358.8125,
+              "height": 55.109375,
+              "right": 374.40625
+            },
+            {
+              "text": "结束本次运动",
+              "x": 15.59375,
+              "y": 808.046875,
+              "width": 174.71875,
+              "height": 47.828125,
+              "right": 190.3125
+            },
+            {
+              "text": "我有不适",
+              "x": 199.671875,
+              "y": 808.046875,
+              "width": 174.734375,
+              "height": 47.828125,
+              "right": 374.40625
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 25,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "音乐律动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 03:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-view.rhythm-copy > uni-text.game-kicker",
+                "text": "呼吸与节拍",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-view.rhythm-copy > uni-text.game-title",
+                "text": "跟随提示轻轻点击",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "命中",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "连击",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "/ 3 组",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-button.beat-button > uni-text",
+                "text": "♪",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-button.beat-button > uni-text",
+                "text": "点击节拍",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.rhythm-stage > uni-text.prototype-label",
+                "text": "3 组 × 8 拍，准确率由原型互动规则生成",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        },
+        {
+          "width": 430,
+          "height": 932,
+          "buttons": [
+            {
+              "text": "继续训练",
+              "x": 17.1875,
+              "y": 818.578125,
+              "width": 395.625,
+              "height": 60.765625,
+              "right": 412.8125
+            },
+            {
+              "text": "结束本次运动",
+              "x": 17.1875,
+              "y": 889.65625,
+              "width": 192.65625,
+              "height": 52.734375,
+              "right": 209.84375
+            },
+            {
+              "text": "我有不适",
+              "x": 220.15625,
+              "y": 889.65625,
+              "width": 192.65625,
+              "height": 52.734375,
+              "right": 412.8125
+            }
+          ],
+          "readability": {
+            "version": 2,
+            "scope": "Rendered DOM including content below scroll folds; display/visibility hidden nodes excluded. Uni-text internal spans included. No accessibility-tree, keyboard, overlap, raster, native-device or assistive-tech proof.",
+            "textCount": 25,
+            "controlCount": 6,
+            "smallText": [],
+            "smallTargets": [],
+            "lowPlainContrast": [],
+            "unverifiedContrast": [
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "‹",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-text",
+                "text": "训练已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.prototype-shell.is-training > uni-view.detail-frame > uni-view.detail-header > uni-button",
+                "text": "?",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.paused-exercise-name",
+                "text": "音乐律动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-state-group > uni-text.training-state",
+                "text": "已暂停",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "00:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.training-strip.training-strip--compact > uni-view.training-timer > uni-text",
+                "text": "/ 03:00",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-view.rhythm-copy > uni-text.game-kicker",
+                "text": "呼吸与节拍",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-view.rhythm-copy > uni-text.game-title",
+                "text": "跟随提示轻轻点击",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "命中",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "连击",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text.score",
+                "text": "1",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.game-stage.rhythm-stage > uni-view.rhythm-stats > uni-view > uni-text",
+                "text": "/ 3 组",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-button.beat-button > uni-text",
+                "text": "♪",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.experience > uni-view.game-stage.rhythm-stage > uni-button.beat-button > uni-text",
+                "text": "点击节拍",
+                "reason": "disabled control excluded"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.experience > uni-view.game-stage.rhythm-stage > uni-text.prototype-label",
+                "text": "3 组 × 8 拍，准确率由原型互动规则生成",
+                "reason": "opacity/filter requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"toggle-training\"]",
+                "text": "继续训练",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"end-paused-training\"]",
+                "text": "结束本次运动",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"training-discomfort\"]",
+                "text": "我有不适",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "uni-view.detail-content.training-detail > uni-view.pause-safety-note > uni-text",
+                "text": "暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。",
+                "reason": "gradient/image requires pixel review"
+              },
+              {
+                "selector": "[data-testid=\"demo-complete\"]",
+                "text": "快速完成演示",
+                "reason": "gradient/image requires pixel review"
+              }
+            ]
+          }
+        }
+      ],
+      "completionPaths": [
+        {
+          "action": "end-paused-training",
+          "status": "completed",
+          "demoCompleted": false,
+          "pointsDelta": 15
+        },
+        {
+          "action": "demo-complete",
+          "status": "completed",
+          "demoCompleted": true,
+          "pointsDelta": 15
+        }
+      ],
+      "actual": "Three sizes: resting purple art, primary continue, original completion/demo actions preserved. Timer freezes/resumes; discomfort cancel stays paused; explicit safety stop adds no rewards. Ordinary and demo completion still use baseline completed semantics."
+    }
+  ],
+  "errors": [],
+  "notProven": [
+    "real camera or WeChat/App device",
+    "full video duration",
+    "pixel-identical visual match"
+  ]
+}

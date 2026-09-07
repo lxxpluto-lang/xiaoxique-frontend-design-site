@@ -1,0 +1,25 @@
+{
+  "mode": "built-in image_gen",
+  "reference": "../output/小喜鹊原型升级-20260906/27-安全停止提示.png",
+  "scope": "Decorative icons only; original symptom labels and stopTraining handler unchanged. Opaque white backgrounds, not alpha cutouts.",
+  "assets": [
+    {
+      "id": "chest",
+      "prompt": "Use case: stylized-concept. Asset type: one small decorative symptom icon for a real Chinese rehabilitation mini-app, shown at about 32 CSS pixels. Image 1 is ONLY the style reference, specifically its red symptom illustrations inside the white safety dialog; do not reproduce any interface. Primary request: a single coral red stylized heart symbol with a simple white lightning-bolt cutout, for chest discomfort. Style: refined minimal soft 3D relief with rounded edges, restrained coral-red shading and soft highlights, matching the reference, easily recognizable at small size. Front-facing, centered square composition, whole symbol fills 82% with clean margin. Background: opaque perfectly plain pure white #FFFFFF everywhere outside the icon, not transparent, no checkerboard, no gray field, no vignette or floor/contact shadow. No text, letters, numbers, labels, borders, UI panels, buttons, trophies, medals, trees or additional objects. Not a diagnostic/anatomical teaching image; only a simple decorative symbol beside unchanged symptom text.",
+      "target": "src/static/replica/safety-chest-v1.png",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-dfd1d775-39e9-4503-b3b5-27e67026151d.png"
+    },
+    {
+      "id": "breath",
+      "prompt": "Use case: stylized-concept. Asset type: one small decorative symptom icon for a real Chinese rehabilitation mini-app, shown at about 32 CSS pixels. Image 1 is ONLY the style reference, specifically its red symptom illustrations inside the white safety dialog; do not reproduce any interface. Primary request: a single simplified coral-red pair of lungs with a short red trachea above and a small white branching airway detail, for breathing discomfort. Nonrealistic, no gore. Style: refined minimal soft 3D relief with rounded edges, restrained coral-red shading and soft highlights, matching the reference, easily recognizable at small size. Front-facing, centered square composition, whole symbol fills 82% with clean margin. Background: opaque perfectly plain pure white #FFFFFF everywhere outside the icon, not transparent, no checkerboard, no gray field, no vignette or floor/contact shadow. No text, letters, numbers, labels, borders, UI panels, buttons, trophies, medals, trees or additional objects. Not a diagnostic/anatomical teaching image; only a simple decorative symbol beside unchanged symptom text.",
+      "target": "src/static/replica/safety-breath-v1.png",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-7c55f718-7367-4cc7-a92f-e599f868cffd.png"
+    },
+    {
+      "id": "dizzy",
+      "prompt": "Use case: stylized-concept. Asset type: one small decorative symptom icon for a real Chinese rehabilitation mini-app, shown at about 32 CSS pixels. Image 1 is ONLY the style reference, specifically its red symptom illustrations inside the white safety dialog; do not reproduce any interface. Primary request: a single coral-red side-profile head silhouette with a small orbit and a few red stars just above the head, for dizziness. No face detail, no brain, no gore. Style: refined minimal soft 3D relief with rounded edges, restrained coral-red shading and soft highlights, matching the reference, easily recognizable at small size. Front-facing, centered square composition, whole symbol fills 82% with clean margin. Background: opaque perfectly plain pure white #FFFFFF everywhere outside the icon, not transparent, no checkerboard, no gray field, no vignette or floor/contact shadow. No text, letters, numbers, labels, borders, UI panels, buttons, trophies, medals, trees or additional objects. Not a diagnostic/anatomical teaching image; only a simple decorative symbol beside unchanged symptom text.",
+      "target": "src/static/replica/safety-dizzy-v1.png",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-50f3168d-f666-47a9-b873-f316c0b9bb78.png"
+    }
+  ]
+}

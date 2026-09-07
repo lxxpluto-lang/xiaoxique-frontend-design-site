@@ -1,0 +1,507 @@
+{
+  "generatedAt": "2026-09-07T00:09:12.028Z",
+  "baseUrl": "http://127.0.0.1:4183/",
+  "runDir": "/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/dist/runtime-delivery/run-mVNYIV",
+  "manifestSha256": "fa3a509d611801843f27465d3d4d1e739934725f3eea4febf4d22056097644f7",
+  "results": [
+    {
+      "name": "三端分发所有保留文件与原编译逐字节一致",
+      "status": "PASS",
+      "actual": {
+        "files": 319,
+        "platforms": [
+          "h5",
+          "mp-weixin",
+          "app"
+        ]
+      }
+    },
+    {
+      "name": "原素材与未纳入分发的历史文件仍完整",
+      "status": "PASS",
+      "actual": {
+        "sourceAssets": 236,
+        "notDistributedButPreserved": 171,
+        "sourceFiles": 49
+      }
+    },
+    {
+      "name": "精简H5每个文件HTTP返回与白名单hash一致",
+      "status": "PASS",
+      "actual": {
+        "url": "http://127.0.0.1:4183/",
+        "files": 71,
+        "bytes": 69898883
+      }
+    },
+    {
+      "name": "六个原视频可Range读取且内容未变",
+      "status": "PASS",
+      "actual": {
+        "videos": [
+          "/static/knowledge/videos/cardiac-check-demo.mp4",
+          "/static/knowledge/videos/habit-demo.mp4",
+          "/static/knowledge/videos/warm-up-demo.mp4",
+          "/static/videos/baduanjin-full-course-mobile.mp4",
+          "/static/videos/magpie-resistance-continuous-v3.mp4",
+          "/static/videos/magpie-singing-continuous-v3.mp4"
+        ],
+        "range": "0-1023",
+        "note": "Byte/Range check, not proof of full-duration viewing; browser playback separately tested"
+      }
+    },
+    {
+      "name": "服务没有回落到全量历史素材目录",
+      "status": "PASS",
+      "actual": {
+        "probes": [
+          {
+            "url": "/static/backgrounds/card-switch-v1/baduanjin-cute-v2.png",
+            "status": 200,
+            "result": "exact packaged HTML fallback, not historical image"
+          },
+          {
+            "url": "/static/backgrounds/card-switch-v1/baduanjin-premium-v1.png",
+            "status": 200,
+            "result": "exact packaged HTML fallback, not historical image"
+          }
+        ],
+        "note": "Deliberate exclusion probes; every retained file separately requires exact asset hash"
+      }
+    }
+  ],
+  "requests": [
+    {
+      "file": "assets/index-CHvsBHbl.js",
+      "status": 200,
+      "bytes": 234351,
+      "sha256": "5f32a31b392698e183e739eed9fd3db7839781652f6c5436d3c1ec4fb9475ee3"
+    },
+    {
+      "file": "assets/index-CXo5621q.css",
+      "status": 200,
+      "bytes": 5754,
+      "sha256": "e69b541bef713649f887633401544f69cd3d80a7fe2870bfd306b5bad2f50b44"
+    },
+    {
+      "file": "assets/index-DjPoBKD5.css",
+      "status": 200,
+      "bytes": 185274,
+      "sha256": "dcc1157c81b2b21f7b58ff79b5bfea18e1411787ade10656159bf176654cdf88"
+    },
+    {
+      "file": "assets/pages-index-index.Cb7-AU0I.js",
+      "status": 200,
+      "bytes": 2839484,
+      "sha256": "79b93b7b095ec970e328cf3f2a5bb3002d29693a8b68f991bcdce3254fe2ebcc"
+    },
+    {
+      "file": "assets/uni.e0a5729a.css",
+      "status": 200,
+      "bytes": 34186,
+      "sha256": "e0a5729aadce5e831f6e6837a84aa5fce2146b546ded87553320ae9f9d593a0b"
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 911,
+      "sha256": "360ad46e13766809df52bb4d4b179ab57546fbb7d59f8a54d1f041cce1933ac8"
+    },
+    {
+      "file": "static/icons/magpie-line/README.md",
+      "status": 200,
+      "bytes": 2367,
+      "sha256": "0d0cf8b6d6949a48a5b17c52a684e0ae28045933b24609c6f59cbddf9afee486"
+    },
+    {
+      "file": "static/icons/magpie-line/archive.svg",
+      "status": 200,
+      "bytes": 301,
+      "sha256": "ce94155156355c48476eb92a51e7620a161b8329839ca85eec4dc788aa43cc29"
+    },
+    {
+      "file": "static/icons/magpie-line/assessment.svg",
+      "status": 200,
+      "bytes": 847,
+      "sha256": "04ed9754e29fff22854607706477c1d0b4a0efe99e1f582958856282e40c4cf3"
+    },
+    {
+      "file": "static/icons/magpie-line/assistant.svg",
+      "status": 200,
+      "bytes": 1359,
+      "sha256": "8d1d6e745ed7c5392c8c60909d10456a0bc5ed2fd0834888dee41b89d3184850"
+    },
+    {
+      "file": "static/icons/magpie-line/badge.svg",
+      "status": 200,
+      "bytes": 1085,
+      "sha256": "deaa2d1b5ca7508b646b2473a990436d92be4e9ab70924a5a9eb523e3c6aafcf"
+    },
+    {
+      "file": "static/icons/magpie-line/chat.svg",
+      "status": 200,
+      "bytes": 374,
+      "sha256": "a5235cfcea404ee9eeac7ebed960e0a11cb8350cc87b9f88b0aa6df01e128148"
+    },
+    {
+      "file": "static/icons/magpie-line/device.svg",
+      "status": 200,
+      "bytes": 277,
+      "sha256": "75d299f908b1832d99713d6d5a3ec3267722ba407c3e791f6705993c2e8c2850"
+    },
+    {
+      "file": "static/icons/magpie-line/exercise.svg",
+      "status": 200,
+      "bytes": 1464,
+      "sha256": "d8ae4f7b0e6a0f17fc4f4665ef315edb5ca2b08b7462c6611ed962270d5b4bb8"
+    },
+    {
+      "file": "static/icons/magpie-line/heart-rate.svg",
+      "status": 200,
+      "bytes": 1075,
+      "sha256": "89b80cb4f50250b608681ad34a35c751eea8949a0f81f4def601bf927d03c588"
+    },
+    {
+      "file": "static/icons/magpie-line/home.svg",
+      "status": 200,
+      "bytes": 410,
+      "sha256": "79923aff5ba328ea9e5d60694e60c4cb2c3acf91d39705b39a652e5c1b1b00f5"
+    },
+    {
+      "file": "static/icons/magpie-line/knowledge.svg",
+      "status": 200,
+      "bytes": 467,
+      "sha256": "f946d609359e90a1444cedb09a2a827dc19ab64dcaede079c7b9395cbabf09f3"
+    },
+    {
+      "file": "static/icons/magpie-line/music.svg",
+      "status": 200,
+      "bytes": 367,
+      "sha256": "bf74055653fa954d9ce983106a7c13d0a7a7c8897d36d875a2b7b251fb96b05f"
+    },
+    {
+      "file": "static/icons/magpie-line/original/archive.svg",
+      "status": 200,
+      "bytes": 287,
+      "sha256": "d8b1ed77008c59abdc3eb54ddd7f4a2fc1526364c461ca9fe9c59b9adcc229f6"
+    },
+    {
+      "file": "static/icons/magpie-line/original/assessment.svg",
+      "status": 200,
+      "bytes": 847,
+      "sha256": "f231e86dbbad552c460f8d21f9845582ec9afef4f6dff3b43261538186981c57"
+    },
+    {
+      "file": "static/icons/magpie-line/original/assistant.svg",
+      "status": 200,
+      "bytes": 1344,
+      "sha256": "df43aae30e9191c2f1814ba55634e1f5b8fd7ac6289a0a953939e8f4e6e33104"
+    },
+    {
+      "file": "static/icons/magpie-line/original/badge.svg",
+      "status": 200,
+      "bytes": 1085,
+      "sha256": "fb0352cadc2b08d6d755acf0ab4c3e9a124882fb4cd24e946b6684a99d583a9b"
+    },
+    {
+      "file": "static/icons/magpie-line/original/chat.svg",
+      "status": 200,
+      "bytes": 374,
+      "sha256": "61cef968dc5059ecc6125d88aaae3bc7ab9a6bc6ecb57889779825d43481cb71"
+    },
+    {
+      "file": "static/icons/magpie-line/original/device.svg",
+      "status": 200,
+      "bytes": 277,
+      "sha256": "7929c3aa0a621924b9c04bc779a9420715a8d298bd8f5aa2d4c8b9c0c4f787da"
+    },
+    {
+      "file": "static/icons/magpie-line/original/exercise.svg",
+      "status": 200,
+      "bytes": 1449,
+      "sha256": "f5ac377f864faa9b06d0dd97dd99fef11e04affd90c06264486ce45005395dba"
+    },
+    {
+      "file": "static/icons/magpie-line/original/heart-rate.svg",
+      "status": 200,
+      "bytes": 1075,
+      "sha256": "a7ea8e4f38a071c51efb86ee98802c99c90f2648193ff1132bfe0588ebfec019"
+    },
+    {
+      "file": "static/icons/magpie-line/original/home.svg",
+      "status": 200,
+      "bytes": 410,
+      "sha256": "a0b72904d6955161b38a516b9caf4196b017f859b4ad61be6b764c8a149155c1"
+    },
+    {
+      "file": "static/icons/magpie-line/original/knowledge.svg",
+      "status": 200,
+      "bytes": 467,
+      "sha256": "4408ac4a538950b4f0e03f55a0da267b47491d89d0bb208d2d171f3a8b40cfec"
+    },
+    {
+      "file": "static/icons/magpie-line/original/profile.svg",
+      "status": 200,
+      "bytes": 744,
+      "sha256": "9e6050b65512248a48af79ac538232f41a241dc3cdb853626256a2f3aa487816"
+    },
+    {
+      "file": "static/icons/magpie-line/original/record.svg",
+      "status": 200,
+      "bytes": 360,
+      "sha256": "17b49122de739eca18ffe6d966a8bdbfc61bf377e629f821590f789b1a61aa2e"
+    },
+    {
+      "file": "static/icons/magpie-line/original/report.svg",
+      "status": 200,
+      "bytes": 427,
+      "sha256": "95501a2ef834ee5319a81cbbaf8d73b87d19a655ebeed1c95a80136d67a46d48"
+    },
+    {
+      "file": "static/icons/magpie-line/original/safety.svg",
+      "status": 200,
+      "bytes": 1323,
+      "sha256": "65bf1443849b98fd5f18c18a059c433a2c766eac8edcfce18f9a2520d3bb6dcb"
+    },
+    {
+      "file": "static/icons/magpie-line/original/sync.svg",
+      "status": 200,
+      "bytes": 1430,
+      "sha256": "58a9bc9e6832aa503eb7309bf47ccc060fdda07dafcf4d83f4b356a807663d2b"
+    },
+    {
+      "file": "static/icons/magpie-line/profile.svg",
+      "status": 200,
+      "bytes": 744,
+      "sha256": "8000c6dacf9d603651d589da5d01c639d5aa5c672faf416a0af5a0328cf0d9bf"
+    },
+    {
+      "file": "static/icons/magpie-line/record.svg",
+      "status": 200,
+      "bytes": 388,
+      "sha256": "d4670585e7ba1f213b3d6d86f7cd9a287a6a11b176729414902f39dee668f4ad"
+    },
+    {
+      "file": "static/icons/magpie-line/report.svg",
+      "status": 200,
+      "bytes": 427,
+      "sha256": "14aedb84b019036e68ea1440258a2c3067aadfdbed8ee8bde50da1b1cb821b64"
+    },
+    {
+      "file": "static/icons/magpie-line/resistance.svg",
+      "status": 200,
+      "bytes": 323,
+      "sha256": "2a82e81b9ab4b9699638656b02c5e4149a36f134b20b8038860f37b498571f4e"
+    },
+    {
+      "file": "static/icons/magpie-line/safety.svg",
+      "status": 200,
+      "bytes": 1323,
+      "sha256": "0baf312d562844cbdd9c29a9873615e162c8f8eccd4877686cd5d629620a1387"
+    },
+    {
+      "file": "static/icons/magpie-line/stretch.svg",
+      "status": 200,
+      "bytes": 322,
+      "sha256": "b0505c20bf66c8b99455f1c3843c616ee4d0ad090af3043ffb68f88ea88b2fdf"
+    },
+    {
+      "file": "static/icons/magpie-line/sync.svg",
+      "status": 200,
+      "bytes": 1445,
+      "sha256": "579577d44dbfd527b4cbc82861e07449430ed2a7bf641ea6cabd5dc25996b58d"
+    },
+    {
+      "file": "static/knowledge/videos/cardiac-check-demo.mp4",
+      "status": 200,
+      "bytes": 74661,
+      "sha256": "3bc201d8d6baf39b827f7d470854fff7ae6a9503d2c77bf3e9ff575b00e61879"
+    },
+    {
+      "file": "static/knowledge/videos/habit-demo.mp4",
+      "status": 200,
+      "bytes": 77216,
+      "sha256": "aa8852f486da437a582b7229bc54b397b886aa5024ca9d62ab8cdc736492f1c9"
+    },
+    {
+      "file": "static/knowledge/videos/warm-up-demo.mp4",
+      "status": 200,
+      "bytes": 75917,
+      "sha256": "70eb5563e9d4e05dea3f4ab646fe9bda467497b8ad7a983c4bd1e37f4467d991"
+    },
+    {
+      "file": "static/previews/baduanjin-full-course-poster.jpg",
+      "status": 200,
+      "bytes": 55953,
+      "sha256": "5788f60c8734d0f1892e17b7a42ee27a13b8eb1e6ac7b89e328871c6322dc639"
+    },
+    {
+      "file": "static/previews/continuous-v3/baduanjin-poster-v3.png",
+      "status": 200,
+      "bytes": 138216,
+      "sha256": "85e7917ed223d9dd51f6aa4ec44a38db0743bf943698d298058820cc492426e4"
+    },
+    {
+      "file": "static/previews/continuous-v3/resistance-poster-v3.png",
+      "status": 200,
+      "bytes": 105149,
+      "sha256": "a54368b4189c78ef22598e25b7e61ea2dddc4417d3e2de294a8874b74f305a17"
+    },
+    {
+      "file": "static/previews/continuous-v3/singing-poster-v3.png",
+      "status": 200,
+      "bytes": 49880,
+      "sha256": "0b4c98627061a3530c5240a3a40a8ce9a8781f18bbf362c33cfcea42d9dc7000"
+    },
+    {
+      "file": "static/replica/buddy-friends.png",
+      "status": 200,
+      "bytes": 1777082,
+      "sha256": "f44be134ce3a1d52bb281faadf4cd1bd46ce9f47f6b51c57a4b5f698fe7ee48f"
+    },
+    {
+      "file": "static/replica/exercise-clinician-v1.png",
+      "status": 200,
+      "bytes": 1408202,
+      "sha256": "5d8ef8c1b3e65d62771b45fea14d854b1b9eb445be2d5da35654e6293c73e592"
+    },
+    {
+      "file": "static/replica/health-heart.png",
+      "status": 200,
+      "bytes": 1200817,
+      "sha256": "3f556d630e6ed0d51bbdeb843eea9457eb2f6957b765cb99d5b8fe5c0ee7e149"
+    },
+    {
+      "file": "static/replica/knowledge-checklist-v1.png",
+      "status": 200,
+      "bytes": 1059216,
+      "sha256": "38af3d59de35bf9b935d462a817d0caa9dc7a19f8d3cc5f21d50d80c95e4650f"
+    },
+    {
+      "file": "static/replica/knowledge-effort-v1.png",
+      "status": 200,
+      "bytes": 1046101,
+      "sha256": "bc09a28b078113efbe3262de644c20e9a0431eb8b31436ad893f9b4f8586612c"
+    },
+    {
+      "file": "static/replica/knowledge-leaves-v1.png",
+      "status": 200,
+      "bytes": 1223544,
+      "sha256": "0c9053aac10b3bbca03ff24171760d2b4b01e9a955bf41d3d45c14c58ff7b6d1"
+    },
+    {
+      "file": "static/replica/magpie-flying.png",
+      "status": 200,
+      "bytes": 1006734,
+      "sha256": "98902fedddc8eaa1229ec7e54e2cc93605c113174ac0821c64b273d2443adb04"
+    },
+    {
+      "file": "static/replica/magpie-resting-v1.png",
+      "status": 200,
+      "bytes": 1297438,
+      "sha256": "6814686ac9666fb874a6e7c4e0031e161f22f758deff2973a4ca7998bc13c7c6"
+    },
+    {
+      "file": "static/replica/onboarding-shoe-v1.png",
+      "status": 200,
+      "bytes": 1427013,
+      "sha256": "f969775b1d851f4d2488745cb3b347b3684cadae1de47c367dff8212d23dc5d4"
+    },
+    {
+      "file": "static/replica/reward-guardian-v1.png",
+      "status": 200,
+      "bytes": 1241561,
+      "sha256": "7f2ecbac85a60e5ebf8038bf3101825f493038fb79fa4beb4d9a6ca8fa2a0dc5"
+    },
+    {
+      "file": "static/replica/reward-handbook-v1.png",
+      "status": 200,
+      "bytes": 1160696,
+      "sha256": "4aef134cab39745f1bb057843a08b42f01f3eb955f60dd7117c7059d8b776d01"
+    },
+    {
+      "file": "static/replica/reward-mem-badge-v1.png",
+      "status": 200,
+      "bytes": 1181654,
+      "sha256": "b44d9de0b61c45a960d281d258a4dce6176a6377c2058f39593256c3fcd7e619"
+    },
+    {
+      "file": "static/replica/reward-notebook-v1.png",
+      "status": 200,
+      "bytes": 1636702,
+      "sha256": "e7342e9cf2e5fb1c545b2171d9b575d6836019647815f96506d6f60a4272d569"
+    },
+    {
+      "file": "static/replica/reward-resistance-band-v1.png",
+      "status": 200,
+      "bytes": 1038575,
+      "sha256": "6daf4a022a69b9a8cc3e9866481fb6b65d4063367b8061a3d4c7bdb4aa7f3a2a"
+    },
+    {
+      "file": "static/replica/safety-breath-v1.png",
+      "status": 200,
+      "bytes": 1005035,
+      "sha256": "59c921005cf140aed1e327e969e21630345aac5fd0de52354b2a40ad6457c9ff"
+    },
+    {
+      "file": "static/replica/safety-chest-v1.png",
+      "status": 200,
+      "bytes": 986105,
+      "sha256": "fe6f0d0d3dcf426564df9ce79b934c5500a186957899567cce0f76277f00629c"
+    },
+    {
+      "file": "static/replica/safety-dizzy-v1.png",
+      "status": 200,
+      "bytes": 853783,
+      "sha256": "c940d86c5cce261d7db63386a93d0c0bf1196acab709b3ac2ca8e3fbfc5de5e1"
+    },
+    {
+      "file": "static/replica/social-friends.png",
+      "status": 200,
+      "bytes": 1686037,
+      "sha256": "c1df43a6db7a1ca02187057ea0cf1cfd8e43b5e0a8fdfa587baacbd67ae83f65"
+    },
+    {
+      "file": "static/replica/tree-mature.png",
+      "status": 200,
+      "bytes": 1580033,
+      "sha256": "9159d1aa8a1d73a3e3ce34b2c4cdb8285ad143ba698d17092857a834961a4759"
+    },
+    {
+      "file": "static/replica/tree-sprout.svg",
+      "status": 200,
+      "bytes": 821,
+      "sha256": "bc36dd1902db4472f16f679e4473f2f67d526369c0b12ef2d1df4843604eea4c"
+    },
+    {
+      "file": "static/rive-source/v4/master/magpie-neutral-master-v4.png",
+      "status": 200,
+      "bytes": 864856,
+      "sha256": "37fe04b0a302fa7fbdb0c3d5cffd6558f23eb41798bca568ada48cdb9b19d149"
+    },
+    {
+      "file": "static/videos/baduanjin-full-course-mobile.mp4",
+      "status": 200,
+      "bytes": 40426298,
+      "sha256": "29ef9061946b1eb49c1074888f361d9ec3349ca096a14cbad173da99972f8f04"
+    },
+    {
+      "file": "static/videos/magpie-resistance-continuous-v3.mp4",
+      "status": 200,
+      "bytes": 474777,
+      "sha256": "3bac64059b09dc209c3b3b2c2cc9367e4cc2b58d92ef550f529ecc2ddba58686"
+    },
+    {
+      "file": "static/videos/magpie-singing-continuous-v3.mp4",
+      "status": 200,
+      "bytes": 411587,
+      "sha256": "c3662c10b5ae9ea54b3389fb1811d0dee0114b241752797b09983bfa9bfac7de"
+    }
+  ],
+  "notProven": [
+    "WeChat/App device runtime",
+    "platform upload size/approval",
+    "all possible future dynamic paths",
+    "pixel-identical visual acceptance"
+  ]
+}

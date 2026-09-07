@@ -1,0 +1,33 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "name": "knowledge-leaves-v1",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone decorative illustration for an existing mint-green Chinese rehabilitation mini-app. Input image 1 is STYLE reference only, not an edit target. Follow its clean, calm polished 3D illustration language, soft mint and teal palette, rounded forms and gentle highlights. Output only the requested subject on a clean opaque uniform very pale mint #F1FAF6 background. Square canvas, subject fully inside the frame with a modest margin, no UI, text, numbers, watermark, awards, trophy, soil, flowerpot, floor, ground, island, pedestal or platform. Subject: a graceful decorative cluster of leafy stems, 7 to 9 broad leaves in sage, mint and teal, varying heights, fine subtle veins and curved satin surfaces, gently fanning upwards. Stems end neatly, no roots. Organic natural health editorial illustration like the foliage in the reference featured card, but absolutely no base or platform.",
+      "reference": "12-康复资讯.png",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-372e7d2d-910e-4bd8-875a-8b91bad1091e.png",
+      "target": "src/static/replica/knowledge-leaves-v1.png"
+    },
+    {
+      "name": "knowledge-checklist-v1",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone decorative illustration for an existing mint-green Chinese rehabilitation mini-app. Input image 1 is STYLE reference only, not an edit target. Follow its clean, calm polished 3D illustration language, soft mint and teal palette, rounded forms and gentle highlights. Output only the requested subject on a clean opaque uniform very pale mint #F1FAF6 background. Square canvas, subject fully inside the frame with a modest margin, no UI, text, numbers, watermark, awards, trophy, soil, flowerpot, floor, ground, island, pedestal or platform. Subject: one gently tilted rounded teal clipboard with mint top clip and white inset paper containing three simple teal check marks and short blank line strokes, matching the 3D checklist illustration on the reference article card. No writing or numbers.",
+      "reference": "12-康复资讯.png",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-99e48cb1-b1dd-4d64-8191-fbc2c5bdd606.png",
+      "target": "src/static/replica/knowledge-checklist-v1.png"
+    },
+    {
+      "name": "knowledge-effort-v1",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone decorative illustration for an existing mint-green Chinese rehabilitation mini-app. Input image 1 is STYLE reference only, not an edit target. Follow its clean, calm polished 3D illustration language, soft mint and teal palette, rounded forms and gentle highlights. Output only the requested subject on a clean opaque uniform very pale mint #F1FAF6 background. Square canvas, subject fully inside the frame with a modest margin, no UI, text, numbers, watermark, awards, trophy, soil, flowerpot, floor, ground, island, pedestal or platform. Subject: one rounded semicircular mint and teal dial with a single soft teal pointer leaning slightly right, matching the effort-gauge illustration on the reference card. Minimal abstract tick marks only, no number labels, no normal/danger zones, no green-yellow-red medical thresholds. Decorative conceptual effort scale, not a measurement display.",
+      "reference": "12-康复资讯.png",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-3519f2e6-9f02-46e6-a5d1-b17fa19fd7df.png",
+      "target": "src/static/replica/knowledge-effort-v1.png"
+    },
+    {
+      "name": "exercise-clinician-v1",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone decorative illustration for an existing mint-green Chinese rehabilitation mini-app. Input image 1 is STYLE reference only, not an edit target. Follow its clean, calm polished 3D illustration language, soft mint and teal palette, rounded forms and gentle highlights. Output only the requested subject on a clean opaque uniform very pale mint #F1FAF6 background. Square canvas, subject fully inside the frame with a modest margin, no UI, text, numbers, watermark, awards, trophy, soil, flowerpot, floor, ground, island, pedestal or platform. Subject: a friendly mature Chinese female clinician with short dark bob, white coat over sage green blouse, a discreet stethoscope and small mint clipboard held at waist. Gentle open-hand welcoming gesture. Waist-up portrait, fully visible head and hand. Match the illustrated clinician in the reference prescription card. Warm professional expression, soft 3D editorial illustration, not a real person photograph; no hospital logo or badge text.",
+      "reference": "09-运动选择.png",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-b715699f-ba8a-4e45-82e1-5e3566c1e42c.png",
+      "target": "src/static/replica/exercise-clinician-v1.png"
+    }
+  ]
+}

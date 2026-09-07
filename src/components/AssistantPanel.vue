@@ -1,48 +1,48 @@
 <template>
   <view class="assistant-panel" data-testid="assistant-screen">
-    <view class="assistant-hero">
-      <image :src="mascot" mode="aspectFit" />
-      <view>
-        <text class="eyebrow">小喜 · 健康问答</text>
-        <text class="title">有问题就问我</text>
-        <text class="copy">我可以解释今日处方、身体数据和训练报告。</text>
-      </view>
+    <scroll-view class="assistant-scroll" scroll-y :scroll-into-view="scrollTarget" scroll-with-animation data-testid="assistant-scroll">
+    <view class="assistant-content">
+    <view class="assistant-hero"><view><text class="eyebrow">小喜健康助手</text><text class="hero-title">你好，{{ displayName }}</text><text class="hero-copy">新的一天，从关爱自己开始</text></view><image src="/static/replica-v7/assistant-clothed.png" mode="aspectFit" /></view>
+    <view class="advice-card" :class="'level-' + (latestAdvice?.level || 'insufficient')" data-testid="region-assistant-advice"><text class="section-title">小喜最新建议</text><image src="/static/replica-v7/assistant-advice.png" mode="aspectFit" /><view class="advice-copy"><text>{{ latestAdvice?.title || '先了解你的运动状态' }}</text><text>{{ latestAdvice?.summary || '完成运动后，小喜会根据本地记录整理建议；暂无数据时不判断为正常。' }}</text></view><button data-testid="assistant-latest-advice" @tap="latestAdvice ? emit('open-reports') : emit('open-devices')">{{ latestAdvice ? '查看建议与训练记录' : '查看数据来源' }}<text>›</text></button></view>
+    <view class="question-block"><text class="section-title">你可以这样问</text><view class="prompt-list"><button v-for="prompt in prompts" :key="prompt" data-testid="assistant-task-question" @tap="ask(prompt)">{{ prompt }}<text>›</text></button></view></view>
+    <view v-if="messages.length" class="dialog-list" aria-live="polite" data-testid="assistant-messages"><view v-for="(message,index) in messages" :id="'assistant-message-' + index" :key="index" class="dialog" :class="'dialog--' + message.role"><text>{{ message.text }}</text></view></view>
     </view>
-    <view class="question-block">
-      <text class="section-title">你可以这样问</text>
-      <view class="prompt-list"><button v-for="prompt in prompts" :key="prompt" @tap="ask(prompt)">{{ prompt }}<text>›</text></button></view>
+    </scroll-view>
+    <view class="assistant-composer" data-testid="assistant-composer">
+    <view class="assistant-input"><image :src="mascot" mode="aspectFit" /><input v-model="query" data-testid="assistant-query" aria-label="向小喜提问" placeholder="问问小喜…" confirm-type="send" maxlength="500" @confirm="send" /><button data-testid="assistant-send" :disabled="!query.trim()" @tap="send">发送</button></view>
+    <text class="boundary">小喜只做健康信息整理，不替代医生诊断。回答由本地规则生成，不是实时医疗服务。</text>
     </view>
-    <view v-if="messages.length" class="dialog-list"><view v-for="(message, index) in messages" :key="index" class="dialog" :class="'dialog--' + message.role">{{ message.text }}</view></view>
-    <view class="assistant-input"><input v-model="query" placeholder="问问今天怎么练、数据怎么看" confirm-type="send" @confirm="send" /><button @tap="send">发送</button></view>
-    <text class="boundary">小喜只做健康教育和规则解释，不能诊断疾病或直接修改医院处方。</text>
   </view>
 </template>
-
 <script setup lang="ts">
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
+import AppIcon from '@/components/AppIcon.vue'
 import type { AIAdvice, UserMode } from '@/lib/prototype-data'
-
-const props = defineProps<{ mode: UserMode; displayName: string; mascot: string; completedCount: number; streak: number; planTitle: string; planCompleted: boolean; latestAdvice?: AIAdvice }>()
-defineEmits<{ (event: 'start-plan'): void; (event: 'open-reports'): void; (event: 'open-devices'): void; (event: 'open-profile'): void }>()
-const prompts = ['医生今天给我安排了什么？', '身体数据怎么理解？', '单次报告怎么看？']
-const messages = ref<Array<{ role: 'user' | 'assistant'; text: string }>>([])
-const query = ref('')
-function answer(question: string) {
-  if (/数据|心率|血氧/.test(question)) return props.latestAdvice ? `${props.latestAdvice.title}：${props.latestAdvice.summary}` : '先确认数据来源和时间；缺失或过期数据不会被判断为正常。'
-  if (/医生|联系/.test(question)) return '患者计划的调整必须由医生确认。小喜只说明触发规则和下一步，不替代诊断。'
-  if (/处方|怎么练|今天/.test(question)) return props.mode === 'cardiac' ? `请按“今日”中的医院处方逐项完成；当前卡片会展示强度和时长。有不适时立即停止。` : `可从“今日”选择 ${props.planTitle}，完成后会自动记录。`
-  if (/报告/.test(question)) return '单次报告合并当天全部运动；阶段性报告在当月累计5个有效训练日后生成。缺失数据会明确标记为未采集。'
-  if (/胸痛|气促|晕/.test(question)) return '请立即停止运动。症状明显、持续或加重时及时就医；紧急情况请呼叫120。'
-  return '我会围绕今日计划、身体数据和运动报告回答；处方调整由医生确认。'
+const props=defineProps<{mode:UserMode;displayName:string;mascot:string;planPoster?:string;planIllustration?:string;completedCount:number;streak:number;planTitle:string;planCompleted:boolean;latestAdvice?:AIAdvice}>()
+const emit=defineEmits<{(event:'start-plan'):void;(event:'open-reports'):void;(event:'open-devices'):void;(event:'open-profile'):void}>()
+const prompts=['医生今天给我安排了什么？','身体数据怎么理解？','单次报告怎么看？','计划需要调整吗？']
+const messages=ref<Array<{role:'user'|'assistant';text:string}>>([])
+const query=ref('')
+const scrollTarget=ref('')
+function answer(question:string){
+  const boundary='来源：本机原型状态与规则说明。小喜不诊断、不调整药物、不直接修改医院处方。'
+  const result=(conclusion:string,status:string,evidence:string,next:string,source=boundary)=>['结论：'+conclusion,'当前状态：'+status,'判断依据：'+evidence,'下一步：'+next,source].join('\n')
+  // Safety intent must precede overlapping plan and data keywords.
+  if(/胸痛|气促|头晕|晕厥|心悸|呼吸困难/.test(question))return result('先停止运动。','你提到了不适，无法通过聊天确定原因。','你的文字描述，并非医学评估。','按医院指引联系医护；症状明显、持续或加重时及时就医，紧急情况呼叫 120。')
+  if(/调整|医生|联系/.test(question)&&!/安排|今天/.test(question))return result('患者计划调整须由医生确认。',props.mode==='cardiac'?'按医院演示处方执行。':'当前为日常运动模式。','小喜只有本机记录，不能进行诊断。','带上训练记录与身体感受咨询医护；本地审核演示不代表真实确认。')
+  if(/数据|数值|心率|血氧/.test(question))return props.latestAdvice?result(props.latestAdvice.title,props.latestAdvice.summary,props.latestAdvice.evidence.join('；'),props.latestAdvice.actions.join('；'),'来源：'+props.latestAdvice.sourceSummary+' · '+props.latestAdvice.ruleVersion+'\n'+props.latestAdvice.boundary):result('当前没有可供解读的训练建议。','有效数据不足，不等于正常。','本机尚无最新评估记录。','打开数据来源，核对授权、采集时间和质量。')
+  if(/报告/.test(question))return result('报告整理运动过程，不能证明康复疗效。','累计完成 '+props.completedCount+' 项运动。','报告中心按自然日汇总，停止记录保留但不计入完成；月度累计 5 个有效训练日后形成阶段结论。','查看前后数值、来源和缺失标记；小报告汇总近 7 或 30 天。')
+  if(/处方|怎么练|今天|安排/.test(question))return result(props.mode==='cardiac'?'按今日医院处方逐项执行。':'选择适合当日状态的运动。',props.planTitle+'，'+(props.planCompleted?'已有完成记录。':'待完成。'),'今日计划卡与本地训练记录。',props.planCompleted?'查看报告，不必为积分额外加量。':'打开今日计划；患者先完成训练前检查。有不适立即停止。')
+  return result('我可以解释计划、数据和报告。',props.mode==='cardiac'?'心脏康复模式。':'日常运动模式。','当前回答仅使用本地演示规则，没有联网诊疗能力。','选择上方任务或描述你想了解的记录。')
 }
-function ask(value: string) { messages.value.push({ role: 'user', text: value }, { role: 'assistant', text: answer(value) }) }
-function send() { const value = query.value.trim(); if (!value) return; query.value = ''; ask(value) }
+async function ask(value:string){const userIndex=messages.value.length;messages.value.push({role:'user',text:value},{role:'assistant',text:answer(value)});await nextTick();scrollTarget.value='assistant-message-'+userIndex}
+function send(){const value=query.value.trim();if(!value)return;query.value='';ask(value)}
 </script>
-
 <style scoped lang="scss">
-.assistant-panel { display: grid; gap: 24rpx; }.assistant-hero { display: grid; min-height: 232rpx; padding: 32rpx; grid-template-columns: 144rpx 1fr; align-items: center; gap: 24rpx; border-radius: 24rpx; background: linear-gradient(135deg,#ecfdf5,#ccfbf1); box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }.assistant-hero image { width: 144rpx; height: 160rpx; }
-.eyebrow,.title,.copy,.section-title,.advice-brief view text,.boundary { display: block; }.eyebrow { color: #0f766e; font-size: 24rpx; font-weight: 600; }.title { margin-top: 8rpx; color: #1e293b; font-size: 36rpx; font-weight: 700; }.copy { margin-top: 8rpx; color: #64748b; font-size: 26rpx; line-height: 1.55; }
-.advice-brief { display: grid; padding: 32rpx; grid-template-columns: 1fr auto; align-items: center; gap: 16rpx; border: 0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }.advice-brief view text:first-child { color: #64748b; font-size: 24rpx; }.advice-brief view text:nth-child(2) { margin-top: 8rpx; color: #1e293b; font-size: 32rpx; font-weight: 600; }.advice-brief view text:nth-child(3) { margin-top: 8rpx; color: #64748b; font-size: 26rpx; line-height: 1.5; }.advice-brief > text { color: #0ea5a4; font-size: 26rpx; }.advice-brief.level-attention { background: #fffbeb; }.advice-brief.level-stop { background: #fef2f2; }
-.assistant-primary { display: flex; min-height: 88rpx; align-items: center; justify-content: center; border-radius: 16rpx; color: #fff; background: #0ea5a4; font-size: 32rpx; font-weight: 600; }.question-block { padding: 32rpx; border: 0; border-radius: 24rpx; background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }.section-title { color: #1e293b; font-size: 32rpx; font-weight: 600; }.prompt-list { display: grid; margin-top: 16rpx; }.prompt-list button { display: flex; min-height: 88rpx; align-items: center; justify-content: space-between; color: #475569; font-size: 28rpx; text-align: left; border-top: 1rpx solid #f1f5f9; }.prompt-list button:first-child { border-top: 0; }.prompt-list button text { color: #cbd5e1; }
-.dialog-list { display: grid; gap: 12rpx; }.dialog { max-width: 88%; padding: 18rpx 22rpx; border-radius: 16rpx; font-size: 26rpx; line-height: 1.5; }.dialog--assistant { background: #fff; box-shadow: 0 4rpx 16rpx rgba(15,23,42,.04); }.dialog--user { justify-self: end; color: #fff; background: #0ea5a4; }.assistant-input { display: grid; padding: 8rpx; grid-template-columns: 1fr 120rpx; gap: 8rpx; border: 1rpx solid #e2e8f0; border-radius: 16rpx; background: #fff; }.assistant-input input { height: 72rpx; padding: 0 16rpx; font-size: 26rpx; }.assistant-input button { display: flex; align-items: center; justify-content: center; border-radius: 12rpx; color: #fff; background: #0ea5a4; font-size: 26rpx; }.boundary { padding: 20rpx; border-radius: 16rpx; color: #64748b; background: #f1f5f9; font-size: 22rpx; line-height: 1.5; }
+.assistant-panel{display:flex;flex-direction:column;overflow:hidden}.assistant-scroll{flex:1;min-height:0;height:0}.assistant-content{display:grid;gap:24rpx;padding:16rpx 28rpx 28rpx}.assistant-composer{flex-shrink:0;padding:12rpx 28rpx 0;background:var(--color-page);border-top:1rpx solid #e2f0e8}.assistant-hero{position:relative;min-height:282rpx;padding:30rpx 12rpx 10rpx}.assistant-hero>view{position:relative;z-index:1;width:66%}.assistant-hero>image{position:absolute;width:260rpx;height:280rpx;right:-14rpx;bottom:-16rpx}.eyebrow,.hero-title,.hero-copy,.section-title,.copy,.plan-title,.boundary{display:block}.eyebrow{color:#4f786a;font-size:25rpx}.hero-title{margin-top:25rpx;font-size:43rpx;font-weight:800;line-height:1.35}.hero-copy{margin-top:17rpx;color:#287464;font-size:27rpx;line-height:1.6}.plan-card,.advice-card,.shortcut-grid,.question-block{padding:28rpx;border:2rpx solid #fff;border-radius:38rpx;background:#fff;box-shadow:var(--shadow-card)}.section-title{font-size:31rpx;font-weight:750;color:#164d42}.plan-content{display:grid;grid-template-columns:238rpx minmax(0,1fr);gap:26rpx;margin-top:24rpx;align-items:center}.plan-content>image{width:238rpx;height:280rpx;border-radius:28rpx;background:#e8f8f1}.tag{display:inline-block;padding:9rpx 15rpx;border-radius:16rpx;color:#00786b;background:#e5f7f1;font-size:23rpx}.plan-title{margin-top:20rpx;font-size:32rpx;line-height:1.4;font-weight:750}.copy{margin-top:17rpx;color:var(--color-text-secondary);font-size:24rpx}.primary{display:flex;min-height: 92rpx;margin-top:26rpx;align-items:center;justify-content:center;border-radius:999rpx;background:var(--gradient-brand);color:#fff;font-size:28rpx;font-weight:700}.advice-card{position:relative;overflow:hidden;background:#fff}.advice-card>image{position:absolute;right:-10rpx;bottom:92rpx;width:195rpx;height:205rpx}.advice-copy{position:relative;width:74%;margin:32rpx 0}.advice-copy>text{display:block}.advice-copy>text:first-child{font-size:33rpx;font-weight:750;line-height:1.4}.advice-copy>text:last-child{margin-top:14rpx;color:#537068;font-size:25rpx;line-height:1.7}.advice-card>button{position:relative;display:flex;min-height: 92rpx;padding:0 23rpx;align-items:center;justify-content:space-between;border-radius:999rpx;background:#fff;color:#176d5c;font-size:26rpx}.advice-card.level-attention{background:#fff9eb}.advice-card.level-stop{background:#fff1ef}.shortcut-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8rpx;padding:28rpx 12rpx}.shortcut-grid>button{display:flex;width:100%;padding:0;background:transparent;min-height:132rpx;gap:10rpx;align-items:center;justify-content:center;flex-direction:column}.shortcut-grid text:first-of-type{font-size:25rpx;font-weight:650}.shortcut-grid text:last-of-type{font-size:23rpx;color:var(--color-text-secondary)}.prompt-list{display:grid;grid-template-columns:1fr 1fr;gap:12rpx;margin-top:22rpx}.prompt-list button{display:flex;min-height: 92rpx;padding:13rpx;align-items:center;justify-content:space-between;gap:10rpx;border-radius:18rpx;background:#f0f9f5;color:#276c5c;text-align:left;font-size:24rpx;line-height:1.5}.dialog-list{display:grid;gap:18rpx}.dialog{max-width:96%;padding:24rpx;border-radius:28rpx;font-size:26rpx;line-height:1.75;white-space:pre-wrap;word-break:break-word}.dialog--assistant{background:#fff}.dialog--user{justify-self:end;background:#daf6eb;color:#0d594b}.assistant-input{display:grid;grid-template-columns:62rpx minmax(0,1fr) 100rpx;align-items:center;gap:12rpx;padding:15rpx;border-radius:999rpx;border:1rpx solid #daede5;background:#fff;box-shadow:var(--shadow-card)}.assistant-input image{width:62rpx;height:62rpx}.assistant-input input{height:72rpx;font-size:29rpx}.assistant-input button{display:flex;width:100%;padding:0;white-space:nowrap;min-height: 92rpx;align-items:center;justify-content:center;border-radius:999rpx;background:var(--gradient-brand);color:#fff;font-size:26rpx}.assistant-input button[disabled]{background:#c8ded5;color:#59756a}.boundary{padding:12rpx 8rpx 8rpx;color:#738f84;font-size:23rpx;line-height:1.45;text-align:center}
+
+.assistant-hero{min-height:235rpx;padding:24rpx 0 8rpx}.assistant-hero>image{width:270rpx;height:240rpx;right:-4rpx;bottom:0}.assistant-hero>view{width:64%}.eyebrow{display:none}.hero-title{margin-top:18rpx;font-size:38rpx}.hero-copy{color:#607078;font-size:24rpx}.assistant-content{gap:23rpx;padding-top:0}.plan-card,.advice-card,.shortcut-grid,.question-block{border:0;border-radius:30rpx;background:#fff}.plan-content{grid-template-columns:43% minmax(0,1fr);gap:23rpx}.plan-content>image{width:100%;height:310rpx;background:#fff}.advice-card>image{width:185rpx;height:185rpx;bottom:102rpx;right:16rpx}.advice-copy{width:70%}.assistant-input{border-radius:28rpx;padding:9rpx 14rpx;box-shadow:var(--shadow-card)}.assistant-input button{min-height:78rpx}.assistant-composer{padding-top:12rpx}.boundary{font-size:20rpx;line-height:1.5;color:#6b7a87}.plan-card .primary{min-height:84rpx}
+</style>
+<style scoped lang="scss">
+.assistant-hero{min-height:180rpx;padding:16rpx 0}.assistant-hero>image{width:210rpx;height:190rpx}.hero-title{font-size:36rpx}.hero-copy{font-size:23rpx}.assistant-content{gap:20rpx}.advice-card{padding:24rpx}.advice-copy{margin:24rpx 0}.advice-copy>text:first-child{font-size:30rpx}.advice-copy>text:last-child{font-size:24rpx}.advice-card>button{min-height:76rpx;background:#eef7f5}.question-block{padding:24rpx}.prompt-list{margin-top:18rpx}.prompt-list button{min-height:80rpx}.assistant-panel button{line-height:1.5}
 </style>

@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-09-07T00:06:42.335Z",
+  "environment": "http://127.0.0.1:4173/",
+  "results": [
+    {
+      "name": "public-active",
+      "status": "FAIL",
+      "actual": "locator.evaluate: Error: Nonmonotonic gradient requires pixel audit\n    at eval (eval at evaluate (:311:30), <anonymous>:7:59)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at main (/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-safety-qa.cjs:45:59)",
+      "measurements": [],
+      "branches": []
+    },
+    {
+      "name": "public-paused",
+      "status": "FAIL",
+      "actual": "locator.evaluate: Error: Nonmonotonic gradient requires pixel audit\n    at eval (eval at evaluate (:311:30), <anonymous>:7:59)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at main (/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-safety-qa.cjs:45:59)",
+      "measurements": [],
+      "branches": []
+    },
+    {
+      "name": "cardiac-active",
+      "status": "FAIL",
+      "actual": "locator.evaluate: Error: Nonmonotonic gradient requires pixel audit\n    at eval (eval at evaluate (:311:30), <anonymous>:7:59)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at main (/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-safety-qa.cjs:45:59)",
+      "measurements": [],
+      "branches": []
+    },
+    {
+      "name": "cardiac-paused",
+      "status": "FAIL",
+      "actual": "locator.evaluate: Error: Nonmonotonic gradient requires pixel audit\n    at eval (eval at evaluate (:311:30), <anonymous>:7:59)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at main (/Users/guagua/Documents/冠心病课题/小喜鹊精简功能版-原型副本/scripts/replica-safety-qa.cjs:45:59)",
+      "measurements": [],
+      "branches": []
+    }
+  ],
+  "errors": [],
+  "notProven": [
+    "WeChat/App native overlays and screen readers",
+    "medical correctness or diagnosis",
+    "all patient post-assessment policy combinations; existing browser/keyboard tests separately cover required post mode"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "mode": "built-in image_gen",
+  "reference": "../output/小喜鹊原型升级-20260906/24-健康积分与权益.png",
+  "assets": [
+    {
+      "name": "reward-guardian-v1",
+      "prompt": "Use case: stylized-concept. Asset type: single small decorative reward product illustration for the existing green Chinese rehabilitation mini-app. Image 1 is ONLY a style reference, not an edit target; use the soft polished 3D product rendering language in the bottom reward cards, do not generate the UI. Scene/backdrop: opaque, perfectly smooth very pale mint #F1FAF6, no checkerboard or transparency simulation. Composition: one centered isolated product, square canvas, three-quarter view, fully visible with 12% breathing room around it; soft studio highlights, subtle small contact shadow, clean readable silhouette. No text, letters, digits, pricing, UI, badge ribbons, medals, trophies, gold, extra objects, scenery or watermark. Subject: a friendly glossy PURPLE shield-shaped keepsake badge with a cute PURPLE magpie head cameo, white face patch and small warm yellow beak. The bird must be purple, never green. Polished lavender enamel and purple rim; resembles the purple shield in the reference reward row. No gold medal or ribbon.",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-f6cb24df-8aca-49ec-822e-401e2355fb67.png",
+      "target": "src/static/replica/reward-guardian-v1.png"
+    },
+    {
+      "name": "reward-handbook-v1",
+      "prompt": "Use case: stylized-concept. Asset type: single small decorative reward product illustration for the existing green Chinese rehabilitation mini-app. Image 1 is ONLY a style reference, not an edit target; use the soft polished 3D product rendering language in the bottom reward cards, do not generate the UI. Scene/backdrop: opaque, perfectly smooth very pale mint #F1FAF6, no checkerboard or transparency simulation. Composition: one centered isolated product, square canvas, three-quarter view, fully visible with 12% breathing room around it; soft studio highlights, subtle small contact shadow, clean readable silhouette. No text, letters, digits, pricing, UI, badge ribbons, medals, trophies, gold, extra objects, scenery or watermark. Subject: a single upright CLOSED green rehabilitation exercise handbook with rounded corners, visible cream page edges and a very simple white stretching-person silhouette printed on the front, matching the book in the reference reward row. Mint-green hardcover and darker jade spine. No writing.",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-543b914d-8f23-4290-84ac-3e9fa83cf96b.png",
+      "target": "src/static/replica/reward-handbook-v1.png"
+    },
+    {
+      "name": "reward-resistance-band-v1",
+      "prompt": "Use case: stylized-concept. Asset type: single small decorative reward product illustration for the existing green Chinese rehabilitation mini-app. Image 1 is ONLY a style reference, not an edit target; use the soft polished 3D product rendering language in the bottom reward cards, do not generate the UI. Scene/backdrop: opaque, perfectly smooth very pale mint #F1FAF6, no checkerboard or transparency simulation. Composition: one centered isolated product, square canvas, three-quarter view, fully visible with 12% breathing room around it; soft studio highlights, subtle small contact shadow, clean readable silhouette. No text, letters, digits, pricing, UI, badge ribbons, medals, trophies, gold, extra objects, scenery or watermark. Subject: one light mint-green elastic resistance loop band loosely folded into a soft figure-eight curve like the elastic band in the reference reward row. Satin latex material, mint inner surface and teal outer edge, clearly a flexible exercise band, not a rope, bracelet or hardware.",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-89166b7c-ee1b-4900-a4a8-a705e498664f.png",
+      "target": "src/static/replica/reward-resistance-band-v1.png"
+    },
+    {
+      "name": "reward-notebook-v1",
+      "prompt": "Use case: stylized-concept. Asset type: single small decorative reward product illustration for the existing green Chinese rehabilitation mini-app. Image 1 is ONLY a style reference, not an edit target; use the soft polished 3D product rendering language in the bottom reward cards, do not generate the UI. Scene/backdrop: opaque, perfectly smooth very pale mint #F1FAF6, no checkerboard or transparency simulation. Composition: one centered isolated product, square canvas, three-quarter view, fully visible with 12% breathing room around it; soft studio highlights, subtle small contact shadow, clean readable silhouette. No text, letters, digits, pricing, UI, badge ribbons, medals, trophies, gold, extra objects, scenery or watermark. Subject: one sage-green exercise journal notebook, closed, rounded hardbound cover, pale cream page block, a slim teal elastic closure and a single embossed leaf motif. Premium calm stationery. Distinct from an exercise instruction book: no human illustration and no writing.",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-e252a4d1-f5c0-4823-9938-28b71c9516f1.png",
+      "target": "src/static/replica/reward-notebook-v1.png"
+    },
+    {
+      "name": "reward-mem-badge-v1",
+      "prompt": "Use case: stylized-concept. Asset type: single small decorative reward product illustration for the existing green Chinese rehabilitation mini-app. Image 1 is ONLY a style reference, not an edit target; use the soft polished 3D product rendering language in the bottom reward cards, do not generate the UI. Scene/backdrop: opaque, perfectly smooth very pale mint #F1FAF6, no checkerboard or transparency simulation. Composition: one centered isolated product, square canvas, three-quarter view, fully visible with 12% breathing room around it; soft studio highlights, subtle small contact shadow, clean readable silhouette. No text, letters, digits, pricing, UI, badge ribbons, medals, trophies, gold, extra objects, scenery or watermark. Subject: one rounded square enamel pin in mint and emerald green with a simple raised teal leaf motif and a small purple corner accent. A modest exercise-learning keepsake pin, not a military badge or medal. No lettering, no numbers, no ribbon.",
+      "source": "/Users/guagua/.codex/generated_images/01a07737-8d2c-7931-8dcf-83aa2e17795c/exec-594729eb-68e1-4b54-8cfe-398ffa5e7cc3.png",
+      "target": "src/static/replica/reward-mem-badge-v1.png"
+    }
+  ]
+}

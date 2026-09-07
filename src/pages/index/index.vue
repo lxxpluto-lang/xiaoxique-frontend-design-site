@@ -1,429 +1,41 @@
 <template>
-  <view class="prototype-shell" :data-user-mode="mode">
-    <view v-if="!appReady" class="onboarding">
-      <view class="brand-row"
-        ><view class="brand-mark"
-          ><image :src="magpieAsset" mode="aspectFit" /></view
-        ><view
-          ><text class="brand-name">小喜鹊</text
-          ><text class="brand-caption">科学运动，轻松坚持</text></view
-        ></view
-      >
-      <view
-        v-if="onboardingStep === 'mode'"
-        class="onboarding-card"
-        data-testid="onboarding-mode"
-      >
-        <image class="welcome-magpie" :src="magpieAsset" mode="aspectFit" />
-        <text class="panel-kicker">选择使用方式</text
-        ><text class="panel-title">今天从哪里开始？</text>
-        <button
-          class="mode-card mode-card--public"
-          data-testid="choose-public"
-          @tap="chooseMode('public')"
-        >
-          <view class="mode-icon"
-            ><AppIcon
-              src="/static/icons/magpie-line/exercise.svg"
-              :size="46" /></view
-          ><view
-            ><text>日常运动</text><text>无需评估，直接开始今日运动</text></view
-          ><text>›</text>
-        </button>
-        <button
-          class="mode-card"
-          data-testid="choose-cardiac"
-          @tap="chooseMode('cardiac')"
-        >
-          <view class="mode-icon"
-            ><AppIcon
-              src="/static/icons/magpie-line/heart-rate.svg"
-              :size="46" /></view
-          ><view
-            ><text>心脏康复</text
-            ><text>关联医院计划，按策略记录状态</text></view
-          ><text>›</text>
-        </button>
-        <button class="text-button" @tap="showAiBoundary = true">
-          健康助手与医疗边界
-        </button>
-      </view>
-      <view v-else class="onboarding-card" data-testid="onboarding-binding">
-        <button class="back-link" @tap="backToMode">‹ 返回</button
-        ><text class="panel-kicker">关联康复计划</text
-        ><text class="panel-title">输入患者号</text
-        ><text class="panel-copy"
-          >演示支持 {{ sharedPatientFixture.hospital.name }}</text
-        >
-        <view class="field-block"
-          ><text>医院</text
-          ><view class="hospital-select"
-            ><AppIcon
-              src="/static/icons/magpie-line/archive.svg"
-              :size="32"
-            /><text>{{ sharedPatientFixture.hospital.name }}</text
-            ><text>✓</text></view
-          ></view
-        >
-        <view class="field-block"
-          ><text>患者号</text
-          ><input
-            v-model="visitNumber"
-            class="text-input"
-            data-testid="visit-number"
-            placeholder="输入 256572 或 P-256572"
-            maxlength="16"
-        /></view>
-        <view v-if="bindingState === 'matched'" class="match-card"
-          ><text>✓</text
-          ><view
-            ><text>已匹配康复计划</text
-            ><text
-              >{{ sharedPatientFixture.patient.maskedName }} ·
-              {{ sharedPatientFixture.patient.rehabStage }}</text
-            ><text
-              >{{ sharedPatientFixture.prescription.prescriptionNo }} ·
-              {{ sharedPatientFixture.prescription.version }}</text
-            ></view
-          ></view
-        >
-        <text v-if="bindingState === 'error'" class="form-error"
-          >未找到计划，请检查患者号。</text
-        >
-        <button
-          class="primary-button"
-          :loading="bindingState === 'loading'"
-          data-testid="bind-plan"
-          @tap="bindPatient"
-        >
-          {{ bindingState === "matched" ? "进入今日计划" : "查询计划" }}
-        </button>
-      </view>
-    </view>
+  <view class="prototype-shell" :class="{ 'is-training': detailView === 'training', 'is-report': detailView === 'session-report' }" :data-user-mode="mode" :data-state="trainingStatus">
+    <OnboardingView v-if="!appReady"
+      :step="onboardingStep" :binding-state="bindingState" v-model:visit-number="visitNumber"
+      :hospital="sharedPatientFixture.hospital.name" :patient="sharedPatientFixture.patient.maskedName"
+      :stage="sharedPatientFixture.patient.rehabStage" :version="sharedPatientFixture.prescription.version"
+      :prescription-no="sharedPatientFixture.prescription.prescriptionNo" :mascot="magpieAsset"
+      @choose="chooseMode" @back="backToMode" @bind="bindPatient" @boundary="showAiBoundary = true" />
 
     <template v-else>
       <view v-if="detailView === 'none'" class="app-frame">
         <view class="topbar"
           ><view
             ><text class="topbar-title">{{ topbarTitle }}</text
-            ><text class="topbar-copy">{{ todayLabel }}</text></view
-          ><button class="avatar-button" @tap="activeNav = 'profile'">
-            {{ displayName.slice(0, 1) }}
+            ></view
+          ><button class="avatar-button" aria-label="打开小喜健康助手" @tap="activeNav = 'assistant'">
+            •••
           </button></view
         >
-        <scroll-view class="page-scroll" scroll-y>
-          <view
-            v-if="activeNav === 'today'"
-            class="screen today-screen"
-            data-testid="today-screen"
-          >
-            <view class="today-summary">
-              <view class="today-summary__head"
-                ><view
-                  ><text>{{
-                    mode === "cardiac"
-                      ? prescriptionAllDone
-                        ? "今日处方已完成"
-                        : checkInDone
-                          ? "今天已打卡，处方继续完成"
-                          : "医院今日处方"
-                      : publicTodayCompleted
-                        ? "今天已经运动"
-                        : "今天想怎么动？"
-                  }}</text
-                  ><text>{{
-                    mode === "cardiac"
-                      ? checkInDone
-                        ? "打卡已保存，不需要为了积分额外加量"
-                        : "完成第一项有效运动后自动打卡"
-                     : publicTodayCompleted
-                       ? "今天的运动已记录，按状态休息即可"
-                        : "选择一项适合自己的运动开始吧"
-                  }}</text></view></view
-              >
-              <view class="today-summary__numbers"
-                ><view
-                  ><text>{{ weeklyCompletedDays }}<text>/7</text></text
-                  ><text>本周训练</text></view
-                ><view
-                  ><text
-                    >{{
-                      mode === "public"
-                        ? publicCompletedMinutes
-                        : completedMinutes
-                    }}<text>分钟</text></text
-                  ><text>今日运动</text></view
-                ><view
-                  ><text>{{ streak }}<text>天</text></text
-                  ><text>连续打卡</text></view
-                ></view
-              >
-            </view>
-            <button
-              class="today-steps-card"
-              data-testid="today-steps-card"
-              @tap="goDetail('devices')"
-            >
-              <view class="today-steps-card__head">
-                <view class="today-steps-card__icon">步</view>
-                <view>
-                  <text>今日步数</text>
-                  <text v-if="validTodayStepRecord"
-                    >{{ formatSteps(validTodayStepRecord.steps) }}
-                    <text>/ {{ formatSteps(validTodayStepRecord.goal) }} 步</text></text
-                  >
-                  <text v-else>今日步数未同步</text>
-                </view>
-                <text>{{ validTodayStepRecord ? "查看数据 ›" : "去同步 ›" }}</text>
-              </view>
-              <view class="steps-progress" aria-hidden="true">
-                <view :style="{ width: todayStepProgress + '%' }" />
-              </view>
-              <text class="today-steps-card__source">
-                {{
-                  validTodayStepRecord
-                    ? `${sourceLabel(validTodayStepRecord.source)} · ${formatStepSyncedTime(validTodayStepRecord.syncedAt)}更新`
-                    : "连接设备或手动补录；缺失值不会显示为 0"
-                }}
-              </text>
-            </button>
-            <template v-if="mode === 'cardiac'">
-              <view class="prescription-head"
-                ><view
-                  ><text>医生今日处方</text
-                  ><text
-                    >{{ sharedPatientFixture.prescription.version }} ·
-                    {{ sharedPatientFixture.patient.assignedDoctor }}</text
-                  ></view
-                ><text
-                  >已完成 {{ prescriptionCompletedCount }}/{{
-                    prescriptionTasks.length
-                  }}</text
-                ></view
-              >
-              <view
-                class="prescription-carousel"
-              >
-                <view
-                  class="prescription-pagination"
-                  data-testid="prescription-pagination"
-                >
-                  <text
-                    >{{ prescriptionSlide + 1 }}/{{
-                      prescriptionTasks.length
-                    }}</text
-                  >
-                  <view>
-                    <text
-                      v-for="(task, index) in prescriptionTasks"
-                      :key="task.key"
-                      :class="{
-                        active: prescriptionSlide === index,
-                        complete: task.completed,
-                      }"
-                    />
-                  </view>
-                </view>
-                <swiper
-                  class="prescription-swiper"
-                  :current="prescriptionSlide"
-                  data-testid="prescription-swiper"
-                  @change="onPrescriptionSlide"
-                >
-                  <swiper-item
-                    v-for="task in prescriptionTasks"
-                    :key="task.key"
-                    data-testid="prescription-slide"
-                  >
-                    <view
-                      class="today-task prescription-card"
-                      :class="{ complete: task.completed }"
-                      data-testid="today-core-task"
-                      ><view class="task-heading"
-                        ><view
-                          ><text>{{ task.item.category }}</text
-                          ><text>{{ task.item.reason }}</text></view
-                        ><text>{{
-                          task.completed ? "已完成" : "待完成"
-                        }}</text></view
-                      ><view class="task-main"
-                        ><view class="task-media"
-                          ><AppIcon
-                            :src="
-                              task.game?.iconPath ||
-                              '/static/icons/magpie-line/exercise.svg'
-                            "
-                            :size="62"
-                            color="#0F766E" /></view
-                        ><view class="task-body"
-                          ><view class="tag-row"
-                            ><text>医院处方</text
-                            ><text>{{
-                              sharedPatientFixture.prescription.version
-                            }}</text
-                            ><text v-if="task.game?.arSupported"
-                              >AR互动</text
-                            ></view
-                          ><text class="task-title">{{ task.item.project }}</text
-                          ><text class="task-copy">{{
-                            task.item.intensity
-                          }}</text></view
-                        ></view
-                      ><view class="task-meta"
-                        ><view
-                          ><text>时长</text
-                          ><text>{{ task.item.duration }}</text></view
-                        ><view
-                          ><text>频次</text
-                          ><text>{{ task.item.frequency }}</text></view
-                        ><view
-                          ><text>状态</text
-                          ><text>{{
-                            task.completed ? "完成" : "待训练"
-                          }}</text></view
-                        ></view
-                      ><text v-if="planAdjustment" class="plan-adjustment"
-                        >医生已确认：{{ planAdjustment }}</text
-                      ><button
-                        v-if="task.game"
-                        class="task-primary"
-                        @tap="startPrescriptionTask(task)"
-                      >
-                        {{
-                          task.completed ? "再次训练" : "开始这一项"
-                        }}</button
-                      ><button v-else class="task-primary" disabled>
-                        暂未适配小程序训练
-                      </button></view
-                  ></swiper-item>
-                </swiper>
-              </view>
-            </template>
-            <button
-              v-if="mode === 'cardiac'"
-              class="today-garden-entry"
-              data-testid="today-garden-entry"
-              @tap="openGarden('growth')"
-            >
-              <image
-                src="/static/icons/cabbage-checkin.svg"
-                mode="aspectFit"
-              />
-              <view>
-                <text
-                  >小白菜 · 成长第{{ gardenViewState.cycleDay }}/{{
-                    gardenViewState.cycleLength
-                  }}天</text
-                >
-                <text>{{ checkInDone ? "今天已成长" : "今天待成长" }}</text>
-              </view>
-              <text>查看菜园 ›</text>
-            </button>
-            <view
-              class="section-heading exercise-picker-heading"
-              :data-testid="
-                mode === 'public'
-                  ? 'public-exercise-picker'
-                  : 'cardiac-self-exercise-picker'
-              "
-              ><view
-                ><text>{{ mode === "public" ? "选择一项运动" : "更多运动" }}</text
-                ><text>{{
-                  mode === "public"
-                    ? "按自己的兴趣和当前状态选择"
-                    : "自选内容不会改变医生处方"
-                }}</text></view
-              ></view
-            >
-            <view class="category-grid"
-              ><button
-                v-for="category in exerciseCategories"
-                :key="category.id"
-                :class="{
-                  active:
-                    (mode === 'public'
-                      ? selectedCategoryId
-                      : expandedCategoryId) === category.id,
-                }"
-                data-testid="exercise-category"
-                @tap="toggleCategory(category.id)"
-              >
-                <view
-                  ><AppIcon
-                    :src="category.iconPath"
-                    :size="38"
-                    color="#11866F" /></view
-                ><text>{{ category.shortTitle }}</text>
-              </button></view
-            >
-            <view
-              v-if="mode === 'public' || expandedCategoryId"
-              class="inline-game-grid"
-              data-testid="self-directed-game-list"
-              ><button
-                v-for="game in visibleSelfDirectedGames"
-                :key="game.id"
-                :class="{ selected: selfSelectedGameId === game.id }"
-                data-testid="self-directed-game"
-                @tap="chooseSelfDirected(game.id)"
-              >
-                <view
-                  ><AppIcon
-                    :src="game.iconPath"
-                    :size="42"
-                    color="#0F766E" /></view
-                ><text>{{ game.title }}</text
-                ><text>{{ game.subtitle }}</text
-                ><view
-                  ><text>{{ game.duration }}</text
-                  ><text v-if="game.arSupported">AR互动</text></view
-                >
-              </button></view
-            >
-            <view
-              v-if="selfSelectedGame"
-              class="self-selected-card"
-              data-testid="selected-self-exercise"
-              ><view
-                ><text>自选运动</text
-                ><text>{{ mode === "cardiac" ? "非医院处方" : "已选择" }}</text></view
-              ><text>{{ selfSelectedGame.title }}</text
-              ><text
-                >{{ selfSelectedGame.subtitle }} ·
-                {{ selfSelectedGame.duration }}</text
-              ><text>{{
-                mode === "cardiac"
-                  ? "不影响医生今日计划"
-                  : "准备好后即可开始运动"
-              }}</text
-              ><button data-testid="start-self-exercise" @tap="startSelfSelected">
-                {{ mode === "public" ? "开始运动" : "开始自选运动" }}
-              </button></view
-            >
-            <button
-              v-if="mode === 'public'"
-              class="today-garden-entry"
-              data-testid="today-garden-entry"
-              @tap="openGarden('growth')"
-            >
-              <image src="/static/icons/cabbage-checkin.svg" mode="aspectFit" />
-              <view>
-                <text
-                  >小白菜 · 成长第{{ gardenViewState.cycleDay }}/{{
-                    gardenViewState.cycleLength
-                  }}天</text
-                >
-                <text>{{ checkInDone ? "今天已成长" : "今天待成长" }}</text>
-              </view>
-              <text>查看菜园 ›</text>
-            </button>
-          </view>
+        <scroll-view v-if="activeNav !== 'assistant'" class="page-scroll" scroll-y>
+          <TodayDashboard v-if="activeNav === 'today'"
+            :mode="mode" :display-name="displayName" :greeting="greeting()"
+            :hospital="sharedPatientFixture.hospital.shortName" :weekly-days="weeklyCompletedDays"
+            :minutes="mode === 'public' ? publicCompletedMinutes : completedMinutes" :streak="streak"
+            :checked-today="checkInDone" :completed-tasks="prescriptionCompletedCount"
+            :tasks="prescriptionTasks" :slide="prescriptionSlide" :adjustment="planAdjustment"
+            :featured="featuredGame" :games="exerciseGames" :days="weeklyPlanDays"
+            @start-task="startPrescriptionTask" @exercise="startSelfExercise" @slide="onPrescriptionSlide"
+            @checkin="openGarden('checkin')" @weekly="goDetail('weekly-path')"
+            @all-exercises="goDetail('exercise-category')" />
 
           <view
             v-else-if="activeNav === 'discover'"
             class="discover-screen"
             data-testid="discover-screen"
           >
+            <KnowledgeHub :mode="mode" :items="knowledgeItems" @open="openKnowledgeItem">
+              <template #community>
             <CompanionHub
               entry-only
               disabled
@@ -440,29 +52,11 @@
               :today-key="todayKey()"
               @open-social="openSocial"
             />
-            <KnowledgeHub
-              :mode="mode"
-              :items="knowledgeItems"
-              @open="openKnowledgeItem"
-            />
+              </template>
+            </KnowledgeHub>
+
           </view>
 
-          <AssistantPanel
-            v-else-if="activeNav === 'assistant'"
-            class="screen"
-            :mode="mode"
-            :display-name="displayName"
-            :mascot="magpieAsset"
-            :completed-count="completedExerciseCount"
-            :streak="streak"
-            :plan-title="featuredGame.title + ' ' + featuredGame.duration"
-            :plan-completed="taskCompleted"
-            :latest-advice="latestAdvice"
-            @start-plan="selectExercise(featuredGame.id)"
-            @open-reports="openLatestReport"
-            @open-devices="goDetail('devices')"
-            @open-profile="goDetail('health-archive')"
-          />
 
           <view
             v-else-if="activeNav === 'data'"
@@ -471,53 +65,40 @@
           >
             <view class="data-panel">
               <view class="today-numbers"
-                ><view
-                  ><text>{{ totalMinutes }}</text
-                  ><text>运动时间</text></view
-                ><view
-                  ><text>{{ totalCompletedSessions }}</text
+                ><view data-metric="METRIC-DATA-TOTAL-MINUTES"
+                  ><image class="data-stat-icon" src="/static/replica-v7/data-time-icon.png" mode="aspectFit" /><text class="data-stat-value">{{ totalMinutes }}</text
+                  ><text>运动时间/分钟</text></view
+                ><view data-metric="METRIC-DATA-TOTAL-COMPLETED"
+                  ><image class="data-stat-icon" src="/static/replica-v7/data-completed-icon.png" mode="aspectFit" /><text class="data-stat-value">{{ totalCompletedSessions }}</text
                   ><text>完成项目</text></view
-                ><view
-                  ><text>{{ streak }}</text
+                ><view data-metric="METRIC-DATA-STREAK"
+                  ><image class="data-stat-icon" src="/static/replica-v7/data-streak-icon.png" mode="aspectFit" /><text class="data-stat-value">{{ streak }}</text
                   ><text>连续天数</text></view
                 ></view
               >
-              <button
-                v-if="latestAdvice"
-                class="latest-advice"
-                :class="'level-' + latestAdvice.level"
-                @tap="openLatestReport"
-              >
-                <view
-                  ><text>最新解读</text><text>{{ latestAdvice.title }}</text
-                  ><text>{{ latestAdvice.summary }}</text></view
-                ><text>›</text>
-              </button>
-              <view v-else class="empty-card"
-                >完成一次运动后，小喜会在这里显示简短解读。</view
-              >
-              <view class="section-heading"
+              <TrainingInsightCard :sessions="sessions" :today="todayKey()" :advice="latestAdvice" @report="openLatestReport" />
+              <view class="data-section" data-testid="data-body-metrics"><view class="section-heading"
                 ><view
                   ><text>身体数据</text
                   ><text>缺失与过期不会显示为正常</text></view
                 ><button @tap="goDetail('devices')">数据来源 ›</button></view
               >
               <view class="metric-row"
-                ><view v-for="metric in visibleMetrics" :key="metric.label"
-                  ><text>{{ metric.label }}</text
+                ><view v-for="metric in visibleMetrics" :key="metric.label" :data-metric-label="metric.label"
+                  ><view class="data-metric-label"><image class="data-vital-icon" :src="metric.label.includes('心率') ? '/static/replica-v7/data-heart-icon.png' : '/static/replica-v7/data-oxygen-icon.png'" mode="aspectFit" /><text>{{ metric.label }}</text></view
                   ><text
                     >{{ metric.value
                     }}<text class="metric-unit">{{ metric.unit }}</text></text
                   ><text>{{ metric.source }}</text></view
                 ></view
-              >
-              <view class="section-heading daily-activity-heading"
+              ></view>
+              <view class="data-activity-card"><view class="section-heading daily-activity-heading"
                 ><view
                   ><text>每日活动</text
                   ><text>步数独立于训练前后安全评估</text></view
                 ><button @tap="goDetail('devices')">录入与来源 ›</button></view
               >
-              <button
+              <view class="data-activity-columns"><button
                 class="daily-steps-card"
                 data-testid="daily-steps-card"
                 @tap="goDetail('devices')"
@@ -532,6 +113,7 @@
                   <text
                     >目标 {{ formatSteps(DAILY_STEP_GOAL) }} 步（演示目标）</text
                   >
+                  <view class="data-step-progress" data-testid="data-step-progress" :data-progress="todayStepProgress"><view :style="{ width: todayStepProgress + '%' }" /></view>
                 </view>
                 <view class="daily-steps-card__status">
                   <text>{{ todayStepProgress }}%</text>
@@ -568,13 +150,13 @@
                 <text v-if="validStepTrendDays < 2" class="steps-trend-empty"
                   >有效日期少于2天，暂不足以形成趋势判断。</text
                 >
-              </view>
-              <view class="section-heading"
+              </view></view></view>
+              <view class="data-section"><view class="section-heading"
                 ><view
-                  ><text>近7次运动</text><text>日期、开始时间与时长</text></view
+                  ><text>最近运动</text><text>日期、开始时间与时长</text></view
                 ></view
               ><view class="recent-session-list"
-                ><view v-for="session in recentSessions" :key="session.id"
+                ><button v-for="session in recentSessions.slice(0, 2)" :key="session.id" @tap="openSession(session)" :data-testid="'recent-session-'+session.id"
                   ><view
                     ><text>{{ session.title }}</text
                     ><text>{{
@@ -582,145 +164,49 @@
                     }}</text></view
                   ><text>{{
                     formatDuration(session.durationSeconds)
-                  }}</text></view
-                ><text v-if="!recentSessions.length">还没有完成记录</text></view
-              >
+                  }}</text><text>›</text></button
+                ><text v-if="!recentSessions.length">还没有完成记录</text><button class="recent-all" data-testid="data-all-reports" @tap="openTrainingReports">查看全部 ›</button></view
+              ></view>
             </view>
           </view>
 
-          <view
-            v-else
-            class="screen profile-screen"
-            data-testid="profile-screen"
-          >
-            <view class="profile-identity"
-              ><view class="profile-avatar">{{ displayName.slice(0, 1) }}</view
-              ><text>{{
-                mode === "cardiac"
-                  ? sharedPatientFixture.patient.name
-                  : displayName
-              }}</text
-              ><text>{{
-                mode === "cardiac"
-                  ? sharedPatientFixture.hospital.shortName +
-                    " · " +
-                    sharedPatientFixture.patient.patientNo
-                  : "日常运动用户"
-              }}</text
-              ><button @tap="goDetail('health-archive')">
-                查看健康档案
-              </button></view
-            >
-            <view class="profile-garden-card" data-testid="profile-garden-card">
-              <button
-                class="profile-garden-main"
-                data-testid="profile-garden-growth"
-                @tap="openGarden('growth')"
-              >
-                <image
-                  src="/static/icons/cabbage-checkin.svg"
-                  mode="aspectFit"
-                />
-                <view>
-                  <text>我的运动小菜园</text>
-                  <text>{{ gardenViewState.stageLabel }}</text>
-                  <text
-                    >成长第{{ gardenViewState.cycleDay }}/{{
-                      gardenViewState.cycleLength
-                    }}天</text
-                  >
-                </view>
-                <text>查看菜园 ›</text>
-              </button>
-              <view class="profile-garden-footer">
-                <view>
-                  <text>连续{{ streak }}天</text>
-                  <text>累计{{ totalCheckInDays }}天</text>
-                </view>
-                <button
-                  data-testid="profile-garden-checkin"
-                  @tap="openGarden('checkin')"
-                >
-                  查看打卡记录 ›
-                </button>
-              </view>
-            </view>
-            <view class="profile-section"
-              ><text>健康管理</text
-              ><view class="service-grid health-management-grid"
-                ><button @tap="goDetail('devices')">
-                  <view
-                    ><AppIcon
-                      src="/static/icons/magpie-line/device.svg"
-                      :size="36" /></view
-                  ><text>设备授权</text
-                  ><text>{{
-                    deviceConnected ? "已连接" : "去管理"
-                  }}</text></button
-                ><button @tap="goDetail('health-archive')">
-                  <view
-                    ><AppIcon
-                      src="/static/icons/magpie-line/archive.svg"
-                      :size="36" /></view
-                  ><text>健康档案</text><text>目标与来源</text></button
-                ><button @tap="openTrainingReports">
-                  <view
-                    ><AppIcon
-                      src="/static/icons/magpie-line/report.svg"
-                      :size="36" /></view
-                  ><text>训练报告</text><text>单次与阶段</text></button
-                ><button
-                  class="service-disabled"
-                  disabled
-                  aria-disabled="true"
-                  data-testid="points-exchange-unavailable"
-                >
-                  <view
-                    ><AppIcon
-                      src="/static/icons/magpie-line/badge.svg"
-                      :size="36" /></view
-                  ><text>积分兑换</text><text>暂未开放</text>
-                </button></view
-              ></view
-            >
-            <view class="profile-section"
-              ><text>原型设置</text
-              ><view class="service-list"
-                ><button @tap="goDetail('prototype-policy')">
-                  <AppIcon
-                    src="/static/icons/magpie-line/safety.svg"
-                    :size="34"
-                  /><view
-                    ><text>训练状态策略</text
-                    ><text>患者策略 v{{ publishedPolicy.version }}</text></view
-                  ><text>›</text></button
-                ><button @tap="goDetail('doctor-reviews')">
-                  <AppIcon
-                    src="/static/icons/magpie-line/report.svg"
-                    :size="34"
-                  /><view
-                    ><text>医生审核队列</text
-                    ><text>{{ pendingReviewCount }} 条待处理</text></view
-                  ><text>›</text>
-                </button></view
-              ></view
-            >
-            <view class="profile-actions"
-              ><button @tap="switchMode">切换使用模式</button
-              ><button @tap="showAiBoundary = true">隐私与医疗边界</button
-              ><button @tap="resetPrototype">重置原型</button></view
-            >
-          </view>
+          <PatientProfile v-else :display-name="displayName" :mode="mode" :total-days="totalCheckInDays"
+            :streak="streak" :garden="gardenViewState" :connected="deviceConnected" :demo-enabled="prototypeDemoEnabled"
+            @garden="openGarden" @archive="goDetail('health-archive')" @devices="goDetail('devices')"
+            @reports="openTrainingReports" @privacy="showAiBoundary = true" @policy="goDetail('prototype-policy')"
+            @reviews="goDetail('doctor-reviews')" @team="openSocial('team')" @buddy="openSocial('buddy')"
+            @rewards="goDetail('reward-store')" @mini-report="goDetail('hospital-report')"
+            @switch-mode="switchMode" @reset="resetPrototype" />
         </scroll-view>
+          <AssistantPanel
+            v-if="activeNav === 'assistant'"
+            class="page-scroll"
+            :mode="mode"
+            :display-name="displayName"
+            :mascot="magpieAsset"
+            :completed-count="completedExerciseCount"
+            :streak="streak"
+            :plan-title="mode === 'cardiac' && prescriptionTasks[0] ? prescriptionTasks[0].item.project + ' ' + prescriptionTasks[0].item.duration : featuredGame.title + ' ' + featuredGame.duration"
+            :plan-poster="featuredGame.poster"
+            :plan-illustration="featuredGame.id === 'baduanjin' ? '/static/replica-v7/assistant-plan.png' : featuredGame.id === 'breathing' ? '/static/replica-v7/article-recovery.png' : ''"
+            :plan-completed="taskCompleted"
+            :latest-advice="latestAdvice"
+            @start-plan="startAssistantPlan"
+            @open-reports="openLatestReport"
+            @open-devices="goDetail('devices')"
+            @open-profile="goDetail('health-archive')"
+          />
         <view class="bottom-nav"
           ><button
             v-for="item in navItems"
             :key="item.id"
-            :class="{ active: activeNav === item.id }"
+            :class="{ active: activeNav === item.id, 'nav-assistant': item.id === 'assistant' }"
+            :data-testid="'nav-' + item.id"
+            :aria-current="activeNav === item.id ? 'page' : undefined"
             @tap="switchNav(item.id)"
           >
             <view
-              ><AppIcon
+              ><image v-if="item.id === 'assistant'" class="nav-mascot" :src="magpieAsset" mode="aspectFit" /><AppIcon v-else
                 :src="item.iconPath"
                 :size="42"
                 :active="activeNav === item.id"
@@ -732,21 +218,23 @@
 
       <view v-else class="detail-frame" :data-detail-view="detailView">
         <view class="detail-header"
-          ><button @tap="closeDetail">‹</button><text>{{ detailTitle }}</text
-          ><button @tap="showAiBoundary = true">?</button></view
+          ><button aria-label="返回上一页" @tap="closeDetail">‹</button><text>{{ detailView === 'training' && trainingStatus === 'paused' ? '训练已暂停' : detailTitle }}</text
+          ><button aria-label="健康助手与医疗边界" @tap="showAiBoundary = true">?</button></view
         >
         <scroll-view class="detail-scroll" scroll-y>
-          <view v-if="detailView === 'weekly-path'" class="detail-content"
+          <view v-if="detailView === 'weekly-path'" class="detail-content weekly-detail" data-testid="weekly-path-screen"
             ><DetailIntro
               kicker="本周运动路径"
+              artwork="/static/replica-v7/weekly-leaves.png"
               title="一天一个小节点"
-              copy="普通中断不扣分、不清空计划。"
-            /><view class="path-list"
+              copy="按状态完成即可，不需要为了积分额外加量。"
+            /><view class="week-timeline" data-testid="region-week-nodes"><view v-for="day in weeklyPlanDays" :key="day.label" :class="{done:day.done,today:day.today}"><text>周{{ day.label }}</text><text>{{ day.done ? '✓' : day.index }}</text><text>{{ day.done ? '已完成' : day.today ? '今天' : '待开始' }}</text></view></view><view class="week-overview"><text>本周已完成 {{ weeklyCompletedDays }} / 7 天</text><text>中断不扣分、不清空计划；日期与打卡记录同步。</text></view><view class="path-list"
               ><button
                 v-for="day in weeklyPlanDays"
                 :key="day.label"
                 :class="{ done: day.done, today: day.today }"
-                @tap="day.today && selectExercise(day.gameId)"
+                data-testid="weekly-day"
+                @tap="day.today && startSelfExercise(day.gameId)"
               >
                 <text>{{ day.done ? "✓" : day.index }}</text
                 ><view
@@ -762,56 +250,36 @@
             ></view
           >
 
-          <view
+          <ExerciseSelection
             v-else-if="detailView === 'exercise-category'"
-            class="detail-content"
-            ><DetailIntro
-              kicker="运动分类"
-              :title="selectedCategory.title"
-              :copy="selectedCategory.description"
-            /><view class="category-recommend"
-              ><view class="category-recommend__icon"
-                ><AppIcon
-                  :src="categoryRecommendedGame.iconPath"
-                  :size="72"
-                  color="#0F766E" /></view
-              ><view
-                ><text>今日推荐</text
-                ><text>{{ categoryRecommendedGame.title }}</text
-                ><text>{{ categoryRecommendedGame.subtitle }}</text
-                ><button @tap="selectExercise(categoryRecommendedGame.id)">
-                  开始 {{ categoryRecommendedGame.duration }}
-                </button></view
-              ></view
-            ><view class="simple-exercise-list"
-              ><button
-                v-for="game in categoryGames"
-                :key="game.id"
-                @tap="selectExercise(game.id)"
-              >
-                <view
-                  ><text>{{ game.title }}</text
-                  ><text
-                    >{{ game.feature
-                    }}<text v-if="game.arSupported"> · AR互动</text></text
-                  ></view
-                ><text>{{ game.duration }} ›</text>
-              </button></view
-            ></view
-          >
+            :mode="mode" :categories="exerciseCategories" :selected-category="selectedCategory"
+            :games="categoryGames" :all-games="exerciseGames" :recommended-id="categoryRecommendedGame.id"
+            :completed-minutes="completedMinutes" :completed-projects="completedExerciseCount"
+            :completed-records="completedTodaySessions.length" :streak="streak"
+            :steps="validTodayStepRecord?.steps"
+            :progress="mode === 'cardiac' ? Math.round(prescriptionCompletedCount / Math.max(1, prescriptionTasks.length) * 100) : publicTodayCompleted ? 100 : 0"
+            :stage="sharedPatientFixture.patient.rehabStage"
+            :prescription-version="sharedPatientFixture.prescription.version"
+            :prescription-total="prescriptionTasks.length" :prescription-completed="prescriptionCompletedCount"
+            @update:selected-category-id="selectedCategoryId = $event"
+            @select="startSelfExercise" @open-prescription="goDetail('health-archive')"
+          />
 
           <view
             v-else-if="detailView === 'precheck'"
-            class="detail-content"
+            class="detail-content assessment-detail precheck-detail"
             data-testid="precheck-screen"
             ><StepIndicator :current="1" />
-            <view class="precheck-heading">
+            <view class="assessment-intro">
+              <view class="assessment-emblem"><AppIcon src="/static/icons/magpie-line/safety.svg" :size="66" /></view>
+              <view class="precheck-heading">
               <text>训练前确认</text>
               <text>完成以下信息后即可开始 · 约30秒</text>
               <text
                 >医院安全规则 v{{ publishedPolicy.version }} ·
                 训练前{{ modeLabel(publishedPolicy.preMode) }}</text
               >
+              </view>
             </view>
             <view class="precheck-section" data-testid="discomfort-score">
               <view class="precheck-section__title">
@@ -824,6 +292,8 @@
               </view>
               <slider
                 :value="preSnapshot.discomfortScore ?? 0"
+                role="slider" tabindex="0" aria-label="运动前不适程度" aria-valuemin="0" aria-valuemax="10"
+                :aria-valuenow="preSnapshot.discomfortScore ?? 0" :aria-valuetext="preSnapshot.discomfortScore === null || preSnapshot.discomfortScore === undefined ? '待填写，0代表没有不适，10代表非常不适' : String(preSnapshot.discomfortScore)" data-keyboard-step="1"
                 min="0"
                 max="10"
                 step="1"
@@ -960,10 +430,10 @@
             class="detail-content training-detail"
             data-testid="training-screen"
             ><view class="training-strip training-strip--compact"
-              ><text class="training-state">{{
+              ><view class="training-state-group"><text v-if="trainingStatus === 'paused'" class="paused-exercise-name">{{ selectedGame.title }}</text><text class="training-state">{{
                 trainingStatus === "paused" ? "已暂停" : "训练中"
               }}</text
-              ><view v-if="showLiveVitals" class="live-vitals-inline" data-testid="live-vitals"
+              ></view><view v-if="showLiveVitals" class="live-vitals-inline" data-testid="live-vitals"
                 ><text>♥ {{ liveHeartRate }} <text>bpm</text></text
                 ><text>SpO₂ {{ liveOxygen }}%</text
                 ><text>手环</text></view
@@ -986,141 +456,81 @@
               @course-ended="finishTraining(false)"
               @rep="recordRep"
               @beat="recordBeat"
-            /><view class="exercise-controls"
-              ><button @tap="toggleTraining">
-                {{ trainingStatus === "paused" ? "继续" : "暂停" }}</button
-              ><button class="danger-button" @tap="showStopReason = true">
+            />
+            <view v-if="showLiveVitals" class="training-health-cards"><view><text>♥ 心率</text><text>{{ liveHeartRate }}<text>次/分</text></text></view><view><text>◉ 血氧</text><text>{{ liveOxygen }}<text>%</text></text></view><text>模拟手环 · {{ formatTime(liveVitalUpdatedAt) }} 更新</text></view>
+            <view v-if="selectedGame.interaction === 'camera-score'" class="training-score-card" data-testid="training-score"><view><text>动作评分</text><text>{{ cameraStatus === 'ready' ? activityScore : '未评分' }}<text v-if="cameraStatus === 'ready'">分</text></text></view><view><text>{{ cameraStatus === 'ready' ? '跟随示范，保持自然呼吸' : '可开启摄像头查看本地评分演示' }}</text><text>评分为互动演示，不评估康复疗效。</text></view></view>
+            <view v-if="trainingStatus === 'paused'" class="pause-message" data-testid="training-paused" data-state="paused"><view class="pause-art" aria-hidden="true"><view class="pause-symbol"><view /><view /></view><image src="/static/replica/magpie-resting-v1.png" mode="aspectFit" data-testid="paused-magpie-art" /></view><view class="pause-copy"><text>休息一下，</text><text>准备好再继续</text></view></view>
+            <view class="exercise-controls" :class="{ 'exercise-controls--paused': trainingStatus === 'paused' }"
+              ><button data-testid="toggle-training" @tap="toggleTraining">
+                <view v-if="trainingStatus === 'paused'" class="resume-symbol" aria-hidden="true" />{{ trainingStatus === "paused" ? "继续训练" : "暂停" }}</button
+              ><button v-if="trainingStatus === 'paused'" class="paused-end-button" data-testid="end-paused-training" @tap="finishTraining(false)">结束本次运动</button><button class="danger-button" data-testid="training-discomfort" @tap="showStopReason = true">
                 我有不适
               </button></view
-            ><button
-              class="primary-button"
+            ><view v-if="trainingStatus === 'paused'" class="pause-safety-note"><text>暂停不会扣除已有积分；如有不适，请选择“我有不适”并记录原因。</text></view><button
+              class="text-button"
               data-testid="demo-complete"
               @tap="finishTraining(true)"
             >
               快速完成演示</button
-            ><button class="text-button" @tap="finishTraining(false)">
-              结束本次运动
+            ><button v-if="trainingStatus !== 'paused'" class="primary-button" data-testid="finish-training" @tap="finishTraining(false)">
+              完成训练
             </button></view
           >
 
-          <view
-            v-else-if="detailView === 'postcheck'"
-            class="detail-content"
-            data-testid="postcheck-screen"
-            ><StepIndicator :current="3" /><view class="policy-banner"
-              ><view
-                ><text>{{
-                  trainingStatus === "stopped" ? "训练已停止" : "缓和后记录"
-                }}</text
-                ><text
-                  >训练后{{ modeLabel(publishedPolicy.postMode) }} ·
-                  3–5分钟恢复数据</text
-                ></view
-              ><button @tap="simulateVitalSync('post')">重新同步</button></view
-            ><view
-              class="vital-source"
-              :class="'quality-' + postSnapshot.quality"
-              ><view
-                ><AppIcon
-                  src="/static/icons/magpie-line/device.svg"
-                  :size="34"
-                /><view
-                  ><text>{{ sourceLabel(postSnapshot.source) }}</text
-                  ><text
-                    >{{ qualityLabel(postSnapshot.quality) }} ·
-                    {{ formatTime(postSnapshot.measuredAt) }}</text
-                  ></view
-                ></view
-              ><text>{{
-                postSnapshot.quality === "valid" ? "已同步" : "待补充"
-              }}</text></view
-            ><view class="vital-form"
-              ><label v-if="publishedPolicy.fields.heartRate"
-                ><text>心率</text
-                ><view
-                  ><input
-                    v-model.number="postSnapshot.heartRate"
-                    type="number"
-                  /><text>次/分</text></view
-                ></label
-              ><label v-if="publishedPolicy.fields.oxygenSaturation"
-                ><text>血氧</text
-                ><view
-                  ><input
-                    v-model.number="postSnapshot.oxygenSaturation"
-                    type="number"
-                  /><text>%</text></view
-                ></label
-              ></view
-            ><button
-              v-if="postSnapshot.quality !== 'valid'"
-              class="text-button"
-              @tap="useManualSnapshot('post')"
-            >
-              标记为外部设备读数</button
-            ><view v-if="publishedPolicy.fields.borg" class="form-card"
-              ><text class="form-title">Borg用力感 {{ postSnapshot.borg }}</text
-              ><slider
-                :value="postSnapshot.borg"
-                min="0"
-                max="10"
-                activeColor="#11866F"
-                @change="setSnapshotBorg('post', $event)" /></view
-            ><view v-if="publishedPolicy.fields.feeling" class="form-card"
-              ><text class="form-title">运动后感受</text
-              ><view class="feeling-row"
-                ><button
-                  v-for="feeling in ['轻松', '适中', '较累']"
-                  :key="feeling"
-                  :class="{ active: postSnapshot.feeling === feeling }"
-                  @tap="setPostFeeling(feeling)"
-                >
-                  {{ feeling }}
-                </button></view
-              ></view
-            ><button
-              class="primary-button"
-              data-testid="generate-report"
-              @tap="generateReport"
-            >
-              {{ postReady ? "生成运动解读" : "保存记录并查看提示" }}</button
-            ><button
-              v-if="publishedPolicy.postMode === 'optional'"
-              class="text-button"
-              @tap="skipPost"
-            >
-              跳过本次记录
-            </button></view
-          >
+          <view v-else-if="detailView === 'postcheck'" class="detail-content assessment-detail postcheck-detail" data-testid="postcheck-screen">
+            <StepIndicator :current="3" />
+            <view class="assessment-intro">
+              <image class="v7-postcheck-person" src="/static/replica-v7/postcheck-person.png" mode="aspectFit" aria-hidden="true" />
+              <view class="assessment-emblem"><AppIcon src="/static/icons/magpie-line/assessment.svg" :size="66" /></view>
+              <view class="precheck-heading">
+                <text>{{ trainingStatus === "stopped" ? "训练已停止" : "记录运动后的身体感受" }}</text>
+                <text>缓和后记录 · 3–5分钟恢复数据</text>
+                <text>训练后{{ modeLabel(publishedPolicy.postMode) }} · 保留实际感受与数据来源</text>
+              </view>
+            </view>
+            <view class="assessment-panel" data-testid="postcheck-vitals">
+              <view class="assessment-panel-head">
+                <AppIcon src="/static/icons/magpie-line/heart-rate.svg" :size="42" /><text>运动后数据</text>
+                <button data-testid="read-post-vitals" @tap="simulateVitalSync('post')">重新同步</button>
+              </view>
+              <view class="vital-source" :class="'quality-' + postSnapshot.quality">
+                <view><AppIcon src="/static/icons/magpie-line/device.svg" :size="34" /><view>
+                  <text>{{ sourceLabel(postSnapshot.source) }}</text>
+                  <text>{{ qualityLabel(postSnapshot.quality) }} · {{ formatTime(postSnapshot.measuredAt) }}</text>
+                </view></view>
+                <text>{{ postSnapshot.quality === "valid" ? "已同步" : "待补充" }}</text>
+              </view>
+              <view class="vital-form">
+                <label v-if="publishedPolicy.fields.heartRate">
+                  <text>心率</text><view><input v-model.number="postSnapshot.heartRate" type="number" data-testid="post-heart-rate" aria-label="运动后心率，次每分" /><text>次/分</text></view>
+                </label>
+                <label v-if="publishedPolicy.fields.oxygenSaturation">
+                  <text>血氧</text><view><input v-model.number="postSnapshot.oxygenSaturation" type="number" data-testid="post-oxygen" aria-label="运动后血氧，百分比" /><text>%</text></view>
+                </label>
+              </view>
+              <button v-if="postSnapshot.quality !== 'valid'" class="text-button" @tap="useManualSnapshot('post')">标记为外部设备读数</button>
+              <view v-if="publishedPolicy.fields.borg" class="form-card borg-card" data-testid="post-borg">
+                <text class="form-title">Borg用力感 {{ postSnapshot.borg }}</text>
+                <slider :value="postSnapshot.borg" min="0" max="10" role="slider" tabindex="0" aria-label="运动后Borg主观用力感" aria-valuemin="0" aria-valuemax="10" :aria-valuenow="postSnapshot.borg ?? 0" data-keyboard-step="1" activeColor="#11866F" @change="setSnapshotBorg('post', $event)" />
+                <view class="borg-scale" aria-hidden="true"><text v-for="value in [0,2,4,6,8,10]" :key="value">{{ value }}</text></view>
+              </view>
+            </view>
+            <view v-if="publishedPolicy.fields.feeling" class="form-card feeling-card">
+              <view class="assessment-panel-head"><AppIcon src="/static/icons/magpie-line/profile.svg" :size="42" /><text>运动后感受</text></view>
+              <view class="feeling-row">
+                <button v-for="feeling in ['轻松', '适中', '较累']" :key="feeling" :class="{ active: postSnapshot.feeling === feeling }"
+                  :aria-pressed="postSnapshot.feeling === feeling" @tap="setPostFeeling(feeling)">{{ feeling }}</button>
+              </view>
+            </view>
+            <button class="primary-button" data-testid="generate-report" @tap="generateReport">{{ postReady ? "生成运动解读" : "保存记录并查看提示" }}</button>
+            <button v-if="publishedPolicy.postMode === 'optional'" class="text-button" @tap="skipPost">跳过本次记录</button>
+          </view>
 
           <view
             v-else-if="detailView === 'session-report'"
             class="detail-content"
             data-testid="session-report-screen"
-            ><view
-              v-if="selectedSession"
-              class="session-summary"
-              :class="{ stopped: selectedSession.status === 'stopped' }"
-              ><view>{{
-                selectedSession.status === "stopped"
-                  ? "停"
-                  : selectedSession.poseScored
-                    ? selectedSession.score
-                    : "完"
-              }}</view
-              ><text>{{
-                selectedSession.status === "stopped"
-                  ? "本次运动已停止并记录"
-                  : selectedSession.title + "完成"
-              }}</text
-              ><text
-                >{{ formatDuration(selectedSession.durationSeconds) }} ·
-                {{
-                  selectedSession.pointsAwarded
-                    ? "+" + selectedSession.pointsAwarded + "积分"
-                    : "未新增积分"
-                }}</text
-              ></view
+            ><SessionReportSummary v-if="selectedSession" :session="selectedSession"
             ><view
               v-if="
                 selectedSession?.status === 'completed' &&
@@ -1133,14 +543,14 @@
               data-state="success"
             >
               <image
-                src="/static/icons/cabbage-checkin.svg"
+                src="/static/replica-v7/tree.png"
                 mode="aspectFit"
               />
               <view>
                 <text>{{
                   pendingGardenFeedback.harvested
-                    ? `恭喜收获第${pendingGardenFeedback.harvestCount}棵小白菜`
-                    : "训练完成，小白菜长大啦"
+                    ? `恭喜收获第${pendingGardenFeedback.harvestCount}棵小树`
+                    : "训练完成，小树长大啦"
                 }}</text>
                 <text v-if="pendingGardenFeedback.harvested"
                   >本轮成长已达到第7/7天，下一轮将从第0/7天开始。</text
@@ -1151,19 +561,8 @@
                 >
               </view>
             </view
-            ><view v-if="selectedSession?.assessment" class="comparison-card"
-              ><text class="form-title">训练前后变化</text
-              ><view
-                ><text>训练前</text
-                ><text>{{
-                  snapshotSummary(selectedSession.assessment.pre)
-                }}</text></view
-              ><view
-                ><text>训练后</text
-                ><text>{{
-                  snapshotSummary(selectedSession.assessment.post)
-                }}</text></view
-              ><text>{{ selectedSession.assessment.comparison }}</text></view
+
+            ></SessionReportSummary
             ><view
               v-if="selectedSession?.advice"
               class="advice-card"
@@ -1175,7 +574,7 @@
                 ><text>{{
                   adviceLevelLabel(selectedSession.advice.level)
                 }}</text></view
-              ><text class="advice-summary">{{
+              ><image class="v7-session-companion" src="/static/replica-v7/session-bird.png" mode="aspectFit" aria-hidden="true" /><text class="advice-summary">{{
                 selectedSession.advice.summary
               }}</text
               ><view class="advice-list"
@@ -1210,8 +609,10 @@
                   reviewForAdvice(selectedSession.advice.id)!.status,
                 )
               }}</text></view
-            ><button class="primary-button" @tap="closeDetail">
-              完成
+            ><button class="primary-button" data-testid="session-mini-report" @tap="goDetail('hospital-report')">
+              查看康复小报告
+            </button><button class="secondary-button" @tap="closeDetail">
+              返回
             </button></view
           >
 
@@ -1231,13 +632,16 @@
             :sessions="sessions"
             :prescription-items="sharedPatientFixture.prescription.items"
             :prescription-version="sharedPatientFixture.prescription.version"
+            @open-mini-report="goDetail('hospital-report')"
           />
 
+          <RehabMiniReport v-else-if="detailView === 'hospital-report'" class="detail-content"
+            :sessions="sessions" :name="displayName" :mode="mode" :reviews="doctorReviews"
+            :version="sharedPatientFixture.prescription.version"
+            @records="openTrainingReports" @reviews="goDetail('doctor-reviews')" />
+
           <view v-else-if="detailView === 'social-hub'" class="detail-content"
-            ><DetailIntro
-              kicker="温和陪伴"
-              title="一起坚持，不比较身体数据"
-              copy="申请、配对和提醒均为本地演示，不会发送真实消息。" /><CompanionHub
+            ><text class="social-caption">一起坚持，不比较身体数据 · 本地陪伴演示</text><CompanionHub
               v-model:active-tab="socialTab"
               :streak="streak"
               :team-joined="teamJoined"
@@ -1261,6 +665,7 @@
           <view v-else-if="detailView === 'devices'" class="detail-content"
             ><DetailIntro
               kicker="数据来源"
+              artwork="/static/replica-v7/device-watch.png"
               title="设备与授权"
               copy="手机负责授权和汇总，不被描述为血氧仪。"
             /><view class="device-platforms"
@@ -1301,6 +706,7 @@
                 ><input
                   v-model="manualStepsInput"
                   data-testid="manual-steps-input"
+                  aria-label="今日手动步数"
                   type="number"
                   maxlength="6"
                   placeholder="请输入 0–100000 的整数"
@@ -1332,6 +738,7 @@
             class="detail-content archive-detail"
             ><DetailIntro
               kicker="我的健康档案"
+              artwork="/static/replica-v7/default-avatar.svg"
               :title="
                 mode === 'cardiac'
                   ? '确认身份、医生计划和数据来源'
@@ -1362,11 +769,14 @@
               </label>
               <label class="public-profile-field">
                 <text>出生日期</text>
+                <view class="public-profile-date-control">
                 <picker
                   mode="date"
                   :value="publicProfileDraft.birthDate"
                   :end="todayKey()"
                   data-testid="public-profile-birth-date"
+                  aria-label="出生日期"
+                  data-keyboard-proxy="public-profile-keyboard-date"
                   @change="setPublicBirthDate"
                 >
                   <view class="public-profile-picker">
@@ -1376,6 +786,10 @@
                     <text>›</text>
                   </view>
                 </picker>
+                <!-- #ifdef H5 -->
+                <H5KeyboardDate :value="publicProfileDraft.birthDate" :max="todayKey()" @change="setPublicBirthDate" />
+                <!-- #endif -->
+                </view>
                 <text
                   v-if="publicProfileErrors.birthDate"
                   class="field-error"
@@ -1502,62 +916,55 @@
             ></view
           >
 
-          <view
-            v-else-if="detailView === 'reward-store'"
-            class="detail-content reward-station"
-            ><view class="points-hero"
-              ><text>元气任务派送站</text><text>{{ wallet.healthPoints }}</text
-              ><text>健康积分可用</text
-              ><view
-                ><text>完成有效运动</text><text>自动打卡</text
-                ><text>坚持7天</text></view
-              ></view
-            ><view class="points-task"
-              ><text class="form-title">本周打卡任务</text
-              ><view class="points-days"
-                ><view
-                  v-for="day in weeklyPlanDays"
-                  :key="day.label"
-                  :class="{ done: day.done }"
-                  ><text>{{ day.done ? "✓" : day.label }}</text
-                  ><text>{{ day.done ? "+5" : "待完成" }}</text></view
-                ></view
-              ></view
-            ><button
-              v-if="mem.unlocked"
-              class="convert-button"
-              :disabled="wallet.healthPoints < 100"
-              @tap="convertPoints"
-            >
-              100健康积分 → 5M币</button
-            ><view v-if="mem.unlocked" class="mem-challenge-rule"
-              ><view><text>MEM八段锦7日奖励</text><text>连续 {{ memChallengeDays }}/7 天</text></view
-              ><text>每天完整完成八式并产生动作评分，连续7天奖励20M币；快速演示和提前结束不计入。</text></view
-            ><text class="store-title">积分礼品</text
-            ><view class="reward-grid"
-              ><view v-for="reward in visibleRewards" :key="reward.id"
-                ><view>{{ reward.icon }}</view
-                ><text>{{ reward.name }}</text
-                ><text>{{ reward.description }}</text
-                ><button
-                  :disabled="!canRedeem(reward)"
-                  @tap="confirmRedeem(reward)"
-                >
-                  {{ reward.cost
-                  }}{{ reward.audience === "mem" ? "M币" : "积分" }}兑换
-                </button></view
-              ></view
-            ><view v-if="redemptions.length" class="redemption-list"
-              ><text class="form-title">兑换记录</text
-              ><text v-for="record in redemptions" :key="record.id"
-                >{{ record.rewardName }} · -{{ record.cost
-                }}{{ record.currency === "m-coins" ? "M币" : "积分" }} ·
-                已完成</text
-              ></view
-            ><text class="knowledge-boundary"
-              >仅为本地积分兑换演示，不接人民币支付或积分充值。</text
-            ></view
-          >
+          <view v-else-if="detailView === 'reward-store'" class="detail-content reward-station" data-testid="reward-store-screen">
+            <view class="points-hero">
+              <image src="/static/replica-v7/reward-bird.png" mode="aspectFit" />
+              <text>健康积分与权益</text><text>{{ wallet.healthPoints }}</text><text>健康积分可用</text>
+              <view><text>完成有效运动</text><text>自动打卡</text><text>坚持7天</text></view>
+            </view>
+            <view class="points-task">
+              <text class="form-title">本周打卡任务</text>
+              <view class="points-days">
+                <view v-for="day in weeklyPlanDays" :key="day.label" :class="{ done: day.done }">
+                  <text>{{ day.done ? "✓" : day.label }}</text><text>{{ day.done ? "+5" : "待完成" }}</text>
+                </view>
+              </view>
+            </view>
+            <view class="milestone-card">
+              <text class="form-title">坚持的每一步，都值得记录</text>
+              <view class="milestone-grid">
+                <view v-for="item in rewardMilestones" :key="item.day" :class="{ reached: streak >= item.day }">
+                  <text>{{ item.day }}天</text><text>{{ item.label }}</text><text>{{ streak >= item.day ? '当前连续天数已达到' : '继续积累运动日' }}</text>
+                </view>
+              </view>
+              <text class="knowledge-boundary">里程碑记录运动习惯，不代表康复疗效；不因漏训扣除已有积分。</text>
+            </view>
+            <view class="reward-catalog" data-testid="region-reward-catalog">
+              <text class="store-title">积分兑换好礼</text>
+              <text class="reward-catalog-copy">使用本地积分，记录每一次坚持</text>
+              <view class="reward-grid">
+                <RewardProductCard v-for="reward in visibleRewards" :key="reward.id" :reward="reward" :redeemable="canRedeem(reward)" @redeem="confirmRedeem(reward)" />
+              </view>
+            </view>
+            <view v-if="redemptions.length" class="redemption-list">
+              <text class="form-title">兑换记录</text>
+              <text v-for="record in redemptions" :key="record.id">{{ record.rewardName }} · -{{ record.cost }}{{ record.currency === "m-coins" ? "M币" : "积分" }} · 已完成</text>
+            </view>
+            <view class="mem-card" data-testid="mem-entitlement">
+              <text class="form-title">MEM 本地权益演示</text>
+              <template v-if="!mem.unlocked">
+                <text>输入演示邀请码 MEM-2026，查看已有兑换规则。</text>
+                <view><input v-model="memCode" data-testid="mem-code" aria-label="MEM演示邀请码" placeholder="输入 MEM-2026" /><button data-testid="unlock-mem" :disabled="!memCode.trim()" @tap="unlockMem">解锁</button></view>
+              </template>
+              <template v-else><text>已解锁 · {{ wallet.mCoins }} M币</text><text>仅使用本地积分，不接支付或充值。</text></template>
+            </view>
+            <button v-if="mem.unlocked" class="convert-button" :disabled="wallet.healthPoints < 100" @tap="convertPoints">100健康积分 → 5M币</button>
+            <view v-if="mem.unlocked" class="mem-challenge-rule">
+              <view><text>MEM八段锦7日奖励</text><text>连续 {{ memChallengeDays }}/7 天</text></view>
+              <text>每天完整完成八式并产生动作评分，连续7天奖励20M币；快速演示和提前结束不计入。</text>
+            </view>
+            <text class="knowledge-boundary">仅为本地积分兑换演示，不接人民币支付或积分充值。</text>
+          </view>
 
           <view
             v-else-if="detailView === 'prototype-policy'"
@@ -1565,6 +972,7 @@
             data-testid="policy-console"
             ><DetailIntro
               kicker="本地原型配置台"
+              artwork="/static/replica-v7/policy-art.png"
               title="训练状态策略"
               copy="普通用户固定关闭；配置仅作用于患者计划。"
             /><view class="policy-version"
@@ -1608,6 +1016,7 @@
                   ><text>{{ field.copy }}</text></view
                 ><switch
                   :checked="policyDraft.fields[field.id]"
+                  role="switch" :aria-label="field.label" :aria-checked="policyDraft.fields[field.id]"
                   color="#11866F"
                   @change="setPolicyField(field.id, $event)" /></label></view
             ><view class="policy-source"
@@ -1629,110 +1038,73 @@
             ></view
           >
 
-          <view
-            v-else-if="detailView === 'doctor-reviews'"
-            class="detail-content"
-            data-testid="doctor-review-console"
-            ><DetailIntro
-              kicker="本地医生工作台"
-              title="建议审核"
-              :copy="
-                pendingReviewCount +
-                ' 条建议等待确认，未经确认不会修改患者计划。'
-              "
-            /><view class="review-list"
-              ><view v-for="review in doctorReviews" :key="review.id"
-                ><view class="review-head"
-                  ><view
-                    ><text>{{
-                      adviceForReview(review)?.title || "运动建议"
-                    }}</text
-                    ><text>{{ formatDateTime(review.createdAt) }}</text></view
-                  ><text>{{ reviewStatusLabel(review.status) }}</text></view
-                ><text>{{ review.proposedChange }}</text
-                ><view v-if="review.status === 'pending'"
-                  ><button @tap="resolveReview(review.id, 'approved')">
-                    同意调整</button
-                  ><button @tap="resolveReview(review.id, 'maintained')">
-                    维持计划</button
-                  ><button @tap="resolveReview(review.id, 'rejected')">
-                    驳回
-                  </button></view
-                ></view
-              ><view v-if="!doctorReviews.length" class="empty-card"
-                >暂无待审核建议。</view
-              ></view
-            ></view
-          >
+          <view v-else-if="detailView === 'doctor-reviews'" class="detail-content review-console" data-testid="doctor-review-console">
+            <DetailIntro kicker="本地医生工作台" title="建议审核" appearance="review"
+              :copy="pendingReviewCount + ' 条建议等待确认，未经确认不会修改患者计划。'" />
+            <view class="review-list">
+              <view v-for="review in doctorReviews" :key="review.id" class="review-card"
+                data-testid="review-card" :data-review-id="review.id" :data-state="review.status">
+                <view class="review-head">
+                  <view class="review-icon"><AppIcon src="/static/icons/magpie-line/heart-rate.svg" :size="60" /></view>
+                  <view class="review-heading">
+                    <text>{{ adviceForReview(review)?.title || "运动建议" }}</text>
+                    <text>{{ formatDateTime(review.createdAt) }}</text>
+                  </view>
+                  <text>{{ reviewStatusLabel(review.status) }}</text>
+                </view>
+                <view class="review-proposal">
+                  <text>建议内容</text>
+                  <text data-testid="review-proposal">{{ review.proposedChange }}</text>
+                </view>
+                <view v-if="review.status === 'pending'" class="review-actions">
+                  <button @tap="resolveReview(review.id, 'approved')">同意调整</button>
+                  <button @tap="resolveReview(review.id, 'maintained')">维持计划</button>
+                  <button @tap="resolveReview(review.id, 'rejected')">驳回</button>
+                </view>
+                <view v-else class="review-resolution" data-testid="review-resolution">
+                  <text>{{ reviewStatusLabel(review.status) }} · 本地记录</text>
+                  <text v-if="review.reviewedAt">{{ formatDateTime(review.reviewedAt) }}</text>
+                </view>
+              </view>
+              <view v-if="!doctorReviews.length" class="empty-card">暂无待审核建议。</view>
+            </view>
+            <view class="review-boundary" data-testid="review-boundary">
+              <AppIcon src="/static/icons/magpie-line/safety.svg" :size="44" />
+              <text>审核操作仅为本地原型演示，不代表真实医生确认。真实处方仍须由医生确认后执行。</text>
+            </view>
+          </view>
 
-          <view
-            v-else-if="detailView === 'knowledge-article'"
-            class="detail-content"
-            ><view class="knowledge-detail-banner"
-              ><view
-                ><AppIcon
-                  src="/static/icons/magpie-line/knowledge.svg"
-                  :size="50"
-                  color="#0F766E" /></view
-              ><text>{{ selectedKnowledgeItem.duration }}</text></view
-            ><DetailIntro
-              kicker="精选指南"
-              :title="selectedKnowledgeItem.title"
-              :copy="selectedKnowledgeItem.summary"
-            /><view class="article-body"
-              ><text
-                v-for="(paragraph, index) in selectedKnowledgeItem.body"
-                :key="index"
-                >{{ paragraph }}</text
-              ></view
-            ><text class="knowledge-boundary"
-              >原型内容待医学审核，不替代医生诊断或处方。</text
-            ></view
-          >
-          <view
-            v-else-if="detailView === 'knowledge-video'"
-            class="detail-content video-detail-content"
-            ><video
-              class="knowledge-video"
-              :src="selectedKnowledgeItem.video"
-              :poster="selectedKnowledgeItem.poster"
-              :controls="true"
-              :show-center-play-btn="true"
-              object-fit="contain"
-            /><view class="video-detail-body"
-              ><DetailIntro
-                kicker="健康短视频"
-                :title="selectedKnowledgeItem.title"
-                :copy="selectedKnowledgeItem.summary"
-              /><text class="knowledge-boundary"
-                >视频为原型素材，动作与内容待医学审核。</text
-              ></view
-            ></view
-          >
+          <KnowledgeDetail v-else-if="detailView === 'knowledge-article' || detailView === 'knowledge-video'" :item="selectedKnowledgeItem" @back="closeDetail" />
         </scroll-view>
       </view>
     </template>
 
-    <view v-if="showAiBoundary" class="modal-mask" @tap="showAiBoundary = false"
+    <view v-if="showAiBoundary" class="modal-mask" data-testid="medical-boundary-modal" role="dialog" aria-modal="true" aria-label="健康助手边界" @tap="showAiBoundary = false"
       ><view class="modal-card" @tap.stop
         ><text>健康助手边界</text
         ><text
           >小喜只提供健康教育、数据来源说明和规则化建议。它不能诊断疾病、调整药物或直接修改医院处方。</text
-        ><button @tap="showAiBoundary = false">我知道了</button></view
+        ><button data-keyboard-dismiss @tap="showAiBoundary = false">我知道了</button></view
       ></view
     >
-    <view v-if="showStopReason" class="modal-mask"
+    <view v-if="showStopReason" class="modal-mask" data-testid="stop-modal" role="dialog" aria-modal="true" aria-label="哪里不舒服"
       ><view class="modal-card danger-modal"
         ><text>哪里不舒服？</text><text>选择后立即停止，不会扣积分。</text
         ><button
           v-for="item in symptomOptions.slice(0, 3)"
           :key="item.value"
+          class="stop-symptom"
+          data-testid="stop-symptom"
+          :data-symptom="item.value"
           @tap="stopTraining(item.label)"
         >
-          {{ item.label }}</button
-        ><button class="cancel" @tap="showStopReason = false">
+          <image v-if="item.value === 'chest-pain'" src="/static/replica/safety-chest-v1.png" mode="aspectFit" aria-hidden="true" />
+          <image v-else-if="item.value === 'dyspnea'" src="/static/replica/safety-breath-v1.png" mode="aspectFit" aria-hidden="true" />
+          <image v-else src="/static/replica/safety-dizzy-v1.png" mode="aspectFit" aria-hidden="true" />
+          <text>{{ item.label }}</text></button
+        ><button class="stop-now" data-testid="stop-immediately" @tap="stopTraining('主动停止本次运动')">立即停止运动</button><button class="cancel" data-keyboard-dismiss data-testid="return-to-training" @tap="showStopReason = false">
           返回训练
-        </button></view
+        </button><text class="emergency-note">如症状持续或加重，请联系医护人员；紧急情况请呼叫 120。</text></view
       ></view
     >
   </view>
@@ -1741,15 +1113,30 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 import AppIcon from "@/components/AppIcon.vue";
+import TodayDashboard from "@/components/TodayDashboard.vue";
+import PatientProfile from "@/components/PatientProfile.vue";
+import TrainingInsightCard from "@/components/TrainingInsightCard.vue";
 import AssistantPanel from "@/components/AssistantPanel.vue";
 import CompanionHub from "@/components/CompanionHub.vue";
 import DetailIntro from "@/components/DetailIntro.vue";
 import KnowledgeHub from "@/components/KnowledgeHub.vue";
+import KnowledgeDetail from "@/components/KnowledgeDetail.vue";
 import RehabGardenPanel from "@/components/RehabGardenPanel.vue";
 import StepIndicator from "@/components/StepIndicator.vue";
 import TrainingExperience from "@/components/TrainingExperience.vue";
 import TrainingReports from "@/components/TrainingReports.vue";
+import OnboardingView from "@/components/OnboardingView.vue";
+import RehabMiniReport from "@/components/RehabMiniReport.vue";
+import SessionReportSummary from "@/components/SessionReportSummary.vue";
+import PrescriptionTaskCard from "@/components/PrescriptionTaskCard.vue";
+import RewardProductCard from "@/components/RewardProductCard.vue";
+import ExerciseSelection from "@/components/ExerciseSelection.vue";
 import { activities } from "@/lib/rive-motion";
+import { sanitizePrototypeState } from "@/lib/prototype-storage-guard";
+// #ifdef H5
+import { installPrototypeKeyboard } from "@/lib/prototype-keyboard";
+import H5KeyboardDate from "@/components/H5KeyboardDate.vue";
+// #endif
 import {
   isSupportedPatientNo,
   prescriptionItemGameId,
@@ -1765,6 +1152,7 @@ import {
   patientMetrics,
   publicMetrics,
   rewardItems,
+  rewardMilestones,
   type AdviceLevel,
   type AIAdvice,
   type AssessmentMode,
@@ -1824,8 +1212,13 @@ const STORAGE_KEY = "magpie-prototype-state";
 const DAILY_STEP_GOAL = 6000;
 const GARDEN_CYCLE_LENGTH = 7;
 const magpieAsset =
-  "/static/rive-source/v4/master/magpie-neutral-master-v4.png";
+  "/static/replica-v7/welcome.png";
 const appReady = ref(false);
+const prototypeDemoEnabled = ref(false);
+// #ifdef H5
+prototypeDemoEnabled.value = ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname)
+  && new URLSearchParams(location.search).get('prototypeDemo') === '1';
+// #endif
 const onboardingStep = ref<OnboardingStep>("mode");
 const mode = ref<UserMode>("public");
 const visitNumber = ref("");
@@ -2113,10 +1506,10 @@ const topbarTitle = computed(() =>
   activeNav.value === "data"
     ? "训练数据"
     : {
-        today: `${greeting()}，${displayName.value}`,
+        today: "今日",
         discover: "康复资讯",
         assistant: "小喜",
-        profile: "个人信息",
+        profile: "我的",
       }[activeNav.value],
 );
 const todayLabel = computed(
@@ -2382,22 +1775,22 @@ const visibleRewards = computed(() =>
 const detailTitle = computed(
   () =>
     ({
-      precheck: "训练前状态",
+      precheck: "运动前检查",
       training: activeTrainingTitle.value,
-      postcheck: "训练后状态",
-      "session-report": "运动解读",
+      postcheck: "运动后状态",
+      "session-report": "本次运动报告",
       garden: "我的运动小菜园",
       "training-reports": "训练报告",
       "health-archive": "健康档案",
-      devices: "设备与授权",
+      devices: "设备与数据来源",
       "knowledge-article": "指南",
-      "knowledge-video": "短视频",
+      "knowledge-video": "康复视频",
       "reward-store": "健康权益",
       "weekly-path": "本周路径",
-      "exercise-category": selectedCategory.value.title,
+      "exercise-category": "运动选择",
       "prototype-policy": "训练状态策略",
       "doctor-reviews": "医生审核",
-      "hospital-report": "医院记录",
+      "hospital-report": "康复小报告",
       "social-hub": socialTab.value === "buddy" ? "健康搭子" : "健康小队",
       none: "",
     })[detailView.value],
@@ -2854,8 +2247,8 @@ function closeDetail() {
     activeNav.value = "today";
     uni.showToast({
       title: growthFeedback.harvested
-        ? "已收获一棵小白菜"
-        : `小白菜长大啦 · 第${growthFeedback.afterDay}/7天`,
+        ? "已收获一棵小树"
+        : `小树长大啦 · 第${growthFeedback.afterDay}/7天`,
       icon: "none",
     });
   } else {
@@ -2899,8 +2292,16 @@ function chooseSelfDirected(id: ExerciseGameId) {
 }
 function startSelfSelected() {
   if (!selfSelectedGame.value) return;
+  startSelfExercise(selfSelectedGame.value.id);
+}
+function startSelfExercise(id: ExerciseGameId) {
   activePrescriptionItemKey.value = "";
-  selectExercise(selfSelectedGame.value.id);
+  selectExercise(id);
+}
+function startAssistantPlan() {
+  const task = mode.value === "cardiac" ? prescriptionTasks.value[0] : undefined;
+  if (task) startPrescriptionTask(task);
+  else startSelfExercise(featuredGame.value.id);
 }
 function startPrescriptionTask(task: {
   item: SharedPrescriptionItem;
@@ -3986,7 +3387,12 @@ function resetPrototype() {
   syncPublicProfileDraft();
 }
 onMounted(() => {
-  const saved = uni.getStorageSync(STORAGE_KEY);
+  const rawSaved = uni.getStorageSync(STORAGE_KEY);
+  const recovered = sanitizePrototypeState(rawSaved);
+  const saved = recovered.state;
+  if (recovered.repaired && !uni.getStorageSync(STORAGE_KEY + '-recovery')) {
+    uni.setStorageSync(STORAGE_KEY + '-recovery', { savedAt: new Date().toISOString(), original: rawSaved });
+  }
   if (saved?.ready) {
     mode.value = saved.mode === "cardiac" ? "cardiac" : "public";
     healthGoal.value =
@@ -4081,7 +3487,18 @@ onMounted(() => {
     persistState();
   }
 });
+// #ifdef H5
+let disposeKeyboard: (() => void) | undefined;
+onMounted(() => {
+  const root = document.querySelector<HTMLElement>('.prototype-shell');
+  if (root) disposeKeyboard = installPrototypeKeyboard(root, {
+    onCarouselKey: (key) => onPrescriptionSlide({ detail: { current: key === 'Home' ? 0 : key === 'End' ? prescriptionTasks.value.length - 1 : prescriptionSlide.value + (key === 'ArrowLeft' ? -1 : 1) } }),
+  });
+});
+onUnmounted(() => disposeKeyboard?.());
+// #endif
 onUnmounted(stopTimer);
 </script>
 
 <style lang="scss" src="./index.scss"></style>
+<style lang="scss" src="./v7.scss"></style>

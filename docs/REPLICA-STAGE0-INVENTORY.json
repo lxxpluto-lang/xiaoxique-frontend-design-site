@@ -1,0 +1,5078 @@
+{
+  "generatedAt": "2026-09-06T16:54:57.257Z",
+  "baseline": "c1b56ff43a94c0e7e096bb80f0f19f998673a48c",
+  "target": "c1b56ff43a94c0e7e096bb80f0f19f998673a48c",
+  "baselineStatus": "",
+  "targetStatus": "?? docs/visual-acceptance/\n?? scripts/replica-inventory.cjs\n?? \"\\344\\270\\200\\346\\254\\241\\350\\267\\221\\345\\256\\214-\\345\\212\\237\\350\\203\\275\\344\\277\\235\\347\\234\\237\\344\\270\\216\\351\\253\\230\\344\\277\\235\\347\\234\\237\\345\\244\\215\\345\\210\\273\\344\\270\\273\\346\\217\\220\\347\\244\\272\\350\\257\\215.md\"",
+  "node": "v25.4.0",
+  "enumeration": {
+    "UserMode": [
+      "cardiac",
+      "public"
+    ],
+    "NavId": [
+      "today",
+      "discover",
+      "assistant",
+      "data",
+      "profile"
+    ],
+    "ExerciseCategoryId": [
+      "traditional",
+      "aerobic",
+      "strength",
+      "mobility",
+      "recovery"
+    ],
+    "ExerciseGameId": [
+      "baduanjin",
+      "taichi",
+      "walking",
+      "power-bike",
+      "resistance",
+      "stretch",
+      "balance",
+      "music",
+      "breathing"
+    ],
+    "KnowledgeCategory": [
+      "recommended",
+      "guide",
+      "tip",
+      "video"
+    ],
+    "KnowledgeItemType": [
+      "guide",
+      "tip",
+      "video"
+    ],
+    "AssessmentMode": [
+      "off",
+      "optional",
+      "required"
+    ],
+    "DataSource": [
+      "hospital-device",
+      "apple-health",
+      "health-connect",
+      "manual",
+      "demo-device"
+    ],
+    "DataQuality": [
+      "valid",
+      "stale",
+      "missing",
+      "denied"
+    ],
+    "AdviceLevel": [
+      "stable",
+      "attention",
+      "stop",
+      "insufficient"
+    ],
+    "ReviewStatus": [
+      "pending",
+      "approved",
+      "rejected",
+      "maintained"
+    ],
+    "DetailView": [
+      "none",
+      "precheck",
+      "training",
+      "postcheck",
+      "session-report",
+      "garden",
+      "training-reports",
+      "hospital-report",
+      "health-archive",
+      "devices",
+      "knowledge-article",
+      "knowledge-video",
+      "reward-store",
+      "weekly-path",
+      "exercise-category",
+      "prototype-policy",
+      "doctor-reviews",
+      "social-hub"
+    ],
+    "TrainingStatus": [
+      "idle",
+      "checking",
+      "active",
+      "paused",
+      "stopped",
+      "completed"
+    ]
+  },
+  "baselineFiles": [
+    {
+      "file": "src/App.vue",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "d15b6a6f7a12d9e675816e7e209482d985ad9da08c289d2df18ba64e4ed27e62"
+    },
+    {
+      "file": "src/components/AppIcon.vue",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "8add2af3cae051ccc8fd22c36d0e19630f13e58a53126525e1b3502ae83aa711"
+    },
+    {
+      "file": "src/components/AssistantPanel.vue",
+      "anchors": [
+        {
+          "id": "assistant-screen",
+          "line": 2
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "ask(prompt)",
+          "line": 13
+        },
+        {
+          "event": "confirm",
+          "expression": "send",
+          "line": 16
+        },
+        {
+          "event": "tap",
+          "expression": "send",
+          "line": 16
+        }
+      ],
+      "fields": [
+        {
+          "binding": "query",
+          "line": 16
+        }
+      ],
+      "functions": [
+        {
+          "name": "answer",
+          "line": 30
+        },
+        {
+          "name": "ask",
+          "line": 38
+        },
+        {
+          "name": "send",
+          "line": 39
+        }
+      ],
+      "views": [],
+      "sha256": "7c9b42c0a50820e5c0656ed21059ca76566e5e70621281116aeb36c8d47f2193"
+    },
+    {
+      "file": "src/components/CameraPreview.vue",
+      "anchors": [],
+      "handlers": [
+        {
+          "event": "error",
+          "expression": "onNativeError",
+          "line": 10
+        },
+        {
+          "event": "initdone",
+          "expression": "onNativeReady",
+          "line": 11
+        },
+        {
+          "event": "tap",
+          "expression": "enableCamera",
+          "line": 46
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "enableCamera",
+          "line": 70
+        },
+        {
+          "name": "markReady",
+          "line": 77
+        },
+        {
+          "name": "markDenied",
+          "line": 82
+        },
+        {
+          "name": "onNativeReady",
+          "line": 88
+        },
+        {
+          "name": "onNativeError",
+          "line": 92
+        }
+      ],
+      "views": [],
+      "sha256": "11dffd83c2112c2960eac38099f945c10bf77f86110fa7a55a95fddc223a0956"
+    },
+    {
+      "file": "src/components/CompanionHub.vue",
+      "anchors": [
+        {
+          "id": "knowledge-companions",
+          "line": 2
+        },
+        {
+          "id": "knowledge-buddy-entry",
+          "line": 12
+        },
+        {
+          "id": "knowledge-team-entry",
+          "line": 13
+        },
+        {
+          "id": "team-panel",
+          "line": 16
+        },
+        {
+          "id": "create-team",
+          "line": 22
+        },
+        {
+          "id": "join-team-code",
+          "line": 23
+        },
+        {
+          "id": "join-team",
+          "line": 24
+        },
+        {
+          "id": "buddy-panel",
+          "line": 28
+        },
+        {
+          "id": "connect-buddy",
+          "line": 33
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "open('buddy')",
+          "line": 12
+        },
+        {
+          "event": "tap",
+          "expression": "open('team')",
+          "line": 13
+        },
+        {
+          "event": "tap",
+          "expression": "emit('remindTeam', member.id)",
+          "line": 19
+        },
+        {
+          "event": "tap",
+          "expression": "emit('createTeam')",
+          "line": 22
+        },
+        {
+          "event": "tap",
+          "expression": "emit('joinTeam', inviteCode)",
+          "line": 23
+        },
+        {
+          "event": "tap",
+          "expression": "emit('joinDemoTeam')",
+          "line": 24
+        },
+        {
+          "event": "tap",
+          "expression": "emit('setBuddyCycle', 7)",
+          "line": 29
+        },
+        {
+          "event": "tap",
+          "expression": "emit('setBuddyCycle', 30)",
+          "line": 29
+        },
+        {
+          "event": "tap",
+          "expression": "emit('remindBuddy')",
+          "line": 31
+        },
+        {
+          "event": "tap",
+          "expression": "emit('connectBuddy')",
+          "line": 33
+        }
+      ],
+      "fields": [
+        {
+          "binding": "inviteCode",
+          "line": 23
+        }
+      ],
+      "functions": [
+        {
+          "name": "open",
+          "line": 83
+        }
+      ],
+      "views": [],
+      "sha256": "80324afe7a6ecd730cf167deb0a3ce1575c9e078aa5f697d9414120efa7d5ad0"
+    },
+    {
+      "file": "src/components/DetailIntro.vue",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "04302447a224521199bd5c5081ca1e5a75cd4294c4decdb16b21e09d9beaa13a"
+    },
+    {
+      "file": "src/components/ExerciseCards.vue",
+      "anchors": [
+        {
+          "id": "exercise-primary-cards",
+          "line": 2
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "emit('select', game.id)",
+          "line": 8
+        }
+      ],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "056a9c8d2941d2049f68729c2638c5dd770083cd0cbffc721cb6fd7d75c34d08"
+    },
+    {
+      "file": "src/components/KnowledgeHub.vue",
+      "anchors": [
+        {
+          "id": "discover-content",
+          "line": 2
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "emit('open', featured)",
+          "line": 4
+        },
+        {
+          "event": "tap",
+          "expression": "emit('open', item)",
+          "line": 8
+        },
+        {
+          "event": "tap",
+          "expression": "emit('open', item)",
+          "line": 10
+        }
+      ],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "5bf7ce1cb782e3b4099ac6f3380e680076211d6b64db61b5f88060769f920658"
+    },
+    {
+      "file": "src/components/MagpieMotion.vue",
+      "anchors": [],
+      "handlers": [
+        {
+          "event": "load",
+          "expression": "onRiveLoad",
+          "line": 16
+        },
+        {
+          "event": "error",
+          "expression": "onRiveError",
+          "line": 17
+        },
+        {
+          "event": "error",
+          "expression": "onVideoError",
+          "line": 33
+        },
+        {
+          "event": "error",
+          "expression": "onVideoError",
+          "line": 59
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "onRiveLoad",
+          "line": 118
+        },
+        {
+          "name": "handleRiveReady",
+          "line": 122
+        },
+        {
+          "name": "handleRiveRenderError",
+          "line": 126
+        },
+        {
+          "name": "onRiveError",
+          "line": 132
+        },
+        {
+          "name": "onVideoError",
+          "line": 136
+        },
+        {
+          "name": "cleanupRuntime",
+          "line": 148
+        }
+      ],
+      "views": [],
+      "sha256": "f09c7f8ab41954aff19def9d5e8eeef9cb1c39d0c4f8e23fa51574f75b5e0a09"
+    },
+    {
+      "file": "src/components/RehabGardenPanel.vue",
+      "anchors": [
+        {
+          "id": "rehab-garden-panel",
+          "line": 2
+        },
+        {
+          "id": "garden-section-tabs",
+          "line": 3
+        },
+        {
+          "id": "garden-section-growth",
+          "line": 6
+        },
+        {
+          "id": "garden-section-checkin",
+          "line": 13
+        },
+        {
+          "id": "garden-growth-content",
+          "line": 24
+        },
+        {
+          "id": "region-garden-hero",
+          "line": 28
+        },
+        {
+          "id": "garden-growth-track",
+          "line": 67
+        },
+        {
+          "id": "region-garden-growth",
+          "line": 86
+        },
+        {
+          "id": "garden-cycle-detail",
+          "line": 99
+        },
+        {
+          "id": "garden-checkin-content",
+          "line": 130
+        },
+        {
+          "id": "garden-checkin-summary",
+          "line": 132
+        },
+        {
+          "id": "garden-checkin-calendar",
+          "line": 147
+        },
+        {
+          "id": "garden-recent-checkins",
+          "line": 182
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "selectSection('growth')",
+          "line": 7
+        },
+        {
+          "event": "tap",
+          "expression": "selectSection('checkin')",
+          "line": 14
+        },
+        {
+          "event": "tap",
+          "expression": "emit('shift-month', -1)",
+          "line": 149
+        },
+        {
+          "event": "tap",
+          "expression": "emit('shift-month', 1)",
+          "line": 153
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "selectSection",
+          "line": 301
+        }
+      ],
+      "views": [],
+      "sha256": "bc2bbaf2ed67db516fce03ce01de879d013d7977a18d9fb51a6dc4d98656dd26"
+    },
+    {
+      "file": "src/components/StepIndicator.vue",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [
+        {
+          "name": "stateClass",
+          "line": 17
+        },
+        {
+          "name": "lineClass",
+          "line": 23
+        }
+      ],
+      "views": [],
+      "sha256": "19b7cd91209555eeb9c6f17b0486adb342fa4fac124859572131a6f268f9ede9"
+    },
+    {
+      "file": "src/components/TrainingExperience.vue",
+      "anchors": [],
+      "handlers": [
+        {
+          "event": "timeupdate",
+          "expression": "onCourseTimeUpdate",
+          "line": 33
+        },
+        {
+          "event": "ended",
+          "expression": "emit('course-ended')",
+          "line": 34
+        },
+        {
+          "event": "status",
+          "expression": "emit('camera-status', $event)",
+          "line": 49
+        },
+        {
+          "event": "tap",
+          "expression": "emit('rep')",
+          "line": 60
+        },
+        {
+          "event": "tap",
+          "expression": "emit('beat')",
+          "line": 77
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "onCourseTimeUpdate",
+          "line": 132
+        }
+      ],
+      "views": [],
+      "sha256": "a3a2d11697d4a9194eb919f5bf06745146f84cdae94c490767c46cc0ee817e83"
+    },
+    {
+      "file": "src/components/TrainingReports.vue",
+      "anchors": [
+        {
+          "id": "training-reports",
+          "line": 2
+        },
+        {
+          "id": "report-tab-daily",
+          "line": 7
+        },
+        {
+          "id": "report-tab-monthly",
+          "line": 14
+        },
+        {
+          "id": "daily-report-list",
+          "line": 29
+        },
+        {
+          "id": "daily-report-row",
+          "line": 30
+        },
+        {
+          "id": "monthly-report-list",
+          "line": 46
+        },
+        {
+          "id": "monthly-report-row",
+          "line": 47
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "selectTab('daily')",
+          "line": 9
+        },
+        {
+          "event": "tap",
+          "expression": "selectTab('monthly')",
+          "line": 16
+        },
+        {
+          "event": "tap",
+          "expression": "selectedDate = ''",
+          "line": 22
+        },
+        {
+          "event": "tap",
+          "expression": "selectedDate = report.date",
+          "line": 30
+        },
+        {
+          "event": "tap",
+          "expression": "selectedMonth = ''",
+          "line": 41
+        },
+        {
+          "event": "tap",
+          "expression": "selectedMonth = report.month",
+          "line": 47
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "selectTab",
+          "line": 67
+        },
+        {
+          "name": "minutes",
+          "line": 95
+        },
+        {
+          "name": "dateLabel",
+          "line": 96
+        },
+        {
+          "name": "monthLabel",
+          "line": 97
+        },
+        {
+          "name": "timeLabel",
+          "line": 98
+        },
+        {
+          "name": "itemDone",
+          "line": 99
+        },
+        {
+          "name": "snapshotValue",
+          "line": 100
+        },
+        {
+          "name": "dailyConclusion",
+          "line": 101
+        },
+        {
+          "name": "stageConclusion",
+          "line": 102
+        },
+        {
+          "name": "stageAverage",
+          "line": 103
+        }
+      ],
+      "views": [],
+      "sha256": "c71d013d8f9c9e9d9a70cb26d572cee059ec1c5030c59644a5803ee5f49bb172"
+    },
+    {
+      "file": "src/components/VitalForm.vue",
+      "anchors": [],
+      "handlers": [
+        {
+          "event": "input",
+          "expression": "setValue('sbp', $event)",
+          "line": 7
+        },
+        {
+          "event": "input",
+          "expression": "setValue('dbp', $event)",
+          "line": 11
+        },
+        {
+          "event": "input",
+          "expression": "setValue('hr', $event)",
+          "line": 15
+        },
+        {
+          "event": "input",
+          "expression": "setValue('spo2', $event)",
+          "line": 19
+        },
+        {
+          "event": "change",
+          "expression": "setBorg",
+          "line": 23
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "setValue",
+          "line": 40
+        },
+        {
+          "name": "setBorg",
+          "line": 44
+        }
+      ],
+      "views": [],
+      "sha256": "b2f618e9ee8a3795df1438cb30bce2d7f876769a0e7d65c883d05bd577cc63cf"
+    },
+    {
+      "file": "src/env.d.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "6cffe84a6b162cf97d3a80dd4cc1999d2899f10e194fa052c743a704c63f9cd8"
+    },
+    {
+      "file": "src/lib/prototype-data.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "111000dca6d1f7c10bb47bb22c504fa45d4162eb7483b541a43d28c39153f825"
+    },
+    {
+      "file": "src/lib/rive-motion.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "bec2828f9d28afcedeeffdf40fd4426023775e4cbc1fdcd5b098292c582b75f7"
+    },
+    {
+      "file": "src/lib/shared-patient.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [
+        {
+          "name": "normalizePatientNo",
+          "line": 56
+        },
+        {
+          "name": "isSupportedPatientNo",
+          "line": 61
+        },
+        {
+          "name": "isPrescriptionExercise",
+          "line": 65
+        },
+        {
+          "name": "prescriptionItemKey",
+          "line": 69
+        },
+        {
+          "name": "prescriptionItemGameId",
+          "line": 73
+        }
+      ],
+      "views": [],
+      "sha256": "712b82ae69b05ebd85d7bac8fd56213b6621b8e19f479f461a275e157c4c60cb"
+    },
+    {
+      "file": "src/main.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [
+        {
+          "name": "createApp",
+          "line": 3
+        }
+      ],
+      "views": [],
+      "sha256": "0ca64f05900c7b37ac760947af76b72d93fbf85b4c044724562a8a7d83d9620b"
+    },
+    {
+      "file": "src/pages/index/index.vue",
+      "anchors": [
+        {
+          "id": "onboarding-mode",
+          "line": 15
+        },
+        {
+          "id": "choose-public",
+          "line": 22
+        },
+        {
+          "id": "choose-cardiac",
+          "line": 35
+        },
+        {
+          "id": "onboarding-binding",
+          "line": 51
+        },
+        {
+          "id": "visit-number",
+          "line": 73
+        },
+        {
+          "id": "bind-plan",
+          "line": 96
+        },
+        {
+          "id": "today-screen",
+          "line": 118
+        },
+        {
+          "id": "today-steps-card",
+          "line": 164
+        },
+        {
+          "id": "prescription-pagination",
+          "line": 209
+        },
+        {
+          "id": "prescription-swiper",
+          "line": 230
+        },
+        {
+          "id": "prescription-slide",
+          "line": 236
+        },
+        {
+          "id": "today-core-task",
+          "line": 241
+        },
+        {
+          "id": "today-garden-entry",
+          "line": 305
+        },
+        {
+          "id": "exercise-category",
+          "line": 348
+        },
+        {
+          "id": "self-directed-game-list",
+          "line": 362
+        },
+        {
+          "id": "self-directed-game",
+          "line": 367
+        },
+        {
+          "id": "selected-self-exercise",
+          "line": 386
+        },
+        {
+          "id": "start-self-exercise",
+          "line": 399
+        },
+        {
+          "id": "today-garden-entry",
+          "line": 406
+        },
+        {
+          "id": "discover-screen",
+          "line": 425
+        },
+        {
+          "id": "data-screen",
+          "line": 470
+        },
+        {
+          "id": "daily-steps-card",
+          "line": 522
+        },
+        {
+          "id": "steps-trend",
+          "line": 544
+        },
+        {
+          "id": "profile-screen",
+          "line": 594
+        },
+        {
+          "id": "profile-garden-card",
+          "line": 614
+        },
+        {
+          "id": "profile-garden-growth",
+          "line": 617
+        },
+        {
+          "id": "profile-garden-checkin",
+          "line": 641
+        },
+        {
+          "id": "points-exchange-unavailable",
+          "line": 676
+        },
+        {
+          "id": "precheck-screen",
+          "line": 806
+        },
+        {
+          "id": "discomfort-score",
+          "line": 816
+        },
+        {
+          "id": "precheck-danger-entry",
+          "line": 844
+        },
+        {
+          "id": "precheck-vitals",
+          "line": 853
+        },
+        {
+          "id": "read-pre-vitals",
+          "line": 864
+        },
+        {
+          "id": "enter-pre-vitals-manually",
+          "line": 871
+        },
+        {
+          "id": "begin-training",
+          "line": 945
+        },
+        {
+          "id": "training-screen",
+          "line": 961
+        },
+        {
+          "id": "live-vitals",
+          "line": 966
+        },
+        {
+          "id": "demo-complete",
+          "line": 997
+        },
+        {
+          "id": "postcheck-screen",
+          "line": 1009
+        },
+        {
+          "id": "generate-report",
+          "line": 1083
+        },
+        {
+          "id": "session-report-screen",
+          "line": 1099
+        },
+        {
+          "id": "garden-growth-feedback",
+          "line": 1132
+        },
+        {
+          "id": "manual-steps-card",
+          "line": 1284
+        },
+        {
+          "id": "manual-steps-input",
+          "line": 1303
+        },
+        {
+          "id": "save-manual-steps",
+          "line": 1310
+        },
+        {
+          "id": "public-profile-form",
+          "line": 1348
+        },
+        {
+          "id": "public-profile-name",
+          "line": 1355
+        },
+        {
+          "id": "public-profile-birth-date",
+          "line": 1369
+        },
+        {
+          "id": "public-profile-gender",
+          "line": 1390
+        },
+        {
+          "id": "public-profile-save",
+          "line": 1407
+        },
+        {
+          "id": "policy-console",
+          "line": 1565
+        },
+        {
+          "id": "doctor-review-console",
+          "line": 1635
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "chooseMode('public')",
+          "line": 23
+        },
+        {
+          "event": "tap",
+          "expression": "chooseMode('cardiac')",
+          "line": 36
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = true",
+          "line": 47
+        },
+        {
+          "event": "tap",
+          "expression": "backToMode",
+          "line": 52
+        },
+        {
+          "event": "tap",
+          "expression": "bindPatient",
+          "line": 97
+        },
+        {
+          "event": "tap",
+          "expression": "activeNav = 'profile'",
+          "line": 110
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 165
+        },
+        {
+          "event": "change",
+          "expression": "onPrescriptionSlide",
+          "line": 231
+        },
+        {
+          "event": "tap",
+          "expression": "startPrescriptionTask(task)",
+          "line": 290
+        },
+        {
+          "event": "tap",
+          "expression": "openGarden('growth')",
+          "line": 306
+        },
+        {
+          "event": "tap",
+          "expression": "toggleCategory(category.id)",
+          "line": 349
+        },
+        {
+          "event": "tap",
+          "expression": "chooseSelfDirected(game.id)",
+          "line": 368
+        },
+        {
+          "event": "tap",
+          "expression": "startSelfSelected",
+          "line": 399
+        },
+        {
+          "event": "tap",
+          "expression": "openGarden('growth')",
+          "line": 407
+        },
+        {
+          "event": "open-social",
+          "expression": "openSocial",
+          "line": 441
+        },
+        {
+          "event": "open",
+          "expression": "openKnowledgeItem",
+          "line": 446
+        },
+        {
+          "event": "start-plan",
+          "expression": "selectExercise(featuredGame.id)",
+          "line": 461
+        },
+        {
+          "event": "open-reports",
+          "expression": "openLatestReport",
+          "line": 462
+        },
+        {
+          "event": "open-devices",
+          "expression": "goDetail('devices')",
+          "line": 463
+        },
+        {
+          "event": "open-profile",
+          "expression": "goDetail('health-archive')",
+          "line": 464
+        },
+        {
+          "event": "tap",
+          "expression": "openLatestReport",
+          "line": 489
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 503
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 518
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 523
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('health-archive')",
+          "line": 610
+        },
+        {
+          "event": "tap",
+          "expression": "openGarden('growth')",
+          "line": 618
+        },
+        {
+          "event": "tap",
+          "expression": "openGarden('checkin')",
+          "line": 642
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 651
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('health-archive')",
+          "line": 660
+        },
+        {
+          "event": "tap",
+          "expression": "openTrainingReports",
+          "line": 666
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('prototype-policy')",
+          "line": 689
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('doctor-reviews')",
+          "line": 697
+        },
+        {
+          "event": "tap",
+          "expression": "switchMode",
+          "line": 709
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = true",
+          "line": 710
+        },
+        {
+          "event": "tap",
+          "expression": "resetPrototype",
+          "line": 711
+        },
+        {
+          "event": "tap",
+          "expression": "switchNav(item.id)",
+          "line": 720
+        },
+        {
+          "event": "tap",
+          "expression": "closeDetail",
+          "line": 735
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = true",
+          "line": 736
+        },
+        {
+          "event": "tap",
+          "expression": "day.today && selectExercise(day.gameId)",
+          "line": 749
+        },
+        {
+          "event": "tap",
+          "expression": "selectExercise(categoryRecommendedGame.id)",
+          "line": 782
+        },
+        {
+          "event": "tap",
+          "expression": "selectExercise(game.id)",
+          "line": 790
+        },
+        {
+          "event": "changing",
+          "expression": "setPreDiscomfortScore",
+          "line": 832
+        },
+        {
+          "event": "change",
+          "expression": "setPreDiscomfortScore",
+          "line": 833
+        },
+        {
+          "event": "tap",
+          "expression": "reportPrecheckDiscomfort",
+          "line": 845
+        },
+        {
+          "event": "tap",
+          "expression": "readPreVitalsFromDevice",
+          "line": 865
+        },
+        {
+          "event": "tap",
+          "expression": "chooseManualPreVitals",
+          "line": 872
+        },
+        {
+          "event": "input",
+          "expression": "\n                        setManualPreVital('systolicBloodPressure', $event)\n                      ",
+          "line": 889
+        },
+        {
+          "event": "input",
+          "expression": "\n                        setManualPreVital('diastolicBloodPressure', $event)\n                      ",
+          "line": 904
+        },
+        {
+          "event": "input",
+          "expression": "setManualPreVital('oxygenSaturation', $event)",
+          "line": 919
+        },
+        {
+          "event": "tap",
+          "expression": "startTraining",
+          "line": 946
+        },
+        {
+          "event": "tap",
+          "expression": "skipPre",
+          "line": 952
+        },
+        {
+          "event": "camera-status",
+          "expression": "cameraStatus = $event",
+          "line": 984
+        },
+        {
+          "event": "course-time",
+          "expression": "syncCourseElapsed",
+          "line": 985
+        },
+        {
+          "event": "course-ended",
+          "expression": "finishTraining(false)",
+          "line": 986
+        },
+        {
+          "event": "rep",
+          "expression": "recordRep",
+          "line": 987
+        },
+        {
+          "event": "beat",
+          "expression": "recordBeat",
+          "line": 988
+        },
+        {
+          "event": "tap",
+          "expression": "toggleTraining",
+          "line": 990
+        },
+        {
+          "event": "tap",
+          "expression": "showStopReason = true",
+          "line": 992
+        },
+        {
+          "event": "tap",
+          "expression": "finishTraining(true)",
+          "line": 998
+        },
+        {
+          "event": "tap",
+          "expression": "finishTraining(false)",
+          "line": 1001
+        },
+        {
+          "event": "tap",
+          "expression": "simulateVitalSync('post')",
+          "line": 1019
+        },
+        {
+          "event": "tap",
+          "expression": "useManualSnapshot('post')",
+          "line": 1058
+        },
+        {
+          "event": "change",
+          "expression": "setSnapshotBorg('post', $event)",
+          "line": 1068
+        },
+        {
+          "event": "tap",
+          "expression": "setPostFeeling(feeling)",
+          "line": 1076
+        },
+        {
+          "event": "tap",
+          "expression": "generateReport",
+          "line": 1084
+        },
+        {
+          "event": "tap",
+          "expression": "skipPost",
+          "line": 1090
+        },
+        {
+          "event": "tap",
+          "expression": "closeDetail",
+          "line": 1213
+        },
+        {
+          "event": "update:section",
+          "expression": "setGardenSection",
+          "line": 1224
+        },
+        {
+          "event": "shift-month",
+          "expression": "shiftCalendarMonth",
+          "line": 1225
+        },
+        {
+          "event": "create-team",
+          "expression": "createDemoTeam",
+          "line": 1252
+        },
+        {
+          "event": "join-team",
+          "expression": "joinTeamByCode",
+          "line": 1253
+        },
+        {
+          "event": "join-demo-team",
+          "expression": "applyDemoTeam",
+          "line": 1254
+        },
+        {
+          "event": "remind-team",
+          "expression": "remindTeamMember",
+          "line": 1255
+        },
+        {
+          "event": "set-buddy-cycle",
+          "expression": "setBuddyCycle",
+          "line": 1256
+        },
+        {
+          "event": "connect-buddy",
+          "expression": "applyDemoBuddy",
+          "line": 1257
+        },
+        {
+          "event": "remind-buddy",
+          "expression": "remindBuddy",
+          "line": 1258
+        },
+        {
+          "event": "tap",
+          "expression": "simulateDeviceConnect(source.id)",
+          "line": 1270
+        },
+        {
+          "event": "tap",
+          "expression": "saveManualSteps",
+          "line": 1312
+        },
+        {
+          "event": "change",
+          "expression": "setPublicBirthDate",
+          "line": 1370
+        },
+        {
+          "event": "tap",
+          "expression": "publicProfileDraft.gender = item.value",
+          "line": 1396
+        },
+        {
+          "event": "tap",
+          "expression": "savePublicProfile",
+          "line": 1408
+        },
+        {
+          "event": "tap",
+          "expression": "\n                  activeNav = 'today';\n                  closeDetail();\n                ",
+          "line": 1453
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 1472
+        },
+        {
+          "event": "tap",
+          "expression": "setHealthGoal('habit')",
+          "line": 1481
+        },
+        {
+          "event": "tap",
+          "expression": "setHealthGoal('weight')",
+          "line": 1486
+        },
+        {
+          "event": "tap",
+          "expression": "setHealthGoal('cardiac')",
+          "line": 1492
+        },
+        {
+          "event": "tap",
+          "expression": "convertPoints",
+          "line": 1530
+        },
+        {
+          "event": "tap",
+          "expression": "confirmRedeem(reward)",
+          "line": 1544
+        },
+        {
+          "event": "tap",
+          "expression": "publishPolicy",
+          "line": 1578
+        },
+        {
+          "event": "tap",
+          "expression": "setPolicyMode('pre', item.id)",
+          "line": 1586
+        },
+        {
+          "event": "tap",
+          "expression": "setPolicyMode('post', item.id)",
+          "line": 1598
+        },
+        {
+          "event": "change",
+          "expression": "setPolicyField(field.id, $event)",
+          "line": 1612
+        },
+        {
+          "event": "tap",
+          "expression": "seedScenario('stable')",
+          "line": 1622
+        },
+        {
+          "event": "tap",
+          "expression": "seedScenario('attention')",
+          "line": 1623
+        },
+        {
+          "event": "tap",
+          "expression": "seedScenario('stop')",
+          "line": 1624
+        },
+        {
+          "event": "tap",
+          "expression": "seedScenario('insufficient')",
+          "line": 1625
+        },
+        {
+          "event": "tap",
+          "expression": "resolveReview(review.id, 'approved')",
+          "line": 1654
+        },
+        {
+          "event": "tap",
+          "expression": "resolveReview(review.id, 'maintained')",
+          "line": 1656
+        },
+        {
+          "event": "tap",
+          "expression": "resolveReview(review.id, 'rejected')",
+          "line": 1658
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = false",
+          "line": 1716
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = false",
+          "line": 1721
+        },
+        {
+          "event": "tap",
+          "expression": "stopTraining(item.label)",
+          "line": 1730
+        },
+        {
+          "event": "tap",
+          "expression": "showStopReason = false",
+          "line": 1733
+        }
+      ],
+      "fields": [
+        {
+          "binding": "visitNumber",
+          "line": 71
+        },
+        {
+          "binding": "postSnapshot.heartRate",
+          "line": 1042
+        },
+        {
+          "binding": "postSnapshot.oxygenSaturation",
+          "line": 1050
+        },
+        {
+          "binding": "manualStepsInput",
+          "line": 1302
+        },
+        {
+          "binding": "publicProfileDraft.name",
+          "line": 1354
+        }
+      ],
+      "functions": [
+        {
+          "name": "pad",
+          "line": 2406
+        },
+        {
+          "name": "localDateKey",
+          "line": 2409
+        },
+        {
+          "name": "todayKey",
+          "line": 2412
+        },
+        {
+          "name": "monthKey",
+          "line": 2415
+        },
+        {
+          "name": "startOfLocalDay",
+          "line": 2418
+        },
+        {
+          "name": "addLocalDays",
+          "line": 2421
+        },
+        {
+          "name": "parseDateKey",
+          "line": 2426
+        },
+        {
+          "name": "calculateAgeFromBirthDate",
+          "line": 2430
+        },
+        {
+          "name": "greeting",
+          "line": 2450
+        },
+        {
+          "name": "formatTimer",
+          "line": 2454
+        },
+        {
+          "name": "formatDuration",
+          "line": 2457
+        },
+        {
+          "name": "formatDateTime",
+          "line": 2462
+        },
+        {
+          "name": "formatCheckInDate",
+          "line": 2466
+        },
+        {
+          "name": "compactSessionDate",
+          "line": 2470
+        },
+        {
+          "name": "formatTime",
+          "line": 2474
+        },
+        {
+          "name": "formatSteps",
+          "line": 2478
+        },
+        {
+          "name": "formatCompactSteps",
+          "line": 2481
+        },
+        {
+          "name": "formatStepSyncedTime",
+          "line": 2486
+        },
+        {
+          "name": "stepBarHeight",
+          "line": 2493
+        },
+        {
+          "name": "sourceLabel",
+          "line": 2498
+        },
+        {
+          "name": "qualityLabel",
+          "line": 2507
+        },
+        {
+          "name": "modeLabel",
+          "line": 2515
+        },
+        {
+          "name": "adviceLevelLabel",
+          "line": 2518
+        },
+        {
+          "name": "reviewStatusLabel",
+          "line": 2526
+        },
+        {
+          "name": "snapshotSummary",
+          "line": 2534
+        },
+        {
+          "name": "createDefaultPolicy",
+          "line": 2541
+        },
+        {
+          "name": "createVitalSnapshot",
+          "line": 2571
+        },
+        {
+          "name": "buildSeedCheckIns",
+          "line": 2595
+        },
+        {
+          "name": "buildSeedDailySteps",
+          "line": 2607
+        },
+        {
+          "name": "migrateDailyStepRecords",
+          "line": 2625
+        },
+        {
+          "name": "upsertDailyStepRecord",
+          "line": 2670
+        },
+        {
+          "name": "createDefaultTeamState",
+          "line": 2676
+        },
+        {
+          "name": "createDefaultBuddyState",
+          "line": 2686
+        },
+        {
+          "name": "calculateStreak",
+          "line": 2697
+        },
+        {
+          "name": "buildCalendarCells",
+          "line": 2708
+        },
+        {
+          "name": "migrateCheckIns",
+          "line": 2736
+        },
+        {
+          "name": "chooseMode",
+          "line": 2755
+        },
+        {
+          "name": "backToMode",
+          "line": 2765
+        },
+        {
+          "name": "bindPatient",
+          "line": 2770
+        },
+        {
+          "name": "enterApp",
+          "line": 2782
+        },
+        {
+          "name": "switchMode",
+          "line": 2788
+        },
+        {
+          "name": "setHealthGoal",
+          "line": 2797
+        },
+        {
+          "name": "syncPublicProfileDraft",
+          "line": 2801
+        },
+        {
+          "name": "setPublicBirthDate",
+          "line": 2809
+        },
+        {
+          "name": "savePublicProfile",
+          "line": 2813
+        },
+        {
+          "name": "goDetail",
+          "line": 2834
+        },
+        {
+          "name": "closeDetail",
+          "line": 2841
+        },
+        {
+          "name": "switchNav",
+          "line": 2866
+        },
+        {
+          "name": "openGarden",
+          "line": 2869
+        },
+        {
+          "name": "setGardenSection",
+          "line": 2873
+        },
+        {
+          "name": "onPrescriptionSlide",
+          "line": 2876
+        },
+        {
+          "name": "focusFirstIncompletePrescription",
+          "line": 2883
+        },
+        {
+          "name": "toggleCategory",
+          "line": 2889
+        },
+        {
+          "name": "chooseSelfDirected",
+          "line": 2894
+        },
+        {
+          "name": "startSelfSelected",
+          "line": 2900
+        },
+        {
+          "name": "startPrescriptionTask",
+          "line": 2905
+        },
+        {
+          "name": "openSocial",
+          "line": 2918
+        },
+        {
+          "name": "openKnowledgeItem",
+          "line": 2923
+        },
+        {
+          "name": "openSession",
+          "line": 2929
+        },
+        {
+          "name": "openLatestReport",
+          "line": 2934
+        },
+        {
+          "name": "openTrainingReports",
+          "line": 2942
+        },
+        {
+          "name": "shiftCalendarMonth",
+          "line": 2945
+        },
+        {
+          "name": "resetTraining",
+          "line": 2952
+        },
+        {
+          "name": "selectExercise",
+          "line": 2973
+        },
+        {
+          "name": "startTraining",
+          "line": 2982
+        },
+        {
+          "name": "skipPre",
+          "line": 2996
+        },
+        {
+          "name": "skipPost",
+          "line": 3000
+        },
+        {
+          "name": "startTimer",
+          "line": 3004
+        },
+        {
+          "name": "syncCourseElapsed",
+          "line": 3016
+        },
+        {
+          "name": "initializeLiveVitals",
+          "line": 3032
+        },
+        {
+          "name": "updateLiveVitals",
+          "line": 3041
+        },
+        {
+          "name": "stopTimer",
+          "line": 3057
+        },
+        {
+          "name": "toggleTraining",
+          "line": 3061
+        },
+        {
+          "name": "recordRep",
+          "line": 3065
+        },
+        {
+          "name": "recordBeat",
+          "line": 3070
+        },
+        {
+          "name": "finishTraining",
+          "line": 3079
+        },
+        {
+          "name": "stopTraining",
+          "line": 3100
+        },
+        {
+          "name": "stopBeforeStart",
+          "line": 3110
+        },
+        {
+          "name": "setPreDiscomfortScore",
+          "line": 3116
+        },
+        {
+          "name": "reportPrecheckDiscomfort",
+          "line": 3119
+        },
+        {
+          "name": "readPreVitalsFromDevice",
+          "line": 3123
+        },
+        {
+          "name": "chooseManualPreVitals",
+          "line": 3145
+        },
+        {
+          "name": "setManualPreVital",
+          "line": 3160
+        },
+        {
+          "name": "updatePreSymptoms",
+          "line": 3178
+        },
+        {
+          "name": "setSnapshotBorg",
+          "line": 3181
+        },
+        {
+          "name": "setPostFeeling",
+          "line": 3185
+        },
+        {
+          "name": "simulateVitalSync",
+          "line": 3188
+        },
+        {
+          "name": "useManualSnapshot",
+          "line": 3198
+        },
+        {
+          "name": "snapshotReady",
+          "line": 3210
+        },
+        {
+          "name": "autoCheckInCoreExercise",
+          "line": 3250
+        },
+        {
+          "name": "resultItems",
+          "line": 3275
+        },
+        {
+          "name": "buildAssessment",
+          "line": 3300
+        },
+        {
+          "name": "buildAdvice",
+          "line": 3334
+        },
+        {
+          "name": "generateReport",
+          "line": 3476
+        },
+        {
+          "name": "setPolicyMode",
+          "line": 3574
+        },
+        {
+          "name": "setPolicyField",
+          "line": 3582
+        },
+        {
+          "name": "publishPolicy",
+          "line": 3596
+        },
+        {
+          "name": "seedScenario",
+          "line": 3616
+        },
+        {
+          "name": "reviewForAdvice",
+          "line": 3684
+        },
+        {
+          "name": "adviceForReview",
+          "line": 3687
+        },
+        {
+          "name": "resolveReview",
+          "line": 3690
+        },
+        {
+          "name": "simulateDeviceConnect",
+          "line": 3699
+        },
+        {
+          "name": "saveManualSteps",
+          "line": 3721
+        },
+        {
+          "name": "createDemoTeam",
+          "line": 3748
+        },
+        {
+          "name": "joinTeamByCode",
+          "line": 3758
+        },
+        {
+          "name": "joinDemoTeam",
+          "line": 3765
+        },
+        {
+          "name": "applyDemoTeam",
+          "line": 3773
+        },
+        {
+          "name": "remindTeamMember",
+          "line": 3779
+        },
+        {
+          "name": "setBuddyCycle",
+          "line": 3787
+        },
+        {
+          "name": "connectDemoBuddy",
+          "line": 3791
+        },
+        {
+          "name": "applyDemoBuddy",
+          "line": 3800
+        },
+        {
+          "name": "remindBuddy",
+          "line": 3806
+        },
+        {
+          "name": "focusMemUnlock",
+          "line": 3811
+        },
+        {
+          "name": "unlockMem",
+          "line": 3814
+        },
+        {
+          "name": "convertPoints",
+          "line": 3828
+        },
+        {
+          "name": "canRedeem",
+          "line": 3834
+        },
+        {
+          "name": "confirmRedeem",
+          "line": 3839
+        },
+        {
+          "name": "redeemReward",
+          "line": 3849
+        },
+        {
+          "name": "calculateMemChallengeDays",
+          "line": 3867
+        },
+        {
+          "name": "evaluateMemChallenge",
+          "line": 3889
+        },
+        {
+          "name": "normalizePublicHealthProfile",
+          "line": 3903
+        },
+        {
+          "name": "persistState",
+          "line": 3923
+        },
+        {
+          "name": "resetPrototype",
+          "line": 3948
+        }
+      ],
+      "views": [
+        "none",
+        "weekly-path",
+        "exercise-category",
+        "precheck",
+        "training",
+        "postcheck",
+        "session-report",
+        "garden",
+        "training-reports",
+        "social-hub",
+        "devices",
+        "health-archive",
+        "reward-store",
+        "prototype-policy",
+        "doctor-reviews",
+        "knowledge-article",
+        "knowledge-video"
+      ],
+      "sha256": "46d988ae80d72d5a43812d9087c54f35919133531d809a2060635a00aa333501"
+    },
+    {
+      "file": "src/shime-uni.d.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "762f1710ff5f9351e4840d0e609277d603ca3ca620b49161d793f73ee0c46c46"
+    }
+  ],
+  "currentFiles": [
+    {
+      "file": "src/App.vue",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "d15b6a6f7a12d9e675816e7e209482d985ad9da08c289d2df18ba64e4ed27e62"
+    },
+    {
+      "file": "src/components/AppIcon.vue",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "8add2af3cae051ccc8fd22c36d0e19630f13e58a53126525e1b3502ae83aa711"
+    },
+    {
+      "file": "src/components/AssistantPanel.vue",
+      "anchors": [
+        {
+          "id": "assistant-screen",
+          "line": 2
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "ask(prompt)",
+          "line": 13
+        },
+        {
+          "event": "confirm",
+          "expression": "send",
+          "line": 16
+        },
+        {
+          "event": "tap",
+          "expression": "send",
+          "line": 16
+        }
+      ],
+      "fields": [
+        {
+          "binding": "query",
+          "line": 16
+        }
+      ],
+      "functions": [
+        {
+          "name": "answer",
+          "line": 30
+        },
+        {
+          "name": "ask",
+          "line": 38
+        },
+        {
+          "name": "send",
+          "line": 39
+        }
+      ],
+      "views": [],
+      "sha256": "7c9b42c0a50820e5c0656ed21059ca76566e5e70621281116aeb36c8d47f2193"
+    },
+    {
+      "file": "src/components/CameraPreview.vue",
+      "anchors": [],
+      "handlers": [
+        {
+          "event": "error",
+          "expression": "onNativeError",
+          "line": 10
+        },
+        {
+          "event": "initdone",
+          "expression": "onNativeReady",
+          "line": 11
+        },
+        {
+          "event": "tap",
+          "expression": "enableCamera",
+          "line": 46
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "enableCamera",
+          "line": 70
+        },
+        {
+          "name": "markReady",
+          "line": 77
+        },
+        {
+          "name": "markDenied",
+          "line": 82
+        },
+        {
+          "name": "onNativeReady",
+          "line": 88
+        },
+        {
+          "name": "onNativeError",
+          "line": 92
+        }
+      ],
+      "views": [],
+      "sha256": "11dffd83c2112c2960eac38099f945c10bf77f86110fa7a55a95fddc223a0956"
+    },
+    {
+      "file": "src/components/CompanionHub.vue",
+      "anchors": [
+        {
+          "id": "knowledge-companions",
+          "line": 2
+        },
+        {
+          "id": "knowledge-buddy-entry",
+          "line": 12
+        },
+        {
+          "id": "knowledge-team-entry",
+          "line": 13
+        },
+        {
+          "id": "team-panel",
+          "line": 16
+        },
+        {
+          "id": "create-team",
+          "line": 22
+        },
+        {
+          "id": "join-team-code",
+          "line": 23
+        },
+        {
+          "id": "join-team",
+          "line": 24
+        },
+        {
+          "id": "buddy-panel",
+          "line": 28
+        },
+        {
+          "id": "connect-buddy",
+          "line": 33
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "open('buddy')",
+          "line": 12
+        },
+        {
+          "event": "tap",
+          "expression": "open('team')",
+          "line": 13
+        },
+        {
+          "event": "tap",
+          "expression": "emit('remindTeam', member.id)",
+          "line": 19
+        },
+        {
+          "event": "tap",
+          "expression": "emit('createTeam')",
+          "line": 22
+        },
+        {
+          "event": "tap",
+          "expression": "emit('joinTeam', inviteCode)",
+          "line": 23
+        },
+        {
+          "event": "tap",
+          "expression": "emit('joinDemoTeam')",
+          "line": 24
+        },
+        {
+          "event": "tap",
+          "expression": "emit('setBuddyCycle', 7)",
+          "line": 29
+        },
+        {
+          "event": "tap",
+          "expression": "emit('setBuddyCycle', 30)",
+          "line": 29
+        },
+        {
+          "event": "tap",
+          "expression": "emit('remindBuddy')",
+          "line": 31
+        },
+        {
+          "event": "tap",
+          "expression": "emit('connectBuddy')",
+          "line": 33
+        }
+      ],
+      "fields": [
+        {
+          "binding": "inviteCode",
+          "line": 23
+        }
+      ],
+      "functions": [
+        {
+          "name": "open",
+          "line": 83
+        }
+      ],
+      "views": [],
+      "sha256": "80324afe7a6ecd730cf167deb0a3ce1575c9e078aa5f697d9414120efa7d5ad0"
+    },
+    {
+      "file": "src/components/DetailIntro.vue",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "04302447a224521199bd5c5081ca1e5a75cd4294c4decdb16b21e09d9beaa13a"
+    },
+    {
+      "file": "src/components/ExerciseCards.vue",
+      "anchors": [
+        {
+          "id": "exercise-primary-cards",
+          "line": 2
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "emit('select', game.id)",
+          "line": 8
+        }
+      ],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "056a9c8d2941d2049f68729c2638c5dd770083cd0cbffc721cb6fd7d75c34d08"
+    },
+    {
+      "file": "src/components/KnowledgeHub.vue",
+      "anchors": [
+        {
+          "id": "discover-content",
+          "line": 2
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "emit('open', featured)",
+          "line": 4
+        },
+        {
+          "event": "tap",
+          "expression": "emit('open', item)",
+          "line": 8
+        },
+        {
+          "event": "tap",
+          "expression": "emit('open', item)",
+          "line": 10
+        }
+      ],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "5bf7ce1cb782e3b4099ac6f3380e680076211d6b64db61b5f88060769f920658"
+    },
+    {
+      "file": "src/components/MagpieMotion.vue",
+      "anchors": [],
+      "handlers": [
+        {
+          "event": "load",
+          "expression": "onRiveLoad",
+          "line": 16
+        },
+        {
+          "event": "error",
+          "expression": "onRiveError",
+          "line": 17
+        },
+        {
+          "event": "error",
+          "expression": "onVideoError",
+          "line": 33
+        },
+        {
+          "event": "error",
+          "expression": "onVideoError",
+          "line": 59
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "onRiveLoad",
+          "line": 118
+        },
+        {
+          "name": "handleRiveReady",
+          "line": 122
+        },
+        {
+          "name": "handleRiveRenderError",
+          "line": 126
+        },
+        {
+          "name": "onRiveError",
+          "line": 132
+        },
+        {
+          "name": "onVideoError",
+          "line": 136
+        },
+        {
+          "name": "cleanupRuntime",
+          "line": 148
+        }
+      ],
+      "views": [],
+      "sha256": "f09c7f8ab41954aff19def9d5e8eeef9cb1c39d0c4f8e23fa51574f75b5e0a09"
+    },
+    {
+      "file": "src/components/RehabGardenPanel.vue",
+      "anchors": [
+        {
+          "id": "rehab-garden-panel",
+          "line": 2
+        },
+        {
+          "id": "garden-section-tabs",
+          "line": 3
+        },
+        {
+          "id": "garden-section-growth",
+          "line": 6
+        },
+        {
+          "id": "garden-section-checkin",
+          "line": 13
+        },
+        {
+          "id": "garden-growth-content",
+          "line": 24
+        },
+        {
+          "id": "region-garden-hero",
+          "line": 28
+        },
+        {
+          "id": "garden-growth-track",
+          "line": 67
+        },
+        {
+          "id": "region-garden-growth",
+          "line": 86
+        },
+        {
+          "id": "garden-cycle-detail",
+          "line": 99
+        },
+        {
+          "id": "garden-checkin-content",
+          "line": 130
+        },
+        {
+          "id": "garden-checkin-summary",
+          "line": 132
+        },
+        {
+          "id": "garden-checkin-calendar",
+          "line": 147
+        },
+        {
+          "id": "garden-recent-checkins",
+          "line": 182
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "selectSection('growth')",
+          "line": 7
+        },
+        {
+          "event": "tap",
+          "expression": "selectSection('checkin')",
+          "line": 14
+        },
+        {
+          "event": "tap",
+          "expression": "emit('shift-month', -1)",
+          "line": 149
+        },
+        {
+          "event": "tap",
+          "expression": "emit('shift-month', 1)",
+          "line": 153
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "selectSection",
+          "line": 301
+        }
+      ],
+      "views": [],
+      "sha256": "bc2bbaf2ed67db516fce03ce01de879d013d7977a18d9fb51a6dc4d98656dd26"
+    },
+    {
+      "file": "src/components/StepIndicator.vue",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [
+        {
+          "name": "stateClass",
+          "line": 17
+        },
+        {
+          "name": "lineClass",
+          "line": 23
+        }
+      ],
+      "views": [],
+      "sha256": "19b7cd91209555eeb9c6f17b0486adb342fa4fac124859572131a6f268f9ede9"
+    },
+    {
+      "file": "src/components/TrainingExperience.vue",
+      "anchors": [],
+      "handlers": [
+        {
+          "event": "timeupdate",
+          "expression": "onCourseTimeUpdate",
+          "line": 33
+        },
+        {
+          "event": "ended",
+          "expression": "emit('course-ended')",
+          "line": 34
+        },
+        {
+          "event": "status",
+          "expression": "emit('camera-status', $event)",
+          "line": 49
+        },
+        {
+          "event": "tap",
+          "expression": "emit('rep')",
+          "line": 60
+        },
+        {
+          "event": "tap",
+          "expression": "emit('beat')",
+          "line": 77
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "onCourseTimeUpdate",
+          "line": 132
+        }
+      ],
+      "views": [],
+      "sha256": "a3a2d11697d4a9194eb919f5bf06745146f84cdae94c490767c46cc0ee817e83"
+    },
+    {
+      "file": "src/components/TrainingReports.vue",
+      "anchors": [
+        {
+          "id": "training-reports",
+          "line": 2
+        },
+        {
+          "id": "report-tab-daily",
+          "line": 7
+        },
+        {
+          "id": "report-tab-monthly",
+          "line": 14
+        },
+        {
+          "id": "daily-report-list",
+          "line": 29
+        },
+        {
+          "id": "daily-report-row",
+          "line": 30
+        },
+        {
+          "id": "monthly-report-list",
+          "line": 46
+        },
+        {
+          "id": "monthly-report-row",
+          "line": 47
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "selectTab('daily')",
+          "line": 9
+        },
+        {
+          "event": "tap",
+          "expression": "selectTab('monthly')",
+          "line": 16
+        },
+        {
+          "event": "tap",
+          "expression": "selectedDate = ''",
+          "line": 22
+        },
+        {
+          "event": "tap",
+          "expression": "selectedDate = report.date",
+          "line": 30
+        },
+        {
+          "event": "tap",
+          "expression": "selectedMonth = ''",
+          "line": 41
+        },
+        {
+          "event": "tap",
+          "expression": "selectedMonth = report.month",
+          "line": 47
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "selectTab",
+          "line": 67
+        },
+        {
+          "name": "minutes",
+          "line": 95
+        },
+        {
+          "name": "dateLabel",
+          "line": 96
+        },
+        {
+          "name": "monthLabel",
+          "line": 97
+        },
+        {
+          "name": "timeLabel",
+          "line": 98
+        },
+        {
+          "name": "itemDone",
+          "line": 99
+        },
+        {
+          "name": "snapshotValue",
+          "line": 100
+        },
+        {
+          "name": "dailyConclusion",
+          "line": 101
+        },
+        {
+          "name": "stageConclusion",
+          "line": 102
+        },
+        {
+          "name": "stageAverage",
+          "line": 103
+        }
+      ],
+      "views": [],
+      "sha256": "c71d013d8f9c9e9d9a70cb26d572cee059ec1c5030c59644a5803ee5f49bb172"
+    },
+    {
+      "file": "src/components/VitalForm.vue",
+      "anchors": [],
+      "handlers": [
+        {
+          "event": "input",
+          "expression": "setValue('sbp', $event)",
+          "line": 7
+        },
+        {
+          "event": "input",
+          "expression": "setValue('dbp', $event)",
+          "line": 11
+        },
+        {
+          "event": "input",
+          "expression": "setValue('hr', $event)",
+          "line": 15
+        },
+        {
+          "event": "input",
+          "expression": "setValue('spo2', $event)",
+          "line": 19
+        },
+        {
+          "event": "change",
+          "expression": "setBorg",
+          "line": 23
+        }
+      ],
+      "fields": [],
+      "functions": [
+        {
+          "name": "setValue",
+          "line": 40
+        },
+        {
+          "name": "setBorg",
+          "line": 44
+        }
+      ],
+      "views": [],
+      "sha256": "b2f618e9ee8a3795df1438cb30bce2d7f876769a0e7d65c883d05bd577cc63cf"
+    },
+    {
+      "file": "src/env.d.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "6cffe84a6b162cf97d3a80dd4cc1999d2899f10e194fa052c743a704c63f9cd8"
+    },
+    {
+      "file": "src/lib/prototype-data.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "111000dca6d1f7c10bb47bb22c504fa45d4162eb7483b541a43d28c39153f825"
+    },
+    {
+      "file": "src/lib/rive-motion.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "bec2828f9d28afcedeeffdf40fd4426023775e4cbc1fdcd5b098292c582b75f7"
+    },
+    {
+      "file": "src/lib/shared-patient.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [
+        {
+          "name": "normalizePatientNo",
+          "line": 56
+        },
+        {
+          "name": "isSupportedPatientNo",
+          "line": 61
+        },
+        {
+          "name": "isPrescriptionExercise",
+          "line": 65
+        },
+        {
+          "name": "prescriptionItemKey",
+          "line": 69
+        },
+        {
+          "name": "prescriptionItemGameId",
+          "line": 73
+        }
+      ],
+      "views": [],
+      "sha256": "712b82ae69b05ebd85d7bac8fd56213b6621b8e19f479f461a275e157c4c60cb"
+    },
+    {
+      "file": "src/main.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [
+        {
+          "name": "createApp",
+          "line": 3
+        }
+      ],
+      "views": [],
+      "sha256": "0ca64f05900c7b37ac760947af76b72d93fbf85b4c044724562a8a7d83d9620b"
+    },
+    {
+      "file": "src/pages/index/index.vue",
+      "anchors": [
+        {
+          "id": "onboarding-mode",
+          "line": 15
+        },
+        {
+          "id": "choose-public",
+          "line": 22
+        },
+        {
+          "id": "choose-cardiac",
+          "line": 35
+        },
+        {
+          "id": "onboarding-binding",
+          "line": 51
+        },
+        {
+          "id": "visit-number",
+          "line": 73
+        },
+        {
+          "id": "bind-plan",
+          "line": 96
+        },
+        {
+          "id": "today-screen",
+          "line": 118
+        },
+        {
+          "id": "today-steps-card",
+          "line": 164
+        },
+        {
+          "id": "prescription-pagination",
+          "line": 209
+        },
+        {
+          "id": "prescription-swiper",
+          "line": 230
+        },
+        {
+          "id": "prescription-slide",
+          "line": 236
+        },
+        {
+          "id": "today-core-task",
+          "line": 241
+        },
+        {
+          "id": "today-garden-entry",
+          "line": 305
+        },
+        {
+          "id": "exercise-category",
+          "line": 348
+        },
+        {
+          "id": "self-directed-game-list",
+          "line": 362
+        },
+        {
+          "id": "self-directed-game",
+          "line": 367
+        },
+        {
+          "id": "selected-self-exercise",
+          "line": 386
+        },
+        {
+          "id": "start-self-exercise",
+          "line": 399
+        },
+        {
+          "id": "today-garden-entry",
+          "line": 406
+        },
+        {
+          "id": "discover-screen",
+          "line": 425
+        },
+        {
+          "id": "data-screen",
+          "line": 470
+        },
+        {
+          "id": "daily-steps-card",
+          "line": 522
+        },
+        {
+          "id": "steps-trend",
+          "line": 544
+        },
+        {
+          "id": "profile-screen",
+          "line": 594
+        },
+        {
+          "id": "profile-garden-card",
+          "line": 614
+        },
+        {
+          "id": "profile-garden-growth",
+          "line": 617
+        },
+        {
+          "id": "profile-garden-checkin",
+          "line": 641
+        },
+        {
+          "id": "points-exchange-unavailable",
+          "line": 676
+        },
+        {
+          "id": "precheck-screen",
+          "line": 806
+        },
+        {
+          "id": "discomfort-score",
+          "line": 816
+        },
+        {
+          "id": "precheck-danger-entry",
+          "line": 844
+        },
+        {
+          "id": "precheck-vitals",
+          "line": 853
+        },
+        {
+          "id": "read-pre-vitals",
+          "line": 864
+        },
+        {
+          "id": "enter-pre-vitals-manually",
+          "line": 871
+        },
+        {
+          "id": "begin-training",
+          "line": 945
+        },
+        {
+          "id": "training-screen",
+          "line": 961
+        },
+        {
+          "id": "live-vitals",
+          "line": 966
+        },
+        {
+          "id": "demo-complete",
+          "line": 997
+        },
+        {
+          "id": "postcheck-screen",
+          "line": 1009
+        },
+        {
+          "id": "generate-report",
+          "line": 1083
+        },
+        {
+          "id": "session-report-screen",
+          "line": 1099
+        },
+        {
+          "id": "garden-growth-feedback",
+          "line": 1132
+        },
+        {
+          "id": "manual-steps-card",
+          "line": 1284
+        },
+        {
+          "id": "manual-steps-input",
+          "line": 1303
+        },
+        {
+          "id": "save-manual-steps",
+          "line": 1310
+        },
+        {
+          "id": "public-profile-form",
+          "line": 1348
+        },
+        {
+          "id": "public-profile-name",
+          "line": 1355
+        },
+        {
+          "id": "public-profile-birth-date",
+          "line": 1369
+        },
+        {
+          "id": "public-profile-gender",
+          "line": 1390
+        },
+        {
+          "id": "public-profile-save",
+          "line": 1407
+        },
+        {
+          "id": "policy-console",
+          "line": 1565
+        },
+        {
+          "id": "doctor-review-console",
+          "line": 1635
+        }
+      ],
+      "handlers": [
+        {
+          "event": "tap",
+          "expression": "chooseMode('public')",
+          "line": 23
+        },
+        {
+          "event": "tap",
+          "expression": "chooseMode('cardiac')",
+          "line": 36
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = true",
+          "line": 47
+        },
+        {
+          "event": "tap",
+          "expression": "backToMode",
+          "line": 52
+        },
+        {
+          "event": "tap",
+          "expression": "bindPatient",
+          "line": 97
+        },
+        {
+          "event": "tap",
+          "expression": "activeNav = 'profile'",
+          "line": 110
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 165
+        },
+        {
+          "event": "change",
+          "expression": "onPrescriptionSlide",
+          "line": 231
+        },
+        {
+          "event": "tap",
+          "expression": "startPrescriptionTask(task)",
+          "line": 290
+        },
+        {
+          "event": "tap",
+          "expression": "openGarden('growth')",
+          "line": 306
+        },
+        {
+          "event": "tap",
+          "expression": "toggleCategory(category.id)",
+          "line": 349
+        },
+        {
+          "event": "tap",
+          "expression": "chooseSelfDirected(game.id)",
+          "line": 368
+        },
+        {
+          "event": "tap",
+          "expression": "startSelfSelected",
+          "line": 399
+        },
+        {
+          "event": "tap",
+          "expression": "openGarden('growth')",
+          "line": 407
+        },
+        {
+          "event": "open-social",
+          "expression": "openSocial",
+          "line": 441
+        },
+        {
+          "event": "open",
+          "expression": "openKnowledgeItem",
+          "line": 446
+        },
+        {
+          "event": "start-plan",
+          "expression": "selectExercise(featuredGame.id)",
+          "line": 461
+        },
+        {
+          "event": "open-reports",
+          "expression": "openLatestReport",
+          "line": 462
+        },
+        {
+          "event": "open-devices",
+          "expression": "goDetail('devices')",
+          "line": 463
+        },
+        {
+          "event": "open-profile",
+          "expression": "goDetail('health-archive')",
+          "line": 464
+        },
+        {
+          "event": "tap",
+          "expression": "openLatestReport",
+          "line": 489
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 503
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 518
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 523
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('health-archive')",
+          "line": 610
+        },
+        {
+          "event": "tap",
+          "expression": "openGarden('growth')",
+          "line": 618
+        },
+        {
+          "event": "tap",
+          "expression": "openGarden('checkin')",
+          "line": 642
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 651
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('health-archive')",
+          "line": 660
+        },
+        {
+          "event": "tap",
+          "expression": "openTrainingReports",
+          "line": 666
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('prototype-policy')",
+          "line": 689
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('doctor-reviews')",
+          "line": 697
+        },
+        {
+          "event": "tap",
+          "expression": "switchMode",
+          "line": 709
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = true",
+          "line": 710
+        },
+        {
+          "event": "tap",
+          "expression": "resetPrototype",
+          "line": 711
+        },
+        {
+          "event": "tap",
+          "expression": "switchNav(item.id)",
+          "line": 720
+        },
+        {
+          "event": "tap",
+          "expression": "closeDetail",
+          "line": 735
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = true",
+          "line": 736
+        },
+        {
+          "event": "tap",
+          "expression": "day.today && selectExercise(day.gameId)",
+          "line": 749
+        },
+        {
+          "event": "tap",
+          "expression": "selectExercise(categoryRecommendedGame.id)",
+          "line": 782
+        },
+        {
+          "event": "tap",
+          "expression": "selectExercise(game.id)",
+          "line": 790
+        },
+        {
+          "event": "changing",
+          "expression": "setPreDiscomfortScore",
+          "line": 832
+        },
+        {
+          "event": "change",
+          "expression": "setPreDiscomfortScore",
+          "line": 833
+        },
+        {
+          "event": "tap",
+          "expression": "reportPrecheckDiscomfort",
+          "line": 845
+        },
+        {
+          "event": "tap",
+          "expression": "readPreVitalsFromDevice",
+          "line": 865
+        },
+        {
+          "event": "tap",
+          "expression": "chooseManualPreVitals",
+          "line": 872
+        },
+        {
+          "event": "input",
+          "expression": "\n                        setManualPreVital('systolicBloodPressure', $event)\n                      ",
+          "line": 889
+        },
+        {
+          "event": "input",
+          "expression": "\n                        setManualPreVital('diastolicBloodPressure', $event)\n                      ",
+          "line": 904
+        },
+        {
+          "event": "input",
+          "expression": "setManualPreVital('oxygenSaturation', $event)",
+          "line": 919
+        },
+        {
+          "event": "tap",
+          "expression": "startTraining",
+          "line": 946
+        },
+        {
+          "event": "tap",
+          "expression": "skipPre",
+          "line": 952
+        },
+        {
+          "event": "camera-status",
+          "expression": "cameraStatus = $event",
+          "line": 984
+        },
+        {
+          "event": "course-time",
+          "expression": "syncCourseElapsed",
+          "line": 985
+        },
+        {
+          "event": "course-ended",
+          "expression": "finishTraining(false)",
+          "line": 986
+        },
+        {
+          "event": "rep",
+          "expression": "recordRep",
+          "line": 987
+        },
+        {
+          "event": "beat",
+          "expression": "recordBeat",
+          "line": 988
+        },
+        {
+          "event": "tap",
+          "expression": "toggleTraining",
+          "line": 990
+        },
+        {
+          "event": "tap",
+          "expression": "showStopReason = true",
+          "line": 992
+        },
+        {
+          "event": "tap",
+          "expression": "finishTraining(true)",
+          "line": 998
+        },
+        {
+          "event": "tap",
+          "expression": "finishTraining(false)",
+          "line": 1001
+        },
+        {
+          "event": "tap",
+          "expression": "simulateVitalSync('post')",
+          "line": 1019
+        },
+        {
+          "event": "tap",
+          "expression": "useManualSnapshot('post')",
+          "line": 1058
+        },
+        {
+          "event": "change",
+          "expression": "setSnapshotBorg('post', $event)",
+          "line": 1068
+        },
+        {
+          "event": "tap",
+          "expression": "setPostFeeling(feeling)",
+          "line": 1076
+        },
+        {
+          "event": "tap",
+          "expression": "generateReport",
+          "line": 1084
+        },
+        {
+          "event": "tap",
+          "expression": "skipPost",
+          "line": 1090
+        },
+        {
+          "event": "tap",
+          "expression": "closeDetail",
+          "line": 1213
+        },
+        {
+          "event": "update:section",
+          "expression": "setGardenSection",
+          "line": 1224
+        },
+        {
+          "event": "shift-month",
+          "expression": "shiftCalendarMonth",
+          "line": 1225
+        },
+        {
+          "event": "create-team",
+          "expression": "createDemoTeam",
+          "line": 1252
+        },
+        {
+          "event": "join-team",
+          "expression": "joinTeamByCode",
+          "line": 1253
+        },
+        {
+          "event": "join-demo-team",
+          "expression": "applyDemoTeam",
+          "line": 1254
+        },
+        {
+          "event": "remind-team",
+          "expression": "remindTeamMember",
+          "line": 1255
+        },
+        {
+          "event": "set-buddy-cycle",
+          "expression": "setBuddyCycle",
+          "line": 1256
+        },
+        {
+          "event": "connect-buddy",
+          "expression": "applyDemoBuddy",
+          "line": 1257
+        },
+        {
+          "event": "remind-buddy",
+          "expression": "remindBuddy",
+          "line": 1258
+        },
+        {
+          "event": "tap",
+          "expression": "simulateDeviceConnect(source.id)",
+          "line": 1270
+        },
+        {
+          "event": "tap",
+          "expression": "saveManualSteps",
+          "line": 1312
+        },
+        {
+          "event": "change",
+          "expression": "setPublicBirthDate",
+          "line": 1370
+        },
+        {
+          "event": "tap",
+          "expression": "publicProfileDraft.gender = item.value",
+          "line": 1396
+        },
+        {
+          "event": "tap",
+          "expression": "savePublicProfile",
+          "line": 1408
+        },
+        {
+          "event": "tap",
+          "expression": "\n                  activeNav = 'today';\n                  closeDetail();\n                ",
+          "line": 1453
+        },
+        {
+          "event": "tap",
+          "expression": "goDetail('devices')",
+          "line": 1472
+        },
+        {
+          "event": "tap",
+          "expression": "setHealthGoal('habit')",
+          "line": 1481
+        },
+        {
+          "event": "tap",
+          "expression": "setHealthGoal('weight')",
+          "line": 1486
+        },
+        {
+          "event": "tap",
+          "expression": "setHealthGoal('cardiac')",
+          "line": 1492
+        },
+        {
+          "event": "tap",
+          "expression": "convertPoints",
+          "line": 1530
+        },
+        {
+          "event": "tap",
+          "expression": "confirmRedeem(reward)",
+          "line": 1544
+        },
+        {
+          "event": "tap",
+          "expression": "publishPolicy",
+          "line": 1578
+        },
+        {
+          "event": "tap",
+          "expression": "setPolicyMode('pre', item.id)",
+          "line": 1586
+        },
+        {
+          "event": "tap",
+          "expression": "setPolicyMode('post', item.id)",
+          "line": 1598
+        },
+        {
+          "event": "change",
+          "expression": "setPolicyField(field.id, $event)",
+          "line": 1612
+        },
+        {
+          "event": "tap",
+          "expression": "seedScenario('stable')",
+          "line": 1622
+        },
+        {
+          "event": "tap",
+          "expression": "seedScenario('attention')",
+          "line": 1623
+        },
+        {
+          "event": "tap",
+          "expression": "seedScenario('stop')",
+          "line": 1624
+        },
+        {
+          "event": "tap",
+          "expression": "seedScenario('insufficient')",
+          "line": 1625
+        },
+        {
+          "event": "tap",
+          "expression": "resolveReview(review.id, 'approved')",
+          "line": 1654
+        },
+        {
+          "event": "tap",
+          "expression": "resolveReview(review.id, 'maintained')",
+          "line": 1656
+        },
+        {
+          "event": "tap",
+          "expression": "resolveReview(review.id, 'rejected')",
+          "line": 1658
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = false",
+          "line": 1716
+        },
+        {
+          "event": "tap",
+          "expression": "showAiBoundary = false",
+          "line": 1721
+        },
+        {
+          "event": "tap",
+          "expression": "stopTraining(item.label)",
+          "line": 1730
+        },
+        {
+          "event": "tap",
+          "expression": "showStopReason = false",
+          "line": 1733
+        }
+      ],
+      "fields": [
+        {
+          "binding": "visitNumber",
+          "line": 71
+        },
+        {
+          "binding": "postSnapshot.heartRate",
+          "line": 1042
+        },
+        {
+          "binding": "postSnapshot.oxygenSaturation",
+          "line": 1050
+        },
+        {
+          "binding": "manualStepsInput",
+          "line": 1302
+        },
+        {
+          "binding": "publicProfileDraft.name",
+          "line": 1354
+        }
+      ],
+      "functions": [
+        {
+          "name": "pad",
+          "line": 2406
+        },
+        {
+          "name": "localDateKey",
+          "line": 2409
+        },
+        {
+          "name": "todayKey",
+          "line": 2412
+        },
+        {
+          "name": "monthKey",
+          "line": 2415
+        },
+        {
+          "name": "startOfLocalDay",
+          "line": 2418
+        },
+        {
+          "name": "addLocalDays",
+          "line": 2421
+        },
+        {
+          "name": "parseDateKey",
+          "line": 2426
+        },
+        {
+          "name": "calculateAgeFromBirthDate",
+          "line": 2430
+        },
+        {
+          "name": "greeting",
+          "line": 2450
+        },
+        {
+          "name": "formatTimer",
+          "line": 2454
+        },
+        {
+          "name": "formatDuration",
+          "line": 2457
+        },
+        {
+          "name": "formatDateTime",
+          "line": 2462
+        },
+        {
+          "name": "formatCheckInDate",
+          "line": 2466
+        },
+        {
+          "name": "compactSessionDate",
+          "line": 2470
+        },
+        {
+          "name": "formatTime",
+          "line": 2474
+        },
+        {
+          "name": "formatSteps",
+          "line": 2478
+        },
+        {
+          "name": "formatCompactSteps",
+          "line": 2481
+        },
+        {
+          "name": "formatStepSyncedTime",
+          "line": 2486
+        },
+        {
+          "name": "stepBarHeight",
+          "line": 2493
+        },
+        {
+          "name": "sourceLabel",
+          "line": 2498
+        },
+        {
+          "name": "qualityLabel",
+          "line": 2507
+        },
+        {
+          "name": "modeLabel",
+          "line": 2515
+        },
+        {
+          "name": "adviceLevelLabel",
+          "line": 2518
+        },
+        {
+          "name": "reviewStatusLabel",
+          "line": 2526
+        },
+        {
+          "name": "snapshotSummary",
+          "line": 2534
+        },
+        {
+          "name": "createDefaultPolicy",
+          "line": 2541
+        },
+        {
+          "name": "createVitalSnapshot",
+          "line": 2571
+        },
+        {
+          "name": "buildSeedCheckIns",
+          "line": 2595
+        },
+        {
+          "name": "buildSeedDailySteps",
+          "line": 2607
+        },
+        {
+          "name": "migrateDailyStepRecords",
+          "line": 2625
+        },
+        {
+          "name": "upsertDailyStepRecord",
+          "line": 2670
+        },
+        {
+          "name": "createDefaultTeamState",
+          "line": 2676
+        },
+        {
+          "name": "createDefaultBuddyState",
+          "line": 2686
+        },
+        {
+          "name": "calculateStreak",
+          "line": 2697
+        },
+        {
+          "name": "buildCalendarCells",
+          "line": 2708
+        },
+        {
+          "name": "migrateCheckIns",
+          "line": 2736
+        },
+        {
+          "name": "chooseMode",
+          "line": 2755
+        },
+        {
+          "name": "backToMode",
+          "line": 2765
+        },
+        {
+          "name": "bindPatient",
+          "line": 2770
+        },
+        {
+          "name": "enterApp",
+          "line": 2782
+        },
+        {
+          "name": "switchMode",
+          "line": 2788
+        },
+        {
+          "name": "setHealthGoal",
+          "line": 2797
+        },
+        {
+          "name": "syncPublicProfileDraft",
+          "line": 2801
+        },
+        {
+          "name": "setPublicBirthDate",
+          "line": 2809
+        },
+        {
+          "name": "savePublicProfile",
+          "line": 2813
+        },
+        {
+          "name": "goDetail",
+          "line": 2834
+        },
+        {
+          "name": "closeDetail",
+          "line": 2841
+        },
+        {
+          "name": "switchNav",
+          "line": 2866
+        },
+        {
+          "name": "openGarden",
+          "line": 2869
+        },
+        {
+          "name": "setGardenSection",
+          "line": 2873
+        },
+        {
+          "name": "onPrescriptionSlide",
+          "line": 2876
+        },
+        {
+          "name": "focusFirstIncompletePrescription",
+          "line": 2883
+        },
+        {
+          "name": "toggleCategory",
+          "line": 2889
+        },
+        {
+          "name": "chooseSelfDirected",
+          "line": 2894
+        },
+        {
+          "name": "startSelfSelected",
+          "line": 2900
+        },
+        {
+          "name": "startPrescriptionTask",
+          "line": 2905
+        },
+        {
+          "name": "openSocial",
+          "line": 2918
+        },
+        {
+          "name": "openKnowledgeItem",
+          "line": 2923
+        },
+        {
+          "name": "openSession",
+          "line": 2929
+        },
+        {
+          "name": "openLatestReport",
+          "line": 2934
+        },
+        {
+          "name": "openTrainingReports",
+          "line": 2942
+        },
+        {
+          "name": "shiftCalendarMonth",
+          "line": 2945
+        },
+        {
+          "name": "resetTraining",
+          "line": 2952
+        },
+        {
+          "name": "selectExercise",
+          "line": 2973
+        },
+        {
+          "name": "startTraining",
+          "line": 2982
+        },
+        {
+          "name": "skipPre",
+          "line": 2996
+        },
+        {
+          "name": "skipPost",
+          "line": 3000
+        },
+        {
+          "name": "startTimer",
+          "line": 3004
+        },
+        {
+          "name": "syncCourseElapsed",
+          "line": 3016
+        },
+        {
+          "name": "initializeLiveVitals",
+          "line": 3032
+        },
+        {
+          "name": "updateLiveVitals",
+          "line": 3041
+        },
+        {
+          "name": "stopTimer",
+          "line": 3057
+        },
+        {
+          "name": "toggleTraining",
+          "line": 3061
+        },
+        {
+          "name": "recordRep",
+          "line": 3065
+        },
+        {
+          "name": "recordBeat",
+          "line": 3070
+        },
+        {
+          "name": "finishTraining",
+          "line": 3079
+        },
+        {
+          "name": "stopTraining",
+          "line": 3100
+        },
+        {
+          "name": "stopBeforeStart",
+          "line": 3110
+        },
+        {
+          "name": "setPreDiscomfortScore",
+          "line": 3116
+        },
+        {
+          "name": "reportPrecheckDiscomfort",
+          "line": 3119
+        },
+        {
+          "name": "readPreVitalsFromDevice",
+          "line": 3123
+        },
+        {
+          "name": "chooseManualPreVitals",
+          "line": 3145
+        },
+        {
+          "name": "setManualPreVital",
+          "line": 3160
+        },
+        {
+          "name": "updatePreSymptoms",
+          "line": 3178
+        },
+        {
+          "name": "setSnapshotBorg",
+          "line": 3181
+        },
+        {
+          "name": "setPostFeeling",
+          "line": 3185
+        },
+        {
+          "name": "simulateVitalSync",
+          "line": 3188
+        },
+        {
+          "name": "useManualSnapshot",
+          "line": 3198
+        },
+        {
+          "name": "snapshotReady",
+          "line": 3210
+        },
+        {
+          "name": "autoCheckInCoreExercise",
+          "line": 3250
+        },
+        {
+          "name": "resultItems",
+          "line": 3275
+        },
+        {
+          "name": "buildAssessment",
+          "line": 3300
+        },
+        {
+          "name": "buildAdvice",
+          "line": 3334
+        },
+        {
+          "name": "generateReport",
+          "line": 3476
+        },
+        {
+          "name": "setPolicyMode",
+          "line": 3574
+        },
+        {
+          "name": "setPolicyField",
+          "line": 3582
+        },
+        {
+          "name": "publishPolicy",
+          "line": 3596
+        },
+        {
+          "name": "seedScenario",
+          "line": 3616
+        },
+        {
+          "name": "reviewForAdvice",
+          "line": 3684
+        },
+        {
+          "name": "adviceForReview",
+          "line": 3687
+        },
+        {
+          "name": "resolveReview",
+          "line": 3690
+        },
+        {
+          "name": "simulateDeviceConnect",
+          "line": 3699
+        },
+        {
+          "name": "saveManualSteps",
+          "line": 3721
+        },
+        {
+          "name": "createDemoTeam",
+          "line": 3748
+        },
+        {
+          "name": "joinTeamByCode",
+          "line": 3758
+        },
+        {
+          "name": "joinDemoTeam",
+          "line": 3765
+        },
+        {
+          "name": "applyDemoTeam",
+          "line": 3773
+        },
+        {
+          "name": "remindTeamMember",
+          "line": 3779
+        },
+        {
+          "name": "setBuddyCycle",
+          "line": 3787
+        },
+        {
+          "name": "connectDemoBuddy",
+          "line": 3791
+        },
+        {
+          "name": "applyDemoBuddy",
+          "line": 3800
+        },
+        {
+          "name": "remindBuddy",
+          "line": 3806
+        },
+        {
+          "name": "focusMemUnlock",
+          "line": 3811
+        },
+        {
+          "name": "unlockMem",
+          "line": 3814
+        },
+        {
+          "name": "convertPoints",
+          "line": 3828
+        },
+        {
+          "name": "canRedeem",
+          "line": 3834
+        },
+        {
+          "name": "confirmRedeem",
+          "line": 3839
+        },
+        {
+          "name": "redeemReward",
+          "line": 3849
+        },
+        {
+          "name": "calculateMemChallengeDays",
+          "line": 3867
+        },
+        {
+          "name": "evaluateMemChallenge",
+          "line": 3889
+        },
+        {
+          "name": "normalizePublicHealthProfile",
+          "line": 3903
+        },
+        {
+          "name": "persistState",
+          "line": 3923
+        },
+        {
+          "name": "resetPrototype",
+          "line": 3948
+        }
+      ],
+      "views": [
+        "none",
+        "weekly-path",
+        "exercise-category",
+        "precheck",
+        "training",
+        "postcheck",
+        "session-report",
+        "garden",
+        "training-reports",
+        "social-hub",
+        "devices",
+        "health-archive",
+        "reward-store",
+        "prototype-policy",
+        "doctor-reviews",
+        "knowledge-article",
+        "knowledge-video"
+      ],
+      "sha256": "46d988ae80d72d5a43812d9087c54f35919133531d809a2060635a00aa333501"
+    },
+    {
+      "file": "src/shime-uni.d.ts",
+      "anchors": [],
+      "handlers": [],
+      "fields": [],
+      "functions": [],
+      "views": [],
+      "sha256": "762f1710ff5f9351e4840d0e609277d603ca3ca620b49161d793f73ee0c46c46"
+    }
+  ],
+  "assets": [
+    {
+      "file": "src/static/backgrounds/card-switch-v1/baduanjin-cute-v2.png",
+      "bytes": 2022497
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/baduanjin-premium-v1.png",
+      "bytes": 2179586
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/resistance-cute-v2.png",
+      "bytes": 2091082
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/resistance-premium-v1.png",
+      "bytes": 2377196
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/singing-cute-v2.png",
+      "bytes": 2126319
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/singing-premium-v1.png",
+      "bytes": 2244259
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/unified-health-island-v3.png",
+      "bytes": 1662531
+    },
+    {
+      "file": "src/static/frames/baduanjin/01.png",
+      "bytes": 358440
+    },
+    {
+      "file": "src/static/frames/baduanjin/02.png",
+      "bytes": 360513
+    },
+    {
+      "file": "src/static/frames/baduanjin/03.png",
+      "bytes": 362986
+    },
+    {
+      "file": "src/static/frames/baduanjin/04.png",
+      "bytes": 357226
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/01.png",
+      "bytes": 288239
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/02.png",
+      "bytes": 282423
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/03.png",
+      "bytes": 273558
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/04.png",
+      "bytes": 282171
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/05.png",
+      "bytes": 282027
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/06.png",
+      "bytes": 299519
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/07.png",
+      "bytes": 294544
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/08.png",
+      "bytes": 282035
+    },
+    {
+      "file": "src/static/frames/horse-stance/01.png",
+      "bytes": 359015
+    },
+    {
+      "file": "src/static/frames/horse-stance/02.png",
+      "bytes": 371543
+    },
+    {
+      "file": "src/static/frames/horse-stance/03.png",
+      "bytes": 369309
+    },
+    {
+      "file": "src/static/frames/horse-stance/04.png",
+      "bytes": 361821
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/01.png",
+      "bytes": 255344
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/02.png",
+      "bytes": 236621
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/03.png",
+      "bytes": 260166
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/04.png",
+      "bytes": 253986
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/05.png",
+      "bytes": 253343
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/06.png",
+      "bytes": 243396
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/07.png",
+      "bytes": 255563
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/08.png",
+      "bytes": 258361
+    },
+    {
+      "file": "src/static/frames/singing/01.png",
+      "bytes": 349104
+    },
+    {
+      "file": "src/static/frames/singing/02.png",
+      "bytes": 361905
+    },
+    {
+      "file": "src/static/frames/singing/03.png",
+      "bytes": 356375
+    },
+    {
+      "file": "src/static/frames/singing/04.png",
+      "bytes": 349522
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/01.png",
+      "bytes": 252687
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/02.png",
+      "bytes": 304149
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/03.png",
+      "bytes": 275915
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/04.png",
+      "bytes": 259005
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/05.png",
+      "bytes": 263951
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/06.png",
+      "bytes": 276016
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/07.png",
+      "bytes": 262441
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/08.png",
+      "bytes": 265886
+    },
+    {
+      "file": "src/static/icons/cabbage-checkin.svg",
+      "bytes": 739
+    },
+    {
+      "file": "src/static/icons/garden-cabbage-stage.svg",
+      "bytes": 2055
+    },
+    {
+      "file": "src/static/icons/garden-seed-stage.svg",
+      "bytes": 1888
+    },
+    {
+      "file": "src/static/icons/garden-seedling-stage.svg",
+      "bytes": 2208
+    },
+    {
+      "file": "src/static/icons/magpie-line/README.md",
+      "bytes": 2367
+    },
+    {
+      "file": "src/static/icons/magpie-line/archive.svg",
+      "bytes": 301
+    },
+    {
+      "file": "src/static/icons/magpie-line/assessment.svg",
+      "bytes": 847
+    },
+    {
+      "file": "src/static/icons/magpie-line/assistant.svg",
+      "bytes": 1359
+    },
+    {
+      "file": "src/static/icons/magpie-line/badge.svg",
+      "bytes": 1085
+    },
+    {
+      "file": "src/static/icons/magpie-line/chat.svg",
+      "bytes": 374
+    },
+    {
+      "file": "src/static/icons/magpie-line/device.svg",
+      "bytes": 277
+    },
+    {
+      "file": "src/static/icons/magpie-line/exercise.svg",
+      "bytes": 1464
+    },
+    {
+      "file": "src/static/icons/magpie-line/heart-rate.svg",
+      "bytes": 1075
+    },
+    {
+      "file": "src/static/icons/magpie-line/home.svg",
+      "bytes": 410
+    },
+    {
+      "file": "src/static/icons/magpie-line/knowledge.svg",
+      "bytes": 467
+    },
+    {
+      "file": "src/static/icons/magpie-line/music.svg",
+      "bytes": 367
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/archive.svg",
+      "bytes": 287
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/assessment.svg",
+      "bytes": 847
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/assistant.svg",
+      "bytes": 1344
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/badge.svg",
+      "bytes": 1085
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/chat.svg",
+      "bytes": 374
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/device.svg",
+      "bytes": 277
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/exercise.svg",
+      "bytes": 1449
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/heart-rate.svg",
+      "bytes": 1075
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/home.svg",
+      "bytes": 410
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/knowledge.svg",
+      "bytes": 467
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/profile.svg",
+      "bytes": 744
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/record.svg",
+      "bytes": 360
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/report.svg",
+      "bytes": 427
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/safety.svg",
+      "bytes": 1323
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/sync.svg",
+      "bytes": 1430
+    },
+    {
+      "file": "src/static/icons/magpie-line/profile.svg",
+      "bytes": 744
+    },
+    {
+      "file": "src/static/icons/magpie-line/record.svg",
+      "bytes": 388
+    },
+    {
+      "file": "src/static/icons/magpie-line/report.svg",
+      "bytes": 427
+    },
+    {
+      "file": "src/static/icons/magpie-line/resistance.svg",
+      "bytes": 323
+    },
+    {
+      "file": "src/static/icons/magpie-line/safety.svg",
+      "bytes": 1323
+    },
+    {
+      "file": "src/static/icons/magpie-line/stretch.svg",
+      "bytes": 322
+    },
+    {
+      "file": "src/static/icons/magpie-line/sync.svg",
+      "bytes": 1445
+    },
+    {
+      "file": "src/static/knowledge/videos/cardiac-check-demo.mp4",
+      "bytes": 74661
+    },
+    {
+      "file": "src/static/knowledge/videos/habit-demo.mp4",
+      "bytes": 77216
+    },
+    {
+      "file": "src/static/knowledge/videos/warm-up-demo.mp4",
+      "bytes": 75917
+    },
+    {
+      "file": "src/static/logo.png",
+      "bytes": 4023
+    },
+    {
+      "file": "src/static/overlays/magpie-flight-overlay-v2.png",
+      "bytes": 802036
+    },
+    {
+      "file": "src/static/previews/baduanjin-full-course-poster.jpg",
+      "bytes": 55953
+    },
+    {
+      "file": "src/static/previews/card-switch-v1/showcase-filmstrip-v1.jpg",
+      "bytes": 207449
+    },
+    {
+      "file": "src/static/previews/card-switch-v1/showcase-poster-v1.png",
+      "bytes": 1068574
+    },
+    {
+      "file": "src/static/previews/continuous-v3/baduanjin-filmstrip-v3.jpg",
+      "bytes": 156618
+    },
+    {
+      "file": "src/static/previews/continuous-v3/baduanjin-poster-v3.png",
+      "bytes": 138216
+    },
+    {
+      "file": "src/static/previews/continuous-v3/resistance-filmstrip-v3.jpg",
+      "bytes": 145287
+    },
+    {
+      "file": "src/static/previews/continuous-v3/resistance-poster-v3.png",
+      "bytes": 105149
+    },
+    {
+      "file": "src/static/previews/continuous-v3/singing-filmstrip-v3.jpg",
+      "bytes": 177594
+    },
+    {
+      "file": "src/static/previews/continuous-v3/singing-poster-v3.png",
+      "bytes": 49880
+    },
+    {
+      "file": "src/static/rive/README.md",
+      "bytes": 443
+    },
+    {
+      "file": "src/static/rive-source/v3/asset-index.json",
+      "bytes": 8995
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/girl-rig-atlas-v3-clean.png",
+      "bytes": 583908
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/girl-rig-atlas-v3.png",
+      "bytes": 732741
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/magpie-rig-atlas-v3-clean.png",
+      "bytes": 374776
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/magpie-rig-atlas-v3.png",
+      "bytes": 493173
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/woman-rig-atlas-v3-clean.png",
+      "bytes": 493549
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/woman-rig-atlas-v3.png",
+      "bytes": 612979
+    },
+    {
+      "file": "src/static/rive-source/v3/binding-map.json",
+      "bytes": 6075
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/01-head_base.png",
+      "bytes": 44342
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/02-beanie.png",
+      "bytes": 66522
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/03-hair_front.png",
+      "bytes": 44831
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/04-face_features.png",
+      "bytes": 21833
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/05-torso.png",
+      "bytes": 63688
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/06-upper_arm_left.png",
+      "bytes": 23257
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/07-forearm_left.png",
+      "bytes": 21312
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/08-upper_arm_right.png",
+      "bytes": 22132
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/09-forearm_right.png",
+      "bytes": 19536
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/10-thigh_left.png",
+      "bytes": 30505
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/11-shin_left.png",
+      "bytes": 24693
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/12-thigh_right.png",
+      "bytes": 31329
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/13-shin_right.png",
+      "bytes": 26941
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/14-braid_left.png",
+      "bytes": 41614
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/15-braid_right.png",
+      "bytes": 41167
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/16-green_side_panel.png",
+      "bytes": 24988
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/01-body_shell.png",
+      "bytes": 79830
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/02-face_patch.png",
+      "bytes": 27120
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/03-eye_left.png",
+      "bytes": 17472
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/04-eye_right.png",
+      "bytes": 18601
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/05-beak_upper.png",
+      "bytes": 11798
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/06-beak_lower.png",
+      "bytes": 9396
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/07-wing_left.png",
+      "bytes": 44510
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/08-wing_right.png",
+      "bytes": 43883
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/09-foot_left.png",
+      "bytes": 13463
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/10-foot_right.png",
+      "bytes": 13332
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/11-tail_upper.png",
+      "bytes": 28382
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/12-tail_lower.png",
+      "bytes": 21897
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/13-eyelid_left.png",
+      "bytes": 4712
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/14-eyelid_right.png",
+      "bytes": 4531
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/15-wing_highlight.png",
+      "bytes": 11647
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/16-empty.png",
+      "bytes": 68
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/01-head_base.png",
+      "bytes": 35413
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/02-hair_back.png",
+      "bytes": 49717
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/03-hair_front.png",
+      "bytes": 40103
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/04-face_features.png",
+      "bytes": 11422
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/05-torso.png",
+      "bytes": 64882
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/06-upper_arm_left.png",
+      "bytes": 24178
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/07-forearm_left.png",
+      "bytes": 27295
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/08-upper_arm_right.png",
+      "bytes": 24198
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/09-forearm_right.png",
+      "bytes": 24433
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/10-thigh_left.png",
+      "bytes": 26864
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/11-shin_left.png",
+      "bytes": 25944
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/12-thigh_right.png",
+      "bytes": 29119
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/13-shin_right.png",
+      "bytes": 25540
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/14-hand_alt_left.png",
+      "bytes": 17379
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/15-hand_alt_right.png",
+      "bytes": 18172
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/16-brooch.png",
+      "bytes": 10471
+    },
+    {
+      "file": "src/static/rive-source/v3/rig-blueprint.json",
+      "bytes": 7663
+    },
+    {
+      "file": "src/static/rive-source/v4/README.md",
+      "bytes": 5213
+    },
+    {
+      "file": "src/static/rive-source/v4/eye-module-spec.json",
+      "bytes": 1006
+    },
+    {
+      "file": "src/static/rive-source/v4/master/magpie-neutral-master-v4.png",
+      "bytes": 864856
+    },
+    {
+      "file": "src/static/rive-source/v4/motion-machine-contract.json",
+      "bytes": 979
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/beak.png",
+      "bytes": 32581
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/body_core.png",
+      "bytes": 434423
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/foot_L.png",
+      "bytes": 18163
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/foot_R.png",
+      "bytes": 18924
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/rig-parts-manifest.json",
+      "bytes": 3015
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/tail_lower.png",
+      "bytes": 94176
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/tail_upper.png",
+      "bytes": 120239
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/wing_far.png",
+      "bytes": 46459
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/wing_near.png",
+      "bytes": 152160
+    },
+    {
+      "file": "src/static/rive-source/v4/parts-manifest.json",
+      "bytes": 1484
+    },
+    {
+      "file": "src/static/rive-source/v4/previews/magpie-cut-rig-parts-v4.png",
+      "bytes": 287445
+    },
+    {
+      "file": "src/static/rive-source/v4/rive-session-structure.json",
+      "bytes": 1388
+    },
+    {
+      "file": "src/static/rive-source/v4/vector/magpie-eye-module-v4.svg",
+      "bytes": 2784
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/01.png",
+      "bytes": 180351
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/02.png",
+      "bytes": 183896
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/03.png",
+      "bytes": 183154
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/04.png",
+      "bytes": 182920
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/05.png",
+      "bytes": 183625
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/06.png",
+      "bytes": 178302
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/07.png",
+      "bytes": 179209
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/08.png",
+      "bytes": 180042
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin-sprite-sheet-v3.png",
+      "bytes": 1262555
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/01.png",
+      "bytes": 186987
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/02.png",
+      "bytes": 186788
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/03.png",
+      "bytes": 180010
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/04.png",
+      "bytes": 198581
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/05.png",
+      "bytes": 192725
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/06.png",
+      "bytes": 184663
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/07.png",
+      "bytes": 180643
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/08.png",
+      "bytes": 189555
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance-sprite-sheet-v3.png",
+      "bytes": 1425413
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/01.png",
+      "bytes": 166809
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/02.png",
+      "bytes": 172489
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/03.png",
+      "bytes": 187084
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/04.png",
+      "bytes": 168327
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/05.png",
+      "bytes": 155582
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/06.png",
+      "bytes": 175220
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/07.png",
+      "bytes": 168023
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/08.png",
+      "bytes": 180250
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing-sprite-sheet-v3.png",
+      "bytes": 1196290
+    },
+    {
+      "file": "src/static/storyboards/baduanjin-cinematic-v2.png",
+      "bytes": 2260630
+    },
+    {
+      "file": "src/static/storyboards/baduanjin-storyboard.png",
+      "bytes": 1142756
+    },
+    {
+      "file": "src/static/storyboards/horse-stance-storyboard.png",
+      "bytes": 1157765
+    },
+    {
+      "file": "src/static/storyboards/resistance-cinematic-v2.png",
+      "bytes": 2012984
+    },
+    {
+      "file": "src/static/storyboards/singing-cinematic-v2.png",
+      "bytes": 2148789
+    },
+    {
+      "file": "src/static/storyboards/singing-storyboard.png",
+      "bytes": 1115759
+    },
+    {
+      "file": "src/static/videos/baduanjin-full-course-mobile.mp4",
+      "bytes": 40426298
+    },
+    {
+      "file": "src/static/videos/card-switch-showcase-v1.wav",
+      "bytes": 3034124
+    },
+    {
+      "file": "src/static/videos/magpie-baduanjin-cinematic-v2.mp4",
+      "bytes": 1008682
+    },
+    {
+      "file": "src/static/videos/magpie-baduanjin-continuous-v3.mp4",
+      "bytes": 550543
+    },
+    {
+      "file": "src/static/videos/magpie-baduanjin.mp4",
+      "bytes": 212130
+    },
+    {
+      "file": "src/static/videos/magpie-card-switch-showcase-cute-v2.mp4",
+      "bytes": 3765958
+    },
+    {
+      "file": "src/static/videos/magpie-card-switch-showcase-v1.mp4",
+      "bytes": 3765958
+    },
+    {
+      "file": "src/static/videos/magpie-horse-stance.mp4",
+      "bytes": 243651
+    },
+    {
+      "file": "src/static/videos/magpie-resistance-cinematic-v2.mp4",
+      "bytes": 687921
+    },
+    {
+      "file": "src/static/videos/magpie-resistance-continuous-v3.mp4",
+      "bytes": 474777
+    },
+    {
+      "file": "src/static/videos/magpie-singing-cinematic-v2.mp4",
+      "bytes": 773649
+    },
+    {
+      "file": "src/static/videos/magpie-singing-continuous-v3.mp4",
+      "bytes": 411587
+    },
+    {
+      "file": "src/static/videos/magpie-singing.mp4",
+      "bytes": 253069
+    }
+  ],
+  "references": [
+    {
+      "image": "01-今日首页.png",
+      "view": "today",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "02-运动前检查.png",
+      "view": "precheck",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "03-动作跟练.png",
+      "view": "training/active",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "04-本次运动报告.png",
+      "view": "session-report",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "05-康复小报告.png",
+      "view": "hospital-report",
+      "classification": "rebuild_interaction"
+    },
+    {
+      "image": "06-训练报告中心.png",
+      "view": "training-reports",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "07-选择使用方式.png",
+      "view": "onboarding/mode",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "08-关联康复计划.png",
+      "view": "onboarding/binding",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "09-运动选择.png",
+      "view": "exercise-category",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "10-运动后状态.png",
+      "view": "postcheck",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "11-小喜健康助手.png",
+      "view": "assistant",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "12-康复资讯.png",
+      "view": "discover",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "13-知识文章.png",
+      "view": "knowledge-article",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "14-知识视频.png",
+      "view": "knowledge-video",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "15-训练数据.png",
+      "view": "data",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "16-个人中心.png",
+      "view": "profile",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "17-健康档案.png",
+      "view": "health-archive",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "18-设备与数据来源.png",
+      "view": "devices",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "19-本周运动路径.png",
+      "view": "weekly-path",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "20-运动小菜园-成长.png",
+      "view": "garden/growth",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "21-运动小菜园-打卡.png",
+      "view": "garden/checkin",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "22-健康小队.png",
+      "view": "social-hub/team",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "23-健康搭子.png",
+      "view": "social-hub/buddy",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "24-健康积分与权益.png",
+      "view": "reward-store",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "25-训练状态策略.png",
+      "view": "prototype-policy",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "26-医生审核队列.png",
+      "view": "doctor-reviews",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "27-安全停止提示.png",
+      "view": "training/stop-modal",
+      "classification": "inherit_layout"
+    },
+    {
+      "image": "28-训练暂停状态.png",
+      "view": "training/paused",
+      "classification": "inherit_layout"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-09-07T00:15:21.791Z",
+  "environment": "Chrome H5 http://127.0.0.1:4173/, 390×844, isolated local data",
+  "results": [
+    {
+      "name": "首次Tab与边界弹窗焦点闭环",
+      "status": "PASS",
+      "actual": "首个Tab到日常运动；边界弹窗初始/正反Tab均留在关闭按钮，背景inert；Escape关闭并恢复触发器和滚动。"
+    },
+    {
+      "name": "患者绑定与四处方键盘轮播",
+      "status": "PASS",
+      "actual": "患者输入Enter匹配，Space/Enter入口有效；4卡左右/Home/End有边界，3张非当前卡inert且不进入Tab序列，Tab到当前卡开始按钮。"
+    },
+    {
+      "name": "开关键盘与策略发布隔离",
+      "status": "PASS",
+      "actual": "6字段开关Space改变、Enter恢复，aria-checked同步；未点击发布，已发布版本/字段完全不变。"
+    },
+    {
+      "name": "前后评分键盘与暂停单次触发",
+      "status": "PASS",
+      "actual": "前评分0—10方向/Home/End有界；缺设备仍禁用；Enter长按不重复切换暂停，暂停计时冻结；后Borg=9写入原报告快照。"
+    },
+    {
+      "name": "安全停止弹窗陷阱恢复与停止记录",
+      "status": "PASS",
+      "actual": "安全弹窗默认聚焦返回，不默认执行危险动作；7次Tab不逃逸，Escape保持训练并回焦点；确认停止保留stopped且不增加积分/打卡，背景锁释放。"
+    },
+    {
+      "name": "兑换原生弹窗取消与一次确认",
+      "status": "PASS",
+      "actual": "原uni.showModal默认取消；打开弹窗的Enter松键不扣分/不新增兑换，Escape不扣分，Tab确认并长按Enter只兑换一次，500→450且新增1条记录。"
+    },
+    {
+      "name": "出生日期键盘输入保存与原校验",
+      "status": "PASS",
+      "actual": "原指针日期选择器实际打开/取消且背景锁释放；H5聚焦时显示原生日期输入，保存同一publicHealthProfile字段；未来日期被原保存校验拒绝，旧值不变。"
+    },
+    {
+      "name": "原禁用社交入口键盘不可激活",
+      "status": "PASS",
+      "actual": "两个原业务禁用入口不在Tab序列；即使程序聚焦后按Enter/空格也不进入社交页，不改变开放状态。"
+    }
+  ],
+  "errors": [],
+  "notProven": [
+    "native mini-program/App keyboard and screen reader",
+    "all focus order combinations",
+    "mobile soft keyboard",
+    "full WCAG certification"
+  ]
+}

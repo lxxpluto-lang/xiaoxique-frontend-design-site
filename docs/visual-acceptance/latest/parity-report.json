@@ -1,0 +1,156 @@
+{
+  "generatedAt": "2026-09-07T00:14:10.792Z",
+  "baselineCommit": "c1b56ff43a94c0e7e096bb80f0f19f998673a48c",
+  "baselineWorktree": "clean",
+  "oldAnchors": 83,
+  "newAnchors": 182,
+  "missingAnchors": [],
+  "oldFunctionCount": 123,
+  "newFunctionCount": 123,
+  "missingFunctions": [],
+  "changedFunctions": [
+    "closeDetail"
+  ],
+  "missingAssets": [],
+  "changedAssets": [],
+  "unchangedCore": [
+    {
+      "file": "src/lib/prototype-data.ts",
+      "unchanged": true
+    },
+    {
+      "file": "src/lib/shared-patient.ts",
+      "unchanged": true
+    },
+    {
+      "file": "src/lib/rive-motion.ts",
+      "unchanged": true
+    },
+    {
+      "file": "src/pages.json",
+      "unchanged": true
+    },
+    {
+      "file": "src/manifest.json",
+      "unchanged": true
+    },
+    {
+      "file": "package.json",
+      "unchanged": true
+    }
+  ],
+  "runtimeImages": [
+    {
+      "name": "01-今日首页.png",
+      "present": true
+    },
+    {
+      "name": "02-运动前检查.png",
+      "present": true
+    },
+    {
+      "name": "03-动作跟练.png",
+      "present": true
+    },
+    {
+      "name": "04-本次运动报告.png",
+      "present": true
+    },
+    {
+      "name": "05-康复小报告.png",
+      "present": true
+    },
+    {
+      "name": "06-训练报告中心.png",
+      "present": true
+    },
+    {
+      "name": "07-选择使用方式.png",
+      "present": true
+    },
+    {
+      "name": "08-关联康复计划.png",
+      "present": true
+    },
+    {
+      "name": "09-运动选择.png",
+      "present": true
+    },
+    {
+      "name": "10-运动后状态.png",
+      "present": true
+    },
+    {
+      "name": "11-小喜健康助手.png",
+      "present": true
+    },
+    {
+      "name": "12-康复资讯.png",
+      "present": true
+    },
+    {
+      "name": "13-知识文章.png",
+      "present": true
+    },
+    {
+      "name": "14-知识视频.png",
+      "present": true
+    },
+    {
+      "name": "15-训练数据.png",
+      "present": true
+    },
+    {
+      "name": "16-个人中心.png",
+      "present": true
+    },
+    {
+      "name": "17-健康档案.png",
+      "present": true
+    },
+    {
+      "name": "18-设备与数据来源.png",
+      "present": true
+    },
+    {
+      "name": "19-本周运动路径.png",
+      "present": true
+    },
+    {
+      "name": "20-运动小菜园-成长.png",
+      "present": true
+    },
+    {
+      "name": "21-运动小菜园-打卡.png",
+      "present": true
+    },
+    {
+      "name": "22-健康小队.png",
+      "present": true
+    },
+    {
+      "name": "23-健康搭子.png",
+      "present": true
+    },
+    {
+      "name": "24-健康积分与权益.png",
+      "present": true
+    },
+    {
+      "name": "25-训练状态策略.png",
+      "present": true
+    },
+    {
+      "name": "26-医生审核队列.png",
+      "present": true
+    },
+    {
+      "name": "27-安全停止提示.png",
+      "present": true
+    },
+    {
+      "name": "28-训练暂停状态.png",
+      "present": true
+    }
+  ]
+}

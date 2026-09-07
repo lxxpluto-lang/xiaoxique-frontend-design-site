@@ -1,0 +1,1055 @@
+[
+  {
+    "name": "knowledge-video-reference",
+    "url": "/static/replica-v7/knowledge-video-reference.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/14-知识视频-image2-v7.png",
+    "crop": {
+      "left": 30,
+      "top": 142,
+      "width": 812,
+      "height": 1490
+    },
+    "transparent": false,
+    "sha256": "28092e87dda2bd187db4b0e25ddcf2612d1abf9110a537d45aa1f35b86312bfb"
+  },
+  {
+    "name": "data-time-icon",
+    "url": "/static/replica-v7/data-time-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 123,
+      "top": 130,
+      "width": 73,
+      "height": 68
+    },
+    "transparent": false,
+    "sha256": "703a1f46aee46ec5724e3feeea676087a1000abd7cbdd10f75fdf44f498e1ab5"
+  },
+  {
+    "name": "data-completed-icon",
+    "url": "/static/replica-v7/data-completed-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 393,
+      "top": 130,
+      "width": 72,
+      "height": 68
+    },
+    "transparent": false,
+    "sha256": "1294eec8a79e9005da92b4f8debbf879c40454b7c0e00d0cf344703089c3f401"
+  },
+  {
+    "name": "data-streak-icon",
+    "url": "/static/replica-v7/data-streak-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 664,
+      "top": 130,
+      "width": 70,
+      "height": 68
+    },
+    "transparent": false,
+    "sha256": "9fc11a573cf6c6d476d08215cfd9f73f768be3f5fe5e069c4162d838b0f80049"
+  },
+  {
+    "name": "data-heart-icon",
+    "url": "/static/replica-v7/data-heart-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 76,
+      "top": 1114,
+      "width": 72,
+      "height": 73
+    },
+    "transparent": false,
+    "sha256": "ef51c752d998b00724b6af274d857750916cea0b141ac00af8dd2a2666b6c69c"
+  },
+  {
+    "name": "data-oxygen-icon",
+    "url": "/static/replica-v7/data-oxygen-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 463,
+      "top": 1114,
+      "width": 73,
+      "height": 73
+    },
+    "transparent": false,
+    "sha256": "ec2f455136fbac9234c9dddd4d01907179193a95c757e5574af2c84992448a35"
+  },
+  {
+    "name": "garden-calendar-icon",
+    "url": "/static/replica-v7/garden-calendar-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 126,
+      "top": 1404,
+      "width": 72,
+      "height": 77
+    },
+    "transparent": false,
+    "sha256": "1b7f57592cd9145ccd70cc13bd2d6ecaa863136deb1b6c782ba940e487ddd0a5"
+  },
+  {
+    "name": "garden-exercise-icon",
+    "url": "/static/replica-v7/garden-exercise-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 386,
+      "top": 1404,
+      "width": 76,
+      "height": 77
+    },
+    "transparent": false,
+    "sha256": "7381e1b8806754eb3349be5d14cc142cf24668fbcf89a141e05f27be2430772e"
+  },
+  {
+    "name": "garden-shield-icon",
+    "url": "/static/replica-v7/garden-shield-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 641,
+      "top": 1404,
+      "width": 76,
+      "height": 77
+    },
+    "transparent": false,
+    "sha256": "76f723626f1fc04020ccd6989af42e6ab2326e52084c063525b9a88c1be9c726"
+  },
+  {
+    "name": "garden-check-icon",
+    "url": "/static/replica-v7/garden-check-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 79,
+      "top": 1188,
+      "width": 143,
+      "height": 128
+    },
+    "transparent": true,
+    "sha256": "0ae451b2b93bc6453bc5e203a49808bb816c80457b4979d6b28d0fd145ef06a8"
+  },
+  {
+    "name": "welcome",
+    "url": "/static/replica-v7/welcome.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/01-今日-image2-v7.png",
+    "crop": {
+      "left": 38,
+      "top": 106,
+      "width": 160,
+      "height": 162
+    },
+    "transparent": true,
+    "sha256": "d7c4ffbb3def6e19433ec0b8650a15babf91895d4a15340a02736496f35b0dad"
+  },
+  {
+    "name": "baduanjin",
+    "url": "/static/replica-v7/baduanjin.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/01-今日-image2-v7.png",
+    "crop": {
+      "left": 467,
+      "top": 666,
+      "width": 346,
+      "height": 407
+    },
+    "transparent": false,
+    "sha256": "fe8dd941e2814aef2d9c068aaf00b2495b4a89a9c1c6b85d04f92b5de30af583"
+  },
+  {
+    "name": "walking",
+    "url": "/static/replica-v7/walking.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/01-今日-image2-v7.png",
+    "crop": {
+      "left": 49,
+      "top": 1440,
+      "width": 175,
+      "height": 215
+    },
+    "transparent": false,
+    "sha256": "13d7c989c7a0f7ffe8fd8a39e9bdb23420a5ac1af5ca4a6dd0cd70cdff135ab0"
+  },
+  {
+    "name": "stretch",
+    "url": "/static/replica-v7/stretch.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/01-今日-image2-v7.png",
+    "crop": {
+      "left": 246,
+      "top": 1440,
+      "width": 173,
+      "height": 215
+    },
+    "transparent": false,
+    "sha256": "fd440ce9074f841e4b7cde33d9fd01d089c15181e9d86c6b969cd3f06bc4f698"
+  },
+  {
+    "name": "resistance",
+    "url": "/static/replica-v7/resistance.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/01-今日-image2-v7.png",
+    "crop": {
+      "left": 449,
+      "top": 1437,
+      "width": 173,
+      "height": 218
+    },
+    "transparent": false,
+    "sha256": "bf637f1237a8efa82975d43c7c2a0d0b99f73704278c4850296d87ce41957b07"
+  },
+  {
+    "name": "balance",
+    "url": "/static/replica-v7/balance.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/01-今日-image2-v7.png",
+    "crop": {
+      "left": 648,
+      "top": 1434,
+      "width": 163,
+      "height": 221
+    },
+    "transparent": false,
+    "sha256": "91ead6a4411c8089178d21fb7973cbc7b8bc0e72c26ae265e259871273641835"
+  },
+  {
+    "name": "report-bird",
+    "url": "/static/replica-v7/report-bird.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 42,
+      "top": 376,
+      "width": 177,
+      "height": 210
+    },
+    "transparent": true,
+    "sha256": "e14a11c74fcb40a215599e493151e5220aaa9514226c4bbbfb45a264d90c8bed"
+  },
+  {
+    "name": "trend-icon",
+    "url": "/static/replica-v7/trend-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 79,
+      "top": 604,
+      "width": 104,
+      "height": 102
+    },
+    "transparent": false,
+    "sha256": "31c2bcb6af09694214227720d9efea5450684202ed84d6017dfc7b649e8ba5ed"
+  },
+  {
+    "name": "nutrition-icon",
+    "url": "/static/replica-v7/nutrition-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 81,
+      "top": 716,
+      "width": 102,
+      "height": 96
+    },
+    "transparent": false,
+    "sha256": "e11949b52b737906b74c05fc70f8e25f10d2865618246704c9c94b4f6f4c80c1"
+  },
+  {
+    "name": "shoe-icon",
+    "url": "/static/replica-v7/shoe-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/15-训练数据-image2-v7.png",
+    "crop": {
+      "left": 81,
+      "top": 820,
+      "width": 103,
+      "height": 95
+    },
+    "transparent": false,
+    "sha256": "ed1efe64a7e285409abd4278e2b4d0e14020432440f08fc4a8a0c7cabefcc217"
+  },
+  {
+    "name": "patient",
+    "url": "/static/replica-v7/patient.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/16-个人中心-image2-v7.png",
+    "crop": {
+      "left": 73,
+      "top": 190,
+      "width": 184,
+      "height": 269
+    },
+    "transparent": true,
+    "sha256": "5865bd33fdc440a874deeacff5fbe6309ab98b68cfef5c44ba9e6853d08bcba2"
+  },
+  {
+    "name": "archive-icon",
+    "url": "/static/replica-v7/archive-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/16-个人中心-image2-v7.png",
+    "crop": {
+      "left": 81,
+      "top": 1125,
+      "width": 118,
+      "height": 145
+    },
+    "transparent": false,
+    "sha256": "6458120d1a5df8801cf1401d23492e372393015ea1876a7ac0cd1d031ceffa37"
+  },
+  {
+    "name": "device-icon",
+    "url": "/static/replica-v7/device-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/16-个人中心-image2-v7.png",
+    "crop": {
+      "left": 459,
+      "top": 1125,
+      "width": 113,
+      "height": 145
+    },
+    "transparent": false,
+    "sha256": "498242f1800ad6967c81cf6454cf248b28a3291c181390f4b5edf0b896a6cdde"
+  },
+  {
+    "name": "report-icon",
+    "url": "/static/replica-v7/report-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/16-个人中心-image2-v7.png",
+    "crop": {
+      "left": 80,
+      "top": 1362,
+      "width": 115,
+      "height": 145
+    },
+    "transparent": false,
+    "sha256": "cd56ce92d76face6540d7596154af73a7f798b6d4baf220c939f54a4e8665226"
+  },
+  {
+    "name": "gift-icon",
+    "url": "/static/replica-v7/gift-icon.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/16-个人中心-image2-v7.png",
+    "crop": {
+      "left": 464,
+      "top": 1365,
+      "width": 114,
+      "height": 141
+    },
+    "transparent": false,
+    "sha256": "f0cb543ab0616da7e4c588d48636263a71b60706ef8f09bfa1ff5262cbe79889"
+  },
+  {
+    "name": "assistant-clothed",
+    "url": "/static/replica-v7/assistant-clothed.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/11-小喜健康助手-image2-v7.png",
+    "crop": {
+      "left": 489,
+      "top": 128,
+      "width": 345,
+      "height": 305
+    },
+    "transparent": true,
+    "sha256": "407c1ac2ab43c152e6007dc0ec2892355175f8c165874c005692216162ecfa7b"
+  },
+  {
+    "name": "assistant-plan",
+    "url": "/static/replica-v7/assistant-plan.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/11-小喜健康助手-image2-v7.png",
+    "crop": {
+      "left": 52,
+      "top": 549,
+      "width": 321,
+      "height": 410
+    },
+    "transparent": false,
+    "sha256": "7a8dd34cd193cb31e7e1dffdabf4e2da0adf5b59b9764eafc0b22011b417553e"
+  },
+  {
+    "name": "assistant-advice",
+    "url": "/static/replica-v7/assistant-advice.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/11-小喜健康助手-image2-v7.png",
+    "crop": {
+      "left": 547,
+      "top": 1061,
+      "width": 253,
+      "height": 230
+    },
+    "transparent": true,
+    "sha256": "0c7b41af060e9bebf4ab1f146a093c0d6a51edbbb93f5cd06f698e080e0feffd"
+  },
+  {
+    "name": "tree",
+    "url": "/static/replica-v7/tree.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 153,
+      "top": 382,
+      "width": 537,
+      "height": 566
+    },
+    "transparent": true,
+    "sha256": "d23596e39fe00c179562dda2aad4c9ed7e20ad8ffdc5a9cd5b8583868b7ffb65"
+  },
+  {
+    "name": "growth-bird",
+    "url": "/static/replica-v7/growth-bird.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 580,
+      "top": 1173,
+      "width": 157,
+      "height": 156
+    },
+    "transparent": true,
+    "sha256": "1e83b1ab8058b69e0672d49a6f3ad2d56d0fd8aa995d004405c22a7126e7020b"
+  },
+  {
+    "name": "onboarding-flight",
+    "url": "/static/replica-v7/onboarding-flight.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/07-选择使用方式-image2-v7.png",
+    "crop": {
+      "left": 505,
+      "top": 174,
+      "width": 333,
+      "height": 330
+    },
+    "transparent": true,
+    "sha256": "3adf9591767f21332bccad5efd831315e6ff40afebbd28d933616240a716661d"
+  },
+  {
+    "name": "onboarding-logo",
+    "url": "/static/replica-v7/onboarding-logo.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/07-选择使用方式-image2-v7.png",
+    "crop": {
+      "left": 46,
+      "top": 77,
+      "width": 105,
+      "height": 110
+    },
+    "transparent": false,
+    "sha256": "622c98af5b80555e297af30fb14e4d0a134a9266500d92b8af37c3cfa5de75f6"
+  },
+  {
+    "name": "onboarding-shoe",
+    "url": "/static/replica-v7/onboarding-shoe.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/07-选择使用方式-image2-v7.png",
+    "crop": {
+      "left": 69,
+      "top": 702,
+      "width": 249,
+      "height": 249
+    },
+    "transparent": true,
+    "sha256": "ac0b568be63500308077af22e59b738a33522e59f9d9337fed271a41ade3a8aa"
+  },
+  {
+    "name": "onboarding-checklist",
+    "url": "/static/replica-v7/onboarding-checklist.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/07-选择使用方式-image2-v7.png",
+    "crop": {
+      "left": 70,
+      "top": 1156,
+      "width": 245,
+      "height": 261
+    },
+    "transparent": true,
+    "sha256": "2e166ac684f78c3c91922a07887edeac094292cea3607f6d048152f242adc033"
+  },
+  {
+    "name": "binding-flight",
+    "url": "/static/replica-v7/binding-flight.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/08-关联康复计划-image2-v7.png",
+    "crop": {
+      "left": 105,
+      "top": 1063,
+      "width": 275,
+      "height": 304
+    },
+    "transparent": false,
+    "sha256": "89048fce5b68a431184716cdc42bec019d214483b81c0d0c67b59f50d4097289"
+  },
+  {
+    "name": "knowledge-plant",
+    "url": "/static/replica-v7/knowledge-plant.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/12-康复资讯-image2-v7.png",
+    "crop": {
+      "left": 511,
+      "top": 320,
+      "width": 306,
+      "height": 389
+    },
+    "transparent": false,
+    "sha256": "794a6083f2c02efdb5a081c06813d874ca2c1141b567d3777dcb609f17044da1"
+  },
+  {
+    "name": "knowledge-checklist",
+    "url": "/static/replica-v7/knowledge-checklist.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/12-康复资讯-image2-v7.png",
+    "crop": {
+      "left": 46,
+      "top": 902,
+      "width": 170,
+      "height": 162
+    },
+    "transparent": true,
+    "sha256": "d2480792972ebf3b828ee8d2a4b2c442fe148ebf0438b5a225772ff45440365c"
+  },
+  {
+    "name": "knowledge-effort",
+    "url": "/static/replica-v7/knowledge-effort.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/12-康复资讯-image2-v7.png",
+    "crop": {
+      "left": 320,
+      "top": 947,
+      "width": 144,
+      "height": 111
+    },
+    "transparent": true,
+    "sha256": "f25b07ee12fe442558735e5fbbe3dae2838e4fb22a9502ce3a9fa63c27d69acc"
+  },
+  {
+    "name": "knowledge-bird",
+    "url": "/static/replica-v7/knowledge-bird.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/12-康复资讯-image2-v7.png",
+    "crop": {
+      "left": 565,
+      "top": 933,
+      "width": 141,
+      "height": 156
+    },
+    "transparent": true,
+    "sha256": "47c0a288fb3d9c903986c58ea890b21dcc931ef3e8de28b52a7f8a65e7183d16"
+  },
+  {
+    "name": "mini-report-hero",
+    "url": "/static/replica-v7/mini-report-hero.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/05-康复小报告-image2-v7.png",
+    "crop": {
+      "left": 450,
+      "top": 203,
+      "width": 339,
+      "height": 254
+    },
+    "transparent": true,
+    "sha256": "e640e15238ef0577e2a6422737bc3cf6f0506cc0376a0fdd6c514c7e4d3db0c6"
+  },
+  {
+    "name": "mini-diet",
+    "url": "/static/replica-v7/mini-diet.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/05-康复小报告-image2-v7.png",
+    "crop": {
+      "left": 67,
+      "top": 905,
+      "width": 152,
+      "height": 137
+    },
+    "transparent": true,
+    "sha256": "8a859e152109eee4a37c0d605e5a2ad07c4648817c45afd278dec9bb9c91e23c"
+  },
+  {
+    "name": "mini-heart",
+    "url": "/static/replica-v7/mini-heart.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/05-康复小报告-image2-v7.png",
+    "crop": {
+      "left": 65,
+      "top": 1100,
+      "width": 151,
+      "height": 126
+    },
+    "transparent": true,
+    "sha256": "cbc75befbc3d6fccb52c788082b9961015e49e6f96d8b4d851eebf672fbdf5dd"
+  },
+  {
+    "name": "mini-exercise",
+    "url": "/static/replica-v7/mini-exercise.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/05-康复小报告-image2-v7.png",
+    "crop": {
+      "left": 60,
+      "top": 1280,
+      "width": 165,
+      "height": 139
+    },
+    "transparent": true,
+    "sha256": "a954f33638f2b34868546249bb93c6e4c2d4a4e7461851451965e4a21f7d42c1"
+  },
+  {
+    "name": "mini-safety",
+    "url": "/static/replica-v7/mini-safety.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/05-康复小报告-image2-v7.png",
+    "crop": {
+      "left": 63,
+      "top": 1461,
+      "width": 155,
+      "height": 145
+    },
+    "transparent": true,
+    "sha256": "716790930121293b90c91441ab8126775c1e93abfc8d1c79b1fd73642dbaa9c9"
+  },
+  {
+    "name": "article-hero",
+    "url": "/static/replica-v7/article-hero.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/13-知识文章-image2-v7.png",
+    "crop": {
+      "left": 575,
+      "top": 56,
+      "width": 184,
+      "height": 455
+    },
+    "transparent": true,
+    "sha256": "3a0b90ec40f2a76d5b0c0a6532b40de5363097f010a1bf7ef4b4060dc66de714"
+  },
+  {
+    "name": "article-prepare",
+    "url": "/static/replica-v7/article-prepare.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/13-知识文章-image2-v7.png",
+    "crop": {
+      "left": 78,
+      "top": 599,
+      "width": 167,
+      "height": 150
+    },
+    "transparent": true,
+    "sha256": "a143d354a81ed5c7875137809b0522e8412a4f2ccd3d64be3ede4d7a76455434"
+  },
+  {
+    "name": "article-environment",
+    "url": "/static/replica-v7/article-environment.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/13-知识文章-image2-v7.png",
+    "crop": {
+      "left": 80,
+      "top": 875,
+      "width": 162,
+      "height": 147
+    },
+    "transparent": true,
+    "sha256": "1d0d197603a8c9e809efb50e12be42b2a96bb708a3e7686e0cdaf1458796224c"
+  },
+  {
+    "name": "article-feeling",
+    "url": "/static/replica-v7/article-feeling.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/13-知识文章-image2-v7.png",
+    "crop": {
+      "left": 86,
+      "top": 1132,
+      "width": 162,
+      "height": 178
+    },
+    "transparent": true,
+    "sha256": "db189112320da9772d1d00cb9f587bc87ff0e45a2fb68d7aa970deeb43487af6"
+  },
+  {
+    "name": "article-recovery",
+    "url": "/static/replica-v7/article-recovery.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/13-知识文章-image2-v7.png",
+    "crop": {
+      "left": 70,
+      "top": 1383,
+      "width": 175,
+      "height": 170
+    },
+    "transparent": true,
+    "sha256": "a3648183ffb6087442388f539c8ad861cb280842e2fa61b9efe248f32124ef33"
+  },
+  {
+    "name": "selection-clinician",
+    "url": "/static/replica-v7/selection-clinician.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/09-运动选择-image2-v7.png",
+    "crop": {
+      "left": 57,
+      "top": 506,
+      "width": 152,
+      "height": 207
+    },
+    "transparent": true,
+    "sha256": "c64ecd29e201edfad99c729c9b0cad904733811e6b9a0bac74d06cf03f153f80"
+  },
+  {
+    "name": "selection-baduanjin",
+    "url": "/static/replica-v7/selection-baduanjin.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/09-运动选择-image2-v7.png",
+    "crop": {
+      "left": 37,
+      "top": 945,
+      "width": 229,
+      "height": 155
+    },
+    "transparent": false,
+    "sha256": "33cb4463bc714d0a3579ff5ee2b644313a7050651bfcd33281ebe16f56ac8ad4"
+  },
+  {
+    "name": "selection-resistance",
+    "url": "/static/replica-v7/selection-resistance.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/09-运动选择-image2-v7.png",
+    "crop": {
+      "left": 37,
+      "top": 1119,
+      "width": 229,
+      "height": 150
+    },
+    "transparent": false,
+    "sha256": "449de4edb1d07278feadb63b918d2db8ce9686ff0661778ec42d9d8856742cde"
+  },
+  {
+    "name": "selection-walking",
+    "url": "/static/replica-v7/selection-walking.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/09-运动选择-image2-v7.png",
+    "crop": {
+      "left": 37,
+      "top": 1288,
+      "width": 229,
+      "height": 154
+    },
+    "transparent": false,
+    "sha256": "b6be5cb31a78e6988622d7c159158d8679d55c36f7ed705692acc694c1c92ce9"
+  },
+  {
+    "name": "selection-stretch",
+    "url": "/static/replica-v7/selection-stretch.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/09-运动选择-image2-v7.png",
+    "crop": {
+      "left": 37,
+      "top": 1459,
+      "width": 229,
+      "height": 154
+    },
+    "transparent": false,
+    "sha256": "57a7246bc8d07110b5421b481546b4e14ba98cb4fc61d0cce0c8c1f82e39b672"
+  },
+  {
+    "name": "selection-balance",
+    "url": "/static/replica-v7/selection-balance.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/09-运动选择-image2-v7.png",
+    "crop": {
+      "left": 37,
+      "top": 1629,
+      "width": 229,
+      "height": 109
+    },
+    "transparent": false,
+    "sha256": "999254133f67599893a124e8c0bcd89afe83842164949dcd092b92b58f1d646f"
+  },
+  {
+    "name": "archive-person",
+    "url": "/static/replica-v7/archive-person.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/17-健康档案-image2-v7.png",
+    "crop": {
+      "left": 53,
+      "top": 144,
+      "width": 160,
+      "height": 169
+    },
+    "transparent": false,
+    "sha256": "d5d86c43c17ac9fc302e52622361bc502d12a06df0e6ee15c7bc5332b08d1c93"
+  },
+  {
+    "name": "device-watch",
+    "url": "/static/replica-v7/device-watch.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/18-设备与数据来源-image2-v7.png",
+    "crop": {
+      "left": 86,
+      "top": 220,
+      "width": 117,
+      "height": 182
+    },
+    "transparent": true,
+    "sha256": "614b870e01e9948457137c35f0a162afdf7497d1451db38053791b564dde86cb"
+  },
+  {
+    "name": "weekly-leaves",
+    "url": "/static/replica-v7/weekly-leaves.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/19-本周运动路径-image2-v7.png",
+    "crop": {
+      "left": 678,
+      "top": 146,
+      "width": 174,
+      "height": 230
+    },
+    "transparent": true,
+    "sha256": "68ca23589903722f651b8038fb02dcb23333d7153f466fc44d6ba3e3a60a579c"
+  },
+  {
+    "name": "team-people",
+    "url": "/static/replica-v7/team-people.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/22-健康小队-image2-v7.png",
+    "crop": {
+      "left": 368,
+      "top": 146,
+      "width": 466,
+      "height": 280
+    },
+    "transparent": false,
+    "sha256": "049108f60e8c15b9f2a29e7c80c5a1779084dc0c1c446c18ae21fbd68eecc8f1"
+  },
+  {
+    "name": "team-person-0",
+    "url": "/static/replica-v7/team-person-0.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/22-健康小队-image2-v7.png",
+    "crop": {
+      "left": 51,
+      "top": 644,
+      "width": 95,
+      "height": 104
+    },
+    "transparent": false,
+    "sha256": "357a32da6b448880bd3ca792cb85251ad4129db7520c8a18d8e93c0cf4e5e64b"
+  },
+  {
+    "name": "team-person-1",
+    "url": "/static/replica-v7/team-person-1.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/22-健康小队-image2-v7.png",
+    "crop": {
+      "left": 51,
+      "top": 781,
+      "width": 95,
+      "height": 104
+    },
+    "transparent": false,
+    "sha256": "7f3f3dd00eb301b21657e7e70830530ec2026f8e43c27b25f5b5ed5624d84bb8"
+  },
+  {
+    "name": "team-person-2",
+    "url": "/static/replica-v7/team-person-2.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/22-健康小队-image2-v7.png",
+    "crop": {
+      "left": 51,
+      "top": 916,
+      "width": 95,
+      "height": 104
+    },
+    "transparent": false,
+    "sha256": "af840447eb1c9ff0cfa982312600fd6320f1cd8f9d81caeda0708ba04d315588"
+  },
+  {
+    "name": "team-person-3",
+    "url": "/static/replica-v7/team-person-3.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/22-健康小队-image2-v7.png",
+    "crop": {
+      "left": 51,
+      "top": 1051,
+      "width": 95,
+      "height": 104
+    },
+    "transparent": false,
+    "sha256": "d844436cad8bfe4c605f5b9301cf9bfa8c6105aedc70cf6612440751c85c48a0"
+  },
+  {
+    "name": "team-person-4",
+    "url": "/static/replica-v7/team-person-4.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/22-健康小队-image2-v7.png",
+    "crop": {
+      "left": 51,
+      "top": 1180,
+      "width": 95,
+      "height": 104
+    },
+    "transparent": false,
+    "sha256": "54f67a2c4923a307285dbbced2872b282e7fe1345cd0f2b47a65389428e9aca3"
+  },
+  {
+    "name": "buddy-pair",
+    "url": "/static/replica-v7/buddy-pair.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/23-健康搭子-image2-v7.png",
+    "crop": {
+      "left": 65,
+      "top": 568,
+      "width": 711,
+      "height": 312
+    },
+    "transparent": false,
+    "sha256": "5cb2f539bb21213761c23d5b3463188451a4abb94eb2c052aca8f653f76aa106"
+  },
+  {
+    "name": "reward-bird",
+    "url": "/static/replica-v7/reward-bird.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/24-健康积分与权益-image2-v7.png",
+    "crop": {
+      "left": 455,
+      "top": 151,
+      "width": 355,
+      "height": 310
+    },
+    "transparent": true,
+    "sha256": "0d4a10acbbe4897f5835b8630a29cbfefefaf688795038d53ae0c6ef028068e3"
+  },
+  {
+    "name": "reward-book",
+    "url": "/static/replica-v7/reward-book.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/24-健康积分与权益-image2-v7.png",
+    "crop": {
+      "left": 82,
+      "top": 1369,
+      "width": 187,
+      "height": 157
+    },
+    "transparent": true,
+    "sha256": "317ec2a3940877a8487fda2f301b180687c5f9e7c6ad4e426285d909a99aa401"
+  },
+  {
+    "name": "reward-band",
+    "url": "/static/replica-v7/reward-band.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/24-健康积分与权益-image2-v7.png",
+    "crop": {
+      "left": 329,
+      "top": 1372,
+      "width": 197,
+      "height": 151
+    },
+    "transparent": true,
+    "sha256": "8db5cc4e6a82b01e1184f40794395649c3b3464dbed4efc51f810a9d7cb97aab"
+  },
+  {
+    "name": "reward-badge",
+    "url": "/static/replica-v7/reward-badge.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/24-健康积分与权益-image2-v7.png",
+    "crop": {
+      "left": 580,
+      "top": 1365,
+      "width": 180,
+      "height": 166
+    },
+    "transparent": true,
+    "sha256": "6d95560c8a675d89b4b96e0477363a6628365794319a8ea1638a406daf76692f"
+  },
+  {
+    "name": "policy-art",
+    "url": "/static/replica-v7/policy-art.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/25-训练状态策略-image2-v7.png",
+    "crop": {
+      "left": 519,
+      "top": 53,
+      "width": 276,
+      "height": 179
+    },
+    "transparent": true,
+    "sha256": "5efc2491a6da1651c3d0ccb3b6961f7309500bf5665be8dd45fb206b78660507"
+  },
+  {
+    "name": "precheck-art",
+    "url": "/static/replica-v7/precheck-art.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/02-运动前检查-image2-v7.png",
+    "crop": {
+      "left": 573,
+      "top": 891,
+      "width": 225,
+      "height": 185
+    },
+    "transparent": true,
+    "sha256": "392fb116189c56eecd001ff2b609364b5ad6d37bb51eea94154a28917e13c840"
+  },
+  {
+    "name": "postcheck-person",
+    "url": "/static/replica-v7/postcheck-person.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/10-运动后状态-image2-v7.png",
+    "crop": {
+      "left": 589,
+      "top": 350,
+      "width": 224,
+      "height": 218
+    },
+    "transparent": true,
+    "sha256": "478fc734154f5105bf7cf1ec77fd3e2bb862eea29ccc10e81ecff91e66b00d1a"
+  },
+  {
+    "name": "session-bird",
+    "url": "/static/replica-v7/session-bird.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/04-本次运动报告-image2-v7.png",
+    "crop": {
+      "left": 80,
+      "top": 1368,
+      "width": 222,
+      "height": 174
+    },
+    "transparent": true,
+    "sha256": "ca78cb8bd6d2d6b36d5e618df5b34cdabeb4152f2af9756840b124eddbdcef48"
+  },
+  {
+    "name": "session-leaves",
+    "url": "/static/replica-v7/session-leaves.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/04-本次运动报告-image2-v7.png",
+    "crop": {
+      "left": 680,
+      "top": 146,
+      "width": 172,
+      "height": 335
+    },
+    "transparent": true,
+    "sha256": "0479a56e9057ab19b4ae220818df1f7211632c00bb0af67b46344257d90dce02"
+  },
+  {
+    "name": "tree-stage-1",
+    "url": "/static/replica-v7/tree-stage-1.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 47,
+      "top": 979,
+      "width": 83,
+      "height": 87
+    },
+    "transparent": true,
+    "sha256": "ca404cd403a569b07e26cf7b4f059414534319b08985a513b68af47b483e03d3"
+  },
+  {
+    "name": "tree-stage-2",
+    "url": "/static/replica-v7/tree-stage-2.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 160,
+      "top": 979,
+      "width": 83,
+      "height": 87
+    },
+    "transparent": true,
+    "sha256": "d81d255703fa469c7d6e14c601f3bb1b7b15d29f892c872635052747ec193bbb"
+  },
+  {
+    "name": "tree-stage-3",
+    "url": "/static/replica-v7/tree-stage-3.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 271,
+      "top": 979,
+      "width": 83,
+      "height": 87
+    },
+    "transparent": true,
+    "sha256": "fdcc34ea32cc4232c23bed0680fdb8432022b2f144ea956101aec339293312bc"
+  },
+  {
+    "name": "tree-stage-4",
+    "url": "/static/replica-v7/tree-stage-4.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 384,
+      "top": 979,
+      "width": 83,
+      "height": 87
+    },
+    "transparent": true,
+    "sha256": "2e72f5b3c41a21538b4d2b5ea11dd23f46b0c4ae0a594986f0e715969bb8d48c"
+  },
+  {
+    "name": "tree-stage-5",
+    "url": "/static/replica-v7/tree-stage-5.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 493,
+      "top": 979,
+      "width": 83,
+      "height": 87
+    },
+    "transparent": true,
+    "sha256": "adcbb18e6223ea8398c684ab53ec6c79bae66ece2d9c954dd01463f70da89a15"
+  },
+  {
+    "name": "tree-stage-6",
+    "url": "/static/replica-v7/tree-stage-6.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 605,
+      "top": 979,
+      "width": 83,
+      "height": 87
+    },
+    "transparent": true,
+    "sha256": "39d818d81dcd371cddca5bc7cf48af892bf0caa3f02373fbf5a2a5138f1d529d"
+  },
+  {
+    "name": "tree-stage-7",
+    "url": "/static/replica-v7/tree-stage-7.png",
+    "source": "/Users/guagua/Documents/冠心病课题/output/小喜鹊原型升级-20260906/全部28页原型-v7-image2精绘版-20260907/raw-image2-originals/20-运动小菜园-成长-image2-v7.png",
+    "crop": {
+      "left": 715,
+      "top": 979,
+      "width": 83,
+      "height": 87
+    },
+    "transparent": true,
+    "sha256": "c1e2f7e1c49127199565b8d3cdb440d3ed8e101a2c1a63f07de4bb44c86c0fed"
+  }
+]

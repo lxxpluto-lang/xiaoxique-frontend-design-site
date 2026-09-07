@@ -1,0 +1,2924 @@
+{
+  "generatedAt": "2026-09-07T00:14:10.948Z",
+  "scope": "Read-only lexical references and logical byte sizes; includes inactive branches/comments, does not prove dynamic reachability or platform upload size. No files removed or re-encoded.",
+  "totals": [
+    {
+      "relative": "src/static",
+      "count": 236,
+      "bytes": 132883033
+    },
+    {
+      "relative": "src/wxcomponents",
+      "count": 13,
+      "bytes": 329940
+    },
+    {
+      "relative": "dist/build/mp-weixin",
+      "count": 335,
+      "bytes": 133663414
+    }
+  ],
+  "codeFiles": 48,
+  "dynamicPrefixes": [
+    "/static/icons/magpie-line/"
+  ],
+  "groups": [
+    {
+      "name": "videos",
+      "count": 13,
+      "bytes": 55608347,
+      "literalBytes": 41312662,
+      "noLiteralBytes": 14295685,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "replica",
+      "count": 20,
+      "bytes": 23817149,
+      "literalBytes": 23817149,
+      "noLiteralBytes": 0,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "backgrounds",
+      "count": 7,
+      "bytes": 14703470,
+      "literalBytes": 0,
+      "noLiteralBytes": 14703470,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "frames",
+      "count": 36,
+      "bytes": 10779105,
+      "literalBytes": 0,
+      "noLiteralBytes": 10779105,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "storyboards",
+      "count": 6,
+      "bytes": 9838683,
+      "literalBytes": 0,
+      "noLiteralBytes": 9838683,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "sprites",
+      "count": 27,
+      "bytes": 8209493,
+      "literalBytes": 0,
+      "noLiteralBytes": 8209493,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "rive-source",
+      "count": 74,
+      "bytes": 6753616,
+      "literalBytes": 864856,
+      "noLiteralBytes": 5888760,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "previews",
+      "count": 9,
+      "bytes": 2104720,
+      "literalBytes": 349198,
+      "noLiteralBytes": 1755522,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "overlays",
+      "count": 1,
+      "bytes": 802036,
+      "literalBytes": 0,
+      "noLiteralBytes": 802036,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "knowledge",
+      "count": 3,
+      "bytes": 227794,
+      "literalBytes": 227794,
+      "noLiteralBytes": 0,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "icons",
+      "count": 38,
+      "bytes": 34154,
+      "literalBytes": 11179,
+      "noLiteralBytes": 6890,
+      "dynamicBytes": 16085
+    },
+    {
+      "name": "logo.png",
+      "count": 1,
+      "bytes": 4023,
+      "literalBytes": 0,
+      "noLiteralBytes": 4023,
+      "dynamicBytes": 0
+    },
+    {
+      "name": "rive",
+      "count": 1,
+      "bytes": 443,
+      "literalBytes": 0,
+      "noLiteralBytes": 443,
+      "dynamicBytes": 0
+    }
+  ],
+  "absentReferences": [
+    {
+      "url": "/static/rive/magpie-baduanjin-v3.riv",
+      "references": [
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 44
+        }
+      ],
+      "status": "declared-rive-source; inspect enabled guard, not automatic missing-runtime failure"
+    },
+    {
+      "url": "/static/rive/magpie-resistance-v3.riv",
+      "references": [
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 63
+        }
+      ],
+      "status": "declared-rive-source; inspect enabled guard, not automatic missing-runtime failure"
+    },
+    {
+      "url": "/static/rive/magpie-singing-v3.riv",
+      "references": [
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 82
+        }
+      ],
+      "status": "declared-rive-source; inspect enabled guard, not automatic missing-runtime failure"
+    }
+  ],
+  "assets": [
+    {
+      "file": "src/static/backgrounds/card-switch-v1/baduanjin-cute-v2.png",
+      "url": "/static/backgrounds/card-switch-v1/baduanjin-cute-v2.png",
+      "bytes": 2022497,
+      "sha256": "ba77d499a7e95b2145426e797c5143068e8bef7fbffe772249cc0156f37680cd",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/baduanjin-premium-v1.png",
+      "url": "/static/backgrounds/card-switch-v1/baduanjin-premium-v1.png",
+      "bytes": 2179586,
+      "sha256": "138a8b34eaa39ccee353e7346952bbbd10a7bb7592f63cf449721785b355949a",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/resistance-cute-v2.png",
+      "url": "/static/backgrounds/card-switch-v1/resistance-cute-v2.png",
+      "bytes": 2091082,
+      "sha256": "83cdb30ff486dad10f2e61bbd7f0c9153b217c7dc473c2f754e6df521f3e4687",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/resistance-premium-v1.png",
+      "url": "/static/backgrounds/card-switch-v1/resistance-premium-v1.png",
+      "bytes": 2377196,
+      "sha256": "feaa1b5ff66dc6b6b4ffee5c78740d09483f3ca1e83d0ffe0948690f788fb648",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/singing-cute-v2.png",
+      "url": "/static/backgrounds/card-switch-v1/singing-cute-v2.png",
+      "bytes": 2126319,
+      "sha256": "2a50d125ac5bc825b5902bfffa2eb5186ed83591913f1707f90f1ee28a4177ee",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/singing-premium-v1.png",
+      "url": "/static/backgrounds/card-switch-v1/singing-premium-v1.png",
+      "bytes": 2244259,
+      "sha256": "4a977b3722f97ff2162fff0ae83870944b342e984457f5242f383647ff05ef9b",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/backgrounds/card-switch-v1/unified-health-island-v3.png",
+      "url": "/static/backgrounds/card-switch-v1/unified-health-island-v3.png",
+      "bytes": 1662531,
+      "sha256": "6dc9027f5f9889ab03113e950f585e279d55352f098a01a3a9e05f26eaaa7385",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin/01.png",
+      "url": "/static/frames/baduanjin/01.png",
+      "bytes": 358440,
+      "sha256": "5cc889ec0ecbcc656b955166b69d719a6c14cefa99615c7e936075fb53048020",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin/02.png",
+      "url": "/static/frames/baduanjin/02.png",
+      "bytes": 360513,
+      "sha256": "c9c573d70de101eb87beda85dd1a26dc1543c872c381b58d306b808fbc5f07f9",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin/03.png",
+      "url": "/static/frames/baduanjin/03.png",
+      "bytes": 362986,
+      "sha256": "05f30c50e3766aa28f438a84af9bd48d67fd79b10a5ec4db73ec91c16c8cf546",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin/04.png",
+      "url": "/static/frames/baduanjin/04.png",
+      "bytes": 357226,
+      "sha256": "8a7d117559b73802d6095fe7403bcd7d7ac08de4e3462d67665b97f68717fc43",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/01.png",
+      "url": "/static/frames/baduanjin-cinematic-v2/01.png",
+      "bytes": 288239,
+      "sha256": "65c7b299cfe6fd1702a51d5656d8571becef80096f40319ea2a2fcf1fa11044f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/02.png",
+      "url": "/static/frames/baduanjin-cinematic-v2/02.png",
+      "bytes": 282423,
+      "sha256": "eb157fbdc4cd2f63c5df41fb1a5bc89ff9fc3aacb4b41a1a4a2ba6b56a429db5",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/03.png",
+      "url": "/static/frames/baduanjin-cinematic-v2/03.png",
+      "bytes": 273558,
+      "sha256": "18df70e4376f7c2a3acf8529377d60d0236a7f1804e4261ae8bcb9be777d3a7e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/04.png",
+      "url": "/static/frames/baduanjin-cinematic-v2/04.png",
+      "bytes": 282171,
+      "sha256": "fedad4be01a6088129469b934a203c6fe719be2fc5311ceb9a511ce07e58501d",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/05.png",
+      "url": "/static/frames/baduanjin-cinematic-v2/05.png",
+      "bytes": 282027,
+      "sha256": "a002747c430c2433f533f426480f06a3a206c5a8b443a795a387ae7279609480",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/06.png",
+      "url": "/static/frames/baduanjin-cinematic-v2/06.png",
+      "bytes": 299519,
+      "sha256": "0c06147a8b169eb31dc541454dcdbbfe68c687fe9ef080f562966a837ec7fe0f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/07.png",
+      "url": "/static/frames/baduanjin-cinematic-v2/07.png",
+      "bytes": 294544,
+      "sha256": "7cf0bb3e776e3edde3e4be6c8417e6fa077c32950e9b4c9c6494f360d1365721",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/baduanjin-cinematic-v2/08.png",
+      "url": "/static/frames/baduanjin-cinematic-v2/08.png",
+      "bytes": 282035,
+      "sha256": "7bc17295d671a18a764f78c1298263a5b2a77a89dcae84931392cde939f6f311",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/horse-stance/01.png",
+      "url": "/static/frames/horse-stance/01.png",
+      "bytes": 359015,
+      "sha256": "98095a78a7c882bb161a2a99de952d8c6d4c1e1ae848a7798a7133219e4c1295",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/horse-stance/02.png",
+      "url": "/static/frames/horse-stance/02.png",
+      "bytes": 371543,
+      "sha256": "16aaaf79361938e2e50588ad48a7867653dd760fd4923ebb7726f204a2d1ec73",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/horse-stance/03.png",
+      "url": "/static/frames/horse-stance/03.png",
+      "bytes": 369309,
+      "sha256": "186be6f9afd764f53702654c08c15a9d5c2aeee827ac3b81cc0530e38bd2f56b",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/horse-stance/04.png",
+      "url": "/static/frames/horse-stance/04.png",
+      "bytes": 361821,
+      "sha256": "e9d998d04e9f2a613dae3bf2b905631aa964ca3acdca8733d3690ebcd4e80f65",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/01.png",
+      "url": "/static/frames/resistance-cinematic-v2/01.png",
+      "bytes": 255344,
+      "sha256": "dde706d28f6f61cbc704a1e3f0b4b6afd33b93f45354fa08dc94b1c8c16b51e7",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/02.png",
+      "url": "/static/frames/resistance-cinematic-v2/02.png",
+      "bytes": 236621,
+      "sha256": "7400394a2d18b5297ba4c16d92be78f2fb579b34e74dc7a213c2a939ecb83d9e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/03.png",
+      "url": "/static/frames/resistance-cinematic-v2/03.png",
+      "bytes": 260166,
+      "sha256": "93c9047bf51557ce6262fac1b8632690a1a523507b735df10c5bf0d519682e3c",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/04.png",
+      "url": "/static/frames/resistance-cinematic-v2/04.png",
+      "bytes": 253986,
+      "sha256": "42afb5425304752abd41c7528c2063c3fd5d37610f7e79bbb266b29c364e5825",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/05.png",
+      "url": "/static/frames/resistance-cinematic-v2/05.png",
+      "bytes": 253343,
+      "sha256": "4ff5de3bfe6b167e8ae61148a623ef6f3c975b2febc3f1ae5c4ce806581088e6",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/06.png",
+      "url": "/static/frames/resistance-cinematic-v2/06.png",
+      "bytes": 243396,
+      "sha256": "5d19704ab6f7e892f963a6e25d17a15520a70116a5d5ec1dbc18e1b6e3048c7c",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/07.png",
+      "url": "/static/frames/resistance-cinematic-v2/07.png",
+      "bytes": 255563,
+      "sha256": "10c697649306036de47848c5b1af31d9f85f19a00f9ef5a4ee18155e985a9364",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/resistance-cinematic-v2/08.png",
+      "url": "/static/frames/resistance-cinematic-v2/08.png",
+      "bytes": 258361,
+      "sha256": "0f78cd8c2f16c916bdea61afb188c51a2604a8f45deb5d4d32d5fcb14515d271",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing/01.png",
+      "url": "/static/frames/singing/01.png",
+      "bytes": 349104,
+      "sha256": "47cd03f851e6869593b37950506f8f1ed9b595cb16ed1bad6de085232d090404",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing/02.png",
+      "url": "/static/frames/singing/02.png",
+      "bytes": 361905,
+      "sha256": "2a9e175c0cdb9df237688b66c3554b2cb9494dd122cb7942d588adb94fddefd3",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing/03.png",
+      "url": "/static/frames/singing/03.png",
+      "bytes": 356375,
+      "sha256": "b65119b8f4fa5b321ab9e2812c9119b47523dae9a25e67195a172666cfb35c2e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing/04.png",
+      "url": "/static/frames/singing/04.png",
+      "bytes": 349522,
+      "sha256": "2b6d44020761746268f58e6e29ac576cb3688e511fdd2aa26bbd64f74c021d17",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/01.png",
+      "url": "/static/frames/singing-cinematic-v2/01.png",
+      "bytes": 252687,
+      "sha256": "9559feaca0bce187b6b0aabe24f0e0bec967234e0f04dd5e2843a6f7ff3c7ab2",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/02.png",
+      "url": "/static/frames/singing-cinematic-v2/02.png",
+      "bytes": 304149,
+      "sha256": "af182a62d321523ce9cfb7cfb5735977e2f8ffa34ee2b9ec0f3037f935b7c482",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/03.png",
+      "url": "/static/frames/singing-cinematic-v2/03.png",
+      "bytes": 275915,
+      "sha256": "1e48d774de512d049492665fb85daa5e8b80eb6bd3b056100e5217caca902eca",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/04.png",
+      "url": "/static/frames/singing-cinematic-v2/04.png",
+      "bytes": 259005,
+      "sha256": "012da7bea662850b0488e635020f2f1f5ea5f3c1db680c86674405e87019d1b5",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/05.png",
+      "url": "/static/frames/singing-cinematic-v2/05.png",
+      "bytes": 263951,
+      "sha256": "7c5e2c875c1cbe7c679aee7c89fc93794804d528783669e7f7f90c6f596a858c",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/06.png",
+      "url": "/static/frames/singing-cinematic-v2/06.png",
+      "bytes": 276016,
+      "sha256": "f3fdf008760189ad668df50c07403c1f526df246affdd0ba41666c2cb1de9a45",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/07.png",
+      "url": "/static/frames/singing-cinematic-v2/07.png",
+      "bytes": 262441,
+      "sha256": "03e3f8137200b9b16e52ce3fd447fe13397e820581cea9a011236235d7c6a375",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/frames/singing-cinematic-v2/08.png",
+      "url": "/static/frames/singing-cinematic-v2/08.png",
+      "bytes": 265886,
+      "sha256": "9a9fbb84c307e7b5efa924294209cb1dff54f4c176e1b8ceefe38485cfe1b9e1",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/icons/cabbage-checkin.svg",
+      "url": "/static/icons/cabbage-checkin.svg",
+      "bytes": 739,
+      "sha256": "ed5d2c4f3dde135d25dffd4ca75058ad9448974d31cf52052fadf505a604823a",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/icons/garden-cabbage-stage.svg",
+      "url": "/static/icons/garden-cabbage-stage.svg",
+      "bytes": 2055,
+      "sha256": "0e6d82b9d310e71851784ab63b0ac748afb75339485fec2005b572b973a0e6f8",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/icons/garden-seed-stage.svg",
+      "url": "/static/icons/garden-seed-stage.svg",
+      "bytes": 1888,
+      "sha256": "a594f592581f579f75bc3cbb397af27dfbb7c8f5693af24e70579e674e7ace02",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/icons/garden-seedling-stage.svg",
+      "url": "/static/icons/garden-seedling-stage.svg",
+      "bytes": 2208,
+      "sha256": "a5c411e5e66521bd80ab3d17a1e8bd5437521acc8dd60bb0325c5a4d04ee4227",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/icons/magpie-line/README.md",
+      "url": "/static/icons/magpie-line/README.md",
+      "bytes": 2367,
+      "sha256": "0d0cf8b6d6949a48a5b17c52a684e0ae28045933b24609c6f59cbddf9afee486",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/archive.svg",
+      "url": "/static/icons/magpie-line/archive.svg",
+      "bytes": 301,
+      "sha256": "ce94155156355c48476eb92a51e7620a161b8329839ca85eec4dc788aa43cc29",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/AssistantPanel.vue",
+          "line": 12
+        },
+        {
+          "file": "src/components/OnboardingView.vue",
+          "line": 28
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 169
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 520
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/assessment.svg",
+      "url": "/static/icons/magpie-line/assessment.svg",
+      "bytes": 847,
+      "sha256": "04ed9754e29fff22854607706477c1d0b4a0efe99e1f582958856282e40c4cf3",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 449
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 501
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 363
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 873
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/assistant.svg",
+      "url": "/static/icons/magpie-line/assistant.svg",
+      "bytes": 1359,
+      "sha256": "8d1d6e745ed7c5392c8c60909d10456a0bc5ed2fd0834888dee41b89d3184850",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 299
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/badge.svg",
+      "url": "/static/icons/magpie-line/badge.svg",
+      "bytes": 1085,
+      "sha256": "deaa2d1b5ca7508b646b2473a990436d92be4e9ab70924a5a9eb523e3c6aafcf",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 537
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/chat.svg",
+      "url": "/static/icons/magpie-line/chat.svg",
+      "bytes": 374,
+      "sha256": "a5235cfcea404ee9eeac7ebed960e0a11cb8350cc87b9f88b0aa6df01e128148",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/device.svg",
+      "url": "/static/icons/magpie-line/device.svg",
+      "bytes": 277,
+      "sha256": "75d299f908b1832d99713d6d5a3ec3267722ba407c3e791f6705993c2e8c2850",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/AssistantPanel.vue",
+          "line": 11
+        },
+        {
+          "file": "src/components/ExerciseSelection.vue",
+          "line": 13
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 51
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 170
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 511
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 886
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/exercise.svg",
+      "url": "/static/icons/magpie-line/exercise.svg",
+      "bytes": 1464,
+      "sha256": "d8ae4f7b0e6a0f17fc4f4665ef315edb5ca2b08b7462c6611ed962270d5b4bb8",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/AssistantPanel.vue",
+          "line": 9
+        },
+        {
+          "file": "src/components/ExerciseSelection.vue",
+          "line": 5
+        },
+        {
+          "file": "src/components/ExerciseSelection.vue",
+          "line": 10
+        },
+        {
+          "file": "src/components/PrescriptionTaskCard.vue",
+          "line": 3
+        },
+        {
+          "file": "src/components/PrescriptionTaskCard.vue",
+          "line": 7
+        },
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 50
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 447
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 475
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 479
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 52
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 168
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 337
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/heart-rate.svg",
+      "url": "/static/icons/magpie-line/heart-rate.svg",
+      "bytes": 1075,
+      "sha256": "89b80cb4f50250b608681ad34a35c751eea8949a0f81f4def601bf927d03c588",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/KnowledgeHub.vue",
+          "line": 19
+        },
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 13
+        },
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 49
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 51
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 363
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 882
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 1434
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/home.svg",
+      "url": "/static/icons/magpie-line/home.svg",
+      "bytes": 410,
+      "sha256": "79923aff5ba328ea9e5d60694e60c4cb2c3acf91d39705b39a652e5c1b1b00f5",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 297
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/knowledge.svg",
+      "url": "/static/icons/magpie-line/knowledge.svg",
+      "bytes": 467,
+      "sha256": "f946d609359e90a1444cedb09a2a827dc19ab64dcaede079c7b9395cbabf09f3",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/KnowledgeHub.vue",
+          "line": 19
+        },
+        {
+          "file": "src/components/KnowledgeHub.vue",
+          "line": 29
+        },
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 48
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 300
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/music.svg",
+      "url": "/static/icons/magpie-line/music.svg",
+      "bytes": 367,
+      "sha256": "bf74055653fa954d9ce983106a7c13d0a7a7c8897d36d875a2b7b251fb96b05f",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 450
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 510
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 519
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/archive.svg",
+      "url": "/static/icons/magpie-line/original/archive.svg",
+      "bytes": 287,
+      "sha256": "d8b1ed77008c59abdc3eb54ddd7f4a2fc1526364c461ca9fe9c59b9adcc229f6",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/assessment.svg",
+      "url": "/static/icons/magpie-line/original/assessment.svg",
+      "bytes": 847,
+      "sha256": "f231e86dbbad552c460f8d21f9845582ec9afef4f6dff3b43261538186981c57",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/assistant.svg",
+      "url": "/static/icons/magpie-line/original/assistant.svg",
+      "bytes": 1344,
+      "sha256": "df43aae30e9191c2f1814ba55634e1f5b8fd7ac6289a0a953939e8f4e6e33104",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/badge.svg",
+      "url": "/static/icons/magpie-line/original/badge.svg",
+      "bytes": 1085,
+      "sha256": "fb0352cadc2b08d6d755acf0ab4c3e9a124882fb4cd24e946b6684a99d583a9b",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/chat.svg",
+      "url": "/static/icons/magpie-line/original/chat.svg",
+      "bytes": 374,
+      "sha256": "61cef968dc5059ecc6125d88aaae3bc7ab9a6bc6ecb57889779825d43481cb71",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/device.svg",
+      "url": "/static/icons/magpie-line/original/device.svg",
+      "bytes": 277,
+      "sha256": "7929c3aa0a621924b9c04bc779a9420715a8d298bd8f5aa2d4c8b9c0c4f787da",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/exercise.svg",
+      "url": "/static/icons/magpie-line/original/exercise.svg",
+      "bytes": 1449,
+      "sha256": "f5ac377f864faa9b06d0dd97dd99fef11e04affd90c06264486ce45005395dba",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/heart-rate.svg",
+      "url": "/static/icons/magpie-line/original/heart-rate.svg",
+      "bytes": 1075,
+      "sha256": "a7ea8e4f38a071c51efb86ee98802c99c90f2648193ff1132bfe0588ebfec019",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/home.svg",
+      "url": "/static/icons/magpie-line/original/home.svg",
+      "bytes": 410,
+      "sha256": "a0b72904d6955161b38a516b9caf4196b017f859b4ad61be6b764c8a149155c1",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/knowledge.svg",
+      "url": "/static/icons/magpie-line/original/knowledge.svg",
+      "bytes": 467,
+      "sha256": "4408ac4a538950b4f0e03f55a0da267b47491d89d0bb208d2d171f3a8b40cfec",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/profile.svg",
+      "url": "/static/icons/magpie-line/original/profile.svg",
+      "bytes": 744,
+      "sha256": "9e6050b65512248a48af79ac538232f41a241dc3cdb853626256a2f3aa487816",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/record.svg",
+      "url": "/static/icons/magpie-line/original/record.svg",
+      "bytes": 360,
+      "sha256": "17b49122de739eca18ffe6d966a8bdbfc61bf377e629f821590f789b1a61aa2e",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/report.svg",
+      "url": "/static/icons/magpie-line/original/report.svg",
+      "bytes": 427,
+      "sha256": "95501a2ef834ee5319a81cbbaf8d73b87d19a655ebeed1c95a80136d67a46d48",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/safety.svg",
+      "url": "/static/icons/magpie-line/original/safety.svg",
+      "bytes": 1323,
+      "sha256": "65bf1443849b98fd5f18c18a059c433a2c766eac8edcfce18f9a2520d3bb6dcb",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/original/sync.svg",
+      "url": "/static/icons/magpie-line/original/sync.svg",
+      "bytes": 1430,
+      "sha256": "58a9bc9e6832aa503eb7309bf47ccc060fdda07dafcf4d83f4b356a807663d2b",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/profile.svg",
+      "url": "/static/icons/magpie-line/profile.svg",
+      "bytes": 744,
+      "sha256": "8000c6dacf9d603651d589da5d01c639d5aa5c672faf416a0af5a0328cf0d9bf",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 301
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 51
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 908
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/record.svg",
+      "url": "/static/icons/magpie-line/record.svg",
+      "bytes": 388,
+      "sha256": "d4670585e7ba1f213b3d6d86f7cd9a287a6a11b176729414902f39dee668f4ad",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/ExerciseSelection.vue",
+          "line": 12
+        },
+        {
+          "file": "src/components/PrescriptionTaskCard.vue",
+          "line": 8
+        },
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 11
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 171
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 331
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/report.svg",
+      "url": "/static/icons/magpie-line/report.svg",
+      "bytes": 427,
+      "sha256": "14aedb84b019036e68ea1440258a2c3067aadfdbed8ee8bde50da1b1cb821b64",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/AssistantPanel.vue",
+          "line": 10
+        },
+        {
+          "file": "src/components/ExerciseSelection.vue",
+          "line": 11
+        },
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 12
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 298
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 172
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 334
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 526
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 556
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/resistance.svg",
+      "url": "/static/icons/magpie-line/resistance.svg",
+      "bytes": 323,
+      "sha256": "2a82e81b9ab4b9699638656b02c5e4149a36f134b20b8038860f37b498571f4e",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 448
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 488
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/safety.svg",
+      "url": "/static/icons/magpie-line/safety.svg",
+      "bytes": 1323,
+      "sha256": "0baf312d562844cbdd9c29a9873615e162c8f8eccd4877686cd5d629620a1387",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/KnowledgeDetail.vue",
+          "line": 17
+        },
+        {
+          "file": "src/components/OnboardingView.vue",
+          "line": 22
+        },
+        {
+          "file": "src/components/OnboardingView.vue",
+          "line": 33
+        },
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 21
+        },
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 51
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 548
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 664
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 1458
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/stretch.svg",
+      "url": "/static/icons/magpie-line/stretch.svg",
+      "bytes": 322,
+      "sha256": "b0505c20bf66c8b99455f1c3843c616ee4d0ad090af3043ffb68f88ea88b2fdf",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 446
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 462
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 471
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 497
+        }
+      ],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/icons/magpie-line/sync.svg",
+      "url": "/static/icons/magpie-line/sync.svg",
+      "bytes": 1445,
+      "sha256": "579577d44dbfd527b4cbc82861e07449430ed2a7bf641ea6cabd5dc25996b58d",
+      "classification": "dynamic-prefix-candidate",
+      "references": [],
+      "dynamicPrefixes": [
+        "/static/icons/magpie-line/"
+      ]
+    },
+    {
+      "file": "src/static/knowledge/videos/cardiac-check-demo.mp4",
+      "url": "/static/knowledge/videos/cardiac-check-demo.mp4",
+      "bytes": 74661,
+      "sha256": "3bc201d8d6baf39b827f7d470854fff7ae6a9503d2c77bf3e9ff575b00e61879",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 425
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/knowledge/videos/habit-demo.mp4",
+      "url": "/static/knowledge/videos/habit-demo.mp4",
+      "bytes": 77216,
+      "sha256": "aa8852f486da437a582b7229bc54b397b886aa5024ca9d62ab8cdc736492f1c9",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 439
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/knowledge/videos/warm-up-demo.mp4",
+      "url": "/static/knowledge/videos/warm-up-demo.mp4",
+      "bytes": 75917,
+      "sha256": "70eb5563e9d4e05dea3f4ab646fe9bda467497b8ad7a983c4bd1e37f4467d991",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 411
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/logo.png",
+      "url": "/static/logo.png",
+      "bytes": 4023,
+      "sha256": "46719607502ebe256abff3ee000121c761708258187fb2bd6dac8443845ef32e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/overlays/magpie-flight-overlay-v2.png",
+      "url": "/static/overlays/magpie-flight-overlay-v2.png",
+      "bytes": 802036,
+      "sha256": "74362d361efd154faebce428a666e99e33b8251d19f01522613ad3ced02a925a",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/baduanjin-full-course-poster.jpg",
+      "url": "/static/previews/baduanjin-full-course-poster.jpg",
+      "bytes": 55953,
+      "sha256": "5788f60c8734d0f1892e17b7a42ee27a13b8eb1e6ac7b89e328871c6322dc639",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 464
+        },
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 42
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/card-switch-v1/showcase-filmstrip-v1.jpg",
+      "url": "/static/previews/card-switch-v1/showcase-filmstrip-v1.jpg",
+      "bytes": 207449,
+      "sha256": "7e896f8049ac2ca776b53aeedeb8feeb8c9ae016f0dd984963d434b58a581f8d",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/card-switch-v1/showcase-poster-v1.png",
+      "url": "/static/previews/card-switch-v1/showcase-poster-v1.png",
+      "bytes": 1068574,
+      "sha256": "71602df5d06bdc3a781f3114ba6065cf54ded81593a1fcf4d526ba67c09a707c",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/continuous-v3/baduanjin-filmstrip-v3.jpg",
+      "url": "/static/previews/continuous-v3/baduanjin-filmstrip-v3.jpg",
+      "bytes": 156618,
+      "sha256": "4f5116c392ac9fabc4fba4be52236cf491bfad74cc80352b0ac20fadacbbbd77",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/continuous-v3/baduanjin-poster-v3.png",
+      "url": "/static/previews/continuous-v3/baduanjin-poster-v3.png",
+      "bytes": 138216,
+      "sha256": "85e7917ed223d9dd51f6aa4ec44a38db0743bf943698d298058820cc492426e4",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 412
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 471
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 497
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 501
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/continuous-v3/resistance-filmstrip-v3.jpg",
+      "url": "/static/previews/continuous-v3/resistance-filmstrip-v3.jpg",
+      "bytes": 145287,
+      "sha256": "afefa325bcb7719de63155e4f0884c99bb57782ade5b2849a9bfffd96b4a075b",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/continuous-v3/resistance-poster-v3.png",
+      "url": "/static/previews/continuous-v3/resistance-poster-v3.png",
+      "bytes": 105149,
+      "sha256": "a54368b4189c78ef22598e25b7e61ea2dddc4417d3e2de294a8874b74f305a17",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 426
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 490
+        },
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 61
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/continuous-v3/singing-filmstrip-v3.jpg",
+      "url": "/static/previews/continuous-v3/singing-filmstrip-v3.jpg",
+      "bytes": 177594,
+      "sha256": "e2c05ba4b0458885cff19521001c8cee18ff4f100ea6fe9ed8b4849096187cc3",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/previews/continuous-v3/singing-poster-v3.png",
+      "url": "/static/previews/continuous-v3/singing-poster-v3.png",
+      "bytes": 49880,
+      "sha256": "0b4c98627061a3530c5240a3a40a8ce9a8781f18bbf362c33cfcea42d9dc7000",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 440
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 475
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 479
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 512
+        },
+        {
+          "file": "src/lib/prototype-data.ts",
+          "line": 519
+        },
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 80
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/buddy-friends.png",
+      "url": "/static/replica/buddy-friends.png",
+      "bytes": 1777082,
+      "sha256": "f44be134ce3a1d52bb281faadf4cd1bd46ce9f47f6b51c57a4b5f698fe7ee48f",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/CompanionHub.vue",
+          "line": 9
+        },
+        {
+          "file": "src/components/CompanionHub.vue",
+          "line": 33
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/exercise-clinician-v1.png",
+      "url": "/static/replica/exercise-clinician-v1.png",
+      "bytes": 1408202,
+      "sha256": "5d8ef8c1b3e65d62771b45fea14d854b1b9eb445be2d5da35654e6293c73e592",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/ExerciseSelection.vue",
+          "line": 17
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/health-heart.png",
+      "url": "/static/replica/health-heart.png",
+      "bytes": 1200817,
+      "sha256": "3f556d630e6ed0d51bbdeb843eea9457eb2f6957b765cb99d5b8fe5c0ee7e149",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/RehabMiniReport.vue",
+          "line": 4
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/knowledge-checklist-v1.png",
+      "url": "/static/replica/knowledge-checklist-v1.png",
+      "bytes": 1059216,
+      "sha256": "38af3d59de35bf9b935d462a817d0caa9dc7a19f8d3cc5f21d50d80c95e4650f",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/KnowledgeDetail.vue",
+          "line": 9
+        },
+        {
+          "file": "src/components/KnowledgeHub.vue",
+          "line": 61
+        },
+        {
+          "file": "src/components/OnboardingView.vue",
+          "line": 18
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/knowledge-effort-v1.png",
+      "url": "/static/replica/knowledge-effort-v1.png",
+      "bytes": 1046101,
+      "sha256": "bc09a28b078113efbe3262de644c20e9a0431eb8b31436ad893f9b4f8586612c",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/KnowledgeHub.vue",
+          "line": 62
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/knowledge-leaves-v1.png",
+      "url": "/static/replica/knowledge-leaves-v1.png",
+      "bytes": 1223544,
+      "sha256": "0c9053aac10b3bbca03ff24171760d2b4b01e9a955bf41d3d45c14c58ff7b6d1",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/KnowledgeHub.vue",
+          "line": 6
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/magpie-flying.png",
+      "url": "/static/replica/magpie-flying.png",
+      "bytes": 1006734,
+      "sha256": "98902fedddc8eaa1229ec7e54e2cc93605c113174ac0821c64b273d2443adb04",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/OnboardingView.vue",
+          "line": 9
+        },
+        {
+          "file": "src/components/OnboardingView.vue",
+          "line": 31
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/magpie-resting-v1.png",
+      "url": "/static/replica/magpie-resting-v1.png",
+      "bytes": 1297438,
+      "sha256": "6814686ac9666fb874a6e7c4e0031e161f22f758deff2973a4ca7998bc13c7c6",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 852
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/onboarding-shoe-v1.png",
+      "url": "/static/replica/onboarding-shoe-v1.png",
+      "bytes": 1427013,
+      "sha256": "f969775b1d851f4d2488745cb3b347b3684cadae1de47c367dff8212d23dc5d4",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/OnboardingView.vue",
+          "line": 13
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/reward-guardian-v1.png",
+      "url": "/static/replica/reward-guardian-v1.png",
+      "bytes": 1241561,
+      "sha256": "7f2ecbac85a60e5ebf8038bf3101825f493038fb79fa4beb4d9a6ca8fa2a0dc5",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/RewardProductCard.vue",
+          "line": 19
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/reward-handbook-v1.png",
+      "url": "/static/replica/reward-handbook-v1.png",
+      "bytes": 1160696,
+      "sha256": "4aef134cab39745f1bb057843a08b42f01f3eb955f60dd7117c7059d8b776d01",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/RewardProductCard.vue",
+          "line": 20
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/reward-mem-badge-v1.png",
+      "url": "/static/replica/reward-mem-badge-v1.png",
+      "bytes": 1181654,
+      "sha256": "b44d9de0b61c45a960d281d258a4dce6176a6377c2058f39593256c3fcd7e619",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/RewardProductCard.vue",
+          "line": 23
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/reward-notebook-v1.png",
+      "url": "/static/replica/reward-notebook-v1.png",
+      "bytes": 1636702,
+      "sha256": "e7342e9cf2e5fb1c545b2171d9b575d6836019647815f96506d6f60a4272d569",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/RewardProductCard.vue",
+          "line": 22
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/reward-resistance-band-v1.png",
+      "url": "/static/replica/reward-resistance-band-v1.png",
+      "bytes": 1038575,
+      "sha256": "6daf4a022a69b9a8cc3e9866481fb6b65d4063367b8061a3d4c7bdb4aa7f3a2a",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/RewardProductCard.vue",
+          "line": 21
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/safety-breath-v1.png",
+      "url": "/static/replica/safety-breath-v1.png",
+      "bytes": 1005035,
+      "sha256": "59c921005cf140aed1e327e969e21630345aac5fd0de52354b2a40ad6457c9ff",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 1488
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/safety-chest-v1.png",
+      "url": "/static/replica/safety-chest-v1.png",
+      "bytes": 986105,
+      "sha256": "fe6f0d0d3dcf426564df9ce79b934c5500a186957899567cce0f76277f00629c",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 1487
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/safety-dizzy-v1.png",
+      "url": "/static/replica/safety-dizzy-v1.png",
+      "bytes": 853783,
+      "sha256": "c940d86c5cce261d7db63386a93d0c0bf1196acab709b3ac2ca8e3fbfc5de5e1",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 1489
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/social-friends.png",
+      "url": "/static/replica/social-friends.png",
+      "bytes": 1686037,
+      "sha256": "c1df43a6db7a1ca02187057ea0cf1cfd8e43b5e0a8fdfa587baacbd67ae83f65",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/CompanionHub.vue",
+          "line": 6
+        },
+        {
+          "file": "src/components/CompanionHub.vue",
+          "line": 20
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/tree-mature.png",
+      "url": "/static/replica/tree-mature.png",
+      "bytes": 1580033,
+      "sha256": "9159d1aa8a1d73a3e3ce34b2c4cdb8285ad143ba698d17092857a834961a4759",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/RehabGardenPanel.vue",
+          "line": 264
+        },
+        {
+          "file": "src/components/RehabGardenPanel.vue",
+          "line": 265
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 181
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 281
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 478
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 935
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/replica/tree-sprout.svg",
+      "url": "/static/replica/tree-sprout.svg",
+      "bytes": 821,
+      "sha256": "bc36dd1902db4472f16f679e4473f2f67d526369c0b12ef2d1df4843604eea4c",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/RehabGardenPanel.vue",
+          "line": 174
+        },
+        {
+          "file": "src/components/RehabGardenPanel.vue",
+          "line": 263
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 478
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive/README.md",
+      "url": "/static/rive/README.md",
+      "bytes": 443,
+      "sha256": "8209c0b0ca99fbaec0d64b4506d9a431e5d0b903a76b705765ef1d94e07459ab",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/asset-index.json",
+      "url": "/static/rive-source/v3/asset-index.json",
+      "bytes": 8995,
+      "sha256": "d55c81e55cef011bbb6aaf180c1a70ce15bff3bcff1dabf22e74980bbf8eb9d4",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/girl-rig-atlas-v3-clean.png",
+      "url": "/static/rive-source/v3/atlases/girl-rig-atlas-v3-clean.png",
+      "bytes": 583908,
+      "sha256": "3dcc659c55bdd88ad91b544b6b6efe784369c77640d4fed845ef4e8d96eec7ff",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/girl-rig-atlas-v3.png",
+      "url": "/static/rive-source/v3/atlases/girl-rig-atlas-v3.png",
+      "bytes": 732741,
+      "sha256": "39f66d46f8d92a2058d8625f6d4e5b89a9af5506ac28eb4d38b935d73811d4ac",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/magpie-rig-atlas-v3-clean.png",
+      "url": "/static/rive-source/v3/atlases/magpie-rig-atlas-v3-clean.png",
+      "bytes": 374776,
+      "sha256": "b03885c101fb9bdc0341cfb597f3cdf6e15976f9c21b840bcd1b4f84ec74e35f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/magpie-rig-atlas-v3.png",
+      "url": "/static/rive-source/v3/atlases/magpie-rig-atlas-v3.png",
+      "bytes": 493173,
+      "sha256": "98cd77c7b16ddcbb72cb6f71f315ddbbcbe95a7433247795f90a4f15f63eb993",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/woman-rig-atlas-v3-clean.png",
+      "url": "/static/rive-source/v3/atlases/woman-rig-atlas-v3-clean.png",
+      "bytes": 493549,
+      "sha256": "5b029480b9e4ebb6f1693233f3fe3c35047190a397b690b83b60790a878868a9",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/atlases/woman-rig-atlas-v3.png",
+      "url": "/static/rive-source/v3/atlases/woman-rig-atlas-v3.png",
+      "bytes": 612979,
+      "sha256": "a5ce78ac6cdb50dcc23b258350d404cf7d9aaf0642e58c46f2874623231aa04f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/binding-map.json",
+      "url": "/static/rive-source/v3/binding-map.json",
+      "bytes": 6075,
+      "sha256": "cc5d060b8444f88fa2eded07c0829067f6f8e4fdd5909d5896a00215606a5c8f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/01-head_base.png",
+      "url": "/static/rive-source/v3/parts/girl/01-head_base.png",
+      "bytes": 44342,
+      "sha256": "535b13bac51b40cf5815c1758e3d409e9622323dabfaaa92d0b3ae246c367c67",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/02-beanie.png",
+      "url": "/static/rive-source/v3/parts/girl/02-beanie.png",
+      "bytes": 66522,
+      "sha256": "dd3a668f6a9c4b70298c51cf5844925f95b70738b212a5de643127a6d60d0843",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/03-hair_front.png",
+      "url": "/static/rive-source/v3/parts/girl/03-hair_front.png",
+      "bytes": 44831,
+      "sha256": "16d83d8ad604b06e3b73dd7e81f4c7cac7f5b3e1dbac3e14852916ec5620cfe2",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/04-face_features.png",
+      "url": "/static/rive-source/v3/parts/girl/04-face_features.png",
+      "bytes": 21833,
+      "sha256": "91bdd496ce354d6ad317f00ec929e9350cb47cf5dd081af8ae8dc2fb71103a0e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/05-torso.png",
+      "url": "/static/rive-source/v3/parts/girl/05-torso.png",
+      "bytes": 63688,
+      "sha256": "050160e2681d184542f5c1aa430f3b050870cefeb4f419ac4fddde24f43ffea3",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/06-upper_arm_left.png",
+      "url": "/static/rive-source/v3/parts/girl/06-upper_arm_left.png",
+      "bytes": 23257,
+      "sha256": "b1da1a3f6e4756f0f97f8fe485b301f50e8b8db883e0cf83531a1326cf71c03d",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/07-forearm_left.png",
+      "url": "/static/rive-source/v3/parts/girl/07-forearm_left.png",
+      "bytes": 21312,
+      "sha256": "99402b0dd783ee11b02d9ce19b678507781be195623240eee18a548bef305c6d",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/08-upper_arm_right.png",
+      "url": "/static/rive-source/v3/parts/girl/08-upper_arm_right.png",
+      "bytes": 22132,
+      "sha256": "ebfdae8a5b459c108f8347015750b250b837410387e401f04c14528db82cb434",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/09-forearm_right.png",
+      "url": "/static/rive-source/v3/parts/girl/09-forearm_right.png",
+      "bytes": 19536,
+      "sha256": "40b651e6ed943549e4c12cfc821d80076d79f4b443d653ac759fcab9fc78a88c",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/10-thigh_left.png",
+      "url": "/static/rive-source/v3/parts/girl/10-thigh_left.png",
+      "bytes": 30505,
+      "sha256": "23644f37c2736b892b844cd9b761c764b41c471acaa4b1dee335b7ae967443d9",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/11-shin_left.png",
+      "url": "/static/rive-source/v3/parts/girl/11-shin_left.png",
+      "bytes": 24693,
+      "sha256": "93a583f3f59c42367355dc1af8210a63f6bb381915f0c786fd31ee8428c7f86b",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/12-thigh_right.png",
+      "url": "/static/rive-source/v3/parts/girl/12-thigh_right.png",
+      "bytes": 31329,
+      "sha256": "f45af22921a95f6bb7b7a44a104dde2d2b5c21c8107ae2534162b6621d8db747",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/13-shin_right.png",
+      "url": "/static/rive-source/v3/parts/girl/13-shin_right.png",
+      "bytes": 26941,
+      "sha256": "3330974a57bcd543ec05567d851570d6939ae5c543961a2ad85611e9fb31698e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/14-braid_left.png",
+      "url": "/static/rive-source/v3/parts/girl/14-braid_left.png",
+      "bytes": 41614,
+      "sha256": "605c018806bead54efc602e983d9b2f5012496f53234de92f6d8cb5bb19bb35f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/15-braid_right.png",
+      "url": "/static/rive-source/v3/parts/girl/15-braid_right.png",
+      "bytes": 41167,
+      "sha256": "a8f8c3c788712e06c2e726377b20ad80d13e7efd0d13d6afc42d68afe69458f2",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/girl/16-green_side_panel.png",
+      "url": "/static/rive-source/v3/parts/girl/16-green_side_panel.png",
+      "bytes": 24988,
+      "sha256": "2130236f511feba85f74b76dc4d5ec813988232d17cbf60a09b23771f8f6f45b",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/01-body_shell.png",
+      "url": "/static/rive-source/v3/parts/magpie/01-body_shell.png",
+      "bytes": 79830,
+      "sha256": "a56ae9cab39952d27c7da305ad0570603bc2f6edf6d93d9f6ea016a9e09c43f7",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/02-face_patch.png",
+      "url": "/static/rive-source/v3/parts/magpie/02-face_patch.png",
+      "bytes": 27120,
+      "sha256": "43146732e2be884cbb888951c6b4cc1b6029f57cf3421d422ae123aa6179ef9f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/03-eye_left.png",
+      "url": "/static/rive-source/v3/parts/magpie/03-eye_left.png",
+      "bytes": 17472,
+      "sha256": "f2364ff99cc5fa744a03b21da90c9d7b7bdf12841eeed732c0922e0449e96a3a",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/04-eye_right.png",
+      "url": "/static/rive-source/v3/parts/magpie/04-eye_right.png",
+      "bytes": 18601,
+      "sha256": "a01528ca4c74254d0a001c95124641f7bf4879243114b7f8292d03a8b9993a7e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/05-beak_upper.png",
+      "url": "/static/rive-source/v3/parts/magpie/05-beak_upper.png",
+      "bytes": 11798,
+      "sha256": "bdd1878803f255565ce482edb732f603ea36f76ce1ad05df7a012dc492934aa1",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/06-beak_lower.png",
+      "url": "/static/rive-source/v3/parts/magpie/06-beak_lower.png",
+      "bytes": 9396,
+      "sha256": "a54d555c94f2e70a91102c8ae7956a16234b5dba677584c11fe2f8007febf478",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/07-wing_left.png",
+      "url": "/static/rive-source/v3/parts/magpie/07-wing_left.png",
+      "bytes": 44510,
+      "sha256": "01608d71899d64490bdace4593cd6d1e4dbdd333247c5d8944ac7d024c127b48",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/08-wing_right.png",
+      "url": "/static/rive-source/v3/parts/magpie/08-wing_right.png",
+      "bytes": 43883,
+      "sha256": "7c21345144b351d1e38ccfcf975fc40f6b5671051c56443d30fe2201824a9db7",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/09-foot_left.png",
+      "url": "/static/rive-source/v3/parts/magpie/09-foot_left.png",
+      "bytes": 13463,
+      "sha256": "78a1ee1fce8c48c3490ae3ff4f07b110ba21003be7d10d894d212d9f28309b86",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/10-foot_right.png",
+      "url": "/static/rive-source/v3/parts/magpie/10-foot_right.png",
+      "bytes": 13332,
+      "sha256": "89c1909035730e6348b3881de2a2f6cba19f673f03829ac79a287eda3d5faf66",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/11-tail_upper.png",
+      "url": "/static/rive-source/v3/parts/magpie/11-tail_upper.png",
+      "bytes": 28382,
+      "sha256": "037011699bf56c0122e5310fc713d823eb5945ff86730af4ba146469f3a69df5",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/12-tail_lower.png",
+      "url": "/static/rive-source/v3/parts/magpie/12-tail_lower.png",
+      "bytes": 21897,
+      "sha256": "1ec274029aa8f9d2f72708ee695f6ceb83afd3a4aa01c03ad7842c089c2604bf",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/13-eyelid_left.png",
+      "url": "/static/rive-source/v3/parts/magpie/13-eyelid_left.png",
+      "bytes": 4712,
+      "sha256": "9c35748d38f877dbd8e3acb218f02712677825235ae2486130285eecb7ceab73",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/14-eyelid_right.png",
+      "url": "/static/rive-source/v3/parts/magpie/14-eyelid_right.png",
+      "bytes": 4531,
+      "sha256": "4c38420615a3d2d38338b79fbce25ebcb45b2b3165f998b9d035a84bd9f53489",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/15-wing_highlight.png",
+      "url": "/static/rive-source/v3/parts/magpie/15-wing_highlight.png",
+      "bytes": 11647,
+      "sha256": "0bb8a55c0ca9376faaca43c9cca0a094caf049207f044efdad948657f9323634",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/magpie/16-empty.png",
+      "url": "/static/rive-source/v3/parts/magpie/16-empty.png",
+      "bytes": 68,
+      "sha256": "391590d092f57b13968ea0174fda8726918550f84594de498c72482f1f2e9623",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/01-head_base.png",
+      "url": "/static/rive-source/v3/parts/woman/01-head_base.png",
+      "bytes": 35413,
+      "sha256": "d2f568dcda367e762de105a25828e051b4649cb3dab3a798aad88f6062256af5",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/02-hair_back.png",
+      "url": "/static/rive-source/v3/parts/woman/02-hair_back.png",
+      "bytes": 49717,
+      "sha256": "f79495ddb2b104365101eb0678cd70ab9b9543ada8ce6e868346ea8247996893",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/03-hair_front.png",
+      "url": "/static/rive-source/v3/parts/woman/03-hair_front.png",
+      "bytes": 40103,
+      "sha256": "5e6339c98a1e05ba12806fb94b3aff27bd8e53199f935304dac792e700b346c8",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/04-face_features.png",
+      "url": "/static/rive-source/v3/parts/woman/04-face_features.png",
+      "bytes": 11422,
+      "sha256": "13227bb43601fd4ec3b08338c5a906ad7104afc5f6c9ac95f22a01d5e57d57f8",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/05-torso.png",
+      "url": "/static/rive-source/v3/parts/woman/05-torso.png",
+      "bytes": 64882,
+      "sha256": "acbb60e4c68810e7428753d7d66a44e1b7d5dc22f2c155572a9cca0e96f9d2a8",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/06-upper_arm_left.png",
+      "url": "/static/rive-source/v3/parts/woman/06-upper_arm_left.png",
+      "bytes": 24178,
+      "sha256": "df806d64089fe4c8878bdf56997f9126a2f5c761d61fd05cbd2efec2f472f5af",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/07-forearm_left.png",
+      "url": "/static/rive-source/v3/parts/woman/07-forearm_left.png",
+      "bytes": 27295,
+      "sha256": "fae28b9582b991d1bec9f77a83e5a79b2d12f45b623c29419fbf9e697f575190",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/08-upper_arm_right.png",
+      "url": "/static/rive-source/v3/parts/woman/08-upper_arm_right.png",
+      "bytes": 24198,
+      "sha256": "b20d09390d3cf2a7c2eca4c010dd8ac90e4eb84fc042d03ab28ef77b18255f59",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/09-forearm_right.png",
+      "url": "/static/rive-source/v3/parts/woman/09-forearm_right.png",
+      "bytes": 24433,
+      "sha256": "e2ff6766cee61cb95f207a092c25a44ed32874d5b4f1988c2d09524568801655",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/10-thigh_left.png",
+      "url": "/static/rive-source/v3/parts/woman/10-thigh_left.png",
+      "bytes": 26864,
+      "sha256": "c110118985b08c6dca96d638cac6eb7035d9a47812d126865e1aa2413fcdfa9e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/11-shin_left.png",
+      "url": "/static/rive-source/v3/parts/woman/11-shin_left.png",
+      "bytes": 25944,
+      "sha256": "f376f3d0c0ccadafa3df09e44a83430d96afe4d4265eccf60a9a4fa06a9f8a1e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/12-thigh_right.png",
+      "url": "/static/rive-source/v3/parts/woman/12-thigh_right.png",
+      "bytes": 29119,
+      "sha256": "ec56e6bb759f850f484007cc11e5474d2fbe978ff25e2bfb1573dec5016b67fb",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/13-shin_right.png",
+      "url": "/static/rive-source/v3/parts/woman/13-shin_right.png",
+      "bytes": 25540,
+      "sha256": "84a8d36c7e44c48c3c6d86782a396faac24c987382017070ca3a1b778e8cdeaa",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/14-hand_alt_left.png",
+      "url": "/static/rive-source/v3/parts/woman/14-hand_alt_left.png",
+      "bytes": 17379,
+      "sha256": "5564c9d2f0ef706d2cbaf0e238ca0cb8140fedff68287dcc36c6fec4c6bcbee9",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/15-hand_alt_right.png",
+      "url": "/static/rive-source/v3/parts/woman/15-hand_alt_right.png",
+      "bytes": 18172,
+      "sha256": "0b8f84e4e5672fc04c23f54edb7e40b531118eca68d7e890fbe0e13a8d76648e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/parts/woman/16-brooch.png",
+      "url": "/static/rive-source/v3/parts/woman/16-brooch.png",
+      "bytes": 10471,
+      "sha256": "7a12877943a7854f9b1bbc3d9ba9d6c35c930c58409381754604c54ec91c74d2",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v3/rig-blueprint.json",
+      "url": "/static/rive-source/v3/rig-blueprint.json",
+      "bytes": 7663,
+      "sha256": "87f1c80f51aabd8ada497aa7b1779be4c71896acf46d9f8f0beeda49d2c0f191",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/README.md",
+      "url": "/static/rive-source/v4/README.md",
+      "bytes": 5213,
+      "sha256": "13113fb7625176476dd861be839aea4a9b647f9d63ba94c4fbb8cbccfdb6e017",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/eye-module-spec.json",
+      "url": "/static/rive-source/v4/eye-module-spec.json",
+      "bytes": 1006,
+      "sha256": "b94318c48585785e849f46cf8d0fa6b4abdca2618a52b90d7080462f8d4f826f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/master/magpie-neutral-master-v4.png",
+      "url": "/static/rive-source/v4/master/magpie-neutral-master-v4.png",
+      "bytes": 864856,
+      "sha256": "37fe04b0a302fa7fbdb0c3d5cffd6558f23eb41798bca568ada48cdb9b19d149",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/components/KnowledgeHub.vue",
+          "line": 63
+        },
+        {
+          "file": "src/components/TrainingExperience.vue",
+          "line": 56
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 347
+        },
+        {
+          "file": "src/pages/index/index.vue",
+          "line": 1598
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/motion-machine-contract.json",
+      "url": "/static/rive-source/v4/motion-machine-contract.json",
+      "bytes": 979,
+      "sha256": "8b48cbbe9f50be55975cd420225c5c438d8d638cef1e54459e2e7d8dcda32227",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/beak.png",
+      "url": "/static/rive-source/v4/parts/beak.png",
+      "bytes": 32581,
+      "sha256": "7802f08a49ede1f72ef5b56a899e7634d7e33d4a611b524d211dec4f5e3e453a",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/body_core.png",
+      "url": "/static/rive-source/v4/parts/body_core.png",
+      "bytes": 434423,
+      "sha256": "d5e7e38bd5977072af686ae5b9ac8d6e8ad54527984bf2c141c56fae6ac07b59",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/foot_L.png",
+      "url": "/static/rive-source/v4/parts/foot_L.png",
+      "bytes": 18163,
+      "sha256": "2859e604922617638eedad0489e86174fae48a39070a28cdbb28d605eecb4d64",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/foot_R.png",
+      "url": "/static/rive-source/v4/parts/foot_R.png",
+      "bytes": 18924,
+      "sha256": "d540a09535578c77a8c96bc8b778a41db78ea76a91ad97d69e270d1c832f85b8",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/rig-parts-manifest.json",
+      "url": "/static/rive-source/v4/parts/rig-parts-manifest.json",
+      "bytes": 3015,
+      "sha256": "d639988b83dfa67a2cc5cae02ac01468275b7104da55996046347d9caa897017",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/tail_lower.png",
+      "url": "/static/rive-source/v4/parts/tail_lower.png",
+      "bytes": 94176,
+      "sha256": "e9705fe96af44fe7b0cebe589750ada9edb9fc1da6ea6099612b5b0206c365a4",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/tail_upper.png",
+      "url": "/static/rive-source/v4/parts/tail_upper.png",
+      "bytes": 120239,
+      "sha256": "f98aee99fd75942aa58002fd8c92cba2ea2c5e5c74ec32a78caa53f4347e1421",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/wing_far.png",
+      "url": "/static/rive-source/v4/parts/wing_far.png",
+      "bytes": 46459,
+      "sha256": "4944c96aea237fdb55dd2e64b19482be4193628ca87f937e9c8f8b7c3f5e238a",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts/wing_near.png",
+      "url": "/static/rive-source/v4/parts/wing_near.png",
+      "bytes": 152160,
+      "sha256": "a8e74665698b962df1d0f5a18d501a70ffe288f46e77cd01d48491eb0346b0b5",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/parts-manifest.json",
+      "url": "/static/rive-source/v4/parts-manifest.json",
+      "bytes": 1484,
+      "sha256": "de6ff039d53229e4258aafbc0b722034d423abdf3ee22fc36a27e22ab6faf56d",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/previews/magpie-cut-rig-parts-v4.png",
+      "url": "/static/rive-source/v4/previews/magpie-cut-rig-parts-v4.png",
+      "bytes": 287445,
+      "sha256": "f79be7083266e7f3bb0c5fc3116f5a4b2ec48513392e7287333318d70a29b17b",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/rive-session-structure.json",
+      "url": "/static/rive-source/v4/rive-session-structure.json",
+      "bytes": 1388,
+      "sha256": "a8dd6daa7b5be6f7927b4c7c8bac94bf8606e56e314e5bf40f216f3b612af407",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/rive-source/v4/vector/magpie-eye-module-v4.svg",
+      "url": "/static/rive-source/v4/vector/magpie-eye-module-v4.svg",
+      "bytes": 2784,
+      "sha256": "394439288b48187fc7e9c0f3c43f5c383b9fedabe4534c41d3fbfe2224de4a46",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/01.png",
+      "url": "/static/sprites/continuous-v3/baduanjin/01.png",
+      "bytes": 180351,
+      "sha256": "408c854529ac94fa6e1d9b661d8ae505f31da02746c69f6aea1105712d7a9947",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/02.png",
+      "url": "/static/sprites/continuous-v3/baduanjin/02.png",
+      "bytes": 183896,
+      "sha256": "f4ae5701a64ce6bac34d63d592c396ce75dd9cce19333086297770f2b09b53e7",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/03.png",
+      "url": "/static/sprites/continuous-v3/baduanjin/03.png",
+      "bytes": 183154,
+      "sha256": "10ada17848658e57a28dbcc9dc2ff3c2f345e06704dc9d447423e88d138e26d9",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/04.png",
+      "url": "/static/sprites/continuous-v3/baduanjin/04.png",
+      "bytes": 182920,
+      "sha256": "af81c1ec50537b836d3719869a56ec6c6620b129c6bc9821202104bc012961c6",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/05.png",
+      "url": "/static/sprites/continuous-v3/baduanjin/05.png",
+      "bytes": 183625,
+      "sha256": "e98ec014030aca440570e8c1832f7937dd239497eaa08a2b7bf587c5d9dca14c",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/06.png",
+      "url": "/static/sprites/continuous-v3/baduanjin/06.png",
+      "bytes": 178302,
+      "sha256": "9521a4b3f4eb066c9c209edb3f124f78777792a0b3bbb18ca56b5b2e9932cafb",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/07.png",
+      "url": "/static/sprites/continuous-v3/baduanjin/07.png",
+      "bytes": 179209,
+      "sha256": "eda8d77e7a5c5fc30e5e5b46184267bd4dced88fb0d9b5f04f700315ead4e66a",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin/08.png",
+      "url": "/static/sprites/continuous-v3/baduanjin/08.png",
+      "bytes": 180042,
+      "sha256": "47e2350a4b80882eb4f46c0d1ce18a6cb670b10752775aecfd510a29cbf86d1e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/baduanjin-sprite-sheet-v3.png",
+      "url": "/static/sprites/continuous-v3/baduanjin-sprite-sheet-v3.png",
+      "bytes": 1262555,
+      "sha256": "a366df514bdf2fdf59038e588cd74f033ab9af54a2eeda1c7e2dc2e0d6b0d572",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/01.png",
+      "url": "/static/sprites/continuous-v3/resistance/01.png",
+      "bytes": 186987,
+      "sha256": "3afae9d5c895945b26553689f0d711a7d102b1301f34a15881c3496ca5f0f154",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/02.png",
+      "url": "/static/sprites/continuous-v3/resistance/02.png",
+      "bytes": 186788,
+      "sha256": "a216f0ea14d9007550d7dbce3a1050a75e1216e2fec8813dd5b558da26d8a8fa",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/03.png",
+      "url": "/static/sprites/continuous-v3/resistance/03.png",
+      "bytes": 180010,
+      "sha256": "4ba12bd609cd06a0ee54bf93f95496b67d03b1c9fb979bdb89c45cbb59f71e9d",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/04.png",
+      "url": "/static/sprites/continuous-v3/resistance/04.png",
+      "bytes": 198581,
+      "sha256": "94ec9e88851d0ee3d9b618ba3f1a6eb54876a41f381f224d6a17a8ed598466e1",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/05.png",
+      "url": "/static/sprites/continuous-v3/resistance/05.png",
+      "bytes": 192725,
+      "sha256": "3e6db95fa25836cb538e1f1e65c902bd8493fb82d145cc430842cad26614ec5b",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/06.png",
+      "url": "/static/sprites/continuous-v3/resistance/06.png",
+      "bytes": 184663,
+      "sha256": "6ae42282ee498c18fac52b779d25475212f11da74976056c5b52cbd07a3e33b3",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/07.png",
+      "url": "/static/sprites/continuous-v3/resistance/07.png",
+      "bytes": 180643,
+      "sha256": "2c4d95b2fe4886cb61ced3c222e1e4701f145fbb71d3ef18104008fd0be0657f",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance/08.png",
+      "url": "/static/sprites/continuous-v3/resistance/08.png",
+      "bytes": 189555,
+      "sha256": "a23744d9b6f9b14d181315f071ee8e132d6db848a4607478886b6b44735b12ba",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/resistance-sprite-sheet-v3.png",
+      "url": "/static/sprites/continuous-v3/resistance-sprite-sheet-v3.png",
+      "bytes": 1425413,
+      "sha256": "9f6066822df8cc2cc9eb37a4a5e86fa440667acf61dc4b17a5f34c0d1eea0d04",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/01.png",
+      "url": "/static/sprites/continuous-v3/singing/01.png",
+      "bytes": 166809,
+      "sha256": "8d3c78e25e6cec94380437aa538d19188c1bce658aefa946d1a36febf884470c",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/02.png",
+      "url": "/static/sprites/continuous-v3/singing/02.png",
+      "bytes": 172489,
+      "sha256": "8664cfc5eb9368d86cac64201f48187e9d62eef903528fc0483ffee07ce7eb0e",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/03.png",
+      "url": "/static/sprites/continuous-v3/singing/03.png",
+      "bytes": 187084,
+      "sha256": "a16be1382ab7c5c0b4c338f0adfa96b766f5c40becfc0f797eeb35d7f0d631ff",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/04.png",
+      "url": "/static/sprites/continuous-v3/singing/04.png",
+      "bytes": 168327,
+      "sha256": "1c0ee18e066a7de97306fafe764ccc56e8c437b79e05f1e687ac2aa91238f756",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/05.png",
+      "url": "/static/sprites/continuous-v3/singing/05.png",
+      "bytes": 155582,
+      "sha256": "7bbabb62b635b34ee89c4f394c5692fb5a6fb81d4c79c733b1c5a6639c5dcee4",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/06.png",
+      "url": "/static/sprites/continuous-v3/singing/06.png",
+      "bytes": 175220,
+      "sha256": "c8c8b90cb0e2321294d899db3726a2e4447fee1c6f6e355837ce9cf9b95f2ecc",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/07.png",
+      "url": "/static/sprites/continuous-v3/singing/07.png",
+      "bytes": 168023,
+      "sha256": "fcbb2dbd403a0998b4117947bf1264ba3233df029a729ead08c9a6ad1c7f1fc9",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing/08.png",
+      "url": "/static/sprites/continuous-v3/singing/08.png",
+      "bytes": 180250,
+      "sha256": "3a99dbe67dc4bdc0bf4609bffacec3f50e3c176bc37cd3b00cddf2802aa3993a",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/sprites/continuous-v3/singing-sprite-sheet-v3.png",
+      "url": "/static/sprites/continuous-v3/singing-sprite-sheet-v3.png",
+      "bytes": 1196290,
+      "sha256": "a81af57e378aa56c6b9447701c195d44ad9431420ad6cb7edf0309532d89fe75",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/storyboards/baduanjin-cinematic-v2.png",
+      "url": "/static/storyboards/baduanjin-cinematic-v2.png",
+      "bytes": 2260630,
+      "sha256": "1f2a70bc1fb457d6d6a82d50de74ce1738c43e7844946680d8537d4a86481651",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/storyboards/baduanjin-storyboard.png",
+      "url": "/static/storyboards/baduanjin-storyboard.png",
+      "bytes": 1142756,
+      "sha256": "8cffbf365dc30452b11b30f231f0eb5094eb1393273761536ca8b9ab7e379642",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/storyboards/horse-stance-storyboard.png",
+      "url": "/static/storyboards/horse-stance-storyboard.png",
+      "bytes": 1157765,
+      "sha256": "9e6ebb263c0e0d149b3ae111346d0d17b83d182544de429e37b32f115b7ad5be",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/storyboards/resistance-cinematic-v2.png",
+      "url": "/static/storyboards/resistance-cinematic-v2.png",
+      "bytes": 2012984,
+      "sha256": "da19989dc376cf740f2696536ba00dc4608c3fc270994883d7e3d134c2b25b21",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/storyboards/singing-cinematic-v2.png",
+      "url": "/static/storyboards/singing-cinematic-v2.png",
+      "bytes": 2148789,
+      "sha256": "2bec20eaae79911a4d73cc64b3b95e80437e79b22b5b6b92058ab408e00b3fd3",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/storyboards/singing-storyboard.png",
+      "url": "/static/storyboards/singing-storyboard.png",
+      "bytes": 1115759,
+      "sha256": "0fe912e4f0e25d55a2cc5eb9463b70fd2b9c2bae9440d71d190f00e6c158ed99",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/baduanjin-full-course-mobile.mp4",
+      "url": "/static/videos/baduanjin-full-course-mobile.mp4",
+      "bytes": 40426298,
+      "sha256": "29ef9061946b1eb49c1074888f361d9ec3349ca096a14cbad173da99972f8f04",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 41
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/card-switch-showcase-v1.wav",
+      "url": "/static/videos/card-switch-showcase-v1.wav",
+      "bytes": 3034124,
+      "sha256": "17d8842ac9d930293c5ac289bfab32a33e4450edc72de3850f8e86744eb5b519",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-baduanjin-cinematic-v2.mp4",
+      "url": "/static/videos/magpie-baduanjin-cinematic-v2.mp4",
+      "bytes": 1008682,
+      "sha256": "2ef5bede2d08f79bcd31fd780c56ae49cc14726e8a187f06a7f89353ef3e0267",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-baduanjin-continuous-v3.mp4",
+      "url": "/static/videos/magpie-baduanjin-continuous-v3.mp4",
+      "bytes": 550543,
+      "sha256": "b0e9eee0b26177cb84d5a2e28c842e5325e6296bab25360f0b5d085e1245891d",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-baduanjin.mp4",
+      "url": "/static/videos/magpie-baduanjin.mp4",
+      "bytes": 212130,
+      "sha256": "3be67c80301f018c525db021a78c8af3b8c6b45229637e7fc975a8de17bdf148",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-card-switch-showcase-cute-v2.mp4",
+      "url": "/static/videos/magpie-card-switch-showcase-cute-v2.mp4",
+      "bytes": 3765958,
+      "sha256": "bc5445c51d810646e1fc52a498f71786f3eab44476d4eeb4f1f2ab8147ca25bc",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-card-switch-showcase-v1.mp4",
+      "url": "/static/videos/magpie-card-switch-showcase-v1.mp4",
+      "bytes": 3765958,
+      "sha256": "bc5445c51d810646e1fc52a498f71786f3eab44476d4eeb4f1f2ab8147ca25bc",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-horse-stance.mp4",
+      "url": "/static/videos/magpie-horse-stance.mp4",
+      "bytes": 243651,
+      "sha256": "2b8a54212c8041fb507dfcf191f3ad4eda5e9e7a6540f7f1b5a0854ad183c874",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-resistance-cinematic-v2.mp4",
+      "url": "/static/videos/magpie-resistance-cinematic-v2.mp4",
+      "bytes": 687921,
+      "sha256": "2ce0318bcc5cdc2bf13bfb09407d7fd1a460a7f62e947d1730f4f1b97848c080",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-resistance-continuous-v3.mp4",
+      "url": "/static/videos/magpie-resistance-continuous-v3.mp4",
+      "bytes": 474777,
+      "sha256": "3bac64059b09dc209c3b3b2c2cc9367e4cc2b58d92ef550f529ecc2ddba58686",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 60
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-singing-cinematic-v2.mp4",
+      "url": "/static/videos/magpie-singing-cinematic-v2.mp4",
+      "bytes": 773649,
+      "sha256": "aeb5bdc1f31300f68906792e01347c07718dfa640507c1a831aafff59b86f2f2",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-singing-continuous-v3.mp4",
+      "url": "/static/videos/magpie-singing-continuous-v3.mp4",
+      "bytes": 411587,
+      "sha256": "c3662c10b5ae9ea54b3389fb1811d0dee0114b241752797b09983bfa9bfac7de",
+      "classification": "literal-reference",
+      "references": [
+        {
+          "file": "src/lib/rive-motion.ts",
+          "line": 79
+        }
+      ],
+      "dynamicPrefixes": []
+    },
+    {
+      "file": "src/static/videos/magpie-singing.mp4",
+      "url": "/static/videos/magpie-singing.mp4",
+      "bytes": 253069,
+      "sha256": "aa2f830c03e2bdccd422873af1110935a0e1ce7396018d91b0d7d90a7eff75ab",
+      "classification": "no-literal-reference-found",
+      "references": [],
+      "dynamicPrefixes": []
+    }
+  ]
+}
