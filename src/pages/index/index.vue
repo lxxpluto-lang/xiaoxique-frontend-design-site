@@ -1257,7 +1257,8 @@ const appReady = ref(false);
 const accountLoginVisible = ref(false);
 const prototypeDemoEnabled = ref(false);
 // #ifdef H5
-prototypeDemoEnabled.value = ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname)
+const prototypeDemoHosts = ['localhost', '127.0.0.1', '::1', '[::1]', 'lxxpluto-lang.github.io'];
+prototypeDemoEnabled.value = prototypeDemoHosts.includes(location.hostname)
   && new URLSearchParams(location.search).get('prototypeDemo') === '1';
 // #endif
 const onboardingStep = ref<OnboardingStep>("mode");
