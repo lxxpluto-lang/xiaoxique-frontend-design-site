@@ -3,13 +3,13 @@
     <scroll-view class="assistant-scroll" scroll-y :scroll-into-view="scrollTarget" scroll-with-animation data-testid="assistant-scroll">
     <view class="assistant-content">
     <view class="assistant-hero"><view><text class="eyebrow">小喜健康助手</text><text class="hero-title">你好，{{ displayName }}</text><text class="hero-copy">新的一天，从关爱自己开始</text></view><image src="/static/replica-v7/assistant-clothed.png" mode="aspectFit" /></view>
-    <view class="advice-card" :class="'level-' + (latestAdvice?.level || 'insufficient')" data-testid="region-assistant-advice"><text class="section-title">小喜最新建议</text><image src="/static/replica-v7/assistant-advice.png" mode="aspectFit" /><view class="advice-copy"><text>{{ latestAdvice?.title || '先了解你的运动状态' }}</text><text>{{ latestAdvice?.summary || '完成运动后，小喜会根据本地记录整理建议；暂无数据时不判断为正常。' }}</text></view><button data-testid="assistant-latest-advice" @tap="latestAdvice ? emit('open-reports') : emit('open-devices')">{{ latestAdvice ? '查看建议与训练记录' : '查看数据来源' }}<text>›</text></button></view>
+    <view class="advice-card" :class="'level-' + (latestAdvice?.level || 'insufficient')" data-testid="region-assistant-advice"><text class="section-title">小喜最新建议</text><view class="advice-copy"><text>{{ latestAdvice?.title || '先了解你的运动状态' }}</text><text>{{ latestAdvice?.summary || '完成运动后，小喜会根据本地记录整理建议；暂无数据时不判断为正常。' }}</text></view><button data-testid="assistant-latest-advice" @tap="latestAdvice ? emit('open-reports') : emit('open-devices')">{{ latestAdvice ? '查看建议与训练记录' : '查看数据来源' }}<text>›</text></button></view>
     <view class="question-block"><text class="section-title">你可以这样问</text><view class="prompt-list"><button v-for="prompt in prompts" :key="prompt" data-testid="assistant-task-question" @tap="ask(prompt)">{{ prompt }}<text>›</text></button></view></view>
     <view v-if="messages.length" class="dialog-list" aria-live="polite" data-testid="assistant-messages"><view v-for="(message,index) in messages" :id="'assistant-message-' + index" :key="index" class="dialog" :class="'dialog--' + message.role"><text>{{ message.text }}</text></view></view>
     </view>
     </scroll-view>
     <view class="assistant-composer" data-testid="assistant-composer">
-    <view class="assistant-input"><image :src="mascot" mode="aspectFit" /><input v-model="query" data-testid="assistant-query" aria-label="向小喜提问" placeholder="问问小喜…" confirm-type="send" maxlength="500" @confirm="send" /><button data-testid="assistant-send" :disabled="!query.trim()" @tap="send">发送</button></view>
+    <view class="assistant-input"><input v-model="query" data-testid="assistant-query" aria-label="向小喜提问" placeholder="问问小喜…" confirm-type="send" maxlength="500" @confirm="send" /><button data-testid="assistant-send" :disabled="!query.trim()" @tap="send">发送</button></view>
     <text class="boundary">小喜只做健康信息整理，不替代医生诊断。回答由本地规则生成，不是实时医疗服务。</text>
     </view>
   </view>
@@ -44,5 +44,8 @@ function send(){const value=query.value.trim();if(!value)return;query.value='';a
 .assistant-hero{min-height:235rpx;padding:24rpx 0 8rpx}.assistant-hero>image{width:270rpx;height:240rpx;right:-4rpx;bottom:0}.assistant-hero>view{width:64%}.eyebrow{display:none}.hero-title{margin-top:18rpx;font-size:38rpx}.hero-copy{color:#607078;font-size:24rpx}.assistant-content{gap:23rpx;padding-top:0}.plan-card,.advice-card,.shortcut-grid,.question-block{border:0;border-radius:30rpx;background:#fff}.plan-content{grid-template-columns:43% minmax(0,1fr);gap:23rpx}.plan-content>image{width:100%;height:310rpx;background:#fff}.advice-card>image{width:185rpx;height:185rpx;bottom:102rpx;right:16rpx}.advice-copy{width:70%}.assistant-input{border-radius:28rpx;padding:9rpx 14rpx;box-shadow:var(--shadow-card)}.assistant-input button{min-height:78rpx}.assistant-composer{padding-top:12rpx}.boundary{font-size:20rpx;line-height:1.5;color:#6b7a87}.plan-card .primary{min-height:84rpx}
 </style>
 <style scoped lang="scss">
-.assistant-hero{min-height:180rpx;padding:16rpx 0}.assistant-hero>image{width:210rpx;height:190rpx}.hero-title{font-size:36rpx}.hero-copy{font-size:23rpx}.assistant-content{gap:20rpx}.advice-card{padding:24rpx}.advice-copy{margin:24rpx 0}.advice-copy>text:first-child{font-size:30rpx}.advice-copy>text:last-child{font-size:24rpx}.advice-card>button{min-height:76rpx;background:#eef7f5}.question-block{padding:24rpx}.prompt-list{margin-top:18rpx}.prompt-list button{min-height:80rpx}.assistant-panel button{line-height:1.5}
+.advice-card>image{display:none}.advice-copy{width:100%}.assistant-input{grid-template-columns:minmax(0,1fr) 100rpx}.assistant-input image{display:none}
+</style>
+<style scoped lang="scss">
+.assistant-hero{min-height:180rpx;padding:16rpx 0}.assistant-hero>image{width:210rpx;height:190rpx}.hero-title{font-size:36rpx}.hero-copy{font-size:23rpx}.assistant-content{gap:20rpx}.advice-card{padding:24rpx}.advice-copy{width:100%;margin:24rpx 0}.advice-copy>text:first-child{font-size:30rpx}.advice-copy>text:last-child{font-size:24rpx}.advice-card>button{min-height:76rpx;background:#eef7f5}.question-block{padding:24rpx}.prompt-list{margin-top:18rpx}.prompt-list button{min-height:80rpx}.assistant-panel button{line-height:1.5}
 </style>
