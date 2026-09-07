@@ -37,8 +37,8 @@ jobs:
       - name: Build H5 site
         run: npm run build:h5
 
-      - name: Disable Jekyll processing
-        run: touch dist/build/h5/.nojekyll
+      - name: Prepare repository-path assets
+        run: node scripts/prepare-pages.cjs
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
